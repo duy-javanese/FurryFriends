@@ -5,6 +5,8 @@
 
 package Controller.Authenticate;
 
+import DAL.UserDao;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -66,7 +68,19 @@ public class LoginContrller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        UserDao uDao = new UserDao();
+        
+        String username = request.getParameter("username");
+        String pwd = request.getParameter("pwd");
+        User account = uDao.doLogin(username,pwd);
+        if (account != null) {
+            response.sendRedirect("home");
+            request.getSession().setAttribute("account", account);
+        } else {
+            request.setAttribute("isFail", true);
+            request.getRequestDispatcher("Views/Authenticate/Login.jsp").forward(request, response);
+        }
+        
     }
 
     /** 

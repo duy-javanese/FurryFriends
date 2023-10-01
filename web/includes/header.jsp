@@ -52,7 +52,7 @@
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
                             </c:if>
                             <c:if test="${sessionScope.account != null}">
-                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">${sessionScope.account.fullName}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">${sessionScope.account.username}</a></li>
                             </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-social">

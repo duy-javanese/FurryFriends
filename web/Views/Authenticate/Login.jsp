@@ -45,8 +45,8 @@
                                     <p style="color: red">Thông tin đăng nhập không chính xác.</p>
                                 </c:if>
                             </c:if>
-                            <h6>EMAIL <span class="text-danger">*</span></h6>
-                            <input type="text" class="form-control mb-3" name="email" required
+                            <h6>Username <span class="text-danger">*</span></h6>
+                            <input type="text" class="form-control mb-3" name="username" required
                                    placeholder="Nhập địa chỉ Email" aria-label="Username">
                             <h6>MẬT KHẨU <span class="text-danger">*</span></h6>
                             <input type="password" class="form-control mb-2" name="pwd" required
