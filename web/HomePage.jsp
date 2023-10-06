@@ -5,10 +5,27 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+          <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sensive Blog - Home</title>
+            <link rel="icon" href="img/Fevicon.png" type="image/png">
+
+    <link rel="stylesheet" href="asset/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="asset/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="asset/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="asset/vendors/linericon/style.css">
+    <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="asset/css/style.css">
+    </head>
     <body>
-        <%@ include file="../includes/header.jsp" %>
+        <%@ include file="asset/includes/header.jsp" %>
         <main class="site-main">
             <!--================Hero Banner start =================-->  
             <section class="mb-30px">
@@ -30,7 +47,7 @@
                     <div class="owl-carousel owl-theme blog-slider">
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide1.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide1.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -40,7 +57,7 @@
                         </div>
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide2.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide2.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -50,7 +67,7 @@
                         </div>
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide3.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide3.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -60,7 +77,7 @@
                         </div>
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide1.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide1.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -70,7 +87,7 @@
                         </div>
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide2.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide2.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -80,7 +97,7 @@
                         </div>
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="img/blog/blog-slider/blog-slide3.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide3.png" alt="">
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -100,7 +117,7 @@
                         <div class="col-lg-8">
                             <div class="single-recent-blog-post">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="img/blog/blog1.png" alt="">
+                                    <img class="img-fluid" src="asset/img/blog/blog1.png" alt="">
                                     <ul class="thumb-info">
                                         <li><a href="#"><i class="ti-user"></i>Admin</a></li>
                                         <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
@@ -120,7 +137,7 @@
 
                             <div class="single-recent-blog-post">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="img/blog/blog2.png" alt="">
+                                    <img class="img-fluid" src="asset/img/blog/blog2.png" alt="">
                                     <ul class="thumb-info">
                                         <li><a href="#"><i class="ti-user"></i>Admin</a></li>
                                         <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
@@ -140,7 +157,7 @@
 
                             <div class="single-recent-blog-post">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="img/blog/blog3.png" alt="">
+                                    <img class="img-fluid" src="asset/img/blog/blog3.png" alt="">
                                     <ul class="thumb-info">
                                         <li><a href="#"><i class="ti-user"></i>Admin</a></li>
                                         <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
@@ -160,7 +177,7 @@
 
                             <div class="single-recent-blog-post">
                                 <div class="thumb">
-                                    <img class="img-fluid" src="img/blog/blog4.png" alt="">
+                                    <img class="img-fluid" src="asset/img/blog/blog4.png" alt="">
                                     <ul class="thumb-info">
                                         <li><a href="#"><i class="ti-user"></i>Admin</a></li>
                                         <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
@@ -262,7 +279,7 @@
                                     <div class="popular-post-list">
                                         <div class="single-post-list">
                                             <div class="thumb">
-                                                <img class="card-img rounded-0" src="img/blog/thumb/thumb1.png" alt="">
+                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb1.png" alt="">
                                                 <ul class="thumb-info">
                                                     <li><a href="#">Adam Colinge</a></li>
                                                     <li><a href="#">Dec 15</a></li>
@@ -276,7 +293,7 @@
                                         </div>
                                         <div class="single-post-list">
                                             <div class="thumb">
-                                                <img class="card-img rounded-0" src="img/blog/thumb/thumb2.png" alt="">
+                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb2.png" alt="">
                                                 <ul class="thumb-info">
                                                     <li><a href="#">Adam Colinge</a></li>
                                                     <li><a href="#">Dec 15</a></li>
@@ -291,7 +308,7 @@
                                         </div>
                                         <div class="single-post-list">
                                             <div class="thumb">
-                                                <img class="card-img rounded-0" src="img/blog/thumb/thumb3.png" alt="">
+                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb3.png" alt="">
                                                 <ul class="thumb-info">
                                                     <li><a href="#">Adam Colinge</a></li>
                                                     <li><a href="#">Dec 15</a></li>
@@ -344,12 +361,12 @@
             </section>
             <!--================ End Blog Post Area =================-->
         </main>
-        <%@ include file="../includes/footer.jsp" %>
-        <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-        <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/main.js"></script>
+        <%@ include file="asset/includes/footer.jsp" %>
+        <script src="asset/vendors/jquery/jquery-3.2.1.min.js"></script>
+        <script src="asset/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="asset/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="asset/js/jquery.ajaxchimp.min.js"></script>
+        <script src="asset/js/mail-script.js"></script>
+        <script src="asset/js/main.js"></script>
     </body>
 </html>

@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Authenticate;
+package Controller;
 
-import DAL.UserDao;
+import DAO.UserDAO;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class LoginContrller extends HttpServlet {
+public class LoginController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -55,7 +55,7 @@ public class LoginContrller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("Views/Authenticate/Login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     } 
 
     /** 
@@ -68,7 +68,7 @@ public class LoginContrller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDao uDao = new UserDao();
+        UserDAO uDao = new UserDAO();
         
         String username = request.getParameter("username");
         String pwd = request.getParameter("pwd");
@@ -78,7 +78,7 @@ public class LoginContrller extends HttpServlet {
             request.getSession().setAttribute("account", account);
         } else {
             request.setAttribute("isFail", true);
-            request.getRequestDispatcher("Views/Authenticate/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
         
     }

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAL;
+package DAO;
 
+import DBUtils.DBContext;
 import Model.UserRole;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author dell
  */
-public class UserRoleDao extends DBContext {
+public class UserRoleDAO extends DBContext {
 
     public UserRole getRoleById(int roleId) {
         try {
@@ -29,7 +30,7 @@ public class UserRoleDao extends DBContext {
                 return new UserRole(rs.getInt("role_id"), rs.getString("role_name"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserRoleDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserRoleDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
