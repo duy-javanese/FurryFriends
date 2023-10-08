@@ -5,18 +5,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="style.css" type="text/css" />
-        <link rel="stylesheet" href="../css/style.css" type="text/css" />
-        <link rel="stylesheet" href="../css/layout.css" type="text/css" />
-        <link rel="stylesheet" href="../css/login.css" type="text/css" />
+        <link href="asset/css/Login/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="asset/css/Login/login.css" rel="stylesheet" type="text/css"/>
+        <link href="asset/css/Login/layout.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
               crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="asset/vendors/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="asset/vendors/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="asset/vendors/themify-icons/themify-icons.css">
+        <link rel="stylesheet" href="asset/vendors/linericon/style.css">
+        <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.theme.default.min.css">
+        <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.carousel.min.css">
+        
+        <link rel="stylesheet" href="asset/css/style.css">
     </head>
 
     <body>
-        <%@ include file="../../includes/header.jsp" %>
+        <%@ include file="asset/includes/header.jsp" %>
         <!-- Login wrapper -->
         <div class="d-flex justify-content-center mt-5 mb-5">
             <div class="login-wrapper shadow bg-body rounded">
@@ -80,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <%@ include file="../../includes/footer.jsp" %>
+        <%@ include file="asset/includes/footer.jsp" %>
         <!--Script go to top, copy to every single page-->
         <script>
             //Get the button

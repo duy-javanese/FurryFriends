@@ -9,10 +9,10 @@
 
 <!-- Nav bar ADMIN wrapper, DONOT COPY THIS, JUST INCLUDE -->
 <section class="position-absolute d-flex flex-column flex-shrink-0 p-3 bg-light"
-         style="width: 280px; height: calc(100vh - 83px);">
+         style="width: 280px; height: calc(100vh - 133px);background-color: bisque">
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="dashBoard" class="nav-link">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#speedometer2"></use>
                 </svg>
@@ -20,11 +20,19 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
+            <a href="listPost" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>
                 </svg>
-                Products
+                Bài viết của tôi
+            </a>
+        </li>
+        <li>
+            <a href="createPost" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Tạo bài viết
             </a>
         </li>
     </ul>
@@ -33,7 +41,7 @@
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
            id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>Admin</strong>
+            <strong>${sessionScope.account.username}</strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
             <li><a class="dropdown-item" href="#">Sign out</a></li>

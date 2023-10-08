@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- This container belong to HEADER ADMIN; DONT copy to JSP, JUST INCLUDE -->
 <header style="background-color: white;" class="d-flex flex-wrap justify-content-center py-3 border-bottom">
-    <a href="/" class="d-flex align-items-center ms-4 mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <img style="width: 200px; height: 50px; object-fit: contain;" src="${pageContext.request.contextPath}/asset/img/furryfriends-1.png" alt="logo">
+    <a href="home" class="d-flex align-items-center ms-4 mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <img style="width: 200px; height: 100px; object-fit: contain;" src="${pageContext.request.contextPath}/asset/img/furryfriends-1.png" alt="logo">
     </a>
 
     <div class="d-flex align-items-center gap-2 me-3">
@@ -30,7 +30,8 @@
                 Hello:<strong>${sessionScope.account.username}</strong>
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <li><a class="dropdown-item" href="logout">Sign out</a></li>
+                <li><a class="dropdown-item" href="home">Trang chủ</a></li>
+                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
             </ul>
         </div>
     </div>

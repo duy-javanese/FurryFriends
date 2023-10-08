@@ -37,7 +37,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-center">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Chó</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="index.html">Chó</a></li> 
                         <li class="nav-item"><a class="nav-link" href="archive.html">Mèo</a></li> 
                         <li class="nav-item"><a class="nav-link" href="category.html">Phụ kiện</a>
                         <li class="nav-item submenu dropdown">
@@ -47,13 +47,21 @@
                                 <li class="nav-item"><a class="nav-link" href="blog-details.html">Tất cả bài viết</a></li>
                             </ul>
                         </li>
-<!--                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>-->
-                            <c:if test="${sessionScope.account == null}">
+                        <!--                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>-->
+                        <c:if test="${sessionScope.account == null}">
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
                             </c:if>
                             <c:if test="${sessionScope.account != null}">
-                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">${sessionScope.account.username}</a></li>
-                            </c:if>
+                            <li class="nav-item active submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">${sessionScope.account.username}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="#">Thông tin cá nhân</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="listPost">Bài viết của tôi</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Tạo bài viết</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-social">
                         <li><a href="#"><span class="ti-themify-favicon"></span></a>Tin nhắn</li>

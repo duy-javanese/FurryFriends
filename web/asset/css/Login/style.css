@@ -1,0 +1,424 @@
+/*******************************
+* MODAL AS LEFT/RIGHT SIDEBAR
+* Add "left" or "right" in modal parent div, after class="modal".
+* Get free snippets on bootpen.com
+*******************************/
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 320px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog {
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.show .modal-dialog {
+    left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.show .modal-dialog {
+    right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-header {
+    border-bottom-color: #eeeeee;
+    background-color: #fafafa;
+}
+
+/* ----- v CAN BE DELETED v ----- */
+
+.demo {
+    padding-top: 60px;
+    padding-bottom: 110px;
+}
+
+.btn-demo {
+    margin: 15px;
+    padding: 10px 15px;
+    border-radius: 0;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+.btn-demo:focus {
+    outline: 0;
+}
+
+.demo-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #212121;
+    text-align: center;
+}
+
+
+.demo-footer > a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+
+.product-card-img:hover {
+    cursor: pointer;
+}
+
+.container-home {
+    max-width: 1190px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+    @media screen and (max-width: 992px) {
+        max-width: 960px;
+    }
+    @media screen and (max-width: 768px) {
+        max-width: 772px;
+    }
+    @media screen and (max-width: 576px) {
+        max-width: 540px;
+    }
+}
+
+.carousel-starter {
+    height: 534px;
+    width: 100%;
+    @media screen and (max-width: 768px) {
+        height: 300px;
+    }
+    @media screen and (max-width: 576px) {
+        height: 224px;
+    }
+
+    .custom-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.list-category {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #c83152;
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    align-items: center;
+    > .category-item p {
+        color: white;
+    }
+    > .category-item:hover {
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+.head-title {
+    font-size: 26px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* new-product */
+.new-product {
+    .product-cart-wrapper {
+        position: relative;
+    }
+    .action-prd-cart {
+        background-color: #ffffff80;
+        padding: 10px;
+        border-radius: 999px;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+    .action-prd-cart:hover {
+        background-color: #c83152;
+        cursor: pointer;
+        transition: all 0.2s linear;
+    }
+
+    .love-prd {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .love-prd:hover {
+        cursor: pointer;
+    }
+
+    .love-prd:hover svg path {
+        fill: #c83152;
+        transition: all 0.2s linear;
+    }
+
+    .product-card-img {
+        border-radius: 8px;
+    }
+
+
+
+    .prd-name {
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 16px;
+        margin-top: 12px;
+    }
+
+    .prd-description {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 14px;
+    }
+
+    .prd-price {
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 26px;
+        margin-top: 14px;
+        color: #c83152;
+    }
+}
+/* new-product */
+
+/* hot-product */
+.hot-product {
+    .product-cart-wrapper {
+        position: relative;
+    }
+    .action-prd-cart {
+        background-color: #ffffff80;
+        padding: 10px;
+        border-radius: 999px;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+    .action-prd-cart:hover {
+        background-color: #c83152;
+        cursor: pointer;
+        transition: all 0.2s linear;
+    }
+
+    .love-prd {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .love-prd:hover {
+        cursor: pointer;
+    }
+
+    .love-prd:hover svg path {
+        fill: #c83152;
+        transition: all 0.2s linear;
+    }
+
+    .product-card-img {
+        border-radius: 8px;
+    }
+
+    .prd-name {
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 16px;
+        margin-top: 12px;
+    }
+
+    .prd-description {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 14px;
+    }
+
+    .prd-price {
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 26px;
+        margin-top: 14px;
+        color: #c83152;
+    }
+}
+/* hot-product */
+
+/* only-in-meeko */
+.only-in-meeko {
+    .img-prd-only {
+        max-height: 248px;
+        border-radius: 8px;
+    }
+}
+/* only-in-meeko */
+
+/* Blog Carousel */
+.blog-carousel-starter {
+    min-height: 534px;
+    width: 100%;
+    @media screen and (max-width: 768px) {
+        min-height: 300px;
+    }
+    @media screen and (max-width: 576px) {
+        min-height: 224px;
+    }
+
+    .custom-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.custom-img-blog {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.blog-item-home {
+    .blog-created-at {
+        font-size: 12px;
+        font-weight: 300;
+    }
+    .blog-title {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .blog-description {
+        font-size: 14px;
+        font-weight: 300;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        // Addition lines for 2 line or multiline ellipsis
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+}
+
+/* Blog Carousel */
+
+/*From now,  Style for cart  */
+
+.cart_quantity {
+    font-size: 12px;
+    font-weight: normal;
+    color: #333;
+}
+
+.img_item_in_cart {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: cover;
+}
+
+.input_cart_width {
+    width: 100px;
+}
+
+/* CSS For hover to see more div  */
+.dropdown-item:hover {
+    background-color: lightsalmon;
+    color: #fff;
+}
+.dropdown .dropdown-menu {
+    display: none;
+}
+.dropdown:hover > .dropdown-menu,
+.dropend:hover > .dropdown-menu {
+    display: block;
+    margin-left: 0.125em;
+}
+
+/* Custom for product detail  */
+.custom_btn_add:hover {
+    background-color: #c83252 !important;
+}
+
+.custom_btn_buynow {
+    background-color: #c83252 !important;
+}
+
+.custom_btn_buynow:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+.custom__select__type.active {
+    color: #c83252 !important;
+    border: 1px solid #c83252 !important;
+}
+
+/* Custom CSS for Modal category  */
+.heading__category {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.heading__category:hover {
+    color: #c83252;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.heading__sub_category {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+}
+
+.heading__sub_category:hover {
+    color: #c83252;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}

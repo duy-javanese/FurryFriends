@@ -20,6 +20,14 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>Controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DashBoardController</servlet-name>
+        <servlet-class>Controller.User.DashBoardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostController</servlet-name>
+        <servlet-class>Controller.Post.CreatePostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashBoardController</servlet-name>
+        <url-pattern>/dashBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostController</servlet-name>
+        <url-pattern>/createPost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

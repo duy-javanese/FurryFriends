@@ -1,0 +1,91 @@
+.header .middle-header {
+  background: rgba(255, 255, 255, 0.84);
+  padding: 18px 0;
+  position: relative;
+}
+
+.header .logo {
+  display: inline-block;
+  overflow: hidden;
+
+  > img {
+    object-fit: cover;
+    max-width: 178px;
+    max-height: 46px;
+    @media screen and(max-width: 620px) {
+      object-fit: cover;
+      max-width: 120px;
+    }
+  }
+}
+
+.search-icon {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+}
+
+.input-search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-search {
+  height: 40px;
+  width: 100%;
+  padding-left: 14px;
+}
+
+.logo-mobile {
+  display: none;
+  @media screen and (max-width: 620px) {
+    display: block;
+  }
+}
+.container-fluid {
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.navbar-nav .nav-item {
+  font-size: 18px;
+  font-weight: 500;
+  .active {
+    color: #ff0000 !important;
+  }
+}
+
+.left-side {
+  width: auto;
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }
+}
+
+.container-navbar {
+  max-width: 1190px;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (max-width: 992px) {
+    max-width: 960px;
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 772px;
+  }
+  @media screen and (max-width: 576px) {
+    max-width: 540px;
+  }
+}
+
+/* CSS For hover to see more div  */
+.dropdown-item:hover {
+  background-color: lightsalmon;
+  color: #fff;
+}
+.dropdown .dropdown-menu {
+  display: none;
+}
+.dropdown:hover > .dropdown-menu,
+.dropend:hover > .dropdown-menu {
+  display: block;
+  margin-left: 0.125em;
+}
