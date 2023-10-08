@@ -5,23 +5,28 @@
  */
 package Controller;
 
+import DAO.UserDAO;
+import Model.User;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-public class MainController extends HttpServlet {
-private static final String ERROR = "errorPage.jsp";
-private static final String HOMEPAGE = "HomePage.jsp";
-private static final String USER_MANAGEMENT = "UserManagement.jsp";
-private static final String SEARCH_USER_CONTROLLER="SearchController";
-private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
+public class SearchController extends HttpServlet {
+private final String SEARCH_PAGE = "UserManagement.html";
+private final String RESULT_PAGE = "UserManagement.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,24 +39,36 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String action = request.getParameter("action");
-            if (action == null) {
-                url = HOMEPAGE;
-            }
-            else if(action.equals("Search User")){
-                url = SEARCH_USER_CONTROLLER;
-            }
-            else if (action.equals("Update user status")){
-                url = UPDATE_USER_STATUS_CONTROLLER;
-            }
-        }catch (Exception e) {
-            log("Error at MainController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        } 
+        String searchValue = request.getParameter("txtSearchValue");
+        String url = SEARCH_PAGE;
+        
+         try {
+            //1. check valid search value
+            if (!searchValue.trim().isEmpty()){
+                
+            //2. Call DAO
+            //2.1 mew DAO Object
+            UserDAO dao = new UserDAO();
+            
+            //2.2 call method of DAO
+            dao.searchUser(searchValue);
+            
+            //3. process DAO
+            List<User> result = dao.getUserList();
+            request.setAttribute("SEARCH_RESULT", result);
+            url = RESULT_PAGE;
+            }// end user had typed valid search value
+            
+        } catch (ClassNotFoundException ex) {
+        Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (NamingException ex) {
+        Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

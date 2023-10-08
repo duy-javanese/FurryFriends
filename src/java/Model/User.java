@@ -22,6 +22,19 @@ public class User {
     public User() {
     }
 
+    //Construction to search members
+    public User(int userId, String username, String email, String phone, String address, int point, boolean status) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.point = point;
+        this.status = status;
+    }
+
+    
+    
     public User(int userId, String username, String pwd, String email, String phone, boolean status, UserRole role, String address, int point) {
         this.userId = userId;
         this.username = username;
@@ -105,5 +118,11 @@ public class User {
     public void setPoint(int point) {
         this.point = point;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "userId=" + userId + ", username=" + username + ", pwd=" + pwd + ", email=" + email + ", phone=" + phone + ", status=" + status + ", role=" + role + ", address=" + address + ", point=" + point + '}';
+    }
+    
     
 }

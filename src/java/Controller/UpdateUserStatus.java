@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Controller;
 
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,48 +18,45 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class MainController extends HttpServlet {
-private static final String ERROR = "errorPage.jsp";
-private static final String HOMEPAGE = "HomePage.jsp";
-private static final String USER_MANAGEMENT = "UserManagement.jsp";
-private static final String SEARCH_USER_CONTROLLER="SearchController";
-private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class UpdateUserStatus extends HttpServlet {
+   private final String ERROR_PAGE = "errorPage.jsp";
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        int userId = Integer.parseInt(request.getParameter("txtID"));
+        boolean status = Boolean.parseBoolean(request.getParameter("txtStatus"));
+        String searchValue = request.getParameter("lastSearchValue");
+        String urlRewriting = ERROR_PAGE;
         try {
-            String action = request.getParameter("action");
-            if (action == null) {
-                url = HOMEPAGE;
+            //1.1 new DAO
+            UserDAO dao = new UserDAO();
+            //1.2 call DAO's methods
+            boolean result = dao.UpdateUserStatus(userId, status);
+            //2. process result
+            if (result) {
+                //2.1 call the search func again using URL rewriting
+                urlRewriting = "MainController"
+                        + "?action=Search User"
+                        + "&txtSearchValue=" + searchValue;
             }
-            else if(action.equals("Search User")){
-                url = SEARCH_USER_CONTROLLER;
-            }
-            else if (action.equals("Update user status")){
-                url = UPDATE_USER_STATUS_CONTROLLER;
-            }
-        }catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+        } catch (Exception ex) {
+            System.out.println(ex);
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        } 
-    }
+            //2.2 transfer Dispatcher
+            response.sendRedirect(urlRewriting);
+        }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -65,13 +64,12 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -79,13 +77,12 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override
