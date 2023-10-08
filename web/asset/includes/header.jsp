@@ -37,17 +37,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-center">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
-                        <li class="nav-item"><a class="nav-link" href="archive.html">Archive</a></li> 
-                        <li class="nav-item"><a class="nav-link" href="category.html">Category</a>
+                        <li class="nav-item active"><a class="nav-link" href="index.html">Chó</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="archive.html">Mèo</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="category.html">Phụ kiện</a>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Pages</a>
+                               aria-expanded="false">Bài viết</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog-details.html">Blog Details</a></li>
+                                <li class="nav-item"><a class="nav-link" href="blog-details.html">Tất cả bài viết</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+<!--                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>-->
                             <c:if test="${sessionScope.account == null}">
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
                             </c:if>
