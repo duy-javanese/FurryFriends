@@ -16,7 +16,7 @@
     </head>
 
     <body>
-        <%@ include file="../../includes/header.jsp" %>
+        <%@ include file="asset/includes/header.jsp" %>
         <!-- Login wrapper -->
         <div class="d-flex justify-content-center mt-5 mb-5">
             <div class="login-wrapper shadow bg-body rounded">
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <%@ include file="../../includes/footer.jsp" %>
+        <%@ include file="asset/includes/footer.jsp" %>
         <!--Script go to top, copy to every single page-->
         <script>
             //Get the button
