@@ -44,8 +44,9 @@ private final String RESULT_PAGE = "UserManagement.jsp";
         
          try {
             //1. check valid search value
-            if (!searchValue.trim().isEmpty()){
-                
+            if (searchValue.trim().isEmpty()){
+                searchValue="*";
+            }
             //2. Call DAO
             //2.1 mew DAO Object
             UserDAO dao = new UserDAO();
@@ -57,7 +58,7 @@ private final String RESULT_PAGE = "UserManagement.jsp";
             List<User> result = dao.getUserList();
             request.setAttribute("SEARCH_RESULT", result);
             url = RESULT_PAGE;
-            }// end user had typed valid search value
+            // end user had typed valid search value
             
         } catch (ClassNotFoundException ex) {
         Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);

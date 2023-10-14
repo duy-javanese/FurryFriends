@@ -44,6 +44,9 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
             else if(action.equals("Search User")){
                 url = SEARCH_USER_CONTROLLER;
             }
+            else if (action.equals("UserManagement")){
+                url = USER_MANAGEMENT;
+            }
             else if (action.equals("Update user status")){
                 url = UPDATE_USER_STATUS_CONTROLLER;
             }

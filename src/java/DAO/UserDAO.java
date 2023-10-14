@@ -75,7 +75,7 @@ public class UserDAO extends DBContext {
                 //2.Create SQL String
                 String sql = "Select userID, username, email, phone_num, user_address, point,user_status "
                         + "From users "
-                        + "Where username Like ?";
+                        + "Where username Like ? and role_id=1";
 
                 //3.Create statement
                 stm = con.prepareStatement(sql);
