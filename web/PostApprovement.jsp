@@ -1,6 +1,6 @@
 <%-- 
-    Document   : StaffPage
-    Created on : Oct 10, 2023, 10:06:30 PM
+    Document   : PostApprovement
+    Created on : Oct 15, 2023, 11:49:34 PM
     Author     : Admin
 --%>
 
@@ -36,7 +36,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <!--sidebar wrapper -->
+             <!--sidebar wrapper -->
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
@@ -85,7 +85,6 @@
                 
         </div>
         <!--end wrapper-->
-        
         <!-- Bootstrap JS -->
 	<script src="asset/staff-page/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->

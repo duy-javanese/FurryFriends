@@ -33,11 +33,6 @@
                 font-size: larger;
                 border: 0;
             }
-            
-            .theadStyle{
-                background-color: green;
-                color: white;
-            }
         </style>
         <title>Manage members</title>
     </head>
@@ -57,8 +52,8 @@
 			<ul class="metismenu" id="menu">
                             <form action="MainController">
                                 <button class="menuButton" name="action" value="Dashboard">Dashboard</button><br/>
-                                <button class="menuButton" name="action" value="UserManagement">Manage user</button><br/>
-                                <button class="menuButton" name="action" value="Post">Post</button><br/>
+                                <button class="menuButton" name="action" value="Get all user">Manage user</button><br/>
+                                <button class="menuButton" name="action" value="PostApprovement">Post</button><br/>
                                 <button class="menuButton" name="action" value="#">Profile</button><br/>
                                 <button class="menuButton" name="action" value="Logout">Logout</button><br/>
                             </form>		
@@ -90,11 +85,11 @@
                                     Search User <input type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
                                     <input type="submit" value="Search User" name="action" />
-                                    <input type="submit" value="Get all user" name="action" />
+                                    
                                     
                                 </form>
                                     <form action="MainController">
-                                        
+                                        <input type="submit" value="Get all user" name="action" />
                                     </form>
                     </div>
                     <div class="container">
@@ -110,9 +105,6 @@
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" class="ps-4" style="width: 50px;">
-
-                                                        </th>
                                                         <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Phone number</th>
@@ -126,9 +118,6 @@
                                                     <c:forEach items="${result}" var="dto" varStatus="counter">
                                                         <form action="MainController" method="POST">
                                                     <tr>
-                                                        <th scope="row" class="ps-4">
-                                                            <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck9" /><label class="form-check-label" for="contacusercheck9"></label></div>
-                                                        </th>
                                                         <td><a href="#" class="text-body">${dto.username}</a></td>
                                                         <td>${dto.email}</td>
                                                         <td>${dto.phone}</td>
@@ -153,7 +142,7 @@
                                             </c:if>
                                                 <c:if test="${empty result}">
                                                     <div class="page-content">
-                                                        <h3>Không có người dùng với tên "${searchValue}"</h3>
+                                                        <h3>Không có người dùng với tên "${searchValue}" :'(</h3>
                                                     </div>
                                                 </c:if>
                                             </c:if>
@@ -162,14 +151,11 @@
                                             <c:set var="result" value ="${requestScope.LIST_USER}"/>
                                                 <c:if test="${not empty result}">
                                                     <div class="page-content">
-                                                        <h2>Here are all users !</h2>
+                                                        <h2>List of users:</h2>
                                                     </div>
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" class="ps-4" style="width: 50px;">
-
-                                                        </th>
                                                         <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Phone number</th>
@@ -183,9 +169,6 @@
                                                     <c:forEach items="${result}" var="dto" varStatus="counter">
                                                         <form action="MainController" method="POST">
                                                     <tr>
-                                                        <th scope="row" class="ps-4">
-                                                            <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck9" /><label class="form-check-label" for="contacusercheck9"></label></div>
-                                                        </th>
                                                         <td><a href="#" class="text-body">${dto.username}</a></td>
                                                         <td>${dto.email}</td>
                                                         <td>${dto.phone}</td>
