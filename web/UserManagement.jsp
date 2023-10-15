@@ -27,12 +27,16 @@
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <style type="text/css">
             .menuButton{
-                border: 0.15;
-                background-color: #111314;
+                background-color: #171717;
                 color: white;
-                padding: 0 75px;
-                border-radius: 13px;
                 margin-bottom: 8px;
+                font-size: larger;
+                border: 0;
+            }
+            
+            .theadStyle{
+                background-color: green;
+                color: white;
             }
         </style>
         <title>Manage members</title>
@@ -48,17 +52,15 @@
 				<div>
 					<h4 class="logo-text">Furry Friends</h4>
 				</div>
-				<div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
-				</div>
 			</div>
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
                             <form action="MainController">
-                                <button class="menuButton" name="action" value="Dashboard">Dashboard</button>
-                                <button class="menuButton" name="action" value="UserManagement">Manage user</button>
-                                <button class="menuButton" name="action" value="Post">Post</button>
-                                <button class="menuButton" name="action" value="#">Profile</button>
-                                <button class="menuButton" name="action" value="Logout">Logout</button>
+                                <button class="menuButton" name="action" value="Dashboard">Dashboard</button><br/>
+                                <button class="menuButton" name="action" value="UserManagement">Manage user</button><br/>
+                                <button class="menuButton" name="action" value="Post">Post</button><br/>
+                                <button class="menuButton" name="action" value="#">Profile</button><br/>
+                                <button class="menuButton" name="action" value="Logout">Logout</button><br/>
                             </form>		
 			</ul>
 			<!--end navigation-->
@@ -86,21 +88,27 @@
                         <h1>User Management</h1>
                                 <form action="MainController">
                                     Search User <input type="text" name="txtSearchValue" 
-                                                        value="${param.txtSearchValue}" />
+                                                       value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
                                     <input type="submit" value="Search User" name="action" />
-                                </form> <br>
+                                    <input type="submit" value="Get all user" name="action" />
+                                    
+                                </form>
+                                    <form action="MainController">
+                                        
+                                    </form>
                     </div>
                     <div class="container">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="">
                                         <div class="table-responsive">
+                                 <!--------------------------------User List-------------------------------->
                                             <c:set var="searchValue" value="${param.txtSearchValue}"/>
                                             <c:if test="${not empty searchValue}">
                                                 <c:set var="result" value ="${requestScope.SEARCH_RESULT}"/>
                                                 <c:if test="${not empty result}">
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
-                                                <thead style="background-color: green; color: white;">
+                                                <thead>
                                                     <tr>
                                                         <th scope="col" class="ps-4" style="width: 50px;">
 
@@ -144,8 +152,61 @@
                                             </table>
                                             </c:if>
                                                 <c:if test="${empty result}">
-
+                                                    <div class="page-content">
+                                                        <h3>Không có người dùng với tên "${searchValue}"</h3>
+                                                    </div>
                                                 </c:if>
+                                            </c:if>
+                                            
+                                 <!--------------------------------User List-------------------------------->
+                                            <c:set var="result" value ="${requestScope.LIST_USER}"/>
+                                                <c:if test="${not empty result}">
+                                                    <div class="page-content">
+                                                        <h2>Here are all users !</h2>
+                                                    </div>
+                                            <table  class="table project-list-table table-nowrap align-middle table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="ps-4" style="width: 50px;">
+
+                                                        </th>
+                                                        <th scope="col">Username</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Phone number</th>
+                                                        <th scope="col">address</th>
+                                                        <th scope="col">Points</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="width: 200px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${result}" var="dto" varStatus="counter">
+                                                        <form action="MainController" method="POST">
+                                                    <tr>
+                                                        <th scope="row" class="ps-4">
+                                                            <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck9" /><label class="form-check-label" for="contacusercheck9"></label></div>
+                                                        </th>
+                                                        <td><a href="#" class="text-body">${dto.username}</a></td>
+                                                        <td>${dto.email}</td>
+                                                        <td>${dto.phone}</td>
+                                                        <td>${dto.address}</td>
+                                                        <td>${dto.point}</td>
+                                                        <td>
+                                                            <select name="txtStatus">
+                                                                                    <option ${(dto.status) ?  "selected": ""} value="true">Active</option>
+                                                                                    <option ${(not dto.status) ?  "selected": ""} value="false">BAN</option>
+                                                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" name="txtID" value="${dto.userId}" />
+                                                            <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
+                                                                                <input type="submit" value="Update user status" name="action" />
+                                                        </td>
+                                                    </tr>
+                                                        </form>
+                                                        </c:forEach>
+                                                </tbody>
+                                            </table>
                                             </c:if>
                                         </div>
                                     </div>

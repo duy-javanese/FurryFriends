@@ -22,6 +22,7 @@ private static final String HOMEPAGE = "HomePage.jsp";
 private static final String USER_MANAGEMENT = "UserManagement.jsp";
 private static final String SEARCH_USER_CONTROLLER="SearchController";
 private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
+private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,6 +50,9 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
             }
             else if (action.equals("Update user status")){
                 url = UPDATE_USER_STATUS_CONTROLLER;
+            }
+            else if (action.equals("Get all user")){
+                url = GET_ALL_USER_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
