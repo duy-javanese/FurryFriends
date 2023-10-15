@@ -17,7 +17,7 @@
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
         <!-- Dashboard Products wrapper -->
-        <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
+        <section style="margin-left: 280px; height: calc(100vh - 133px); overflow-y: auto;">
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
