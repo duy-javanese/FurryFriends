@@ -26,15 +26,19 @@
     </head>
     <body>
         <%@ include file="asset/includes/header.jsp" %>
+        <%@ include file="asset/includes/toast.jsp" %>
         <main class="site-main">
             <!--================Hero Banner start =================-->  
             <section class="mb-30px">
                 <div class="container">
-                    <div class="hero-banner">
+                    <div class="hero-banner"
+                         style="background:url(asset/img/banner/banner1.jpeg) left center no-repeat;
+                         background-size: cover"
+                         >
                         <div class="hero-banner__content">
-                            <h3>Tours & Travels</h3>
-                            <h1>Amazing Places on earth</h1>
-                            <h4>December 12, 2018</h4>
+                            <h3>Blog & Trading</h3>
+                            <h1>Pet trading platform</h1>
+                            <h4>October 1, 2023</h4>
                         </div>
                     </div>
                 </div>
@@ -47,7 +51,7 @@
                     <div class="owl-carousel owl-theme blog-slider">
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide1.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/banner/banner1.jpeg" alt=""/>
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
