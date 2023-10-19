@@ -4,11 +4,18 @@
  */
 package DAO;
 
+import Model.Category;
+import Model.Constant;
 import Model.Post;
+import Model.PostStatus;
+import Model.PostType;
 import Model.User;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +24,46 @@ import java.util.logging.Logger;
  * @author dell
  */
 public class PostDAO extends DBUtils.DBContext {
+
+    public Post GetPostById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [post]\n"
+                    + "  Where post_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                UserDAO uDao = new UserDAO();
+                User user = uDao.GetUserById(rs.getInt("userID"));
+
+                CategoryDAO cDao = new CategoryDAO();
+                Category category = cDao.GetCategoryById(rs.getInt("category_id"));
+
+                PostTypeDAO ptDao = new PostTypeDAO();
+                PostType postType = ptDao.GetTypeById(rs.getInt("post_type"));
+
+                PostStatusDAO psDao = new PostStatusDAO();
+                PostStatus status = psDao.GetStatusById(rs.getInt("status"));
+
+                return new Post(id,
+                        user,
+                        category,
+                        postType,
+                        rs.getString("title"),
+                        rs.getString("post_content"),
+                        rs.getString("post_img"),
+                        rs.getBoolean("isPublic"),
+                        rs.getDate("datePosted"),
+                        rs.getString("reason"),
+                        status,
+                        sql);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public void InsertPost(Post post) {
         try {
@@ -62,12 +109,121 @@ public class PostDAO extends DBUtils.DBContext {
         }
     }
 
-    public ArrayList<Post> GetPostByUser(int userId, String textSearch, int categoryId, int typeId, int status, int aPublic) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Post> GetPostByUser(int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        ArrayList<Post> list = new ArrayList<>();
+        try {
+            int count = 0;
+            String sql = "SELECT *\n"
+                    + "  FROM [post]\n"
+                    + "  Where isPublic = ?\n"
+                    + "  and userId = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            setter.put(++count, Constant.PostPublic);
+            //find by user id
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            Post p;
+            while (rs.next()) {
+                p = new Post();
+                p = GetPostById(rs.getInt("post_id"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
-    public int GetNoOfRecordsPostByUser(int userId, String textSearch, int categoryId, int typeId, int status, int aPublic) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int GetNoOfRecordsPostByUser(int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        try {
+            int count = 0;
+            String sql = "SELECT count(*) as total\n"
+                    + "  FROM [post]\n"
+                    + "  Where isPublic = ?\n"
+                    + "  and userId = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            setter.put(++count, Constant.PostPublic);
+            //find by user id
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
+    public static void main(String[] args) {
+        PostDAO pDao = new PostDAO();
+        Post p = pDao.GetPostById(7);
+        ArrayList<Post> list = pDao.GetPostByUser(3, "", -1, -1, -1, -1);
+        System.out.println(list.size());
+        System.out.println(p.getContent());
+    }
 }

@@ -26,12 +26,29 @@ public class CategoryDAO extends DBUtils.DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                list.add(new Category(rs.getInt("category_id"), 
-                rs.getString("category_name")));
+                list.add(new Category(rs.getInt("category_id"),
+                        rs.getString("category_name")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public Category GetCategoryById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [category]\n"
+                    + "  Where category_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return new Category(id, rs.getString("category_name"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

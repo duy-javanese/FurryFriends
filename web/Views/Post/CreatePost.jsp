@@ -69,8 +69,8 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Chế độ bài viết <span style="color: red">*</span></label>
                             <br>
-                            <input type="radio" name="isPublic" value="1">Công khai
-                            <input type="radio" name="isPublic" value="0">Riêng tư
+                            <input type="radio" name="isPublic" value="true">Công khai
+                            <input type="radio" name="isPublic" value="false">Riêng tư
                         </div>
                         <div class="mb-3" id="address" style="display: none">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>

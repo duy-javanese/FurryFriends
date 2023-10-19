@@ -149,7 +149,7 @@ public class CreatePostController extends HttpServlet {
             List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList());
 
             //lay ra duong dan luu folder anh
-            String realPath = getServletContext().getRealPath("") + File.separator + "img";
+            String realPath = getServletContext().getRealPath("") + "img";
 
             for (Part part : fileParts) {
                 //random ten cho image
@@ -163,7 +163,7 @@ public class CreatePostController extends HttpServlet {
 
                 filename = uuid + "." + fileExtension;
                 part.write(realPath + File.separator + filename);
-
+                response.getWriter().print(realPath);
                 String pathImage = "/" + "img" + "/" + filename;
 
                 //them anh vao database
@@ -172,7 +172,7 @@ public class CreatePostController extends HttpServlet {
 
             PostDAO pDao = new PostDAO();
             pDao.InsertPost(post);
-            response.sendRedirect("listPost");
+//            response.sendRedirect("listPost");
         } catch (Exception e) {
             Logger.getLogger(CreatePostController.class.getName()).log(Level.SEVERE, null, e);
         }

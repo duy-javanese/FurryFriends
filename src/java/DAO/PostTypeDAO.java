@@ -35,4 +35,22 @@ public class PostTypeDAO extends DBContext {
         }
         return list;
     }
+
+    PostType GetTypeById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [postType]\n"
+                    + "  Where postTypeId = ?\n";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return new PostType(id, 
+                rs.getString("postTypeName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
