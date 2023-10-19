@@ -30,20 +30,23 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    ...
+                                    <th>ID</th>
+                                    <th>Ảnh</th>
+                                    <th>Tiêu đề bài viết</th>
+                                    <th>Danh mục bài viết</th>
+                                    <th>Phân loại bài viết</th>
+                                    <th>Chế độ bài viết</th>
+                                    <th>Trạng thái bài viết</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    ...
-                                </tr>
-                                <tr class="align-bottom">
-                                    ...
-                                </tr>
-                                <tr>
                                     <td>...</td>
                                     <td>...</td>
-                                    <td class="align-top">This cell is aligned to the top.</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
                                     <td>...</td>
                                 </tr>
                             </tbody>

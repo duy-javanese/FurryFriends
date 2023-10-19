@@ -6,8 +6,11 @@ package Controller.Post;
 
 import DAO.CategoryDAO;
 import DAO.PostDAO;
+import DAO.PostTypeDAO;
 import Model.Category;
 import Model.Post;
+import Model.PostStatus;
+import Model.PostType;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,12 +80,23 @@ public class CreatePostController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDAO cDao = new CategoryDAO();
+        if (request.getSession().getAttribute("account") == null) {
+            request.getSession().setAttribute("msg","Bạn cần đăng nhập để sử dụng tính năng này!");
+            response.sendRedirect("home");
+        } else {
+            CategoryDAO cDao = new CategoryDAO();
+            PostTypeDAO ptDao = new PostTypeDAO();
 
-        ArrayList<Category> categories = cDao.GetAllCategories();
+            //get all category post
+            ArrayList<Category> categories = cDao.GetAllCategories();
 
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("/Views/Post/CreatePost.jsp").forward(request, response);
+            //get all post type
+            ArrayList<PostType> types = ptDao.GetAllPostType();
+
+            request.setAttribute("types", types);
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("/Views/Post/CreatePost.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -97,7 +111,6 @@ public class CreatePostController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-
             //lay thong tin tai khoan dang dang nhap
             User account = (User) request.getSession().getAttribute("account");
 
@@ -105,21 +118,32 @@ public class CreatePostController extends HttpServlet {
             int categoryId = Integer.parseInt(request.getParameter("category"));
             Category category = new Category();
             category.setCategoryId(categoryId);
+            
+            int typeId = Integer.parseInt(request.getParameter("type"));
+            PostType type = new PostType();
+            type.setPostTypeId(typeId);
 
             String title = request.getParameter("title");
             String content = request.getParameter("content");
             boolean isPublic = Boolean.parseBoolean(request.getParameter("isPublic"));
-
+            String addess = request.getParameter("addess");
+            
             Date createDate = Date.valueOf(LocalDate.now());
+            
+            PostStatus status = new PostStatus();
+            status.setPostStatusId(1);
 
             //tao post
             Post post = new Post();
             post.setUser(account);
             post.setCategory(category);
+            post.setPostType(type);
             post.setTitle(title);
             post.setContent(content);
             post.setIsPublic(isPublic);
             post.setDatePost(createDate);
+            post.setStatus(status);
+            post.setAddress(addess);
 
             //lay file anh client gui len server
             List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList());

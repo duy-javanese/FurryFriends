@@ -68,9 +68,9 @@ public class HomePage extends HttpServlet {
         HttpSession session = request.getSession();
         String msg = null;
 
-        if (session.getAttribute("requireLogin") != null) {
-            msg = (String) session.getAttribute("requireLogin");
-            session.removeAttribute("requireLogin");
+        if (session.getAttribute("msg") != null) {
+            msg = (String) session.getAttribute("msg");
+            session.removeAttribute("msg");
         }
         
         

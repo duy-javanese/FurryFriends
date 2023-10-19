@@ -78,7 +78,7 @@ public class LoginController extends HttpServlet {
             request.getSession().setAttribute("account", account);
         } else {
             request.setAttribute("isFail", true);
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("loginPage.jsp").forward(request, response);
         }
         
     }

@@ -28,6 +28,7 @@
                 <!-- Content Row -->
                 <form action="createPost" method="post" enctype="multipart/form-data">
                     <div class="row m-5 rounded-3" style="background-color: papayawhip">
+                        <!-- Category Post -->
                         <div class="form-floating mt-5">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
                                     name="category">
@@ -37,6 +38,18 @@
                                 </c:forEach>
                             </select>
                             <label for="floatingSelect">Danh mục bài viết</label>
+                        </div>
+
+                        <!-- Type Post -->
+                        <div class="form-floating mt-5">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                                    name="type" onchange="chooseTypePost(this)">
+                                <option selected disabled value="">Danh mục bài viết</option>
+                                <c:forEach items="${types}" var="t">
+                                    <option value="${t.postTypeId}">${t.postTypeName}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="floatingSelect">Phân loại bài viết</label>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
@@ -51,13 +64,18 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Ảnh bài viết <span style="color: red">*</span></label>
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
-                                           multiple required>
+                                   multiple required>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Chế độ bài viết <span style="color: red">*</span></label>
                             <br>
                             <input type="radio" name="isPublic" value="1">Công khai
                             <input type="radio" name="isPublic" value="0">Riêng tư
+                        </div>
+                        <div class="mb-3" id="address" style="display: none">
+                            <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" 
+                                   placeholder="Địa chỉ trao đổi thú cưng" name="address">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
@@ -75,6 +93,16 @@
                 integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+        <script>
+                                        function chooseTypePost(select) {
+                                            const selectedValue = select.value;
+                                            if (selectedValue === '1') {
+                                                document.getElementById("address").style.display = "block";
+                                            }else{
+                                                document.getElementById("address").style.display = "none";
+                                            }
+                                        }
+        </script>
     </body>
 
 </html>

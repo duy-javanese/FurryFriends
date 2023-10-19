@@ -14,29 +14,51 @@ public class Post {
     private int postId;
     private User user;
     private Category category;
+    private PostType postType;
     private String title;
     private String content;
     private String img;
     private boolean isPublic;
     private Date datePost;
     private String reason;
-    private String sta;
+    private PostStatus status;
+    private String address;
 
     public Post() {
     }
 
-    public Post(int postId, User user, Category category, String title, String content, String img, boolean isPublic, Date datePost, String reason, String sta) {
+    public Post(int postId, User user, Category category, PostType postType, String title, String content, String img, boolean isPublic, Date datePost, String reason, PostStatus status, String address) {
         this.postId = postId;
         this.user = user;
         this.category = category;
+        this.postType = postType;
         this.title = title;
         this.content = content;
         this.img = img;
         this.isPublic = isPublic;
         this.datePost = datePost;
         this.reason = reason;
-        this.sta = sta;
+        this.status = status;
+        this.address = address;
     }
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
 
     public int getPostId() {
         return postId;
@@ -110,13 +132,12 @@ public class Post {
         this.reason = reason;
     }
 
-    public String getSta() {
-        return sta;
+    public PostStatus getStatus() {
+        return status;
     }
 
-    public void setSta(String sta) {
-        this.sta = sta;
+    public void setStatus(PostStatus status) {
+        this.status = status;
     }
-    
     
 }
