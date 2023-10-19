@@ -86,7 +86,8 @@ public class ListPostController extends HttpServlet {
                 textSearch = "";
             }
 
-            ArrayList<Post> posts = pDao.GetPostByUser(account.getUserId(), textSearch, categoryId,
+            ArrayList<Post> posts = pDao.GetPostByUser((page - 1) * recordsPerPage,
+                recordsPerPage,account.getUserId(), textSearch, categoryId,
                     typeId, status, isPublic);
 
             int noOfRecords = pDao.GetNoOfRecordsPostByUser(account.getUserId(), textSearch, categoryId,

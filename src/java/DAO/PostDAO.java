@@ -109,7 +109,8 @@ public class PostDAO extends DBUtils.DBContext {
         }
     }
 
-    public ArrayList<Post> GetPostByUser(int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+    public ArrayList<Post> GetPostByUser(int offset, int recordsPerPage,
+            int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
         ArrayList<Post> list = new ArrayList<>();
         try {
             int count = 0;
@@ -147,6 +148,12 @@ public class PostDAO extends DBUtils.DBContext {
                 sql += " and isPublic = ?";
                 setter.put(++count, isPublic);
             }
+
+            sql += " order by post_id\n";
+            sql += "  offset ? ROW\n"
+                    + "  FETCH Next ? Rows only";
+            setter.put(++count, offset);
+            setter.put(++count, recordsPerPage);
 
             PreparedStatement stm = connection.prepareStatement(sql);
             for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
@@ -222,7 +229,7 @@ public class PostDAO extends DBUtils.DBContext {
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
         Post p = pDao.GetPostById(7);
-        ArrayList<Post> list = pDao.GetPostByUser(3, "", -1, -1, -1, -1);
+        ArrayList<Post> list = pDao.GetPostByUser(0,6,3, "", -1, -1, -1, -1);
         System.out.println(list.size());
         System.out.println(p.getContent());
     }

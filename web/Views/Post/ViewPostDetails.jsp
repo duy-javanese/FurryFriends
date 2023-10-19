@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="main_blog_details">
-                            <img class="img-fluid" src="${post.img}" alt="">
+                            <img class="img-fluid" src="${post.img}" alt="" width="800px" height="300px">
                             <a href="#"><h4>${post.title}</h4></a>
                             <div class="user_details">
                                 <div class="float-left">

@@ -4,7 +4,9 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+import DAO.PostDAO;
 import DAO.PostTypeDAO;
+import Model.Post;
 import Model.PostType;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,9 +62,13 @@ public class HomePage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PostTypeDAO ptDao = new PostTypeDAO();
+        PostDAO pDao = new PostDAO();
         
         //get list type post
         ArrayList<PostType> listType = ptDao.GetAllPostType();
+        
+        //get all post
+        ArrayList<Post> posts = pDao.GetPostPageition()
         
         //get session
         HttpSession session = request.getSession();
