@@ -229,8 +229,67 @@ public class PostDAO extends DBUtils.DBContext {
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
         Post p = pDao.GetPostById(7);
-        ArrayList<Post> list = pDao.GetPostByUser(0,6,3, "", -1, -1, -1, -1);
+        ArrayList<Post> list = pDao.GetPostPagenition(0, 6);
         System.out.println(list.size());
         System.out.println(p.getContent());
+    }
+
+    public ArrayList<Post> GetPostPagenition(int offset, int recordsPerPage) {
+        ArrayList<Post> list = new ArrayList<>();
+        try {
+            int count = 0;
+            String sql = "SELECT *\n"
+                    + "  FROM [post]\n"
+                    + "  Where isPublic = ? and status = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            setter.put(++count, Constant.PostPublic);
+            setter.put(++count, Constant.StatusPostAccept);
+
+            sql += " order by post_id\n";
+            sql += "  offset ? ROW\n"
+                    + "  FETCH Next ? Rows only";
+            setter.put(++count, offset);
+            setter.put(++count, recordsPerPage);
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            Post p;
+            while (rs.next()) {
+                p = new Post();
+                p = GetPostById(rs.getInt("post_id"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int GetNoOfRecordsPost() {
+        try {
+            int count = 0;
+            String sql = "SELECT count(*) as total\n"
+                    + "  FROM [post]\n"
+                    + "  Where isPublic = ? and status = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            setter.put(++count, Constant.PostPublic);
+            setter.put(++count, Constant.StatusPostAccept);
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }

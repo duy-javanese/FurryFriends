@@ -23,6 +23,8 @@ import java.util.ArrayList;
  */
 public class HomePage extends HttpServlet {
 
+    private int recordsPerPage = 4;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,13 +65,32 @@ public class HomePage extends HttpServlet {
             throws ServletException, IOException {
         PostTypeDAO ptDao = new PostTypeDAO();
         PostDAO pDao = new PostDAO();
-        
+
+        //pagenition 
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(
+                    request.getParameter("page"));
+        }
+
         //get list type post
         ArrayList<PostType> listType = ptDao.GetAllPostType();
-        
+
         //get all post
-        ArrayList<Post> posts = pDao.GetPostPageition()
-        
+        ArrayList<Post> posts = pDao.GetPostPagenition((page - 1) * recordsPerPage,
+                recordsPerPage);
+
+        int noOfRecords = pDao.GetNoOfRecordsPost();
+
+        int noOfPages = (int) Math.ceil((double) noOfRecords
+                / recordsPerPage);
+
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("noOfRecords", noOfRecords);
+
+        request.setAttribute("posts", posts);
+
         //get session
         HttpSession session = request.getSession();
         String msg = null;
@@ -78,8 +99,7 @@ public class HomePage extends HttpServlet {
             msg = (String) session.getAttribute("msg");
             session.removeAttribute("msg");
         }
-        
-        
+
         session.setAttribute("types", listType);
         request.setAttribute("msg", msg);
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
