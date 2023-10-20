@@ -4,22 +4,30 @@
  * and open the template in the editor.
  */
 
-package Controller;
+package Staff;
 
 import DAO.UserDAO;
+import Model.User;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-public class UpdateUserStatus extends HttpServlet {
-   private final String ERROR_PAGE = "errorPage.jsp";
+public class GetAllUserController extends HttpServlet {
+   private final String SEARCH_PAGE = "UserManagement.jsp";
+    private final String RESULT_PAGE = "UserManagement.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -30,27 +38,17 @@ public class UpdateUserStatus extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int userId = Integer.parseInt(request.getParameter("txtID"));
-        boolean status = Boolean.parseBoolean(request.getParameter("txtStatus"));
-        String searchValue = request.getParameter("lastSearchValue");
-        String urlRewriting = ERROR_PAGE;
+        String url = SEARCH_PAGE;
         try {
-            //1.1 new DAO
             UserDAO dao = new UserDAO();
-            //1.2 call DAO's methods
-            boolean result = dao.UpdateUserStatus(userId, status);
-            //2. process result
-            if (result) {
-                //2.1 call the search func again using URL rewriting
-                urlRewriting = "MainController"
-                        + "?action=Search User"
-                        + "&txtSearchValue=" + searchValue;
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            //2.2 transfer Dispatcher
-            response.sendRedirect(urlRewriting);
+                dao.getAllUser();
+                List<User> result = dao.getUserList();
+                request.setAttribute("LIST_USER", result);
+                url = RESULT_PAGE;
+        }catch (Exception ex) {
+            log("Error at SearchController: " + ex.toString());
+        }finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     } 
 

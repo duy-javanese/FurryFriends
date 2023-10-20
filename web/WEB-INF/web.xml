@@ -14,15 +14,19 @@
     </servlet>
     <servlet>
         <servlet-name>SearchController</servlet-name>
-        <servlet-class>Controller.SearchController</servlet-class>
+        <servlet-class>Staff.SearchController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateUserStatus</servlet-name>
-        <servlet-class>Controller.UpdateUserStatus</servlet-class>
+        <servlet-class>Staff.UpdateUserStatus</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetAllUserController</servlet-name>
-        <servlet-class>Controller.GetAllUserController</servlet-class>
+        <servlet-class>Staff.GetAllUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPendingPost</servlet-name>
+        <servlet-class>Staff.GetPendingPost</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>GetAllUserController</servlet-name>
         <url-pattern>/GetAllUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPendingPost</servlet-name>
+        <url-pattern>/GetPendingPost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

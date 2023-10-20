@@ -33,6 +33,20 @@
                 font-size: larger;
                 border: 0;
             }
+            .search-User-box{
+                width: 330px;
+                height: 36px;
+                border-radius: 4px;
+                padding-left: 13px;
+            }
+            .this-page-button{
+                font-size: large;
+                border: 0;
+                border-radius: 5px;
+                background: #ffc930;
+                color: white;
+                padding: 5px;
+            }
         </style>
         <title>Manage members</title>
     </head>
@@ -56,13 +70,21 @@
                                 <button class="menuButton" name="action" value="PostApprovement">Post</button><br/>
                                 <button class="menuButton" name="action" value="#">Profile</button><br/>
                                 <button class="menuButton" name="action" value="Logout">Logout</button><br/>
-                            </form>		
+                            </form>
+                            <div >
+                                <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+							<div class="user-info ps-3">
+								<p class="user-name mb-0">Hello #</p>
+							</div>
+				</a>
+                            </div>
 			</ul>
 			<!--end navigation-->
 		</div>
 		<!--end sidebar wrapper -->
                 <!--start header -->
-                <header>
+<!--                <header>
                     <div class="topbar d-flex align-items-center">
                         <nav class="navbar navbar-expand">
                             <div class="user-box dropdown">
@@ -75,22 +97,25 @@
 					</div>
                         </nav>
                     </div>
-                </header>
+                </header>-->
                 <!--end header -->
                 <!--Start page-wrapper -->
                 <div class="page-wrapper">
                     <div class="page-content">
                         <h1>User Management</h1>
-                                <form action="MainController">
-                                    Search User <input type="text" name="txtSearchValue" 
+                        <div>
+                            <form action="MainController">
+                                    <input class="search-User-box" type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
-                                    <input type="submit" value="Search User" name="action" />
+                                    <input class="this-page-button" type="submit" value="Search User" name="action" />
                                     
                                     
                                 </form>
                                     <form action="MainController">
-                                        <input type="submit" value="Get all user" name="action" />
+                                        <input class="this-page-button" type="submit" value="Get all user" name="action" />
                                     </form>
+                        </div>
+                                
                     </div>
                     <div class="container">
                             <div class="row">
