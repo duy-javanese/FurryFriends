@@ -71,20 +71,12 @@
                                 <button class="menuButton" name="action" value="#">Profile</button><br/>
                                 <button class="menuButton" name="action" value="Logout">Logout</button><br/>
                             </form>
-                            <div >
-                                <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
-							<div class="user-info ps-3">
-								<p class="user-name mb-0">Hello #</p>
-							</div>
-				</a>
-                            </div>
 			</ul>
 			<!--end navigation-->
 		</div>
 		<!--end sidebar wrapper -->
                 <!--start header -->
-<!--                <header>
+                <header>
                     <div class="topbar d-flex align-items-center">
                         <nav class="navbar navbar-expand">
                             <div class="user-box dropdown">
@@ -97,7 +89,7 @@
 					</div>
                         </nav>
                     </div>
-                </header>-->
+                </header>
                 <!--end header -->
                 <!--Start page-wrapper -->
                 <div class="page-wrapper">
@@ -120,7 +112,6 @@
                     <div class="container">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="">
                                         <div class="table-responsive">
                                  <!--------------------------------User List-------------------------------->
                                             <c:set var="searchValue" value="${param.txtSearchValue}"/>
@@ -217,7 +208,6 @@
                                             </table>
                                             </c:if>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                     </div>

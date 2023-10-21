@@ -137,6 +137,11 @@ public class Post {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" + "postId=" + postId + ", user=" + user + ", category=" + category + ", postType=" + postType + ", title=" + title + ", content=" + content + ", img=" + img + ", isPublic=" + isPublic + ", datePost=" + datePost + ", reason=" + reason + ", status=" + status + ", address=" + address + '}';
+    }
     
     
 }

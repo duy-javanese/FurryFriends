@@ -38,8 +38,8 @@ public class PostDAO extends DBUtils.DBContext {
             conn = DBContext.getConnection();
             if (conn != null) {
                 String sql = "Select * "
-                        + "From users "
-                        + "Where status = 2";
+                        + "From post "
+                        + "Where status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -50,7 +50,7 @@ public class PostDAO extends DBUtils.DBContext {
                     Category category = cDao.GetCategoryById(rs.getInt("category_id"));
 
                     PostStatusDAO psDao = new PostStatusDAO();
-                    PostStatus poststatus = psDao.GetStatusById(2);
+                    PostStatus poststatus = psDao.GetStatusById(rs.getInt("status"));
                     
                     int postId = rs.getInt("post_id");
                     //user
@@ -81,4 +81,17 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
+    
+    public static void main(String[] args){
+        PostDAO dao = new PostDAO();
+        try {
+            dao.getPendingPostList();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Post x : dao.getPendingPost()){
+            System.out.println(x);
+        }
+    }
+    
 }

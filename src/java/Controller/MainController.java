@@ -22,6 +22,7 @@ private static final String HOMEPAGE = "HomePage.jsp";
 private static final String DASHBOARD = "StaffPage.jsp";
 private static final String POST_APPROVEMENT_PAGE = "PostApprovement.jsp";
 private static final String USER_MANAGEMENT = "UserManagement.jsp";
+private static final String GET_PENDING_POST_CONTROLLER="GetPendingPost";
 private static final String SEARCH_USER_CONTROLLER="SearchController";
 private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
 private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
@@ -60,7 +61,7 @@ private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
                 url = DASHBOARD;
             }
             else if (action.equals("PostApprovement")){
-                url = POST_APPROVEMENT_PAGE;
+                url = GET_PENDING_POST_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

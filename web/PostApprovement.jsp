@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -79,7 +80,41 @@
                 <!--end header -->
                 <!--Start page-wrapper -->
                 <div class="page-wrapper">
-                    
+                    <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
+                    <c:forEach items="${result}" var="p" varStatus="counter">
+                        <form action="MainController" method="POST">
+                            <div class="main_blog_details">
+                                <h4>${post.title}</h4>
+                                <c:if test="${not empty p.img}">
+                                             <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px">       
+                                </c:if>
+                                             <div class="user_details">
+                                                    <div class="float-left">
+                                                        <a href="#">${p.category.categoryName}</a>
+                                                        <a href="#">${p.postType.postTypeName}</a>
+                                                    </div>
+                                                 
+                                                <div class="float-right mt-sm-0 mt-3">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h5>${p.user.username}</h5>
+                                                            <p>${p.datePost}</p>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <c:if test="${not empty p.content}">
+                                               <p>
+                                               ${p.content}
+                                               </p>       
+                                            </c:if>
+                                            
+                            </div>
+                        </form>
+                    </c:forEach>
                 </div>
                 <!--end page-wrapper -->
                 
