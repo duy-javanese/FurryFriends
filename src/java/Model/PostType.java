@@ -11,7 +11,6 @@ package Model;
 public class PostType {
     private int postTypeId;
     private String postTypeName;
-
     public PostType() {
     }
 

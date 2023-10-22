@@ -115,7 +115,7 @@ public class UserDAO extends DBContext {
                 //2.Create SQL String
                 String sql = "Select userID, username, email, phone_num, user_address, point,user_status "
                         + "From users "
-                        + "Where username Like ?";
+                        + "Where username Like ? and role_id=3";
 
                 //3.Create statement
                 stm = con.prepareStatement(sql);
@@ -160,6 +160,49 @@ public class UserDAO extends DBContext {
         }
     }
     
+    public void getAllUser() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "Select userID, username, email, phone_num, user_address, point,user_status "
+                        + "From users "
+                        + "Where role_id=3";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = Integer.parseInt(rs.getString("userID"));
+                    String username = rs.getString("username");
+                    String email = rs.getString("email");
+                    String phone_num = rs.getString("phone_num");
+                    String user_address = rs.getString("user_address");
+                    int point = Integer.parseInt(rs.getString("point"));
+                    boolean status = rs.getBoolean("user_status");
+                    User dto = new User(userID, username, email, phone_num, user_address, point, status);
+                    
+                    if (this.userList == null) {
+                        this.userList = new ArrayList<>();
+                    }//end account list had not initialize
+                    this.userList.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
     
     public boolean UpdateUserStatus(int userID, Boolean status) 
             throws SQLException, ClassNotFoundException, NamingException {
@@ -195,6 +238,36 @@ public class UserDAO extends DBContext {
             }
         }
         return result ;
+    }
+    
+    
+    public User GetUserById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [users]\n"
+                    + "  Where userID = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                
+                UserRoleDAO rDao = new UserRoleDAO();
+                UserRole role = rDao.getRoleById(rs.getInt("role_id"));
+                
+                return new User(id,
+                        rs.getString("username"),
+                        null,
+                        rs.getString("email"),
+                        rs.getString("phone_num"),
+                        rs.getBoolean("user_status"),
+                        role,
+                        rs.getString("user_address"),
+                        rs.getInt("point"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     // test searchUser

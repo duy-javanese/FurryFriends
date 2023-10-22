@@ -4,22 +4,27 @@
  * and open the template in the editor.
  */
 
-package Controller;
+package Staff;
 
-import DAO.UserDAO;
+import DAO.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-public class UpdateUserStatus extends HttpServlet {
-   private final String ERROR_PAGE = "errorPage.jsp";
+public class DeclinePostController extends HttpServlet {
+   private final String DEFAULT_PAGE = "errorPage.jsp";
+   private final String RESULT_PAGE = "GetPendingPost";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -30,27 +35,27 @@ public class UpdateUserStatus extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int userId = Integer.parseInt(request.getParameter("txtID"));
-        boolean status = Boolean.parseBoolean(request.getParameter("txtStatus"));
-        String searchValue = request.getParameter("lastSearchValue");
-        String urlRewriting = ERROR_PAGE;
-        try {
-            //1.1 new DAO
-            UserDAO dao = new UserDAO();
-            //1.2 call DAO's methods
-            boolean result = dao.UpdateUserStatus(userId, status);
-            //2. process result
-            if (result) {
-                //2.1 call the search func again using URL rewriting
-                urlRewriting = "MainController"
-                        + "?action=Search User"
-                        + "&txtSearchValue=" + searchValue;
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
+        int postId = Integer.parseInt(request.getParameter("postId"));
+        String declineReason = request.getParameter("declineReason");
+        String url = DEFAULT_PAGE;
+        int updateStatus=3; //3 = decline
+        try  {
+                
+                PostDAO dao = new PostDAO();
+                boolean result = dao.DeclinePost(postId, updateStatus, declineReason);
+                if(result){
+                    url = RESULT_PAGE;
+                }
+            
+        } catch (SQLException ex) {
+           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (NamingException ex) {
+           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
+       }finally {
             //2.2 transfer Dispatcher
-            response.sendRedirect(urlRewriting);
+            response.sendRedirect(url);
         }
     } 
 
