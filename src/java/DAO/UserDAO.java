@@ -85,7 +85,14 @@ public class UserDAO extends DBContext {
             statement.setInt(6, 3);         // role_id luôn là 3
             statement.setString(7, user.getAddress());
             statement.setInt(8, 0);         // point luôn là 0
-
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
     private List<User> userList;
 
     public List<User> getUserList() {
@@ -208,15 +215,8 @@ public class UserDAO extends DBContext {
             System.out.println(x);
         }
     }
-} 
-            int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Xử lý ngoại lệ nếu cần
-            return false;
-        }
-    }
+ 
+            
     
     public User GetUserById(int id) {
         try {
