@@ -27,21 +27,6 @@
         <!-- Login wrapper -->
         <div class="d-flex justify-content-center mt-5 mb-5">
             <div class="login-wrapper shadow bg-body rounded">
-
-                <div class="nav group-login-wrapper mb-2 row" id="accountTab" role="tablist">
-                    <div class="col-6">
-                        <button class="btn-tab-login active w-100" id="pills-login-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login"
-                                aria-selected="true">Đăng nhập</button>
-                    </div>
-                    <div class="col-6">
-                        <form action="register" method="get">
-                            <button class="btn-tab-login w-100"
-                                    type="submit">Đăng kí</button>
-
-                        </form>
-                    </div>
-                </div>
                 <div class="tab-content" id="accountTabContent">
                     <!--Login form-->
                     <div class="tab-pane fade show active body-login-wrapper" id="pills-login" role="tabpanel"
@@ -58,6 +43,11 @@
                             <h6>MẬT KHẨU <span class="text-danger">*</span></h6>
                             <input type="password" class="form-control mb-2" name="pwd" required
                                    placeholder="Nhập Mật khẩu" aria-label="Username">
+                            <div class="mb-3">
+                                <a href="registerPage.jsp" class="forget-pass-btn">
+                                    Đăng kí tài khoản?
+                                </a>
+                            </div>
                             <div class="mb-3">
                                 <a href="forgotPassword" class="forget-pass-btn">
                                     Quên mật khẩu?
