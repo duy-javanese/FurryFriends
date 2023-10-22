@@ -22,6 +22,7 @@ private static final String HOMEPAGE = "HomePage.jsp";
 private static final String USER_MANAGEMENT = "UserManagement.jsp";
 private static final String SEARCH_USER_CONTROLLER="SearchController";
 private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
+private static final String REGISTER = "RegisterController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,6 +41,8 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
             String action = request.getParameter("action");
             if (action == null) {
                 url = HOMEPAGE;
+            } else if (action.equals("Register")) {
+                url = REGISTER;
             }
             else if(action.equals("Search User")){
                 url = SEARCH_USER_CONTROLLER;

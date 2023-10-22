@@ -9,32 +9,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-          <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sensive Blog - Home</title>
-            <link rel="icon" href="img/Fevicon.png" type="image/png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>FurryFriends</title>
+        <link rel="icon" href="img/Fevicon.png" type="image/png">
 
-    <link rel="stylesheet" href="asset/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="asset/vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="asset/vendors/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="asset/vendors/linericon/style.css">
-    <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="asset/vendors/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="asset/vendors/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="asset/vendors/themify-icons/themify-icons.css">
+        <link rel="stylesheet" href="asset/vendors/linericon/style.css">
+        <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.theme.default.min.css">
+        <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.carousel.min.css">
 
-    <link rel="stylesheet" href="asset/css/style.css">
+        <link rel="stylesheet" href="asset/css/style.css">
     </head>
     <body>
         <%@ include file="asset/includes/header.jsp" %>
+        <%@ include file="asset/includes/toast.jsp" %>
         <main class="site-main">
             <!--================Hero Banner start =================-->  
             <section class="mb-30px">
                 <div class="container">
-                    <div class="hero-banner">
+                    <div class="hero-banner"
+                         style="background:url(asset/img/banner/banner1.jpeg) left center no-repeat;
+                         background-size: cover"
+                         >
                         <div class="hero-banner__content">
-                            <h3>Tours & Travels</h3>
-                            <h1>Amazing Places on earth</h1>
-                            <h4>December 12, 2018</h4>
+                            <h3>Blog & Trading</h3>
+                            <h1>Pet trading platform</h1>
+                            <h4>October 1, 2023</h4>
                         </div>
                     </div>
                 </div>
@@ -47,7 +51,7 @@
                     <div class="owl-carousel owl-theme blog-slider">
                         <div class="card blog__slide text-center">
                             <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide1.png" alt="">
+                                <img class="card-img rounded-0" src="asset/img/banner/banner1.jpeg" alt=""/>
                             </div>
                             <div class="blog__slide__content">
                                 <a class="blog__slide__label" href="#">Fashion</a>
@@ -115,108 +119,63 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="single-recent-blog-post">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="asset/img/blog/blog1.png" alt="">
-                                    <ul class="thumb-info">
-                                        <li><a href="#"><i class="ti-user"></i>Admin</a></li>
-                                        <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
-                                        <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
-                                    </ul>
+                            <!-- Post List-->
+                            <c:forEach items="${posts}" var="p">
+                                <div class="single-recent-blog-post">
+                                    <div class="thumb">
+                                        <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px">
+                                        <ul class="thumb-info">
+                                            <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
+                                            <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
+                                            <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="details mt-20">
+                                        <a href="blog-single.html">
+                                            <h3>${p.title}</h3>
+                                        </a>
+<!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
+                                        <p>${p.content.substring(0, 200)}...</p>
+                                        <a class="button" href="viewPostDetails?postId=${p.postId}">Read More <i class="ti-arrow-right"></i></a>
+                                    </div>
                                 </div>
-                                <div class="details mt-20">
-                                    <a href="blog-single.html">
-                                        <h3>Woman claims husband wants to name baby girl
-                                            after his ex-lover sparking.</h3>
-                                    </a>
-                                    <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
-                                    <p>Over yielding doesn't so moved green saw meat hath fish he him from given yielding lesser cattle were fruitful lights. Given let have, lesser their made him above gathered dominion sixth. Creeping deep said can't called second. Air created seed heaven sixth created living</p>
-                                    <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="single-recent-blog-post">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="asset/img/blog/blog2.png" alt="">
-                                    <ul class="thumb-info">
-                                        <li><a href="#"><i class="ti-user"></i>Admin</a></li>
-                                        <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
-                                        <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
-                                    </ul>
-                                </div>
-                                <div class="details mt-20">
-                                    <a href="blog-single.html">
-                                        <h3>Woman claims husband wants to name baby girl
-                                            after his ex-lover sparking.</h3>
-                                    </a>
-                                    <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
-                                    <p>Over yielding doesn't so moved green saw meat hath fish he him from given yielding lesser cattle were fruitful lights. Given let have, lesser their made him above gathered dominion sixth. Creeping deep said can't called second. Air created seed heaven sixth created living</p>
-                                    <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="single-recent-blog-post">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="asset/img/blog/blog3.png" alt="">
-                                    <ul class="thumb-info">
-                                        <li><a href="#"><i class="ti-user"></i>Admin</a></li>
-                                        <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
-                                        <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
-                                    </ul>
-                                </div>
-                                <div class="details mt-20">
-                                    <a href="blog-single.html">
-                                        <h3>Tourist deaths in Costa Rica jeopardize safe dest
-                                            ination reputation all time. </h3>
-                                    </a>
-                                    <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
-                                    <p>Over yielding doesn't so moved green saw meat hath fish he him from given yielding lesser cattle were fruitful lights. Given let have, lesser their made him above gathered dominion sixth. Creeping deep said can't called second. Air created seed heaven sixth created living</p>
-                                    <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="single-recent-blog-post">
-                                <div class="thumb">
-                                    <img class="img-fluid" src="asset/img/blog/blog4.png" alt="">
-                                    <ul class="thumb-info">
-                                        <li><a href="#"><i class="ti-user"></i>Admin</a></li>
-                                        <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
-                                        <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
-                                    </ul>
-                                </div>
-                                <div class="details mt-20">
-                                    <a href="blog-single.html">
-                                        <h3>Tourist deaths in Costa Rica jeopardize safe dest
-                                            ination reputation all time.  </h3>
-                                    </a>
-                                    <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>
-                                    <p>Over yielding doesn't so moved green saw meat hath fish he him from given yielding lesser cattle were fruitful lights. Given let have, lesser their made him above gathered dominion sixth. Creeping deep said can't called second. Air created seed heaven sixth created living</p>
-                                    <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-
+                            </c:forEach>
 
 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <nav class="blog-pagination justify-content-center d-flex">
                                         <ul class="pagination">
-                                            <li class="page-item">
-                                                <a href="#" class="page-link" aria-label="Previous">
-                                                    <span aria-hidden="true">
-                                                        <i class="ti-angle-left"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">
-                                                        <i class="ti-angle-right"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
+                                            <%--For displaying Previous link except for the 1st page --%>
+                                            <c:if test="${currentPage != 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="home?page=${currentPage - 1}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+
+                                            <%--For displaying Page numbers. The when condition does not display
+                                                        a link for the current page--%>
+                                            <c:forEach begin="1" end="${noOfPages}" var="i">
+                                                <c:choose>
+                                                    <c:when test="${currentPage eq i}"> 
+                                                        <li class="page-item"><a class="page-link bg-light" href="#">${i}</a></li>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <li class="page-item"><a class="page-link" href="home?page=${i}">${i}</a></li>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+
+                                            <%--For displaying Next link --%>
+                                            <c:if test="${currentPage lt noOfPages}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="home?page=${currentPage + 1}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
                                         </ul>
                                     </nav>
                                 </div>

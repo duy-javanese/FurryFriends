@@ -19,6 +19,28 @@
     <servlet>
         <servlet-name>UpdateUserStatus</servlet-name>
         <servlet-class>Controller.UpdateUserStatus</servlet-class>
+        <servlet-name>ListPostController</servlet-name>
+        <servlet-class>Controller.Post.ListPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashBoardController</servlet-name>
+        <servlet-class>Controller.User.DashBoardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostController</servlet-name>
+        <servlet-class>Controller.Post.CreatePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>Controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPostDetailsController</servlet-name>
+        <servlet-class>Controller.Post.ViewPostDetailsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -39,6 +61,28 @@
     <servlet-mapping>
         <servlet-name>UpdateUserStatus</servlet-name>
         <url-pattern>/UpdateUserStatus</url-pattern>
+        <servlet-name>ListPostController</servlet-name>
+        <url-pattern>/listPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashBoardController</servlet-name>
+        <url-pattern>/dashBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostController</servlet-name>
+        <url-pattern>/createPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPostDetailsController</servlet-name>
+        <url-pattern>/viewPostDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
