@@ -4,20 +4,24 @@
  */
 package DAO;
 
+import DBUtils.DBContext;
 import Model.Category;
 import Model.Constant;
 import Model.Post;
 import Model.PostStatus;
 import Model.PostType;
 import Model.User;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -292,16 +296,7 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return -1;
     }
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 
-/**
- *
- * @author Admin
- */
-public class PostDAO extends DBUtils.DBContext {
     private List<Post> pendingPost;
 
     public List<Post> getPendingPost() {

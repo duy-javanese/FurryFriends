@@ -19,6 +19,8 @@
     <servlet>
         <servlet-name>UpdateUserStatus</servlet-name>
         <servlet-class>Controller.UpdateUserStatus</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ListPostController</servlet-name>
         <servlet-class>Controller.Post.ListPostController</servlet-class>
     </servlet>
@@ -41,7 +43,6 @@
     <servlet>
         <servlet-name>ViewPostDetailsController</servlet-name>
         <servlet-class>Controller.Post.ViewPostDetailsController</servlet-class>
-        <servlet-class>Staff.UpdateUserStatus</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetAllUserController</servlet-name>
@@ -78,6 +79,8 @@
     <servlet-mapping>
         <servlet-name>UpdateUserStatus</servlet-name>
         <url-pattern>/UpdateUserStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/listPost</url-pattern>
     </servlet-mapping>

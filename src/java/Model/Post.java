@@ -98,14 +98,6 @@ public class Post {
         this.category = category;
     }
 
-    public PostType getPostType() {
-        return postType;
-    }
-
-    public void setPostType(PostType postType) {
-        this.postType = postType;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -160,14 +152,6 @@ public class Post {
 
     public void setStatus(PostStatus status) {
         this.status = status;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     @Override

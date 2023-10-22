@@ -288,36 +288,6 @@ public class UserDAO extends DBContext {
             System.out.println(x);
         }
     }
- 
-            
-    
-    public User GetUserById(int id) {
-        try {
-            String sql = "SELECT *\n"
-                    + "  FROM [users]\n"
-                    + "  Where userID = ? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                
-                UserRoleDAO rDao = new UserRoleDAO();
-                UserRole role = rDao.getRoleById(rs.getInt("role_id"));
-                
-                return new User(id,
-                        rs.getString("username"),
-                        null,
-                        rs.getString("email"),
-                        rs.getString("phone_num"),
-                        rs.getBoolean("user_status"),
-                        role,
-                        rs.getString("user_address"),
-                        rs.getInt("point"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+
     
 }
