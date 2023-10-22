@@ -26,6 +26,8 @@ private static final String GET_PENDING_POST_CONTROLLER="GetPendingPost";
 private static final String SEARCH_USER_CONTROLLER="SearchController";
 private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
 private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
+private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
+private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,6 +64,12 @@ private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
             }
             else if (action.equals("PostApprovement")){
                 url = GET_PENDING_POST_CONTROLLER;
+            }
+            else if (action.equals("Approve")){
+                url = APPROVE_POST_CONTROLLER;
+            }
+            else if (action.equals("Decline")){
+                url = DECLINE_POST_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

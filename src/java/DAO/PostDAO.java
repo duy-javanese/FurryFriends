@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -82,16 +83,81 @@ public class PostDAO extends DBUtils.DBContext {
         }
     }
     
-    public static void main(String[] args){
-        PostDAO dao = new PostDAO();
+    public boolean ApprovePost(int postId, int status) 
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
         try {
-            dao.getPendingPostList();
-        } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //1. Make connection
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                    //2. create SQL String
+                    String sql = "UPDATE post SET status = ? WHERE post_id = ?";
+                    //3. Create statement
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, status);
+                    stm.setInt(2, postId);
+                    //4. Excute querry to get Result set
+                    int effectRow = stm.executeUpdate();
+                    //5. Process Result set
+                    if (effectRow > 0) {
+                        result = true;
+                    }
+                
+                
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
-        for (Post x : dao.getPendingPost()){
-            System.out.println(x);
+        return result ;
+    }
+    
+    public boolean DeclinePost(int postId, int status, String declineReason) 
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            //1. Make connection
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                    //2. create SQL String
+                    String sql = "UPDATE post SET status = ?, reason = ? WHERE post_id = ?";
+                    //3. Create statement
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, status);
+                    stm.setString(2, declineReason);
+                    stm.setInt(3, postId);
+                    //4. Excute querry to get Result set
+                    int effectRow = stm.executeUpdate();
+                    //5. Process Result set
+                    if (effectRow > 0) {
+                        result = true;
+                    }
+                
+                
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
+        return result ;
     }
     
 }
