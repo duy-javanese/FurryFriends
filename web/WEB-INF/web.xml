@@ -36,6 +36,10 @@
         <servlet-name>ViewPostDetailsController</servlet-name>
         <servlet-class>Controller.Post.ViewPostDetailsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddStaffController</servlet-name>
+        <servlet-class>Controller.AddStaffController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ViewPostDetailsController</servlet-name>
         <url-pattern>/viewPostDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaffController</servlet-name>
+        <url-pattern>/AddStaffController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

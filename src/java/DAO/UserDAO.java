@@ -89,6 +89,29 @@ public class UserDAO extends DBContext {
         }
     }
     
+    public boolean addStaff(User user) {
+        try {
+            String sql = "INSERT INTO users (username, pwd, email, phone_num, user_status, role_id, user_address, point) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPwd());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhone());
+            statement.setBoolean(5, true);  // user_status luôn là 1
+            statement.setInt(6, 2);         // role_id staff là 2
+            statement.setString(7, user.getAddress());
+            statement.setInt(8, 0);         // point luôn là 0
+
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+    
     public User GetUserById(int id) {
         try {
             String sql = "SELECT *\n"
