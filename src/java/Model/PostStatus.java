@@ -35,6 +35,11 @@ public class PostStatus {
     public void setPostStatusValue(String postStatusValue) {
         this.postStatusValue = postStatusValue;
     }
+
+    @Override
+    public String toString() {
+        return "PostStatus{" + "postStatusId=" + postStatusId + ", postStatusValue=" + postStatusValue + '}';
+    }
     
     
 }

@@ -19,8 +19,17 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 private static final String ERROR = "errorPage.jsp";
 private static final String HOMEPAGE = "HomePage.jsp";
+private static final String DASHBOARD = "StaffPage.jsp";
+private static final String POST_APPROVEMENT_PAGE = "PostApprovement.jsp";
+private static final String USER_MANAGEMENT = "UserManagement.jsp";
+private static final String GET_PENDING_POST_CONTROLLER="GetPendingPost";
+private static final String SEARCH_USER_CONTROLLER="SearchController";
+private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
 private static final String REGISTER = "RegisterController";
 private static final String ADD_STAFF = "AddStaffController";
+private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
+private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
+private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,6 +52,30 @@ private static final String ADD_STAFF = "AddStaffController";
                 url = REGISTER;
             } else if (action.equals("AddStaff")) {
                 url = ADD_STAFF;
+            }
+            else if(action.equals("Search User")){
+                url = SEARCH_USER_CONTROLLER;
+            }
+            else if (action.equals("UserManagement")){
+                url = USER_MANAGEMENT;
+            }
+            else if (action.equals("Update user status")){
+                url = UPDATE_USER_STATUS_CONTROLLER;
+            }
+            else if (action.equals("Get all user")){
+                url = GET_ALL_USER_CONTROLLER;
+            }
+            else if (action.equals("Dashboard")){
+                url = DASHBOARD;
+            }
+            else if (action.equals("PostApprovement")){
+                url = GET_PENDING_POST_CONTROLLER;
+            }
+            else if (action.equals("Approve")){
+                url = APPROVE_POST_CONTROLLER;
+            }
+            else if (action.equals("Decline")){
+                url = DECLINE_POST_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -13,14 +13,14 @@
     <title>Sensive Blog - Home</title>
     <link rel="icon" href="img/Fevicon.png" type="image/png">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/linericon/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/owl-carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/linericon/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/owl-carousel/owl.carousel.min.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/style.css">
 </head>
 <!--================Header Menu Area =================-->
 <header class="header_area">

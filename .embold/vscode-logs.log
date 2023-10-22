@@ -1,0 +1,71 @@
+2023-10-07 20:25:32 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-07 20:25:32 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-07 20:25:32 info: Congratulations, your extension "Embold" is now active!
+2023-10-09 12:23:14 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 12:23:14 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 12:23:14 info: Congratulations, your extension "Embold" is now active!
+2023-10-09 12:42:00 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/.git/.probe-effe455d-f3f8-47f8-97b3-3431cdd327f8
+2023-10-09 12:42:00 error: SQLITE_ERROR: no such table: issues
+2023-10-09 12:42:03 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/.git/.probe-540690cc-042f-41fc-8838-eca3afa1d47c
+2023-10-09 12:42:03 error: SQLITE_ERROR: no such table: issues
+2023-10-09 12:42:06 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/nbproject/build-impl.xml
+2023-10-09 12:42:06 error: SQLITE_ERROR: no such table: issues
+2023-10-09 12:57:06 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 12:57:06 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 12:57:06 info: Congratulations, your extension "Embold" is now active!
+2023-10-09 13:20:39 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 13:20:39 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.5\temp
+2023-10-09 13:20:39 info: Congratulations, your extension "Embold" is now active!
+2023-10-09 13:33:51 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/src/java/Controller/RegisterController.java
+2023-10-09 13:33:51 error: SQLITE_ERROR: no such table: issues
+2023-10-09 13:35:29 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/.git/index.lock
+2023-10-09 13:35:29 error: SQLITE_ERROR: no such table: issues
+2023-10-09 14:06:54 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/.git/index.lock
+2023-10-09 14:06:54 error: SQLITE_ERROR: no such table: issues
+2023-10-22 14:23:27 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 14:23:27 info: Congratulations, your extension "Embold" is now active!
+2023-10-22 14:23:27 info: Current Version Of Embold
+2023-10-22 14:23:27 info: 0.1.6
+2023-10-22 14:23:27 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 14:23:34 info: Embold extension version response:
+2023-10-22 14:23:34 info: {"hasSupport":false}
+2023-10-22 14:23:34 info: current version : 
+2023-10-22 14:23:34 info: latest version : 
+2023-10-22 15:47:41 error: SQLITE_ERROR: no such table: issues
+2023-10-22 15:47:54 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:10 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:34 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:44 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:31:53 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 16:31:53 info: Congratulations, your extension "Embold" is now active!
+2023-10-22 16:31:53 info: Current Version Of Embold
+2023-10-22 16:31:53 info: 0.1.6
+2023-10-22 16:31:53 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 16:31:57 info: Embold extension version response:
+2023-10-22 16:31:57 info: {"hasSupport":false}
+2023-10-22 16:31:57 info: current version : 
+2023-10-22 16:31:57 info: latest version : 
+2023-10-22 16:32:22 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:32:36 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:32:38 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:32:45 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:48 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:49 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:50 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:50 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:51 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:47:51 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:48:15 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:49:42 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:49:42 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:49:42 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:55:25 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:55:50 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 16:55:50 info: Congratulations, your extension "Embold" is now active!
+2023-10-22 16:55:50 info: Current Version Of Embold
+2023-10-22 16:55:50 info: 0.1.6
+2023-10-22 16:55:50 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 16:55:53 info: Embold extension version response:
+2023-10-22 16:55:53 info: {"hasSupport":false}
+2023-10-22 16:55:53 info: current version : 
+2023-10-22 16:55:53 info: latest version : 

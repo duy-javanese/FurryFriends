@@ -30,6 +30,14 @@ public class DBContext {
         }
     }
     
+    public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        Connection conn= null;
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String url= "jdbc:sqlserver://localhost:1433;databaseName=SWP391_FurryFriends";
+        conn= DriverManager.getConnection(url, "sa", "123456");
+        return conn;
+    }
+    
     public static void main(String[] args) {
         DBContext db = new DBContext();
         System.out.println(db.connection != null);
