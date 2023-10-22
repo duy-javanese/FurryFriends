@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
         <!-- Dashboard Products wrapper -->
-        <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
+        <section style="margin-left: 280px; height: calc(100vh - 133px); overflow-y: auto;">
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -30,26 +31,86 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    ...
+                                    <th>ID</th>
+                                    <th>Ảnh</th>
+                                    <th>Tiêu đề bài viết</th>
+                                    <th>Danh mục bài viết</th>
+                                    <th>Phân loại bài viết</th>
+                                    <th>Chế độ bài viết</th>
+                                    <th>Trạng thái bài viết</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    ...
-                                </tr>
-                                <tr class="align-bottom">
-                                    ...
-                                </tr>
-                                <tr>
-                                    <td>...</td>
-                                    <td>...</td>
-                                    <td class="align-top">This cell is aligned to the top.</td>
-                                    <td>...</td>
-                                </tr>
+                                <c:forEach items="${posts}" var="p">
+                                    <tr>
+                                        <td>${p.postId}</td>
+                                        <td>
+                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover"/>
+                                        </td>
+                                        <td>${p.title}</td>
+                                        <td>${p.category.categoryName}</td>
+                                        <td>${p.postType.postTypeName}</td>
+                                        <td>
+                                            <c:if test="${p.isPublic == true}">
+                                                Công khai
+                                            </c:if>
+                                            <c:if test="${p.isPublic == false}">
+                                                Riêng tư
+                                            </c:if>
+                                        </td>
+                                        <td>${p.status.postStatusValue}</td>
+                                        <td>
+                                            <form action="viewPostDetails" method="post">
+                                                <input type="hidden" value="${p.postId}" name="postId">
+                                                <button type="submit"
+                                                        class="btn btn-outline-success me-2">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center mt-1">
+                <nav aria-label="Page navigation example col-12">
+                    <ul class="pagination">
+                        <%--For displaying Previous link except for the 1st page --%>
+                        <c:if test="${currentPage != 1}">
+                            <li class="page-item">
+                                <a class="page-link" href="listPost?page=${currentPage - 1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
+
+                        <%--For displaying Page numbers. The when condition does not display
+                                    a link for the current page--%>
+                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${currentPage eq i}"> 
+                                    <li class="page-item"><a class="page-link bg-light" href="#">${i}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li class="page-item"><a class="page-link" href="listPost?page=${i}">${i}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                        <%--For displaying Next link --%>
+                        <c:if test="${currentPage lt noOfPages}">
+                            <li class="page-item">
+                                <a class="page-link" href="listPost?page=${currentPage + 1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
             </div>
         </section>
 

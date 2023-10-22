@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 private static final String ERROR = "errorPage.jsp";
 private static final String HOMEPAGE = "HomePage.jsp";
+private static final String REGISTER = "RegisterController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,6 +38,8 @@ private static final String HOMEPAGE = "HomePage.jsp";
             String action = request.getParameter("action");
             if (action == null) {
                 url = HOMEPAGE;
+            } else if (action.equals("Register")) {
+                url = REGISTER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

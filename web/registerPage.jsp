@@ -27,9 +27,10 @@
         <!-- Form đăng ký -->
         <div class="tab-pane fade show active body-register-wrapper" id="pills-register" role="tabpanel"
              aria-labelledby="pills-register-tab">
-            <form action="register" method="post">
+            <form action="MainController" method="POST">
                 <!-- Thêm các trường nhập liệu cho tên người dùng, mật khẩu và thông tin đăng ký khác -->
                 <h6>Tên người dùng <span class="text-danger">*</span></h6>
+                ${requestScope.USERNAME_ERROR}
                 <input type="text" class="form-control mb-3" name="username" required
                        placeholder="Nhập tên người dùng" aria-label="Username">
                 <h6>Mật khẩu <span class="text-danger">*</span></h6>
@@ -37,21 +38,21 @@
                        placeholder="Nhập mật khẩu" aria-label="Password">
                 <!-- Trường nhập lại mật khẩu -->
                 <h6>Nhập lại mật khẩu <span class="text-danger">*</span></h6>
+                ${requestScope.PASSWORD_ERROR}
                 <input type="password" class="form-control mb-2" name="confirm_password" required
                        placeholder="Nhập lại mật khẩu" aria-label="Confirm Password">
                 <h6>Email <span class="text-danger">*</span></h6>
+                ${requestScope.EMAIL_ERROR}
                 <input type="email" class="form-control mb-3" name="email" required
                        placeholder="Nhập email" aria-label="Email">
-
                 <h6>Số điện thoại <span class="text-danger">*</span></h6>
+                ${requestScope.PHONE_ERROR}
                 <input type="tel" class="form-control mb-3" name="phone" required
                        placeholder="Nhập số điện thoại" aria-label="Phone">
-
                 <h6>Địa chỉ <span class="text-danger">*</span></h6>
                 <input type="text" class="form-control mb-3" name="address" required
                        placeholder="Nhập địa chỉ" aria-label="Address">
-
-                <button type="submit" class="btn btn-dark w-100 mb-2">Đăng ký</button>
+                <button type="submit" class="btn btn-dark w-100 mb-2" name="action" value="Register">Đăng ký</button>
             </form>
         </div>
         <!--Script go to top, copy to every single page-->

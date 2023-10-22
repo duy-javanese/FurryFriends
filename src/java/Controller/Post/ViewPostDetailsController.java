@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller;
+package Controller.Post;
 
-import DAO.UserDAO;
-import Model.User;
+import DAO.PostDAO;
+import Model.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class LoginController extends HttpServlet {
+public class ViewPostDetailsController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,18 +29,15 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginContrller</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginContrller at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int postId = Integer.parseInt(request.getParameter("postId"));
+        PostDAO pDao = new PostDAO();
+        Post p = pDao.GetPostById(postId);
+        if (p == null) {
+            request.getSession().setAttribute("msg", "Bài viết hiện không khả thi!");
+            response.sendRedirect("home");
+        } else {
+            request.setAttribute("post", p);
+            request.getRequestDispatcher("Views/Post/ViewPostDetails.jsp").forward(request, response);
         }
     } 
 
@@ -55,7 +52,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("loginPage.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -68,19 +65,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO uDao = new UserDAO();
-        
-        String username = request.getParameter("username");
-        String pwd = request.getParameter("pwd");
-        User account = uDao.doLogin(username,pwd);
-        if (account != null) {
-            response.sendRedirect("home");
-            request.getSession().setAttribute("account", account);
-        } else {
-            request.setAttribute("isFail", true);
-            request.getRequestDispatcher("loginPage.jsp").forward(request, response);
-        }
-        
+        processRequest(request, response);
     }
 
     /** 
