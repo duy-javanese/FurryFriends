@@ -22,3 +22,17 @@
 2023-10-09 13:35:29 error: SQLITE_ERROR: no such table: issues
 2023-10-09 14:06:54 info: file:///e%3A/SWP391/Github/SWP391_FurryFriends/.git/index.lock
 2023-10-09 14:06:54 error: SQLITE_ERROR: no such table: issues
+2023-10-22 14:23:27 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 14:23:27 info: Congratulations, your extension "Embold" is now active!
+2023-10-22 14:23:27 info: Current Version Of Embold
+2023-10-22 14:23:27 info: 0.1.6
+2023-10-22 14:23:27 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 14:23:34 info: Embold extension version response:
+2023-10-22 14:23:34 info: {"hasSupport":false}
+2023-10-22 14:23:34 info: current version : 
+2023-10-22 14:23:34 info: latest version : 
+2023-10-22 15:47:41 error: SQLITE_ERROR: no such table: issues
+2023-10-22 15:47:54 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:10 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:34 error: SQLITE_ERROR: no such table: issues
+2023-10-22 16:17:44 error: SQLITE_ERROR: no such table: issues
