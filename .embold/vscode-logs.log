@@ -69,3 +69,20 @@
 2023-10-22 16:55:53 info: {"hasSupport":false}
 2023-10-22 16:55:53 info: current version : 
 2023-10-22 16:55:53 info: latest version : 
+2023-10-22 17:03:57 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 17:03:57 info: Congratulations, your extension "Embold" is now active!
+2023-10-22 17:03:57 info: Current Version Of Embold
+2023-10-22 17:03:57 info: 0.1.6
+2023-10-22 17:03:57 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-22 17:03:59 info: Embold extension version response:
+2023-10-22 17:03:59 info: {"hasSupport":false}
+2023-10-22 17:03:59 info: current version : 
+2023-10-22 17:03:59 info: latest version : 
+2023-10-22 17:04:21 error: SQLITE_ERROR: no such table: issues
+2023-10-22 17:05:39 error: SQLITE_ERROR: no such table: issues
+2023-10-22 17:05:52 error: SQLITE_ERROR: no such table: issues
+2023-10-23 13:36:34 info: tempDirectory:c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
+2023-10-23 13:36:34 info: Congratulations, your extension "Embold" is now active!
+2023-10-23 13:36:34 info: Current Version Of Embold
+2023-10-23 13:36:34 info: 0.1.6
+2023-10-23 13:36:34 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.6\temp
