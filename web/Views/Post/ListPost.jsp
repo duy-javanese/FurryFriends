@@ -34,7 +34,6 @@
                                     <th>ID</th>
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
-                                    <th>Danh mục bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Chế độ bài viết</th>
                                     <th>Trạng thái bài viết</th>
@@ -49,7 +48,6 @@
                                             <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover"/>
                                         </td>
                                         <td>${p.title}</td>
-                                        <td>${p.category.categoryName}</td>
                                         <td>${p.postType.postTypeName}</td>
                                         <td>
                                             <c:if test="${p.isPublic == true}">

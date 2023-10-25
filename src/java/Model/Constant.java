@@ -15,4 +15,9 @@ public class Constant {
     
     public static int PostPublic = 1;
     public static int PostPrivate = 0;
+    
+    public static int PostHealth = 1;
+    public static int PostInformation = 2;
+    public static int PostTip = 3;
+    public static int PostExchange = 4;
 }

@@ -4,8 +4,10 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+import DAO.CategoryDAO;
 import DAO.PostDAO;
 import DAO.PostTypeDAO;
+import Model.Category;
 import Model.Post;
 import Model.PostType;
 import java.io.IOException;
@@ -36,19 +38,52 @@ public class HomePage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomePage</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomePage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PostTypeDAO ptDao = new PostTypeDAO();
+        PostDAO pDao = new PostDAO();
+        CategoryDAO cDao = new CategoryDAO();
+
+        
+        //get session
+        HttpSession session = request.getSession();
+        
+        //pagenition 
+        int page = 1;
+
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(
+                    request.getParameter("page"));
         }
+
+        //get list type post
+        ArrayList<PostType> listType = ptDao.GetAllPostType();
+
+        //get all post
+        ArrayList<Post> posts = pDao.GetPostPagnition((page - 1) * recordsPerPage,
+                recordsPerPage);
+        ArrayList<Category> categories = cDao.GetAllCategories();
+
+        int noOfRecords = pDao.GetNoOfRecordsPost();
+
+        int noOfPages = (int) Math.ceil((double) noOfRecords
+                / recordsPerPage);
+
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("noOfRecords", noOfRecords);
+
+        request.setAttribute("posts", posts);
+        session.setAttribute("categories", categories);
+
+        String msg = null;
+
+        if (session.getAttribute("msg") != null) {
+            msg = (String) session.getAttribute("msg");
+            session.removeAttribute("msg");
+        }
+
+        session.setAttribute("types", listType);
+        request.setAttribute("msg", msg);
+        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,46 +98,7 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostTypeDAO ptDao = new PostTypeDAO();
-        PostDAO pDao = new PostDAO();
-
-        //pagenition 
-        int page = 1;
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(
-                    request.getParameter("page"));
-        }
-
-        //get list type post
-        ArrayList<PostType> listType = ptDao.GetAllPostType();
-
-        //get all post
-        ArrayList<Post> posts = pDao.GetPostPagenition((page - 1) * recordsPerPage,
-                recordsPerPage);
-
-        int noOfRecords = pDao.GetNoOfRecordsPost();
-
-        int noOfPages = (int) Math.ceil((double) noOfRecords
-                / recordsPerPage);
-
-        request.setAttribute("noOfPages", noOfPages);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("noOfRecords", noOfRecords);
-
-        request.setAttribute("posts", posts);
-
-        //get session
-        HttpSession session = request.getSession();
-        String msg = null;
-
-        if (session.getAttribute("msg") != null) {
-            msg = (String) session.getAttribute("msg");
-            session.removeAttribute("msg");
-        }
-
-        session.setAttribute("types", listType);
-        request.setAttribute("msg", msg);
-        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

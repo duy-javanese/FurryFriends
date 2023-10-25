@@ -60,8 +60,7 @@ public class PostDAO extends DBUtils.DBContext {
                         rs.getBoolean("isPublic"),
                         rs.getDate("datePosted"),
                         rs.getString("reason"),
-                        status,
-                        sql);
+                        status);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,6 +72,44 @@ public class PostDAO extends DBUtils.DBContext {
         try {
             String sql = "INSERT INTO [dbo].[post]\n"
                     + "           ([userID]\n"
+                    + "           ,[post_type]\n"
+                    + "           ,[title]\n"
+                    + "           ,[post_content]\n"
+                    + "           ,[post_img]\n"
+                    + "           ,[isPublic]\n"
+                    + "           ,[datePosted]\n"
+                    + "           ,[reason]\n"
+                    + "           ,[status])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, post.getUser().getUserId());
+            stm.setInt(2, post.getPostType().getPostTypeId());
+            stm.setString(3, post.getTitle());
+            stm.setString(4, post.getContent());
+            stm.setString(5, post.getImg());
+            stm.setBoolean(6, post.isIsPublic());
+            stm.setDate(7, post.getDatePost());
+            stm.setString(8, post.getReason());
+            stm.setInt(9, post.getStatus().getPostStatusId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void InsertPostExchange(Post post) {
+        try {
+            String sql = "INSERT INTO [dbo].[post]\n"
+                    + "           ([userID]\n"
                     + "           ,[category_id]\n"
                     + "           ,[post_type]\n"
                     + "           ,[title]\n"
@@ -81,11 +118,9 @@ public class PostDAO extends DBUtils.DBContext {
                     + "           ,[isPublic]\n"
                     + "           ,[datePosted]\n"
                     + "           ,[reason]\n"
-                    + "           ,[status]\n"
-                    + "           ,[address])\n"
+                    + "           ,[status])\n"
                     + "     VALUES\n"
                     + "           (?\n"
-                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -106,10 +141,9 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setDate(8, post.getDatePost());
             stm.setString(9, post.getReason());
             stm.setInt(10, post.getStatus().getPostStatusId());
-            stm.setString(11, post.getAddress());
             stm.executeUpdate();
         } catch (SQLException ex) {
-
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,10 +154,8 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT *\n"
                     + "  FROM [post]\n"
-                    + "  Where isPublic = ?\n"
-                    + "  and userId = ?\n";
+                    + "  Where userId = ?\n";
             HashMap<Integer, Object> setter = new HashMap<>();
-            setter.put(++count, Constant.PostPublic);
             //find by user id
             setter.put(++count, userId);
 
@@ -233,12 +265,13 @@ public class PostDAO extends DBUtils.DBContext {
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
         Post p = pDao.GetPostById(7);
-        ArrayList<Post> list = pDao.GetPostPagenition(0, 6);
+        ArrayList<Post> list = pDao.GetPostPagnition(0, 3);
         System.out.println(list.size());
         System.out.println(p.getContent());
+        pDao.InsertPost(p);
     }
 
-    public ArrayList<Post> GetPostPagenition(int offset, int recordsPerPage) {
+    public ArrayList<Post> GetPostPagnition(int offset, int recordsPerPage) {
         ArrayList<Post> list = new ArrayList<>();
         try {
             int count = 0;
@@ -282,7 +315,7 @@ public class PostDAO extends DBUtils.DBContext {
             HashMap<Integer, Object> setter = new HashMap<>();
             setter.put(++count, Constant.PostPublic);
             setter.put(++count, Constant.StatusPostAccept);
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
             for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
                 stm.setObject(entry.getKey(), entry.getValue());
@@ -302,7 +335,7 @@ public class PostDAO extends DBUtils.DBContext {
     public List<Post> getPendingPost() {
         return pendingPost;
     }
-    
+
     public void getPendingPostList() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -324,7 +357,7 @@ public class PostDAO extends DBUtils.DBContext {
 
                     PostStatusDAO psDao = new PostStatusDAO();
                     PostStatus poststatus = psDao.GetStatusById(rs.getInt("status"));
-                    
+
                     int postId = rs.getInt("post_id");
                     //user
                     //category
@@ -333,7 +366,7 @@ public class PostDAO extends DBUtils.DBContext {
                     String img = rs.getString("post_img");
                     String reason = rs.getString("reason");
                     Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, poststatus);
-                    
+
                     if (this.pendingPost == null) {
                         this.pendingPost = new ArrayList<>();
                     }//end account list had not initialize
@@ -354,8 +387,8 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
-    
-    public boolean ApprovePost(int postId, int status) 
+
+    public boolean ApprovePost(int postId, int status)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -366,20 +399,18 @@ public class PostDAO extends DBUtils.DBContext {
             con = DBContext.getConnection();
 
             if (con != null) {
-                    //2. create SQL String
-                    String sql = "UPDATE post SET status = ? WHERE post_id = ?";
-                    //3. Create statement
-                    stm = con.prepareStatement(sql);
-                    stm.setInt(1, status);
-                    stm.setInt(2, postId);
-                    //4. Excute querry to get Result set
-                    int effectRow = stm.executeUpdate();
-                    //5. Process Result set
-                    if (effectRow > 0) {
-                        result = true;
-                    }
-                
-                
+                //2. create SQL String
+                String sql = "UPDATE post SET status = ? WHERE post_id = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, status);
+                stm.setInt(2, postId);
+                //4. Excute querry to get Result set
+                int effectRow = stm.executeUpdate();
+                //5. Process Result set
+                if (effectRow > 0) {
+                    result = true;
+                }
 
             }
         } finally {
@@ -390,10 +421,10 @@ public class PostDAO extends DBUtils.DBContext {
                 con.close();
             }
         }
-        return result ;
+        return result;
     }
-    
-    public boolean DeclinePost(int postId, int status, String declineReason) 
+
+    public boolean DeclinePost(int postId, int status, String declineReason)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -404,21 +435,19 @@ public class PostDAO extends DBUtils.DBContext {
             con = DBContext.getConnection();
 
             if (con != null) {
-                    //2. create SQL String
-                    String sql = "UPDATE post SET status = ?, reason = ? WHERE post_id = ?";
-                    //3. Create statement
-                    stm = con.prepareStatement(sql);
-                    stm.setInt(1, status);
-                    stm.setString(2, declineReason);
-                    stm.setInt(3, postId);
-                    //4. Excute querry to get Result set
-                    int effectRow = stm.executeUpdate();
-                    //5. Process Result set
-                    if (effectRow > 0) {
-                        result = true;
-                    }
-                
-                
+                //2. create SQL String
+                String sql = "UPDATE post SET status = ?, reason = ? WHERE post_id = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, status);
+                stm.setString(2, declineReason);
+                stm.setInt(3, postId);
+                //4. Excute querry to get Result set
+                int effectRow = stm.executeUpdate();
+                //5. Process Result set
+                if (effectRow > 0) {
+                    result = true;
+                }
 
             }
         } finally {
@@ -429,7 +458,25 @@ public class PostDAO extends DBUtils.DBContext {
                 con.close();
             }
         }
-        return result ;
+        return result;
     }
-    
+
+    public int GetLastPost() {
+        int maxPostId = -1; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "SELECT MAX(post_id) FROM post";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                maxPostId = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return maxPostId;
+    }
+
 }

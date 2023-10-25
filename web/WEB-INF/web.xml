@@ -64,6 +64,10 @@
         <servlet-name>DeclinePostController</servlet-name>
         <servlet-class>Staff.DeclinePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateExchangeController</servlet-name>
+        <servlet-class>Controller.Post.CreateExchangeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -128,12 +132,13 @@
         <servlet-name>DeclinePostController</servlet-name>
         <url-pattern>/DeclinePostController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateExchangeController</servlet-name>
+        <url-pattern>/createExchange</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>HomePage.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>

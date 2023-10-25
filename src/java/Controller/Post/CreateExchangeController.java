@@ -5,10 +5,12 @@
 package Controller.Post;
 
 import DAO.CategoryDAO;
+import DAO.ExchangeDAO;
 import DAO.PostDAO;
 import DAO.PostTypeDAO;
 import Model.Category;
 import Model.Constant;
+import Model.Exchange;
 import Model.Post;
 import Model.PostStatus;
 import Model.PostType;
@@ -20,8 +22,6 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.nio.file.Files;
@@ -41,7 +41,7 @@ import org.apache.commons.io.FilenameUtils;
  * @author dell
  */
 @MultipartConfig
-public class CreatePostController extends HttpServlet {
+public class CreateExchangeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,10 +60,10 @@ public class CreatePostController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreatePostController</title>");
+            out.println("<title>Servlet CreateExchangeController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreatePostController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreateExchangeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -95,9 +95,8 @@ public class CreatePostController extends HttpServlet {
             ArrayList<PostType> types = ptDao.GetAllPostType();
 
             request.setAttribute("PostExchange", Constant.PostExchange);
-            request.setAttribute("types", types);
             request.setAttribute("categories", categories);
-            request.getRequestDispatcher("/Views/Post/CreatePost.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/Post/CreateExchange.jsp").forward(request, response);
         }
     }
 
@@ -116,9 +115,11 @@ public class CreatePostController extends HttpServlet {
             //lay thong tin tai khoan dang dang nhap
             User account = (User) request.getSession().getAttribute("account");
 
-            int typeId = Integer.parseInt(request.getParameter("type"));
+            Category category = new Category();
+            category.setCategoryId(Integer.parseInt(request.getParameter("category")));
+
             PostType type = new PostType();
-            type.setPostTypeId(typeId);
+            type.setPostTypeId(Constant.PostExchange);
 
             String title = request.getParameter("title");
             String content = request.getParameter("content");
@@ -128,9 +129,23 @@ public class CreatePostController extends HttpServlet {
             PostStatus status = new PostStatus();
             status.setPostStatusId(Constant.StatusPostPending);
 
+            boolean isFree = false;
+            double price = Double.parseDouble(request.getParameter("price"));
+            if (price == 0) {
+                isFree = true;
+            }
+            String address = request.getParameter("address");
+
+            Exchange exchange = new Exchange();
+            exchange.setIsFree(isFree);
+            exchange.setAddress(address);
+            exchange.setPrice(price);
+            exchange.setIsFinish(false);
+
             //tao post
             Post post = new Post();
             post.setUser(account);
+            post.setCategory(category);
             post.setPostType(type);
             post.setTitle(title);
             post.setContent(content);
@@ -138,6 +153,7 @@ public class CreatePostController extends HttpServlet {
             post.setDatePost(createDate);
             post.setStatus(status);
 
+            response.getWriter().print("oke");
             //lay file anh client gui len server
             List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList());
 
@@ -162,37 +178,17 @@ public class CreatePostController extends HttpServlet {
                 post.setImg(pathImage);
             }
             PostDAO pDao = new PostDAO();
-            pDao.InsertPost(post);
+            pDao.InsertPostExchange(post);
+            int lastPost = pDao.GetLastPost();
+            post.setPostId(lastPost);
+            exchange.setPost(post);
+            ExchangeDAO eDao = new ExchangeDAO();
+            eDao.insert(exchange);
+
             response.sendRedirect("listPost");
         } catch (Exception e) {
-            Logger.getLogger(CreatePostController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CreateExchangeController.class.getName()).log(Level.SEVERE, null, e);
         }
-    }
-
-    public static void main(String[] args) {
-        //tao post
-        User account = new User();
-        account.setUserId(3);
-
-        PostType type = new PostType();
-        type.setPostTypeId(1);
-
-        Date createDate = Date.valueOf(LocalDate.now());
-
-        PostStatus status = new PostStatus();
-        status.setPostStatusId(Constant.StatusPostPending);
-
-        Post post = new Post();
-        post.setUser(account);
-        post.setPostType(type);
-        post.setTitle("Test");
-        post.setContent("Test");
-        post.setIsPublic(true);
-        post.setDatePost(createDate);
-        post.setStatus(status);
-
-        PostDAO pDao = new PostDAO();
-        pDao.InsertPost(post);
     }
 
     /**
@@ -204,5 +200,36 @@ public class CreatePostController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public static void main(String[] args) {
+        //tao post
+        User account = new User();
+        account.setUserId(3);
+
+        Category category = new Category();
+        category.setCategoryId(1);
+
+        PostType type = new PostType();
+        type.setPostTypeId(1);
+
+        Date createDate = Date.valueOf(LocalDate.now());
+
+        PostStatus status = new PostStatus();
+        status.setPostStatusId(Constant.StatusPostPending);
+
+        Post post = new Post();
+        post.setUser(account);
+        post.setCategory(category);
+        post.setPostType(type);
+        post.setTitle("Test");
+        post.setContent("Test");
+        post.setIsPublic(true);
+        post.setDatePost(createDate);
+        post.setStatus(status);
+        post.setImg("oke");
+
+        PostDAO pDao = new PostDAO();
+        pDao.InsertPostExchange(post);
+    }
 
 }
