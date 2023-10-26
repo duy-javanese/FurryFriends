@@ -5,16 +5,21 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="DAO.InformationDAO" %>
+<%@ page import="Model.Information" %>
 <!--================ Start Footer Area =================-->
 <footer class="footer-area section-padding">
+    <%
+        try {
+            Information info = InformationDAO.getInfor();
+    %>
     <div class="container">
         <div class="row">
             <div class="col-lg-3  col-md-6 col-sm-6">
                 <div class="single-footer-widget">
                     <h6>About Us</h6>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-                        magna aliqua.
+                        <%= (info.getAboutUs() != null) ? info.getAboutUs() : "Chưa có thông tin" %>
                     </p>
                 </div>
             </div>
@@ -49,17 +54,10 @@
             </div>
             <div class="col-lg-3  col-md-6 col-sm-6">
                 <div class="single-footer-widget mail-chimp">
-                    <h6 class="mb-20">Instragram Feed</h6>
-                    <ul class="instafeed d-flex flex-wrap">
-                        <li><img src="img/instagram/i1.jpg" alt=""></li>
-                        <li><img src="img/instagram/i2.jpg" alt=""></li>
-                        <li><img src="img/instagram/i3.jpg" alt=""></li>
-                        <li><img src="img/instagram/i4.jpg" alt=""></li>
-                        <li><img src="img/instagram/i5.jpg" alt=""></li>
-                        <li><img src="img/instagram/i6.jpg" alt=""></li>
-                        <li><img src="img/instagram/i7.jpg" alt=""></li>
-                        <li><img src="img/instagram/i8.jpg" alt=""></li>
-                    </ul>
+                    <h6 class="mb-20">Contact</h6>
+                    <div>
+                        <%= (info.getPhone() != null) ? info.getPhone() : "Chưa có thông tin" %>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 col-sm-6">
@@ -85,9 +83,14 @@
         </div>
         <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
             <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> by Furry Friends
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
         </div>
     </div>
+    <%
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    %>
 </footer>
 <!--================ End Footer Area =================-->

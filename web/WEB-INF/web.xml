@@ -68,6 +68,10 @@
         <servlet-name>CreateExchangeController</servlet-name>
         <servlet-class>Controller.Post.CreateExchangeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllStaffController</servlet-name>
+        <servlet-class>Staff.GetAllStaffController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>CreateExchangeController</servlet-name>
         <url-pattern>/createExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllStaffController</servlet-name>
+        <url-pattern>/GetAllStaffController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
