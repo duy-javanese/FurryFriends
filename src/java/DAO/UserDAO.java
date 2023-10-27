@@ -99,8 +99,6 @@ public class UserDAO extends DBContext {
         return userList;
     }
     
-    
-    
     public void searchUser(String searchValue)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -203,6 +201,46 @@ public class UserDAO extends DBContext {
         }
     }
     
+    public List<User> getAllStaff() throws SQLException {
+        List<User> listStaff = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "Select userID, username, email, phone_num, user_address, point,user_status "
+                        + "From users "
+                        + "Where role_id=2";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = Integer.parseInt(rs.getString("userID"));
+                    String username = rs.getString("username");
+                    String email = rs.getString("email");
+                    String phone_num = rs.getString("phone_num");
+                    String user_address = rs.getString("user_address");
+                    int point = Integer.parseInt(rs.getString("point"));
+                    boolean status = rs.getBoolean("user_status");
+                    User dto = new User(userID, username, email, phone_num, user_address, point, status);
+                    listStaff.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listStaff;
+    }
     
     public boolean UpdateUserStatus(int userID, Boolean status) 
             throws SQLException, ClassNotFoundException, NamingException {
@@ -240,6 +278,29 @@ public class UserDAO extends DBContext {
         return result ;
     }
     
+    
+    public boolean addStaff(User user) {
+        try {
+            String sql = "INSERT INTO users (username, pwd, email, phone_num, user_status, role_id, user_address, point) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPwd());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhone());
+            statement.setBoolean(5, true);  // user_status luôn là 1
+            statement.setInt(6, 2);         // role_id staff là 2
+            statement.setString(7, user.getAddress());
+            statement.setInt(8, 0);         // point luôn là 0
+
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
     
     public User GetUserById(int id) {
         try {

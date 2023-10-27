@@ -45,6 +45,10 @@
         <servlet-class>Controller.Post.ViewPostDetailsController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddStaffController</servlet-name>
+        <servlet-class>Controller.AddStaffController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>GetAllUserController</servlet-name>
         <servlet-class>Staff.GetAllUserController</servlet-class>
     </servlet>
@@ -63,6 +67,12 @@
     <servlet>
         <servlet-name>GetPendingExchange</servlet-name>
         <servlet-class>Staff.GetPendingExchange</servlet-class>
+        <servlet-name>CreateExchangeController</servlet-name>
+        <servlet-class>Controller.Post.CreateExchangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllStaffController</servlet-name>
+        <servlet-class>Staff.GetAllStaffController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -109,6 +119,10 @@
         <url-pattern>/viewPostDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddStaffController</servlet-name>
+        <url-pattern>/AddStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GetAllUserController</servlet-name>
         <url-pattern>/GetAllUserController</url-pattern>
     </servlet-mapping>
@@ -127,13 +141,16 @@
     <servlet-mapping>
         <servlet-name>GetPendingExchange</servlet-name>
         <url-pattern>/GetPendingExchange</url-pattern>
+        <servlet-name>CreateExchangeController</servlet-name>
+        <url-pattern>/createExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllStaffController</servlet-name>
+        <url-pattern>/GetAllStaffController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>HomePage.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>

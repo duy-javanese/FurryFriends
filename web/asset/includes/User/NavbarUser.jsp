@@ -19,7 +19,7 @@
                 Dashboard
             </a>
         </li>
-        <li>
+        <li class="nav-item">
             <a href="listPost" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>
@@ -27,12 +27,36 @@
                 Bài viết của tôi
             </a>
         </li>
-        <li>
+        <li class="nav-item">
             <a href="createPost" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>
                 </svg>
-                Tạo bài viết
+                Tạo blog
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="createExchange" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Tạo bài viết trao đổi
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Người quan tâm bài viết
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Bài viết quan tâm 
             </a>
         </li>
     </ul>

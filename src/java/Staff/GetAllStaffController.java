@@ -1,31 +1,27 @@
-package Controller;
-
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-import DAO.CategoryDAO;
-import DAO.PostDAO;
-import DAO.PostTypeDAO;
-import Model.Category;
-import Model.Post;
-import Model.PostType;
+package Staff;
+
+import DAO.UserDAO;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author dell
+ * @author DUY
  */
-public class HomePage extends HttpServlet {
-
-    private int recordsPerPage = 4;
+public class GetAllStaffController extends HttpServlet {
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "staffManagement.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,52 +34,20 @@ public class HomePage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostTypeDAO ptDao = new PostTypeDAO();
-        PostDAO pDao = new PostDAO();
-        CategoryDAO cDao = new CategoryDAO();
-
-        
-        //get session
-        HttpSession session = request.getSession();
-        
-        //pagenition 
-        int page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(
-                    request.getParameter("page"));
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
+        try {
+            UserDAO dao = new UserDAO();
+            List<User> result = dao.getAllStaff();
+            if (result.size() > 0) {
+                request.setAttribute("LIST_STAFF", result);
+                url = SUCCESS;
+            }
+        } catch (Exception e) {
+            log("Error at GetAllStaffController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
-
-        //get list type post
-        ArrayList<PostType> listType = ptDao.GetAllPostType();
-
-        //get all post
-        ArrayList<Post> posts = pDao.GetPostPagnition((page - 1) * recordsPerPage,
-                recordsPerPage);
-        ArrayList<Category> categories = cDao.GetAllCategories();
-
-        int noOfRecords = pDao.GetNoOfRecordsPost();
-
-        int noOfPages = (int) Math.ceil((double) noOfRecords
-                / recordsPerPage);
-
-        request.setAttribute("noOfPages", noOfPages);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("noOfRecords", noOfRecords);
-
-        request.setAttribute("posts", posts);
-        session.setAttribute("categories", categories);
-
-        String msg = null;
-
-        if (session.getAttribute("msg") != null) {
-            msg = (String) session.getAttribute("msg");
-            session.removeAttribute("msg");
-        }
-
-        session.setAttribute("types", listType);
-        request.setAttribute("msg", msg);
-        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

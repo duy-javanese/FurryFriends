@@ -26,10 +26,14 @@ private static final String GET_PENDING_POST_CONTROLLER="GetPendingPost";
 private static final String SEARCH_USER_CONTROLLER="SearchController";
 private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
 private static final String REGISTER = "RegisterController";
+private static final String ADD_STAFF = "AddStaffController";
 private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
 private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
 private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
 private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange";
+private static final String GET_ALL_STAFF_CONTROLLER = "GetAllStaffController";
+private static final String UPDATE_ABOUT_US = "UpdateAboutUsController";
+private static final String UPDATE_CONTACT = "UpdateContactController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,6 +54,8 @@ private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange"
                 url = HOMEPAGE;
             } else if (action.equals("Register")) {
                 url = REGISTER;
+            } else if (action.equals("AddStaff")) {
+                url = ADD_STAFF;
             }
             else if(action.equals("Search User")){
                 url = SEARCH_USER_CONTROLLER;
@@ -77,6 +83,14 @@ private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange"
             }
             else if (action.equals("ExchangeApprovement")){
                 url = GET_PENDING_EXCHANGE_CONTROLLER;
+            else if (action.equals("Get all staff")){
+                url = GET_ALL_STAFF_CONTROLLER;
+            }
+            else if (action.equals("UpdateAboutUs")){
+                url = UPDATE_ABOUT_US;
+            }
+            else if (action.equals("UpdateContact")){
+                url = UPDATE_CONTACT;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

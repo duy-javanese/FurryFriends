@@ -42,7 +42,7 @@
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Bài viết</a>
+                               aria-expanded="false">Blog</a>
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
@@ -54,6 +54,25 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">
                                             ${t.postTypeName}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">Bài viết trao đổi</a>
+                            <ul class="dropdown-menu">
+                                <!-- list post type -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Tất cả bài viết
+                                    </a>
+                                </li>
+                                <c:forEach var="c" items="${sessionScope.categories}">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">
+                                            ${c.categoryName}
                                         </a>
                                     </li>
                                 </c:forEach>

@@ -22,40 +22,50 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Tạo blog</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Tạo bài viết</h1>
                 </div>
                 <hr>
                 <!-- Content Row -->
-                <form action="createPost" method="post" enctype="multipart/form-data">
+                <form action="createExchange" method="post" enctype="multipart/form-data">
                     <div class="row m-5 rounded-3" style="background-color: papayawhip">
-
-                        <!-- Type Post -->
+                        <!-- Category Post -->
                         <div class="form-floating mt-5">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    name="type" onchange="chooseTypePost(this)">
-                                <option selected disabled value="">Danh mục bài viết</option>
-                                <c:forEach items="${types}" var="t">
-                                    <c:if test="${t.postTypeId != PostExchange}">
-                                        <option value="${t.postTypeId}">${t.postTypeName}</option>
-                                    </c:if>
+                                    name="category">
+                                <option selected disabled value="">Danh mục trao đổi</option>
+                                <c:forEach items="${categories}" var="c">
+                                    <option value="${c.categoryId}">${c.categoryName}</option>
                                 </c:forEach>
                             </select>
-                            <label for="floatingSelect">Phân loại bài viết</label>
+                            <label for="floatingSelect">Danh mục bài viết</label>
                         </div>
+
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
+                            <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài trao đổi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
                                    placeholder="Tiêu đề bài viết" name="title">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài viết <span style="color: red">*</span></label>
+                            <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài trao đổi <span style="color: red">*</span></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                                       name="content"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Ảnh bài viết <span style="color: red">*</span></label>
+                            <label for="formFile" class="form-label">Ảnh bài trao đổi <span style="color: red">*</span></label>
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
                                    multiple required>
+                        </div>
+
+                        <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">VNĐ</span>
+                            <input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" 
+                                   placeholder="Địa chỉ trao đổi thú cưng" name="address">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
@@ -74,14 +84,14 @@
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
         <script>
-                                        function chooseTypePost(select) {
-                                            const selectedValue = select.value;
-                                            if (selectedValue === '1') {
-                                                document.getElementById("address").style.display = "block";
-                                            } else {
-                                                document.getElementById("address").style.display = "none";
-                                            }
-                                        }
+            function chooseTypePost(select) {
+                const selectedValue = select.value;
+                if (selectedValue === '1') {
+                    document.getElementById("address").style.display = "block";
+                } else {
+                    document.getElementById("address").style.display = "none";
+                }
+            }
         </script>
     </body>
 

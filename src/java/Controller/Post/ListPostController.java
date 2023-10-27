@@ -87,7 +87,7 @@ public class ListPostController extends HttpServlet {
             }
 
             ArrayList<Post> posts = pDao.GetPostByUser((page - 1) * recordsPerPage,
-                recordsPerPage,account.getUserId(), textSearch, categoryId,
+                    recordsPerPage, account.getUserId(), textSearch, categoryId,
                     typeId, status, isPublic);
 
             int noOfRecords = pDao.GetNoOfRecordsPostByUser(account.getUserId(), textSearch, categoryId,
@@ -99,11 +99,18 @@ public class ListPostController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("noOfRecords", noOfRecords);
-            
+
             request.setAttribute("posts", posts);
 
             request.getRequestDispatcher("/Views/Post/ListPost.jsp").forward(request, response);
         }
+    }
+
+    public static void main(String[] args) {
+        PostDAO pDao = new PostDAO();
+        ArrayList<Post> posts = pDao.GetPostByUser(0,
+                3, 3, "", -1, -1, -1, -1);
+        System.out.println(posts.size());
     }
 
     /**

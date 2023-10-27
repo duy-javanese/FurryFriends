@@ -56,7 +56,9 @@
                             <a href="#"><h4>${post.title}</h4></a>
                             <div class="user_details">
                                 <div class="float-left">
-                                    <a href="#">${post.category.categoryName}</a>
+                                    <c:if test="${post.postType.postTypeId == 4}">
+                                        <a href="#">${post.category.categoryName}</a>
+                                    </c:if>
                                     <a href="#">${post.postType.postTypeName}</a>
                                 </div>
                                 <div class="float-right mt-sm-0 mt-3">
@@ -74,7 +76,7 @@
                             <p>
                                 ${post.content}
                             </p>
-                            
+
                             <div class="news_d_footer flex-column flex-sm-row">
                                 <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
                                 <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>06 Comments</a>

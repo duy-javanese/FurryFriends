@@ -22,12 +22,12 @@ public class Post {
     private Date datePost;
     private String reason;
     private PostStatus status;
-    private String address;
+    private Exchange exchange;
 
     public Post() {
     }
 
-    public Post(int postId, User user, Category category, PostType postType, String title, String content, String img, boolean isPublic, Date datePost, String reason, PostStatus status, String address) {
+    public Post(int postId, User user, Category category, PostType postType, String title, String content, String img, boolean isPublic, Date datePost, String reason, PostStatus status) {
         this.postId = postId;
         this.user = user;
         this.category = category;
@@ -39,9 +39,23 @@ public class Post {
         this.datePost = datePost;
         this.reason = reason;
         this.status = status;
-        this.address = address;
     }
 
+    public Post(int postId, User user, Category category, PostType postType, String title, String content, String img, boolean isPublic, Date datePost, String reason, PostStatus status, Exchange exchange) {
+        this.postId = postId;
+        this.user = user;
+        this.category = category;
+        this.postType = postType;
+        this.title = title;
+        this.content = content;
+        this.img = img;
+        this.isPublic = isPublic;
+        this.datePost = datePost;
+        this.reason = reason;
+        this.status = status;
+        this.exchange = exchange;
+    }
+    
     public PostType getPostType() {
         return postType;
     }
@@ -49,17 +63,6 @@ public class Post {
     public void setPostType(PostType postType) {
         this.postType = postType;
     }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    
-    
-
     
     //contrucstor to get post list for staff
     public Post(int postId, User user, Category category, String title, String content, String img, Date datePost, String reason, PostStatus status, PostType postType) {
@@ -155,9 +158,17 @@ public class Post {
         this.status = status;
     }
 
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
+    }
+
     @Override
     public String toString() {
-        return "Post{" + "postId=" + postId + ", user=" + user + ", category=" + category + ", postType=" + postType + ", title=" + title + ", content=" + content + ", img=" + img + ", isPublic=" + isPublic + ", datePost=" + datePost + ", reason=" + reason + ", status=" + status + ", address=" + address + '}';
+        return "Post{" + "postId=" + postId + ", user=" + user + ", category=" + category + ", postType=" + postType + ", title=" + title + ", content=" + content + ", img=" + img + ", isPublic=" + isPublic + ", datePost=" + datePost + ", reason=" + reason + ", status=" + status + '}';
     }
     
     
