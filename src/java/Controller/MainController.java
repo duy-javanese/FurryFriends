@@ -83,6 +83,7 @@ private static final String UPDATE_CONTACT = "UpdateContactController";
             }
             else if (action.equals("ExchangeApprovement")){
                 url = GET_PENDING_EXCHANGE_CONTROLLER;
+            }
             else if (action.equals("Get all staff")){
                 url = GET_ALL_STAFF_CONTROLLER;
             }

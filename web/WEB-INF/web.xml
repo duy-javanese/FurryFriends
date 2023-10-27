@@ -67,6 +67,8 @@
     <servlet>
         <servlet-name>GetPendingExchange</servlet-name>
         <servlet-class>Staff.GetPendingExchange</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CreateExchangeController</servlet-name>
         <servlet-class>Controller.Post.CreateExchangeController</servlet-class>
     </servlet>
@@ -141,6 +143,8 @@
     <servlet-mapping>
         <servlet-name>GetPendingExchange</servlet-name>
         <url-pattern>/GetPendingExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CreateExchangeController</servlet-name>
         <url-pattern>/createExchange</url-pattern>
     </servlet-mapping>
