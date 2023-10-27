@@ -26,7 +26,16 @@
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <style type="text/css">
+            .selected-button{
+                width: 100%;
+                background-color: #ff9907;
+                color: white;
+                margin-bottom: 8px;
+                font-size: larger;
+                border: 0;
+            }
             .menuButton{
+                width: 100%;
                 background-color: #171717;
                 color: white;
                 margin-bottom: 8px;
@@ -47,6 +56,22 @@
                 color: white;
                 padding: 5px;
             }
+            .userpage-wrapper {
+
+                height: 100%;
+
+
+                margin-top: 60px;
+
+
+                margin-bottom: 30px;
+
+
+                margin-left: 250px;
+
+
+            }
+
         </style>
         <title>Manage members</title>
     </head>
@@ -65,11 +90,12 @@
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
                             <form action="MainController">
-                                <button class="menuButton" name="action" value="Dashboard">Dashboard</button><br/>
-                                <button class="menuButton" name="action" value="Get all user">Manage user</button><br/>
-                                <button class="menuButton" name="action" value="PostApprovement">Post</button><br/>
-                                <button class="menuButton" name="action" value="#">Profile</button><br/>
-                                <button class="menuButton" name="action" value="Logout">Logout</button><br/>
+                                <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
+                        <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
+                        <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
+                        <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                        <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
+                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
                             </form>
 			</ul>
 			<!--end navigation-->
@@ -92,7 +118,7 @@
                 </header>
                 <!--end header -->
                 <!--Start page-wrapper -->
-                <div class="page-wrapper">
+                <div class="userpage-wrapper">
                     <div class="page-content">
                         <h1>User Management</h1>
                         <div>

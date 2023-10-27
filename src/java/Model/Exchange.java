@@ -1,0 +1,79 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model;
+
+/**
+ *
+ * @author Admin
+ */
+public class Exchange {
+    private int exchangeId;
+    private Post post;
+    private boolean isFree;
+    private double price;
+    private String address;
+    private boolean isFinish;
+
+    public Exchange(int exchangeId, Post post, boolean isFree, double price, String address, boolean isFinish) {
+        this.exchangeId = exchangeId;
+        this.post = post;
+        this.isFree = isFree;
+        this.price = price;
+        this.address = address;
+        this.isFinish = isFinish;
+    }
+
+    public Exchange() {
+    }
+
+    public int getExchangeId() {
+        return exchangeId;
+    }
+
+    public void setExchangeId(int exchangeId) {
+        this.exchangeId = exchangeId;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public boolean isIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(boolean isFree) {
+        this.isFree = isFree;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isIsFinish() {
+        return isFinish;
+    }
+
+    public void setIsFinish(boolean isFinish) {
+        this.isFinish = isFinish;
+    }
+}

@@ -312,13 +312,16 @@ public class PostDAO extends DBUtils.DBContext {
             if (conn != null) {
                 String sql = "Select * "
                         + "From post "
-                        + "Where status = 1";
+                        + "Where status = 1 AND (post_type = 1 or post_type = 2 or post_type =3 )";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     UserDAO uDao = new UserDAO();
                     User user = uDao.GetUserById(rs.getInt("userID"));
-
+                    
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType posttype = ptDao.GetTypeById(rs.getInt("post_type"));
+                    
                     CategoryDAO cDao = new CategoryDAO();
                     Category category = cDao.GetCategoryById(rs.getInt("category_id"));
 
@@ -332,7 +335,7 @@ public class PostDAO extends DBUtils.DBContext {
                     String content = rs.getString("post_content");
                     String img = rs.getString("post_img");
                     String reason = rs.getString("reason");
-                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, poststatus);
+                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, poststatus, posttype);
                     
                     if (this.pendingPost == null) {
                         this.pendingPost = new ArrayList<>();

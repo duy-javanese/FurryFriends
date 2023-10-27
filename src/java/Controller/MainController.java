@@ -29,6 +29,7 @@ private static final String REGISTER = "RegisterController";
 private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
 private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
 private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
+private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -73,6 +74,9 @@ private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
             }
             else if (action.equals("Decline")){
                 url = DECLINE_POST_CONTROLLER;
+            }
+            else if (action.equals("ExchangeApprovement")){
+                url = GET_PENDING_EXCHANGE_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

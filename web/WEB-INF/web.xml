@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateUserStatus</servlet-name>
-        <servlet-class>Controller.UpdateUserStatus</servlet-class>
+        <servlet-class>Staff.UpdateUserStatus</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListPostController</servlet-name>
@@ -59,6 +59,10 @@
     <servlet>
         <servlet-name>DeclinePostController</servlet-name>
         <servlet-class>Staff.DeclinePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPendingExchange</servlet-name>
+        <servlet-class>Staff.GetPendingExchange</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>DeclinePostController</servlet-name>
         <url-pattern>/DeclinePostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPendingExchange</servlet-name>
+        <url-pattern>/GetPendingExchange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
