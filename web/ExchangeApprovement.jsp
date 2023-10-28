@@ -25,54 +25,7 @@
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <style type="text/css">
-            .selected-button{
-                width: 100%;
-                background-color: #ff9907;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
-            .menuButton{
-                width: 100%;
-                background-color: #171717;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
-            .search-User-box{
-                width: 330px;
-                height: 36px;
-                border-radius: 4px;
-                padding-left: 13px;
-            }
-            .post-style{
-                background: white;
-                margin-left: 100px;
-                padding: 21px;
-                border-radius: 10px;
-                margin-right: 100px;
-                margin-bottom: 50px;
-            }
-            .approve-button{
-                margin-top: 10px;
-                font-size: large;
-                border: 0;
-                border-radius: 5px;
-                background: #30ff3c;
-                color: white;
-                padding: 5px;
-            }
-            .decline-button{
-                margin-top: 10px;
-                font-size: large;
-                border: 0;
-                border-radius: 5px;
-                background: #ff3030;
-                color: white;
-                padding: 5px;
-            }
+            
         </style>
         <title>Duyệt bài trao đổi</title>
     </head>

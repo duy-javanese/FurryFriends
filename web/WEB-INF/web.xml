@@ -123,6 +123,12 @@
     <servlet>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-class>Controller.User.EditProfileController</servlet-class>
+        <servlet-name>GetReportedPost</servlet-name>
+        <servlet-class>Staff.GetReportedPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetReportedExchange</servlet-name>
+        <servlet-class>Staff.GetReportedExchange</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListUserInterestedController</servlet-name>
@@ -263,6 +269,12 @@
     <servlet-mapping>
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/editProfile</url-pattern>
+        <servlet-name>GetReportedPost</servlet-name>
+        <url-pattern>/GetReportedPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReportedExchange</servlet-name>
+        <url-pattern>/GetReportedExchange</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListUserInterestedController</servlet-name>
