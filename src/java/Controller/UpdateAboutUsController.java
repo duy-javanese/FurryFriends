@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UpdateAboutUsController extends HttpServlet {
 
     private static final String ERROR = "errorPage.jsp";
-    private static final String SUCCESS = "config.jsp";
+    private static final String SUCCESS = "configPage.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

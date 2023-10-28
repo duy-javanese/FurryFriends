@@ -34,6 +34,8 @@ private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange"
 private static final String GET_ALL_STAFF_CONTROLLER = "GetAllStaffController";
 private static final String UPDATE_ABOUT_US = "UpdateAboutUsController";
 private static final String UPDATE_CONTACT = "UpdateContactController";
+private static final String UPDATE_LOGO = "UpdateLogoController";
+private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -84,7 +86,7 @@ private static final String UPDATE_CONTACT = "UpdateContactController";
             else if (action.equals("ExchangeApprovement")){
                 url = GET_PENDING_EXCHANGE_CONTROLLER;
             }
-            else if (action.equals("Get all staff")){
+            else if (action.equals("GetAllStaff")){
                 url = GET_ALL_STAFF_CONTROLLER;
             }
             else if (action.equals("UpdateAboutUs")){
@@ -92,6 +94,12 @@ private static final String UPDATE_CONTACT = "UpdateContactController";
             }
             else if (action.equals("UpdateContact")){
                 url = UPDATE_CONTACT;
+            }
+            else if (action.equals("UpdateLogo")){
+                url = UPDATE_LOGO;
+            }
+            else if (action.equals("UpdateStaffStatus")){
+                url = UPDATE_STAFF_STATUS;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

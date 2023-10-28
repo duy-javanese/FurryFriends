@@ -100,4 +100,159 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return check;
     }
+
+    public int countUsers() throws SQLException {
+        int userCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS user_count FROM dbo.users WHERE role_id = 3";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    userCount = rs.getInt("user_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userCount;
+    }
+
+    public int countBannedUsers() throws SQLException {
+        int userCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS user_count FROM dbo.users WHERE role_id = 3 AND user_status = 0";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    userCount = rs.getInt("user_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userCount;
+    }
+
+    public int countStaffs() throws SQLException {
+        int staffCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS staff_count FROM dbo.users WHERE role_id = 2";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    staffCount = rs.getInt("staff_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return staffCount;
+    }
+
+    public int countInactiveStaffs() throws SQLException {
+        int staffCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS staff_count FROM dbo.users WHERE role_id = 2 AND user_status = 0";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    staffCount = rs.getInt("staff_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return staffCount;
+    }
+
+    public int countPosts() throws SQLException {
+        int postCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS post_count FROM dbo.post";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    postCount = rs.getInt("post_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return postCount;
+    }
 }

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Staff;
 
-import DAO.InformationDAO;
-import Model.Information;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,18 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author DUY
  */
-@WebServlet(name = "UpdateContactController", urlPatterns = {"/UpdateContactController"})
-public class UpdateContactController extends HttpServlet {
+@WebServlet(name = "UpdateStaffStatusController", urlPatterns = {"/UpdateStaffStatusController"})
+public class UpdateStaffStatusController extends HttpServlet {
 
-    private static final String ERROR = "configPage.jsp";
-    private static final String SUCCESS = "configPage.jsp";
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "MainController?action=GetAllStaff";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,25 +37,17 @@ public class UpdateContactController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        Information information = new Information();
-        boolean check = false;
-        InformationDAO dao = new InformationDAO();
+        String urlRewriting;
         try {
-            String phone = request.getParameter("phone");
-            if (phone != null && !phone.isEmpty()) {
-                boolean checkPhone = checkPhone(phone);
-                if (checkPhone) {
-                    information.setPhone(phone);
-                    check = dao.updateContact(information);
-                    if (check) {
-                        url = SUCCESS;
-                    }
-                } else {
-                    request.setAttribute("ERROR", "Số điện thoại không hợp lệ!");
-                }
+            int id = Integer.parseInt(request.getParameter("id"));
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            UserDAO dao = new UserDAO();
+            boolean check = dao.UpdateUserStatus(id, status);
+            if (check) {
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at UpdateContactController: " + e.toString());
+            log("Error at UpdateStaffStatusController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -103,10 +92,4 @@ public class UpdateContactController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static boolean checkPhone(String phone) {
-        String regex = "0\\d{9}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
-    }
 }

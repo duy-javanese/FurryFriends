@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  */
 public class AddStaffController extends HttpServlet {
     
-    private static final String ERROR = "adminPage.jsp";
-    private static final String SUCCESS = "adminPage.jsp";
+    private static final String ERROR = "addStaff.jsp";
+    private static final String SUCCESS = "addStaff.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -75,6 +75,7 @@ public class AddStaffController extends HttpServlet {
                     boolean checkAdd = dao.addStaff(user);
                     if (checkAdd) {
                         url = SUCCESS;
+                        request.setAttribute("SUCCESS", "Quản trị viên " + user.getUsername() + " đã được tạo thành công!");
                     }
                 } else {
                     request.setAttribute("USERNAME_ERROR", "Username đã tồn tại!");
