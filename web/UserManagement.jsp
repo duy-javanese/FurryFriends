@@ -26,52 +26,7 @@
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <style type="text/css">
-            .selected-button{
-                width: 100%;
-                background-color: #ff9907;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
-            .menuButton{
-                width: 100%;
-                background-color: #171717;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
-            .search-User-box{
-                width: 330px;
-                height: 36px;
-                border-radius: 4px;
-                padding-left: 13px;
-            }
-            .this-page-button{
-                font-size: large;
-                border: 0;
-                border-radius: 5px;
-                background: #ffc930;
-                color: white;
-                padding: 5px;
-            }
-            .userpage-wrapper {
-
-                height: 100%;
-
-
-                margin-top: 60px;
-
-
-                margin-bottom: 30px;
-
-
-                margin-left: 250px;
-
-
-            }
-
+            
         </style>
         <title>Manage members</title>
     </head>
@@ -91,8 +46,8 @@
 			<ul class="metismenu" id="menu">
                             <form action="MainController">
                                 <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
-                        <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
-                        <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
+                        <button class="selected-button" name="action" value="Get all user">Quản lí người dùng</button><br/>
+                        <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
                         <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
@@ -125,12 +80,12 @@
                             <form action="MainController">
                                     <input class="search-User-box" type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
-                                    <input class="this-page-button" type="submit" value="Search User" name="action" />
+                                    <input class="user-page-button" type="submit" value="Search User" name="action" />
                                     
                                     
                                 </form>
                                     <form action="MainController">
-                                        <input class="this-page-button" type="submit" value="Get all user" name="action" />
+                                        <input class="user-page-button" type="submit" value="Get all user" name="action" />
                                     </form>
                         </div>
                                 

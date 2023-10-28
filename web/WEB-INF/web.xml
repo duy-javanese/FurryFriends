@@ -76,6 +76,14 @@
         <servlet-name>GetAllStaffController</servlet-name>
         <servlet-class>Staff.GetAllStaffController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetReportedPost</servlet-name>
+        <servlet-class>Staff.GetReportedPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetReportedExchange</servlet-name>
+        <servlet-class>Staff.GetReportedExchange</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -151,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>GetAllStaffController</servlet-name>
         <url-pattern>/GetAllStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReportedPost</servlet-name>
+        <url-pattern>/GetReportedPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReportedExchange</servlet-name>
+        <url-pattern>/GetReportedExchange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
