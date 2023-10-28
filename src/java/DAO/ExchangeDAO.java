@@ -142,4 +142,32 @@ public class ExchangeDAO extends DBContext {
             Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Exchange GetExchangeById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [exchange]\n"
+                    + "  Where exchange_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                
+                PostDAO pDao = new PostDAO();
+                Post post = pDao.GetPostById(rs.getInt("post_id"));
+                
+                boolean isFree = rs.getBoolean("is_free");
+                
+                double price = rs.getDouble("price");
+                
+                String address = rs.getString("address");
+                
+                boolean isFinish = rs.getBoolean("isFinish");
+                return new Exchange(id, post, isFree, price, address, isFinish);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

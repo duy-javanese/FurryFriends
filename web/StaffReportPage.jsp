@@ -1,6 +1,6 @@
 <%-- 
-    Document   : PostApprovement
-    Created on : Oct 15, 2023, 11:49:34 PM
+    Document   : ReportApprovement
+    Created on : Oct 27, 2023, 9:42:21 PM
     Author     : Admin
 --%>
 
@@ -24,18 +24,11 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
-        <script>
-//            function validate(){
-//                var reason = document.getElementById('declineReason').value;
-//                if (reason == ""){
-//                    alert("Hãy chọn một lý do");
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            }
-        </script>
-        <title>Duyệt bài viết</title>
+        <style type="text/css">
+            
+            
+        </style>
+        <title>Chỉnh sửa các chính sách</title>
     </head>
     <body>
         <div class="wrapper">
@@ -83,53 +76,51 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
-                <c:forEach items="${result}" var="p" varStatus="counter">
-
-                    <div class="post-style">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${p.user.username}</h5>
-                                        <p>${p.datePost}</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h6>${p.title}</h6>
-                        <p>${p.content}</p>
-                        <c:if test="${not empty p.img}">
-                            <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px"> <br>         
-                        </c:if>
-                        <form action="MainController" method="GET">
-                            <input type="hidden" name="postId" value="${p.postId}">
-                            <button class="approve-button" name="action" value="Approve">Approve</button>
-                        </form><br>
-                        <form name="declineform" action="MainController" onsubmit="return validate()" method="GET">
-                            <button class="decline-button" name="action" value="Decline">Decline</button>
-                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>
-<!--                            <select class="search-User-box" id="declineReason">
-                                <option value="">Chọn một lý do</option>
-                                <option value="Bôi nhọ cá nhân, tổ chức, nhà nước">Bôi nhọ cá nhân, tổ chức, nhà nước</option>
-                                <option value="Ảnh đồi trụy">Ảnh đồi trụy</option>
-                                <option value="Sai chuyên mục">Sai chuyên mục</option>
-                                
-                                <input class="decline-button" type="submit" name="action" value="Decline">
-                            </select>-->
-                            <input type="hidden" name="postId" value="${p.postId}">
-
-                        </form>
-                    </div>
+                <a href="GetReportedPost">Get reported post</a><br>
+                <c:set var="result" value ="${requestScope.REPORTED_POST_LIST}"/>
+                <c:forEach items="${result}" var="r" varStatus="counter">
+                    
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p style="color: #00ff33">${r.reporter.username} </p>
+                                </td>
+                                <td>
+                                    <p>đã báo cáo bài viết này với lí do: </p>
+                                </td>
+                                <td>
+                                    <p style="color: red">${r.reason}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </c:forEach>
+                <a href="GetReportedExchange">Get reported exchange</a>
+                <c:set var="result" value ="${requestScope.REPORTED_ECHANGE_LIST}"/>
+                <c:forEach items="${result}" var="r" varStatus="counter">
+                    
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p style="color: #00ff33">${r.reporter.username} </p>
+                                </td>
+                                <td>
+                                    <p>đã báo cáo bài viết này với lí do: </p>
+                                </td>
+                                <td>
+                                    <p style="color: red">${r.reason}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </c:forEach>
+                
             </div>
             <!--end page-wrapper -->
-
         </div>
         <!--end wrapper-->
         <!-- Bootstrap JS -->
