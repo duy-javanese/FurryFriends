@@ -145,6 +145,12 @@
     <servlet>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <servlet-class>Controller.Post.FindPostByPostTypeAndCategoryController</servlet-class>
+        <servlet-name>BanUserController</servlet-name>
+        <servlet-class>Staff.BanUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HideReportedPostAndExchange</servlet-name>
+        <servlet-class>Staff.HideReportedPostAndExchange</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -291,6 +297,12 @@
     <servlet-mapping>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <url-pattern>/findPostByPostTypeAndCategory</url-pattern>
+        <servlet-name>BanUserController</servlet-name>
+        <url-pattern>/BanUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HideReportedPostAndExchange</servlet-name>
+        <url-pattern>/HideReportedPostAndExchange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

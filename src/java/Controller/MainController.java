@@ -39,6 +39,8 @@ private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
 private static final String ADMIN_GET_ALL_USER = "AdminGetAllUserController";
 private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusController";
 private static final String SEND_NOTIFICATION = "SendNotificationController";
+private static final String BAN_USER_CONTROLLER="BanUserController";
+private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -97,6 +99,10 @@ private static final String SEND_NOTIFICATION = "SendNotificationController";
             }
             else if (action.equals("UpdateContact")){
                 url = UPDATE_CONTACT;
+            }else if (action.equals("Ban")){
+                url = BAN_USER_CONTROLLER;
+            }else if (action.equals("HidePost")){
+                url = HIDE_REPORTED_POST_AND_EXCHANGE;
             }
             else if (action.equals("UpdateLogo")){
                 url = UPDATE_LOGO;
