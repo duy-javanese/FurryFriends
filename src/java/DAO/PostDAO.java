@@ -544,4 +544,38 @@ public class PostDAO extends DBUtils.DBContext {
         return total;
     }
 
+    public boolean HideReportedPost(int postId)
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            //1. Make connection
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                //2. create SQL String
+                String sql = "UPDATE post SET status = 4 WHERE post_id = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, postId);
+                //4. Excute querry to get Result set
+                int effectRow = stm.executeUpdate();
+                //5. Process Result set
+                if (effectRow > 0) {
+                    result = true;
+                }
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

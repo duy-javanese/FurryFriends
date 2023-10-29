@@ -15,9 +15,9 @@ public class Report {
     private int reportId;
     private User reporter; // who report
     private String reportType;
-    private Post postId;
-    private Comment commentId;
-    private Exchange exchangeId;
+    private Post post;
+    private Comment comment;
+    private Exchange exchange;
     private String reason;
     private Date reportDate;
     private boolean reportStatus;
@@ -26,11 +26,11 @@ public class Report {
     }
 
     // Constructor for Reported post
-    public Report(int reportId, User reporter, String reportType, Post postId, String reason, Date reportDate, boolean reportStatus) {
+    public Report(int reportId, User reporter, String reportType, Post post, String reason, Date reportDate, boolean reportStatus) {
         this.reportId = reportId;
         this.reporter = reporter;
         this.reportType = reportType;
-        this.postId = postId;
+        this.post = post;
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
@@ -38,11 +38,11 @@ public class Report {
     
     // Constructor for Reported Exchange
 
-    public Report(int reportId, User reporter, String reportType, Exchange exchangeId, String reason, Date reportDate, boolean reportStatus) {
+    public Report(int reportId, User reporter, String reportType, Exchange exchange, String reason, Date reportDate, boolean reportStatus) {
         this.reportId = reportId;
         this.reporter = reporter;
         this.reportType = reportType;
-        this.exchangeId = exchangeId;
+        this.exchange = exchange;
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
@@ -65,28 +65,37 @@ public class Report {
         this.reporter = reporter;
     }
 
-    public Post getPostId() {
-        return postId;
+    public String getReportType() {
+        return reportType;
     }
 
-    public void setPostId(Post postId) {
-        this.postId = postId;
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
-    public Comment getCommentId() {
-        return commentId;
+    
+    public Post getPost() {
+        return post;
     }
 
-    public void setCommentId(Comment commentId) {
-        this.commentId = commentId;
+    public void setPostId(Post post) {
+        this.post = post;
     }
 
-    public Exchange getExchangeId() {
-        return exchangeId;
+    public Comment getComment() {
+        return comment;
     }
 
-    public void setExchangeId(Exchange exchangeId) {
-        this.exchangeId = exchangeId;
+    public void setComment(Comment comment) {
+        this.comment= comment;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchangeId(Exchange exchange) {
+        this.exchange = exchange;
     }
 
     public String getReason() {
@@ -115,8 +124,9 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{" + "reportId=" + reportId + ", reporter=" + reporter + ", postId=" + postId + ", commentId=" + commentId + ", exchangeId=" + exchangeId + ", reason=" + reason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + '}';
+        return "Report{" + "reportId=" + reportId + ", reporter=" + reporter + ", reportType=" + reportType + ", post=" + post + ", comment=" + comment + ", exchange=" + exchange + ", reason=" + reason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + '}';
     }
+
 
 
     
