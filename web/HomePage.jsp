@@ -131,8 +131,9 @@
                                         </ul>
                                     </div>
                                     <div class="d-flex gap-5">
-                                        <a href="#" class="ml-3"><i class="ti-heart"></i>Thích</a>
-                                        <a href="#" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
+                                        <a href="likePost?postId=${p.postId}" class="ml-3"><i class="ti-heart"></i>Thích</a>
+                                        <a href="interestPost" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
+                                        <a href="interestPost" class="ml-3"><i class="ti-flag-alt"></i>Báo cáo bài viết</a>
                                     </div>
                                     <div class="details mt-20">
                                         <a href="viewPostDetails?postId=${p.postId}">

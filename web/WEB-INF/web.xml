@@ -96,6 +96,14 @@
         <servlet-name>SaveEditExchangeController</servlet-name>
         <servlet-class>Controller.Post.SaveEditExchangeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LikePostController</servlet-name>
+        <servlet-class>Controller.User.LikePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InterestPostController</servlet-name>
+        <servlet-class>Controller.User.InterestPostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>SaveEditExchangeController</servlet-name>
         <url-pattern>/saveEditExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikePostController</servlet-name>
+        <url-pattern>/likePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InterestPostController</servlet-name>
+        <url-pattern>/interestPost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
