@@ -172,7 +172,7 @@ public class CreateExchangeController extends HttpServlet {
 
                 filename = uuid + "." + fileExtension;
                 part.write(realPath + File.separator + filename);
-                String pathImage = "/" + "img" + "/" + filename;
+                String pathImage = "img" + "/" + filename;
 
                 //them anh vao database
                 post.setImg(pathImage);

@@ -20,6 +20,22 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="userProfile" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Thông tin cá nhân
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="listProduct" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Sản phẩm của tôi
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="listPost" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>
