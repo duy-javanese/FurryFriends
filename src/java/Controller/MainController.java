@@ -34,6 +34,8 @@ private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange"
 private static final String GET_ALL_STAFF_CONTROLLER = "GetAllStaffController";
 private static final String UPDATE_ABOUT_US = "UpdateAboutUsController";
 private static final String UPDATE_CONTACT = "UpdateContactController";
+private static final String BAN_USER_CONTROLLER="BanUserController";
+private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -92,6 +94,10 @@ private static final String UPDATE_CONTACT = "UpdateContactController";
             }
             else if (action.equals("UpdateContact")){
                 url = UPDATE_CONTACT;
+            }else if (action.equals("Ban")){
+                url = BAN_USER_CONTROLLER;
+            }else if (action.equals("HidePost")){
+                url = HIDE_REPORTED_POST_AND_EXCHANGE;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

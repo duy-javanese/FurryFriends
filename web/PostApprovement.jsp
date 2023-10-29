@@ -87,21 +87,24 @@
                 <c:forEach items="${result}" var="p" varStatus="counter">
 
                     <div class="post-style">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${p.user.username}</h5>
-                                        <p>${p.datePost}</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div>
+                                            <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
+                            </div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h6>${p.user.username}</h6>
+                                            <p>${p.datePost}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         <h6>${p.title}</h6>
                         <p>${p.content}</p>
                         <c:if test="${not empty p.img}">

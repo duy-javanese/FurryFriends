@@ -84,6 +84,14 @@
         <servlet-name>GetReportedExchange</servlet-name>
         <servlet-class>Staff.GetReportedExchange</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BanUserController</servlet-name>
+        <servlet-class>Staff.BanUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HideReportedPostAndExchange</servlet-name>
+        <servlet-class>Staff.HideReportedPostAndExchange</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -167,6 +175,14 @@
     <servlet-mapping>
         <servlet-name>GetReportedExchange</servlet-name>
         <url-pattern>/GetReportedExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BanUserController</servlet-name>
+        <url-pattern>/BanUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HideReportedPostAndExchange</servlet-name>
+        <url-pattern>/HideReportedPostAndExchange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -78,6 +78,9 @@
                 <c:set var="result" value ="${requestScope.PENDING_EXCHANGE_LIST}"/>
                 <c:forEach items="${result}" var="e" varStatus="counter">
                     <div class="post-style">
+                        <div>
+                            <h5 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h5>
+                        </div>
                         <table>
                             <tbody>
                                 <tr>
@@ -87,7 +90,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>${e.post.user.username}</h5>
+                                        <h6>${e.post.user.username}</h6>
                                         <p>${e.post.datePost}</p>
                                     </td>
                                 </tr>

@@ -76,7 +76,7 @@
                 <div class="userpage-wrapper">
                     <div class="page-content">
                         <h1>User Management</h1>
-                        <div>
+                        <div style="display: flex">
                             <form action="MainController">
                                     <input class="search-User-box" type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
@@ -129,7 +129,7 @@
                                                         <td>
                                                             <input type="hidden" name="txtID" value="${dto.userId}" />
                                                             <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
-                                                                                <input type="submit" value="Update user status" name="action" />
+                                                            <button class="ban-user-button" name="action" value="Update user status">Ban</button>
                                                         </td>
                                                     </tr>
                                                         </form>

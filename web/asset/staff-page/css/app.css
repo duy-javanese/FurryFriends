@@ -31,7 +31,26 @@ File: app.css
 
 
 /* General */
-/*======================== user page ========================*/
+/*======================== Staff report page ========================*/
+.hide-post-button{
+    font-size: large;
+                border: 0;
+                border-radius: 5px;
+                background: #ffc930;
+                color: white;
+                padding: 5px;
+}
+.ban-user-button{
+    font-size: large;
+        color: white;
+        background-color: red;
+        border-radius: 5px;
+        padding: 5px;
+        border: 0;
+        margin-left: 5px;
+}
+/*======================== Staff report page ========================*/
+/*======================== user manage page ========================*/
 .search-User-box{
                 width: 330px;
                 height: 36px;
@@ -45,6 +64,7 @@ File: app.css
                 background: #ffc930;
                 color: white;
                 padding: 5px;
+                margin-left: 5px;
             }
 .userpage-wrapper {
 
@@ -61,7 +81,7 @@ File: app.css
 
 
             }
-/*======================== user page ========================*/
+/*======================== user manage page ========================*/
 
 /*========================= button ==========================*/
 .menuButton{
