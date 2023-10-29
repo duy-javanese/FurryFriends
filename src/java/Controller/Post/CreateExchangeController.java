@@ -179,6 +179,8 @@ public class CreateExchangeController extends HttpServlet {
             }
             PostDAO pDao = new PostDAO();
             pDao.InsertPostExchange(post);
+            
+            //insert exchange
             int lastPost = pDao.GetLastPost();
             post.setPostId(lastPost);
             exchange.setPost(post);

@@ -22,11 +22,11 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Tạo blog</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Chỉnh sửa blog</h1>
                 </div>
                 <hr>
                 <!-- Content Row -->
-                <form action="createPost" method="post" enctype="multipart/form-data">
+                <form action="saveEditBlog" method="post" enctype="multipart/form-data">
                     <div class="row m-5 rounded-3" style="background-color: papayawhip">
 
                         <!-- Type Post -->
@@ -36,7 +36,9 @@
                                 <option selected disabled value="">Danh mục bài viết</option>
                                 <c:forEach items="${types}" var="t">
                                     <c:if test="${t.postTypeId != PostExchange}">
-                                        <option value="${t.postTypeId}">${t.postTypeName}</option>
+                                        <option value="${t.postTypeId}"
+                                                <c:if test="${post.postType.postTypeId == t.postTypeId}">selected</c:if>
+                                                >${t.postTypeName}</option>
                                     </c:if>
                                 </c:forEach>
                             </select>
@@ -45,23 +47,24 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" required>
+                                   placeholder="Tiêu đề bài viết" name="title" value="${post.title}" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài viết <span style="color: red">*</span></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                name="content" required>
-                                          
-                            </textarea>
+                                      name="content" required>${post.content}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Ảnh bài viết <span style="color: red">*</span></label>
+                            <label for="formFile" class="form-label">Thay đổi ảnh bài viết <span style="color: red">*</span></label>
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
-                                   multiple required>
+                                   multiple>
+                            <img src="${post.img}" alt="alt" width="160px" height="160px" style="background-size: cover"/>
+                            <input type="hidden" name="existImg" value="${post.img}">
+                            <input type="hidden" name="postId" value="${post.postId}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-info">Tạo bài viết</button>
+                        <button type="submit" class="btn btn-outline-info">Lưu</button>
                     </div>
                 </form>
             </div>

@@ -76,6 +76,26 @@
         <servlet-name>GetAllStaffController</servlet-name>
         <servlet-class>Staff.GetAllStaffController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditPostContrller</servlet-name>
+        <servlet-class>Controller.Post.EditPostContrller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBlogController</servlet-name>
+        <servlet-class>Controller.Post.EditBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditExchangeController</servlet-name>
+        <servlet-class>Controller.Post.EditExchangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveEditBlogController</servlet-name>
+        <servlet-class>Controller.Post.SaveEditBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveEditExchangeController</servlet-name>
+        <servlet-class>Controller.Post.SaveEditExchangeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -151,6 +171,26 @@
     <servlet-mapping>
         <servlet-name>GetAllStaffController</servlet-name>
         <url-pattern>/GetAllStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPostContrller</servlet-name>
+        <url-pattern>/editPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogController</servlet-name>
+        <url-pattern>/editBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditExchangeController</servlet-name>
+        <url-pattern>/editExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveEditBlogController</servlet-name>
+        <url-pattern>/saveEditBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveEditExchangeController</servlet-name>
+        <url-pattern>/saveEditExchange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

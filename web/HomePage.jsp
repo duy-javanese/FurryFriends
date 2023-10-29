@@ -127,14 +127,18 @@
                                         <ul class="thumb-info">
                                             <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
                                             <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
-                                            <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
+                                            <li><a href="#"><i class="ti-themify-favicon"></i>2 Bình luận</a></li>
                                         </ul>
+                                    </div>
+                                    <div class="d-flex gap-5">
+                                        <a href="#" class="ml-3"><i class="ti-heart"></i>Thích</a>
+                                        <a href="#" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
                                     </div>
                                     <div class="details mt-20">
                                         <a href="viewPostDetails?postId=${p.postId}">
                                             <h3>${p.title}</h3>
                                         </a>
-<!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
+                                        <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <p>${p.content.substring(0, 200)}...</p>
                                         <a class="button" href="viewPostDetails?postId=${p.postId}">Read More <i class="ti-arrow-right"></i></a>
                                     </div>
@@ -198,7 +202,7 @@
 
 
                                 <div class="single-sidebar-widget post-category-widget">
-                                    <h4 class="single-sidebar-widget__title">Catgory</h4>
+                                    <h4 class="single-sidebar-widget__title">Post Type</h4>
                                     <ul class="cat-list mt-20">
                                         <li>
                                             <a href="#" class="d-flex justify-content-between">
