@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author dell
@@ -13,6 +15,7 @@ public class Comment {
     private Post post;
     private User user;
     private String commentValue;
+    private Date createdDate;
     private boolean status;
 
     public Comment() {
@@ -24,6 +27,23 @@ public class Comment {
         this.user = user;
         this.commentValue = commentValue;
         this.status = status;
+    }
+
+    public Comment(int commentId, Post post, User user, String commentValue, Date createdDate, boolean status) {
+        this.commentId = commentId;
+        this.post = post;
+        this.user = user;
+        this.commentValue = commentValue;
+        this.createdDate = createdDate;
+        this.status = status;
+    }
+    
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getCommentId() {

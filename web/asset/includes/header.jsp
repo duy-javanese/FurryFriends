@@ -104,4 +104,5 @@
         </nav>
     </div>
 </header>
+<%@ include file="toast.jsp" %>
 <!--================Header Menu Area =================-->

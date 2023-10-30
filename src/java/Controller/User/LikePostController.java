@@ -5,6 +5,7 @@
 
 package Controller.User;
 
+import DAO.LikePostDAO;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +37,13 @@ public class LikePostController extends HttpServlet {
             session.setAttribute("msg", "Bạn cần đăng nhập để thực hiện hành động này!");
             response.sendRedirect(url);
         }else{
+            int postId = Integer.parseInt(request.getParameter("postId"));
             
+            LikePostDAO lDao = new LikePostDAO();
+            lDao.InsertLike(account.getUserId(), postId);
+            
+            session.setAttribute("msg", "Thích bài viết thành công!");
+            response.sendRedirect(url);
         }
     } 
 

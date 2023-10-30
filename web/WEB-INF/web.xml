@@ -104,6 +104,14 @@
         <servlet-name>InterestPostController</servlet-name>
         <servlet-class>Controller.User.InterestPostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportPostController</servlet-name>
+        <servlet-class>Controller.User.ReportPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentController</servlet-name>
+        <servlet-class>Controller.User.CommentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>InterestPostController</servlet-name>
         <url-pattern>/interestPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportPostController</servlet-name>
+        <url-pattern>/reportPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentController</servlet-name>
+        <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
