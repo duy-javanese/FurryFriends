@@ -112,6 +112,7 @@ private static final String GET_REPORTED_POST="GetReportedPost";
             }
             else if (action.equals("UpdateStaffStatus")){
                 url = UPDATE_STAFF_STATUS;
+            }
             else if (action.equals("Get Reported Post")){
                 url = GET_REPORTED_POST;
             }
