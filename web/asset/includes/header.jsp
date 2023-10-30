@@ -21,6 +21,41 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/owl-carousel/owl.carousel.min.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/style.css">
+
+    <style>
+        /* The Modal (hidden by default) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 500px;
+            background-color: white;
+        }
+
+        /* Close button */
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            color: #000;
+            font-size: 20px;
+        }
+
+    </style>
 </head>
 <!--================Header Menu Area =================-->
 <header class="header_area">

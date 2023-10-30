@@ -112,6 +112,10 @@
         <servlet-name>CommentController</servlet-name>
         <servlet-class>Controller.User.CommentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginEmailController</servlet-name>
+        <servlet-class>Controller.LoginEmailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>CommentController</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginEmailController</servlet-name>
+        <url-pattern>/loginEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -24,7 +24,26 @@ import javax.naming.NamingException;
  * @author dell
  */
 public class UserDAO extends DBContext {
-    
+
+    public User getUserGoogle(String EmailID) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [User] where EmailID like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, EmailID);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                UserDAO uDao = new UserDAO();
+                User user = uDao.GetUserById(rs.getInt("userID"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public User doLogin(String username, String pwd) {
         try {
             String sql = "SELECT *\n"
@@ -37,7 +56,7 @@ public class UserDAO extends DBContext {
             if (rs.next()) {
                 UserRoleDAO rDao = new UserRoleDAO();
                 UserRole role = rDao.getRoleById(rs.getInt("role_id"));
-                
+
                 return new User(rs.getInt("userID"),
                         username,
                         pwd,
@@ -48,13 +67,13 @@ public class UserDAO extends DBContext {
                         rs.getString("user_address"),
                         rs.getInt("point"));
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
     public boolean isUserExists(String username) {
         try {
             String sql = "SELECT *\n"
@@ -63,7 +82,7 @@ public class UserDAO extends DBContext {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            
+
             return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +90,7 @@ public class UserDAO extends DBContext {
             return false;
         }
     }
-    
+
     public boolean addUser(User user) {
         try {
             String sql = "INSERT INTO users (username, pwd, email, phone_num, user_status, role_id, user_address, point) "
@@ -98,7 +117,7 @@ public class UserDAO extends DBContext {
     public List<User> getUserList() {
         return userList;
     }
-    
+
     public void searchUser(String searchValue)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -157,7 +176,7 @@ public class UserDAO extends DBContext {
             }
         }
     }
-    
+
     public void getAllUser() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -179,7 +198,7 @@ public class UserDAO extends DBContext {
                     int point = Integer.parseInt(rs.getString("point"));
                     boolean status = rs.getBoolean("user_status");
                     User dto = new User(userID, username, email, phone_num, user_address, point, status);
-                    
+
                     if (this.userList == null) {
                         this.userList = new ArrayList<>();
                     }//end account list had not initialize
@@ -200,7 +219,7 @@ public class UserDAO extends DBContext {
             }
         }
     }
-    
+
     public List<User> getAllStaff() throws SQLException {
         List<User> listStaff = new ArrayList<>();
         Connection conn = null;
@@ -241,8 +260,8 @@ public class UserDAO extends DBContext {
         }
         return listStaff;
     }
-    
-    public boolean UpdateUserStatus(int userID, Boolean status) 
+
+    public boolean UpdateUserStatus(int userID, Boolean status)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -275,10 +294,9 @@ public class UserDAO extends DBContext {
                 con.close();
             }
         }
-        return result ;
+        return result;
     }
-    
-    
+
     public boolean addStaff(User user) {
         try {
             String sql = "INSERT INTO users (username, pwd, email, phone_num, user_status, role_id, user_address, point) "
@@ -301,7 +319,7 @@ public class UserDAO extends DBContext {
             return false;
         }
     }
-    
+
     public User GetUserById(int id) {
         try {
             String sql = "SELECT *\n"
@@ -311,10 +329,10 @@ public class UserDAO extends DBContext {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                
+
                 UserRoleDAO rDao = new UserRoleDAO();
                 UserRole role = rDao.getRoleById(rs.getInt("role_id"));
-                
+
                 return new User(id,
                         rs.getString("username"),
                         null,
@@ -330,7 +348,7 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
+
     // test searchUser
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
@@ -345,10 +363,32 @@ public class UserDAO extends DBContext {
         } catch (NamingException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (User x : dao.getUserList()){
+        for (User x : dao.getUserList()) {
             System.out.println(x);
         }
     }
 
-    
+    public boolean addUserGoogle(User user) {
+        try {
+            String sql = "INSERT INTO users (username, pwd, email, emailId, phone_num, user_status, role_id, user_address, point) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPwd());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getEmailId());
+            statement.setString(5, user.getPhone());
+            statement.setBoolean(6, true);  // user_status luôn là 1
+            statement.setInt(7, 3);         // role_id luôn là 3
+            statement.setString(8, user.getAddress());
+            statement.setInt(9, 0);         // point luôn là 0
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
 }

@@ -46,6 +46,26 @@
         </section>
         <!--================Hero Banner end =================-->  
 
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModalBtn">&times;</span>
+                <form action="reportPost" method="post">
+                    <input value="${post.postId}" name="postId" type="hidden">
+                    <select name="reportId" required="">
+                        <option selected disabled>Lựa chọn lý do báo cáo</option>
+                        <c:forEach items="${reports}" var="r">
+                            <option value="${r.reportContentId}">${r.reportContent}</option>
+                        </c:forEach>
+                    </select>
+                    <br>
+                    <label>Lý do:</label><br>
+                    <textarea rows="5" cols="60" name="reason"></textarea>
+                    <button class="btn btn-outline-danger">Báo cáo</button>
+                </form>
+            </div>
+        </div>
+
         <!--================ Start Blog Post Area =================-->
         <section class="blog-post-area section-margin">
             <div class="container">
@@ -79,7 +99,9 @@
                             <div class="d-flex">
                                 <a href="likePost?postId=${post.postId}" class="ml-3"><i class="ti-heart"></i>Thích</a>
                                 <a href="interestPost?postId=${post.postId}" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
-                                <a href="reportPost?postId=${post.postId}" class="ml-3"><i class="ti-flag-alt"></i>Báo cáo bài viết</a>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt"></i>Báo cáo bài viết</button>
                             </div>
                             <div class="news_d_footer flex-column flex-sm-row">
                                 <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>${totalLike} người thích</a>
@@ -344,6 +366,29 @@
                 document.documentElement.scrollTop = 0;
             }
 
+        </script>
+        <script>
+            // Get references to the modal and the trigger element
+            var modal = document.getElementById("myModal");
+            var openModalBtn = document.getElementById("openModalBtn");
+            var closeModalBtn = document.getElementById("closeModalBtn");
+
+// Open the modal when the trigger element is clicked
+            openModalBtn.addEventListener("click", function () {
+                modal.style.display = "block";
+            });
+
+// Close the modal when the close button is clicked
+            closeModalBtn.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+// Close the modal if the user clicks outside the modal content
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
         </script>
     </body>
 
