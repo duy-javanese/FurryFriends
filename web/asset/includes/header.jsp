@@ -86,11 +86,13 @@
                                     </a>
                                 </li>
                                 <c:forEach var="t" items="${sessionScope.types}">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">
-                                            ${t.postTypeName}
-                                        </a>
-                                    </li>
+                                    <c:if test="${sessionScope.PostExchange != t.postTypeId}">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                ${t.postTypeName}
+                                            </a>
+                                        </li>
+                                    </c:if>
                                 </c:forEach>
                             </ul>
                         </li>

@@ -104,7 +104,7 @@
                                             <%--For displaying Previous link except for the 1st page --%>
                                             <c:if test="${currentPage != 1}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="img?page=${currentPage - 1}" aria-label="Previous">
+                                                    <a class="page-link" href="home?page=${currentPage - 1}" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
@@ -118,7 +118,7 @@
                                                         <li class="page-item"><a class="page-link bg-light" href="#">${i}</a></li>
                                                         </c:when>
                                                         <c:otherwise>
-                                                        <li class="page-item"><a class="page-link" href="img?page=${i}">${i}</a></li>
+                                                        <li class="page-item"><a class="page-link" href="home?page=${i}">${i}</a></li>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:forEach>
@@ -126,7 +126,7 @@
                                             <%--For displaying Next link --%>
                                             <c:if test="${currentPage lt noOfPages}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="img?page=${currentPage + 1}" aria-label="Next">
+                                                    <a class="page-link" href="home?page=${currentPage + 1}" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>

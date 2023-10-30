@@ -8,6 +8,7 @@ import DAO.CategoryDAO;
 import DAO.PostDAO;
 import DAO.PostTypeDAO;
 import Model.Category;
+import Model.Constant;
 import Model.Post;
 import Model.PostType;
 import java.io.IOException;
@@ -83,6 +84,7 @@ public class HomePage extends HttpServlet {
 
         session.setAttribute("types", listType);
         request.setAttribute("msg", msg);
+        session.setAttribute("PostExchange", Constant.PostExchange);
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
 

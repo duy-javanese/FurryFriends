@@ -28,7 +28,7 @@ public class UserDAO extends DBContext {
     public User getUserGoogle(String EmailID) {
         try {
             String sql = "SELECT *\n"
-                    + "  FROM [User] where EmailID like ?";
+                    + "  FROM [users] where emailId like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, EmailID);
             ResultSet rs = stm.executeQuery();

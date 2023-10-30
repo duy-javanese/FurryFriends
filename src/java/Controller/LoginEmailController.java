@@ -70,8 +70,9 @@ public class LoginEmailController extends HttpServlet {
             account.setRole(role);
 
             uDao.addUserGoogle(account);
+            User newUser = uDao.getUserGoogle(account.getEmailId());
 
-            session.setAttribute("account", account);
+            session.setAttribute("account", newUser);
             response.sendRedirect("home");
         }
     }
