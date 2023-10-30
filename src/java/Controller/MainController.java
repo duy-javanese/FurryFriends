@@ -44,6 +44,7 @@ private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAnd
 private static final String GET_REPORTED_POST="GetReportedPost";
 private static final String BAN_USER_CONTROLLER="BanUserController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
+private static final String GET_REPORTED_POST="GetReportedPost";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -102,9 +103,11 @@ private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAnd
             }
             else if (action.equals("UpdateContact")){
                 url = UPDATE_CONTACT;
-            }else if (action.equals("Ban")){
+            }
+            else if (action.equals("Ban")){
                 url = BAN_USER_CONTROLLER;
-            }else if (action.equals("HidePost")){
+            }
+            else if (action.equals("HidePost")){
                 url = HIDE_REPORTED_POST_AND_EXCHANGE;
             }
             else if (action.equals("Ban")){
@@ -130,6 +133,9 @@ private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAnd
             }
             else if (action.equals("SendNotification")){
                 url = SEND_NOTIFICATION;
+            }
+            else if (action.equals("Get Reported Post")){
+                url = GET_REPORTED_POST;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
