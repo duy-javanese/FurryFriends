@@ -49,10 +49,11 @@
                     <form action="MainController">
                         <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
                         <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
-                        <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
+                        <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                        <button class="selected-button" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
-                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
+                        <a href="logout">Đăng xuất</a>
                     </form>		
                 </ul>
                 <!--end navigation-->
@@ -66,7 +67,9 @@
                                                                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                             <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
                                                                             <div class="user-info ps-3">
-                                                                                    <p class="user-name mb-0">Hello #</p>
+                                                                                    <c:if test="${sessionScope.account != null}">
+                                                                                        <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
+                                                                                    </c:if>
                                                                             </div>
                                                                     </a>
                                                             </div>

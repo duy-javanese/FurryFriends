@@ -19,27 +19,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 	<link href="asset/staff-page/css/app.css" rel="stylesheet">
 	<link href="asset/staff-page/css/icons.css" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <style type="text/css">
-            .selected-button{
-                width: 100%;
-                background-color: #ff9907;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
-            .menuButton{
-                width: 100%;
-                background-color: #171717;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-            }
         </style>
         <title>Staff Page</title>
     </head>
@@ -64,6 +48,7 @@
                         <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
                         <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                        <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
                         <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
                             </form>		
@@ -79,7 +64,9 @@
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
-								<p class="user-name mb-0">Hello #</p>
+                                                            <c:if test="${sessionScope.account != null}">
+                                                                <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
+                                                            </c:if>
 							</div>
 						</a>
 					</div>
