@@ -43,17 +43,17 @@ public class LoginEmailController extends HttpServlet {
             throws ServletException, IOException {
         UserDAO uDao = new UserDAO();
         HttpSession session = request.getSession();
-        
+
         //nhan duoc ng dung dang nhao
         String code = request.getParameter("code");
-        
+
         //gui thong tin code len gg de lay acces token tai khoan dang nhap 
         String accessToken = getToken(code);
         response.getWriter().println(code);
         response.getWriter().println(accessToken);
         //lay duoc thog tin nguoi dung 
         UserGoogle user = getUserInfo(accessToken);
-        
+
         User account = uDao.getUserGoogle(user.getId());
         if (account != null) {
             session.setAttribute("account", account);
@@ -62,13 +62,15 @@ public class LoginEmailController extends HttpServlet {
             account = new User();
             account.setEmail(user.getEmail());
             account.setEmailId(user.getId());
-            
+            account.setUsername("New_User");
+
             UserRole role = new UserRole();
             role.setRoleId(Constant.CustomerRole);
-            
+
             account.setRole(role);
-            
+
             uDao.addUserGoogle(account);
+
             session.setAttribute("account", account);
             response.sendRedirect("home");
         }
