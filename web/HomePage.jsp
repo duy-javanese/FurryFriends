@@ -51,7 +51,7 @@
                         <c:forEach items="${posts}" var="p">
                             <div class="card blog__slide text-center">
                                 <div class="blog__slide__img">
-                                    <img class="card-img rounded-0" src="${p.img}" alt="" width="100px" height="150px"/>
+                                    <img class="card-img rounded-0" src="${p.img}" alt="" width="150px" height="150px"/>
                                 </div>
                                 <div class="blog__slide__content">
                                     <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
