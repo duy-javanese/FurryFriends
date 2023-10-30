@@ -59,13 +59,23 @@
                                         </td>
                                         <td>${p.status.postStatusValue}</td>
                                         <td>
-                                            <form action="viewPostDetails" method="post">
-                                                <input type="hidden" value="${p.postId}" name="postId">
-                                                <button type="submit"
-                                                        class="btn btn-outline-success me-2">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </form>
+                                            <div class="d-flex">
+                                                <form action="viewPostDetails" method="post">
+                                                    <input type="hidden" value="${p.postId}" name="postId">
+                                                    <button type="submit"
+                                                            class="btn btn-outline-success me-2">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </button>
+                                                </form>
+                                                <form action="editPost" method="post">
+                                                    <input type="hidden" value="${p.postId}" name="postId">
+                                                    <input type="hidden" value="${p.postType.postTypeId}" name="postType">
+                                                    <button type="submit"
+                                                            class="btn btn-outline-success me-2">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 </c:forEach>

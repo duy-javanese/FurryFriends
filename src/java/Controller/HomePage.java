@@ -5,9 +5,12 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import DAO.CategoryDAO;
+import DAO.CommentDAO;
 import DAO.PostDAO;
 import DAO.PostTypeDAO;
 import Model.Category;
+import Model.Comment;
+import Model.Constant;
 import Model.Post;
 import Model.PostType;
 import java.io.IOException;
@@ -41,7 +44,7 @@ public class HomePage extends HttpServlet {
         PostTypeDAO ptDao = new PostTypeDAO();
         PostDAO pDao = new PostDAO();
         CategoryDAO cDao = new CategoryDAO();
-
+        CommentDAO cmDao = new CommentDAO();
         
         //get session
         HttpSession session = request.getSession();
@@ -60,6 +63,11 @@ public class HomePage extends HttpServlet {
         //get all post
         ArrayList<Post> posts = pDao.GetPostPagnition((page - 1) * recordsPerPage,
                 recordsPerPage);
+        for (Post post : posts) {
+            ArrayList<Comment> comments = cmDao.GetCommentByPostId(post.getPostId());
+            post.setComments(comments);
+        }
+        
         ArrayList<Category> categories = cDao.GetAllCategories();
 
         int noOfRecords = pDao.GetNoOfRecordsPost();
@@ -83,6 +91,7 @@ public class HomePage extends HttpServlet {
 
         session.setAttribute("types", listType);
         request.setAttribute("msg", msg);
+        session.setAttribute("PostExchange", Constant.PostExchange);
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
 

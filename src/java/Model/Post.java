@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Post {
     private String reason;
     private PostStatus status;
     private Exchange exchange;
+    private ArrayList<Comment> comments;
 
     public Post() {
     }
@@ -166,6 +168,14 @@ public class Post {
         this.exchange = exchange;
     }
 
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+    
     @Override
     public String toString() {
         return "Post{" + "postId=" + postId + ", user=" + user + ", category=" + category + ", postType=" + postType + ", title=" + title + ", content=" + content + ", img=" + img + ", isPublic=" + isPublic + ", datePost=" + datePost + ", reason=" + reason + ", status=" + status + '}';

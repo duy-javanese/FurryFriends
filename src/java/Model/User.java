@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String pwd;
     private String email;
+    private String emailId;
     private String phone;
     private boolean status;
     private UserRole role;
@@ -31,6 +32,19 @@ public class User {
         this.address = address;
         this.point = point;
         this.status = status;
+    }
+
+    public User(int userId, String username, String pwd, String email, String emailId, String phone, boolean status, UserRole role, String address, int point) {
+        this.userId = userId;
+        this.username = username;
+        this.pwd = pwd;
+        this.email = email;
+        this.emailId = emailId;
+        this.phone = phone;
+        this.status = status;
+        this.role = role;
+        this.address = address;
+        this.point = point;
     }
 
     
@@ -119,6 +133,15 @@ public class User {
         this.point = point;
     }
 
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    
     @Override
     public String toString() {
         return "User{" + "userId=" + userId + ", username=" + username + ", pwd=" + pwd + ", email=" + email + ", phone=" + phone + ", status=" + status + ", role=" + role + ", address=" + address + ", point=" + point + '}';

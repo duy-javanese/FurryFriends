@@ -26,7 +26,6 @@
     </head>
     <body>
         <%@ include file="asset/includes/header.jsp" %>
-        <%@ include file="asset/includes/toast.jsp" %>
         <main class="site-main">
             <!--================Hero Banner start =================-->  
             <section class="mb-30px">
@@ -49,66 +48,18 @@
             <section>
                 <div class="container">
                     <div class="owl-carousel owl-theme blog-slider">
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/banner/banner1.jpeg" alt=""/>
+                        <c:forEach items="${posts}" var="p">
+                            <div class="card blog__slide text-center">
+                                <div class="blog__slide__img">
+                                    <img class="card-img rounded-0" src="${p.img}" alt="" width="150px" height="150px"/>
+                                </div>
+                                <div class="blog__slide__content" onclick="redirect('viewPostDetails?postId=${p.postId}')">
+                                    <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
+                                    <h3><a href="#">${p.title}</a></h3>
+                                    <p>${p.content.substring(0, 100)}...</p>
+                                </div>
                             </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide2.png" alt="">
-                            </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide3.png" alt="">
-                            </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide1.png" alt="">
-                            </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide2.png" alt="">
-                            </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="card blog__slide text-center">
-                            <div class="blog__slide__img">
-                                <img class="card-img rounded-0" src="asset/img/blog/blog-slider/blog-slide3.png" alt="">
-                            </div>
-                            <div class="blog__slide__content">
-                                <a class="blog__slide__label" href="#">Fashion</a>
-                                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                                <p>2 days ago</p>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </section>
@@ -127,16 +78,20 @@
                                         <ul class="thumb-info">
                                             <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
                                             <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
-                                            <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
+                                            <li><a href="#"><i class="ti-themify-favicon"></i>${p.comments.size()} Bình luận</a></li>
                                         </ul>
                                     </div>
+                                    <div class="d-flex gap-5">
+                                        <a href="likePost?postId=${p.postId}" class="ml-3"><i class="ti-heart"></i>Thích</a>
+                                        <a href="interestPost?postId=${p.postId}" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
+                                    </div>
                                     <div class="details mt-20">
-                                        <a href="blog-single.html">
+                                        <a href="viewPostDetails?postId=${p.postId}">
                                             <h3>${p.title}</h3>
                                         </a>
-<!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
+                                        <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <p>${p.content.substring(0, 200)}...</p>
-                                        <a class="button" href="viewPostDetails?postId=${p.postId}">Read More <i class="ti-arrow-right"></i></a>
+                                        <a class="button" href="viewPostDetails?postId=${p.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -198,7 +153,7 @@
 
 
                                 <div class="single-sidebar-widget post-category-widget">
-                                    <h4 class="single-sidebar-widget__title">Catgory</h4>
+                                    <h4 class="single-sidebar-widget__title">Post Type</h4>
                                     <ul class="cat-list mt-20">
                                         <li>
                                             <a href="#" class="d-flex justify-content-between">

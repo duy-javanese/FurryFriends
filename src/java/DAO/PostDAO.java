@@ -7,6 +7,7 @@ package DAO;
 import DBUtils.DBContext;
 import Model.Category;
 import Model.Constant;
+import Model.Exchange;
 import Model.Post;
 import Model.PostStatus;
 import Model.PostType;
@@ -351,10 +352,10 @@ public class PostDAO extends DBUtils.DBContext {
                 while (rs.next()) {
                     UserDAO uDao = new UserDAO();
                     User user = uDao.GetUserById(rs.getInt("userID"));
-                    
+
                     PostTypeDAO ptDao = new PostTypeDAO();
                     PostType posttype = ptDao.GetTypeById(rs.getInt("post_type"));
-                    
+
                     CategoryDAO cDao = new CategoryDAO();
                     Category category = cDao.GetCategoryById(rs.getInt("category_id"));
 
@@ -369,7 +370,7 @@ public class PostDAO extends DBUtils.DBContext {
                     String img = rs.getString("post_img");
                     String reason = rs.getString("reason");
                     Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, poststatus, posttype);
-                    
+
                     if (this.pendingPost == null) {
                         this.pendingPost = new ArrayList<>();
                     }//end account list had not initialize
@@ -480,6 +481,67 @@ public class PostDAO extends DBUtils.DBContext {
         }
 
         return maxPostId;
+    }
+
+    public void UpdatePostExchange(Post post) {
+        try {
+            String sql = "UPDATE [dbo].[post]\n"
+                    + "   SET [post_type] = ?\n"
+                    + "      ,[title] = ?\n"
+                    + "      ,[post_content] = ?\n"
+                    + "      ,[post_img] = ?\n"
+                    + " WHERE post_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, post.getPostType().getPostTypeId());
+            stm.setString(2, post.getTitle());
+            stm.setString(3, post.getContent());
+            stm.setString(4, post.getImg());
+            stm.setInt(5, post.getPostId());
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void UpdatePostBlog(Post post) {
+        try {
+            String sql = "UPDATE [dbo].[post]\n"
+                    + "   SET [post_type] = ?\n"
+                    + "      ,[title] = ?\n"
+                    + "      ,[post_content] = ?\n"
+                    + "      ,[post_img] = ?\n"
+                    + " WHERE post_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, post.getPostType().getPostTypeId());
+            stm.setString(2, post.getTitle());
+            stm.setString(3, post.getContent());
+            stm.setString(4, post.getImg());
+            stm.setInt(5, post.getPostId());
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public int GetNoOfRecordsPostByUser(int userId) {
+        int total = -1; // Initialize with a default value (e.g., -1) in case no records exist.
+        try {
+            String sql = "SELECT count(*)\n"
+                    + "  FROM [post]\n"
+                    + "  Where userID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
     }
 
 }

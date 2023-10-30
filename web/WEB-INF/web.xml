@@ -76,6 +76,54 @@
         <servlet-name>GetAllStaffController</servlet-name>
         <servlet-class>Staff.GetAllStaffController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditPostContrller</servlet-name>
+        <servlet-class>Controller.Post.EditPostContrller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBlogController</servlet-name>
+        <servlet-class>Controller.Post.EditBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditExchangeController</servlet-name>
+        <servlet-class>Controller.Post.EditExchangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveEditBlogController</servlet-name>
+        <servlet-class>Controller.Post.SaveEditBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveEditExchangeController</servlet-name>
+        <servlet-class>Controller.Post.SaveEditExchangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LikePostController</servlet-name>
+        <servlet-class>Controller.User.LikePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InterestPostController</servlet-name>
+        <servlet-class>Controller.User.InterestPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportPostController</servlet-name>
+        <servlet-class>Controller.User.ReportPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentController</servlet-name>
+        <servlet-class>Controller.User.CommentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginEmailController</servlet-name>
+        <servlet-class>Controller.LoginEmailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>Controller.User.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>Controller.User.EditProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -151,6 +199,54 @@
     <servlet-mapping>
         <servlet-name>GetAllStaffController</servlet-name>
         <url-pattern>/GetAllStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPostContrller</servlet-name>
+        <url-pattern>/editPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBlogController</servlet-name>
+        <url-pattern>/editBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditExchangeController</servlet-name>
+        <url-pattern>/editExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveEditBlogController</servlet-name>
+        <url-pattern>/saveEditBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveEditExchangeController</servlet-name>
+        <url-pattern>/saveEditExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikePostController</servlet-name>
+        <url-pattern>/likePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InterestPostController</servlet-name>
+        <url-pattern>/interestPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportPostController</servlet-name>
+        <url-pattern>/reportPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentController</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginEmailController</servlet-name>
+        <url-pattern>/loginEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/editProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

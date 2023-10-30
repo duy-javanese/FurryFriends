@@ -21,6 +21,41 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/vendors/owl-carousel/owl.carousel.min.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/style.css">
+
+    <style>
+        /* The Modal (hidden by default) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 500px;
+            background-color: white;
+        }
+
+        /* Close button */
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            color: #000;
+            font-size: 20px;
+        }
+
+    </style>
 </head>
 <!--================Header Menu Area =================-->
 <header class="header_area">
@@ -51,11 +86,13 @@
                                     </a>
                                 </li>
                                 <c:forEach var="t" items="${sessionScope.types}">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">
-                                            ${t.postTypeName}
-                                        </a>
-                                    </li>
+                                    <c:if test="${sessionScope.PostExchange != t.postTypeId}">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">
+                                                ${t.postTypeName}
+                                            </a>
+                                        </li>
+                                    </c:if>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -89,9 +126,10 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">${sessionScope.account.username}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="#">Thông tin cá nhân</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/userProfile">Thông tin cá nhân</a></li>
                                     <li class="nav-item"><a class="nav-link" href="listPost">Bài viết của tôi</a></li>
                                     <li class="nav-item"><a class="nav-link" href="createPost">Tạo bài viết</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </c:if>
@@ -104,4 +142,5 @@
         </nav>
     </div>
 </header>
+<%@ include file="toast.jsp" %>
 <!--================Header Menu Area =================-->

@@ -5,14 +5,20 @@
 
 package Controller.Post;
 
+import DAO.CommentDAO;
+import DAO.LikePostDAO;
 import DAO.PostDAO;
+import DAO.ReportContentDAO;
+import Model.Comment;
 import Model.Post;
+import Model.ReportContent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,6 +42,19 @@ public class ViewPostDetailsController extends HttpServlet {
             request.getSession().setAttribute("msg", "Bài viết hiện không khả thi!");
             response.sendRedirect("home");
         } else {
+            LikePostDAO lpDao = new LikePostDAO();
+            int totalLike = lpDao.GetTotalLikePost(p.getPostId());
+            
+            CommentDAO cDao = new CommentDAO();
+            ArrayList<Comment> comments = cDao.GetCommentByPostId(postId);
+            
+            ReportContentDAO rpDao = new ReportContentDAO();
+            ArrayList<ReportContent> reports = rpDao.GetListReportContent();
+            
+            p.setComments(comments);
+            
+            request.setAttribute("reports", reports);
+            request.setAttribute("totalLike", totalLike);
             request.setAttribute("post", p);
             request.getRequestDispatcher("Views/Post/ViewPostDetails.jsp").forward(request, response);
         }
