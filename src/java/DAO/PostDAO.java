@@ -526,4 +526,22 @@ public class PostDAO extends DBUtils.DBContext {
 
     }
 
+    public int GetNoOfRecordsPostByUser(int userId) {
+        int total = -1; // Initialize with a default value (e.g., -1) in case no records exist.
+        try {
+            String sql = "SELECT count(*)\n"
+                    + "  FROM [post]\n"
+                    + "  Where userID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
 }

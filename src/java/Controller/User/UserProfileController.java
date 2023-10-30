@@ -1,18 +1,12 @@
-package Controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import DAO.CategoryDAO;
-import DAO.CommentDAO;
+package Controller.User;
+
+import DAO.LikePostDAO;
 import DAO.PostDAO;
-import DAO.PostTypeDAO;
-import Model.Category;
-import Model.Comment;
-import Model.Constant;
-import Model.Post;
-import Model.PostType;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,15 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 /**
  *
  * @author dell
  */
-public class HomePage extends HttpServlet {
-
-    private int recordsPerPage = 4;
+public class UserProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,58 +32,19 @@ public class HomePage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostTypeDAO ptDao = new PostTypeDAO();
-        PostDAO pDao = new PostDAO();
-        CategoryDAO cDao = new CategoryDAO();
-        CommentDAO cmDao = new CommentDAO();
-        
-        //get session
-        HttpSession session = request.getSession();
-        
-        //pagenition 
-        int page = 1;
-
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(
-                    request.getParameter("page"));
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UserProfileController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UserProfileController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        //get list type post
-        ArrayList<PostType> listType = ptDao.GetAllPostType();
-
-        //get all post
-        ArrayList<Post> posts = pDao.GetPostPagnition((page - 1) * recordsPerPage,
-                recordsPerPage);
-        for (Post post : posts) {
-            ArrayList<Comment> comments = cmDao.GetCommentByPostId(post.getPostId());
-            post.setComments(comments);
-        }
-        
-        ArrayList<Category> categories = cDao.GetAllCategories();
-
-        int noOfRecords = pDao.GetNoOfRecordsPost();
-
-        int noOfPages = (int) Math.ceil((double) noOfRecords
-                / recordsPerPage);
-
-        request.setAttribute("noOfPages", noOfPages);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("noOfRecords", noOfRecords);
-
-        request.setAttribute("posts", posts);
-        session.setAttribute("categories", categories);
-
-        String msg = null;
-
-        if (session.getAttribute("msg") != null) {
-            msg = (String) session.getAttribute("msg");
-            session.removeAttribute("msg");
-        }
-
-        session.setAttribute("types", listType);
-        request.setAttribute("msg", msg);
-        session.setAttribute("PostExchange", Constant.PostExchange);
-        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,7 +59,18 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        User account = (User) session.getAttribute("account");
+        PostDAO pDao = new PostDAO();
+        String url = request.getHeader("Referer");
+        if (account == null) {
+            session.setAttribute("msg", "Bạn cần đăng nhập để thực hiện hành động này!");
+            response.sendRedirect(url);
+        } else {
+            int totalPost = pDao.GetNoOfRecordsPostByUser(account.getUserId());
+            request.setAttribute("totalPost", totalPost);
+            request.getRequestDispatcher("Views/User/UserProfile.jsp").forward(request, response);
+        }
     }
 
     /**

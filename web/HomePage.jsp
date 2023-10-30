@@ -53,10 +53,10 @@
                                 <div class="blog__slide__img">
                                     <img class="card-img rounded-0" src="${p.img}" alt="" width="150px" height="150px"/>
                                 </div>
-                                <div class="blog__slide__content">
+                                <div class="blog__slide__content" onclick="redirect('viewPostDetails?postId=${p.postId}')">
                                     <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
-                                    <h3><a href="#">${p.content.substring(0, 200)}...</a></h3>
-                                    <p>${p.datePost}</p>
+                                    <h3><a href="#">${p.title}</a></h3>
+                                    <p>${p.content.substring(0, 100)}...</p>
                                 </div>
                             </div>
                         </c:forEach>
@@ -78,7 +78,7 @@
                                         <ul class="thumb-info">
                                             <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
                                             <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
-                                            <li><a href="#"><i class="ti-themify-favicon"></i>2 Bình luận</a></li>
+                                            <li><a href="#"><i class="ti-themify-favicon"></i>${p.comments.size()} Bình luận</a></li>
                                         </ul>
                                     </div>
                                     <div class="d-flex gap-5">
@@ -91,7 +91,7 @@
                                         </a>
                                         <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <p>${p.content.substring(0, 200)}...</p>
-                                        <a class="button" href="viewPostDetails?postId=${p.postId}">Read More <i class="ti-arrow-right"></i></a>
+                                        <a class="button" href="viewPostDetails?postId=${p.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </c:forEach>

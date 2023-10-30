@@ -126,9 +126,10 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">${sessionScope.account.username}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="#">Thông tin cá nhân</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/userProfile">Thông tin cá nhân</a></li>
                                     <li class="nav-item"><a class="nav-link" href="listPost">Bài viết của tôi</a></li>
                                     <li class="nav-item"><a class="nav-link" href="createPost">Tạo bài viết</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </c:if>

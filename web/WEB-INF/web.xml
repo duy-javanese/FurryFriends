@@ -116,6 +116,14 @@
         <servlet-name>LoginEmailController</servlet-name>
         <servlet-class>Controller.LoginEmailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>Controller.User.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>Controller.User.EditProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -231,6 +239,14 @@
     <servlet-mapping>
         <servlet-name>LoginEmailController</servlet-name>
         <url-pattern>/loginEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/editProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
