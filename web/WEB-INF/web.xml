@@ -123,6 +123,8 @@
     <servlet>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-class>Controller.User.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>GetReportedPost</servlet-name>
         <servlet-class>Staff.GetReportedPost</servlet-class>
     </servlet>
@@ -261,6 +263,8 @@
     <servlet-mapping>
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GetReportedPost</servlet-name>
         <url-pattern>/GetReportedPost</url-pattern>
     </servlet-mapping>
