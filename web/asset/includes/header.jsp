@@ -77,7 +77,7 @@
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">Blog</a>
+                               aria-expanded="false">Bài viết chia sẻ</a>
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
@@ -119,7 +119,7 @@
 
                             <!--                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>-->
                             <c:if test="${sessionScope.account == null}">
-                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
                             </c:if>
                             <c:if test="${sessionScope.account != null}">
                             <li class="nav-item active submenu dropdown">
@@ -135,7 +135,7 @@
                         </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-social">
-                        <li><a href="#"><span class="ti-themify-favicon"></span></a>Tin nhắn</li>
+                        <li><a href="#"><span class="ti-themify-favicon"></span></a> Tin nhắn</li>
                     </ul>
                 </div> 
             </div>

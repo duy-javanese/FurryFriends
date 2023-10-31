@@ -1,3 +1,9 @@
+<%-- 
+    Document   : test
+    Created on : Oct 28, 2023, 9:12:22 PM
+    Author     : DUY
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -24,37 +30,55 @@
 
     <body>
         <%@ include file="asset/includes/header.jsp" %>
-        <!-- Form đăng ký -->
-        <div class="tab-pane fade show active body-register-wrapper" id="pills-register" role="tabpanel"
-             aria-labelledby="pills-register-tab">
-            <form action="MainController" method="POST">
-                <!-- Thêm các trường nhập liệu cho tên người dùng, mật khẩu và thông tin đăng ký khác -->
-                <h6>Tên người dùng <span class="text-danger">*</span></h6>
-                ${requestScope.USERNAME_ERROR}
-                <input type="text" class="form-control mb-3" name="username" required
-                       placeholder="Nhập tên người dùng" aria-label="Username">
-                <h6>Mật khẩu <span class="text-danger">*</span></h6>
-                <input type="password" class="form-control mb-2" name="password" required
-                       placeholder="Nhập mật khẩu" aria-label="Password">
-                <!-- Trường nhập lại mật khẩu -->
-                <h6>Nhập lại mật khẩu <span class="text-danger">*</span></h6>
-                ${requestScope.PASSWORD_ERROR}
-                <input type="password" class="form-control mb-2" name="confirm_password" required
-                       placeholder="Nhập lại mật khẩu" aria-label="Confirm Password">
-                <h6>Email <span class="text-danger">*</span></h6>
-                ${requestScope.EMAIL_ERROR}
-                <input type="email" class="form-control mb-3" name="email" required
-                       placeholder="Nhập email" aria-label="Email">
-                <h6>Số điện thoại <span class="text-danger">*</span></h6>
-                ${requestScope.PHONE_ERROR}
-                <input type="tel" class="form-control mb-3" name="phone" required
-                       placeholder="Nhập số điện thoại" aria-label="Phone">
-                <h6>Địa chỉ <span class="text-danger">*</span></h6>
-                <input type="text" class="form-control mb-3" name="address" required
-                       placeholder="Nhập địa chỉ" aria-label="Address">
-                <button type="submit" class="btn btn-dark w-100 mb-2" name="action" value="Register">Đăng ký</button>
-            </form>
+        <!-- Đăng ký tài khoản wrapper -->
+        <div class="d-flex justify-content-center mt-5 mb-5">
+            <div class="login-wrapper shadow bg-body rounded">
+                <div class="tab-content" id="accountTabContent">
+                    <!-- Form đăng ký tài khoản -->
+                    <div class="tab-pane fade show active body-login-wrapper" id="pills-register" role="tabpanel"
+                         aria-labelledby="pills-register-tab">
+                        <form action="MainController" method="post">
+                            <h6>Tên đăng nhập <span class="text-danger">*</span></h6>
+                            ${requestScope.USERNAME_ERROR}
+                            <input type="text" class="form-control mb-3" name="username" required
+                                   placeholder="Nhập tên đăng nhập" aria-label="Username">
+
+                            <h6>Mật khẩu <span class="text-danger">*</span></h6>
+                            <input type="password" class="form-control mb-3" name="password" required
+                                   placeholder="Nhập mật khẩu" aria-label="Password">
+
+                            <h6>Nhập lại mật khẩu <span class="text-danger">*</span></h6>
+                            ${requestScope.PASSWORD_ERROR}
+                            <input type="password" class="form-control mb-3" name="confirm_password" required
+                                   placeholder="Nhập lại mật khẩu" aria-label="Confirm Password">
+
+                            <h6>Email <span class="text-danger">*</span></h6>
+                            ${requestScope.EMAIL_ERROR}
+                            <input type="email" class="form-control mb-3" name="email" required
+                                   placeholder="Nhập địa chỉ Email" aria-label="Email">
+
+                            <h6>Số điện thoại <span class="text-danger">*</span></h6>
+                            ${requestScope.PHONE_ERROR}
+                            <input type="tel" class="form-control mb-3" name="phone" required
+                                   placeholder="Nhập số điện thoại" aria-label="Phone">
+
+                            <h6>Địa chỉ <span class="text-danger">*</span></h6>
+                            <input type="text" class="form-control mb-3" name="address" required
+                                   placeholder="Nhập địa chỉ" aria-label="Address">
+                            
+                            <div class="mb-3">
+                                <a href="loginPage.jsp" class="forget-pass-btn">
+                                    Đăng nhập
+                                </a>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-dark w-100 mb-2" name="action" value="Register">Đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <%@ include file="asset/includes/footer.jsp" %>
         <!--Script go to top, copy to every single page-->
         <script>
             //Get the button
@@ -80,3 +104,6 @@
                 document.documentElement.scrollTop = 0;
             }
         </script>
+    </body>
+</html>
+

@@ -37,20 +37,15 @@
                                     <p style="color: red">Thông tin đăng nhập không chính xác.</p>
                                 </c:if>
                             </c:if>
-                            <h6>Username <span class="text-danger">*</span></h6>
+                            <h6>Tên đăng nhập <span class="text-danger">*</span></h6>
                             <input type="text" class="form-control mb-3" name="username" required
-                                   placeholder="Nhập địa chỉ Email" aria-label="Username">
-                            <h6>MẬT KHẨU <span class="text-danger">*</span></h6>
+                                   placeholder="Nhập tên đăng nhập" aria-label="Username">
+                            <h6>Mật khẩu <span class="text-danger">*</span></h6>
                             <input type="password" class="form-control mb-2" name="pwd" required
-                                   placeholder="Nhập Mật khẩu" aria-label="Username">
+                                   placeholder="Nhập mật khẩu" aria-label="Username">
                             <div class="mb-3">
                                 <a href="registerPage.jsp" class="forget-pass-btn">
-                                    Đăng kí tài khoản?
-                                </a>
-                            </div>
-                            <div class="mb-3">
-                                <a href="forgotPassword" class="forget-pass-btn">
-                                    Quên mật khẩu?
+                                    Đăng kí tài khoản
                                 </a>
                             </div>
                             <button type="submit" class="btn btn-dark w-100 mb-2">Đăng nhập</button>
