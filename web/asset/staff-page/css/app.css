@@ -31,6 +31,34 @@ File: app.css
 
 
 /* General */
+/*======================== PendingPostList ========================*/
+.listPendingPost{
+    padding-top: 30px;
+}
+ .listPendingPost table th, td {
+                border: 2px solid black;
+}
+
+.listPendingPost table {
+                border-collapse: collapse;
+                width: 1000px;
+                margin: 0 auto;
+}
+
+.listPendingPost th, td {
+                padding: 10px
+}
+
+.listPendingPost th{
+                text-align: center;
+                background: grey;
+                color: white;
+}
+
+.listPendingPost td{
+                background: white;
+}
+/*======================== PendingPostList ========================*/
 /*======================== Staff report page ========================*/
 .hide-post-button{
     font-size: large;
@@ -102,11 +130,11 @@ File: app.css
 
 .post-style{
                 background: white;
-                margin-left: 100px;
                 padding: 21px;
                 border-radius: 10px;
-                margin-right: 100px;
                 margin-bottom: 50px;
+                width: 845px;
+                margin: 0 auto;
 }
 
 .approve-button{
@@ -117,6 +145,7 @@ File: app.css
                 background: #30ff3c;
                 color: white;
                 padding: 5px;
+                width: 100px
 }
 
 .decline-button{
@@ -127,6 +156,7 @@ File: app.css
                 background: #ff3030;
                 color: white;
                 padding: 5px;
+                width: 100px
 }
 
 .selected-button{
@@ -308,7 +338,7 @@ body {
 
 	color: #525f7f;
 	
-    background-color: #f8f9fe;
+    background-color: #f1f1f1;
 	
 	letter-spacing: 0.5px;
 

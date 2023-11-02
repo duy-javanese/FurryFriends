@@ -140,6 +140,10 @@
         <servlet-name>HideReportedPostAndExchange</servlet-name>
         <servlet-class>Staff.HideReportedPostAndExchange</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPendingPostDetailController</servlet-name>
+        <servlet-class>Staff.ViewPendingPostDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -279,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>HideReportedPostAndExchange</servlet-name>
         <url-pattern>/HideReportedPostAndExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPendingPostDetailController</servlet-name>
+        <url-pattern>/ViewPendingPostDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

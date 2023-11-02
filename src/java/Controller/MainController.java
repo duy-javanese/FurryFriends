@@ -39,6 +39,7 @@ private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
 private static final String BAN_USER_CONTROLLER="BanUserController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String GET_REPORTED_POST="GetReportedPost";
+private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPostDetailController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -112,6 +113,9 @@ private static final String GET_REPORTED_POST="GetReportedPost";
             }
             else if (action.equals("Get Reported Post")){
                 url = GET_REPORTED_POST;
+            }
+            else if (action.equals("ViewPendPostDetail")){
+                url = VIEW_PENDING_POST_DETAIL_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
