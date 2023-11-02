@@ -1,6 +1,6 @@
 <%-- 
-    Document   : PostApprovement
-    Created on : Oct 15, 2023, 11:49:34 PM
+    Document   : ViewPendingPostDetail
+    Created on : Nov 2, 2023, 1:12:40 PM
     Author     : Admin
 --%>
 
@@ -24,39 +24,7 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
-        <script>
-//            function validate(){
-//                var reason = document.getElementById('declineReason').value;
-//                if (reason == ""){
-//                    alert("Hãy chọn một lý do");
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            }
-        </script>
-        <style>
-            .listPendingPost table th, td {
-                border: 2px solid black;
-            }
-            .listPendingPost table {
-                border-collapse: collapse;
-                width: 1000px;
-                margin: 0 auto;
-            }
-            .listPendingPost th, td {
-                padding: 10px
-            }
-            .listPendingPost th{
-                text-align: center;
-                background: grey;
-                color: white;
-            }
-            .listPendingPost td{
-                background: white;
-            }
-        </style>
-        <title>Duyệt bài viết</title>
+        <title>Chi tiết bài viết</title>
     </head>
     <body>
         <div class="wrapper">
@@ -107,54 +75,9 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
-                <div class="listPendingPost">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Thể loại bài viết
-                                </th>
-                                <th>
-                                    Tiêu đề bài viết
-                                </th>
-                                <th>
-                                    Ngày tạo bài viết
-                                </th>
-                                <th>
-                                    Hành động
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${result}" var="p" varStatus="counter">
-                                <tr>
-                                    <td>
-                                        ${p.postType.postTypeName}
-                                    </td>
-                                    <td>
-                                        ${p.title}
-                                    </td>
-                                    <td>
-                                        ${p.datePost}
-                                    </td>
-                                    <td>
-                                        <form action="MainController">
-                                            <input type="hidden" name="postId" value="${p.postId}">
-                                            <button name="action" value="ViewPendPostDetail">Xem chi tiết</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                        
-                    </table>
-                </div>
+                <div class="post-style">
+                    <c:set var="p" value ="${requestScope.POST}"/>
                     
-                
-                <c:forEach items="${result}" var="p" varStatus="counter">
-
-                    <div class="post-style">
                         <div>
                                             <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
                             </div>
@@ -196,23 +119,9 @@
                             <input type="hidden" name="postId" value="${p.postId}">
 
                         </form>
-                    </div>
-                </c:forEach>
+                </div>
             </div>
             <!--end page-wrapper -->
-
         </div>
-        <!--end wrapper-->
-        <!-- Bootstrap JS -->
-        <script src="asset/staff-page/js/bootstrap.bundle.min.js"></script>
-        <!--plugins-->
-        <script src="asset/staff-page/js/jquery.min.js"></script>
-        <script src="asset/staff-page/plugins/simplebar/js/simplebar.min.js"></script>
-        <script src="asset/staff-page/plugins/metismenu/js/metisMenu.min.js"></script>
-        <script src="asset/staff-page/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-        <script src="asset/staff-page/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-        <script src="asset/staff-page/js/index5.js"></script>
-        <!--app JS-->
-        <script src="asset/staff-page/js/app.js"></script>
     </body>
 </html>

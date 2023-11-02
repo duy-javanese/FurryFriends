@@ -45,6 +45,7 @@ private static final String GET_REPORTED_POST="GetReportedPost";
 private static final String BAN_USER_CONTROLLER="BanUserController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String GET_REPORTED_POST="GetReportedPost";
+private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPostDetailController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
