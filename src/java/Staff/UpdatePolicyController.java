@@ -6,7 +6,7 @@
 
 package Staff;
 
-import DAO.PostDAO;
+import DAO.PolicyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,10 +22,9 @@ import javax.naming.NamingException;
  *
  * @author Admin
  */
-public class ApprovePostController extends HttpServlet {
-   private final String DEFAULT_PAGE = "errorPage.jsp";
-   private final String GET_PENDING_POST = "GetPendingPost";
-   private final String GET_PENDING_EXCHANGE = "GetPendingExchange";
+public class UpdatePolicyController extends HttpServlet {
+   private final String ERROR_PAGE="errorPage.jsp";
+   private final String RESULT_PAGE="GetAllPolicyController";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,32 +35,22 @@ public class ApprovePostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int postId = Integer.parseInt(request.getParameter("postId"));
-        int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
-        String url = DEFAULT_PAGE;
-        int updateStatus = 2; //2 = approve
-        try{
-            if(postTypeId == 4){
-                PostDAO dao = new PostDAO();
-                boolean result = dao.ApprovePost(postId, updateStatus);
-                if(result){
-                    url = GET_PENDING_EXCHANGE;
-                }
-            } else {
-                PostDAO dao = new PostDAO();
-                boolean result = dao.ApprovePost(postId, updateStatus);
-                if(result){
-                    url = GET_PENDING_POST;
-                }
+        int policyId = Integer.parseInt(request.getParameter("policyId"));
+        String policyTitle = request.getParameter("policyTitle");
+        String policyDetail = request.getParameter("policyDetail");
+        String url = ERROR_PAGE;
+        try  {
+            PolicyDAO dao = new PolicyDAO();
+            boolean result = dao.updatePolciy(policyTitle, policyDetail, policyId);
+            if (result){
+                url = RESULT_PAGE;
             }
-                
-            
         } catch (SQLException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(UpdatePolicyController.class.getName()).log(Level.SEVERE, null, ex);
        } catch (ClassNotFoundException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(UpdatePolicyController.class.getName()).log(Level.SEVERE, null, ex);
        } catch (NamingException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(UpdatePolicyController.class.getName()).log(Level.SEVERE, null, ex);
        }finally {
             //2.2 transfer Dispatcher
             response.sendRedirect(url);

@@ -32,6 +32,15 @@ File: app.css
 
 /* General */
 /*======================== PendingPostList ========================*/
+.return-button{
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    border: 0;
+    background: #ff9907;
+    color: white;
+    border-radius: 5px;
+}
 .listPendingPost{
     padding-top: 30px;
 }

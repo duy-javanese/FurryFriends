@@ -40,6 +40,10 @@ private static final String BAN_USER_CONTROLLER="BanUserController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String GET_REPORTED_POST="GetReportedPost";
 private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPostDetailController";
+private static final String GET_POLICY="GetAllPolicyController";
+private static final String EDIT_POLICY_PAGE_CONTROLLER="EditPolicyPage";
+private static final String UPDATE_POLICY_CONTROLLER="UpdatePolicyController";
+private static final String VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER="ViewPendingExchangeDetail";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -116,6 +120,18 @@ private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPost
             }
             else if (action.equals("ViewPendPostDetail")){
                 url = VIEW_PENDING_POST_DETAIL_CONTROLLER;
+            }
+            else if (action.equals("GetPolicy")){
+                url = GET_POLICY;
+            }
+            else if (action.equals("EditPolicy")){
+                url = EDIT_POLICY_PAGE_CONTROLLER;
+            }
+            else if (action.equals("UpdatePolicy")){
+                url = UPDATE_POLICY_CONTROLLER;
+            }
+            else if (action.equals("ViewPendExchangeDetail")){
+                url = VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

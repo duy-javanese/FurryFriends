@@ -1,6 +1,6 @@
 <%-- 
-    Document   : PostApprovement
-    Created on : Oct 15, 2023, 11:49:34 PM
+    Document   : ViewPendingExchangeDetail
+    Created on : Nov 3, 2023, 3:52:04 PM
     Author     : Admin
 --%>
 
@@ -24,39 +24,7 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
-        <script>
-//            function validate(){
-//                var reason = document.getElementById('declineReason').value;
-//                if (reason == ""){
-//                    alert("Hãy chọn một lý do");
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            }
-        </script>
-        <style>
-            .listPendingPost table th, td {
-                border: 2px solid black;
-            }
-            .listPendingPost table {
-                border-collapse: collapse;
-                width: 1000px;
-                margin: 0 auto;
-            }
-            .listPendingPost th, td {
-                padding: 10px
-            }
-            .listPendingPost th{
-                text-align: center;
-                background: grey;
-                color: white;
-            }
-            .listPendingPost td{
-                background: white;
-            }
-        </style>
-        <title>Duyệt bài viết</title>
+        <title>Chi tiết bài trao đổi</title>
     </head>
     <body>
         <div class="wrapper">
@@ -77,8 +45,8 @@
                     <form action="MainController">
                         <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
                         <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
-                        <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
-                        <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                        <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
+                        <button class="selected-button" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
                         <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
                         <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
@@ -107,64 +75,40 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
-                <div class="listPendingPost">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Thể loại bài viết
-                                </th>
-                                <th>
-                                    Tiêu đề bài viết
-                                </th>
-                                <th>
-                                    Ngày tạo bài viết
-                                </th>
-                                <th>
-                                    Hành động
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${result}" var="p" varStatus="counter">
-                                <tr>
-                                    <td>
-                                        ${p.postType.postTypeName}
-                                    </td>
-                                    <td>
-                                        ${p.title}
-                                    </td>
-                                    <td>
-                                        ${p.datePost}
-                                    </td>
-                                    <td>
-                                        <form action="MainController">
-                                            <input type="hidden" name="postId" value="${p.postId}">
-                                            <button name="action" value="ViewPendPostDetail">Xem chi tiết</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                        
-                    </table>
+                <div class="post-style">
+                    <c:set var="e" value ="${requestScope.EXCHANGE}"/>
+                        <div>
+                            <h5 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h5>
+                        </div>
+                        <div style="display: flex">
+                                <div class="d-flex">
+                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                </div>
+                            <div style="margin-left: 15px">
+                                    <h6>${e.post.user.username}</h6>
+                                            <p>${e.post.datePost}</p>
+                                </div>
+                            </div>
+                        <h5>${e.post.title}</h5>
+                        <p>${e.post.content}</p>
+                        <c:if test="${not empty e.post.img}">
+                            <img class="img-fluid" src="${e.post.img}" alt="" width="800px" height="300px"> <br>         
+                        </c:if>
+                            <h5>Price:</h5><h5 style="color: red">${e.price} VNĐ</h5>
+                        <form action="MainController" method="GET">
+                            <input type="hidden" name="postId" value="${e.post.postId}">
+                            <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
+                            <button class="approve-button" name="action" value="Approve">Approve</button>
+                        </form><br>
+                        <form action="MainController" method="GET">
+                            <button class="decline-button" name="action" value="Decline">Decline</button>
+                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>
+                            <input type="hidden" name="postId" value="${e.post.postId}">
+                            <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
+                        </form>
                 </div>
             </div>
             <!--end page-wrapper -->
-
         </div>
-        <!--end wrapper-->
-        <!-- Bootstrap JS -->
-        <script src="asset/staff-page/js/bootstrap.bundle.min.js"></script>
-        <!--plugins-->
-        <script src="asset/staff-page/js/jquery.min.js"></script>
-        <script src="asset/staff-page/plugins/simplebar/js/simplebar.min.js"></script>
-        <script src="asset/staff-page/plugins/metismenu/js/metisMenu.min.js"></script>
-        <script src="asset/staff-page/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-        <script src="asset/staff-page/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-        <script src="asset/staff-page/js/index5.js"></script>
-        <!--app JS-->
-        <script src="asset/staff-page/js/app.js"></script>
     </body>
 </html>

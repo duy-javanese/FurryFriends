@@ -79,44 +79,55 @@
             <!--Start page-wrapper -->
             <div class="page-wrapper">
                 <c:set var="result" value ="${requestScope.PENDING_EXCHANGE_LIST}"/>
-                <c:forEach items="${result}" var="e" varStatus="counter">
-                    <div class="post-style">
-                        <div>
-                            <h5 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h5>
-                        </div>
-                        <table>
-                            <tbody>
+                <div class="listPendingPost">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tiêu đề bài viết
+                                </th>
+                                <th>
+                                    Danh mục
+                                </th>
+                                <th>
+                                    Giá
+                                </th>
+                                <th>
+                                    Ngày tạo bài viết
+                                </th>
+                                <th>
+                                    Hành động
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${result}" var="e" varStatus="counter">
                                 <tr>
                                     <td>
-                                        <div class="d-flex">
-                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                        </div>
+                                        ${e.post.title}
                                     </td>
                                     <td>
-                                        <h6>${e.post.user.username}</h6>
-                                        <p>${e.post.datePost}</p>
+                                        ${e.post.category.categoryName}
+                                    </td>
+                                    <td>
+                                        ${e.price} VNĐ
+                                    </td>
+                                    <td>
+                                        ${e.post.datePost}
+                                    </td>
+                                    <td>
+                                        <form action="MainController">
+                                            <input type="hidden" name="ExchangeId" value="${e.exchangeId}">
+                                            <button name="action" value="ViewPendExchangeDetail">Xem chi tiết</button>
+                                        </form>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                        <h5>${e.post.title}</h5>
-                        <p>${e.post.content}</p>
-                        <c:if test="${not empty e.post.img}">
-                            <img class="img-fluid" src="${e.post.img}" alt="" width="800px" height="300px"> <br>         
-                        </c:if>
-                            <h6>Price:</h6><p style="color: red">${e.price}</p>
-                        <form action="MainController" method="GET">
-                            <input type="hidden" name="postId" value="${e.post.postId}">
-                            <button class="approve-button" name="action" value="Approve">Approve</button>
-                        </form><br>
-                        <form action="MainController" method="GET">
-                            <button class="decline-button" name="action" value="Decline">Decline</button>
-                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>
-                            <input type="hidden" name="postId" value="${e.post.postId}">
-
-                        </form>
-                    </div>
-                </c:forEach>
+                            </c:forEach>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                
             </div>
             <!--end page-wrapper -->
         </div>

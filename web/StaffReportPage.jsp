@@ -83,42 +83,26 @@
                 <c:set var="result" value ="${requestScope.REPORTED_POST_LIST}"/>
                 <c:forEach items="${result}" var="r" varStatus="counter">
                     <div class="post-style">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
+                                    <div style="display: flex">
                                         <p style="color: #00ff33">${r.reporter.username} </p>
-                                    </td>
-                                    <td>
-                                        <p>đã báo cáo bài viết này với lí do: </p>
-                                    </td>
-                                    <td>
-                                        <p style="color: red">${r.reason}</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${r.post.user.username}</h5>
-                                        <p>${r.post.datePost}</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <p style="margin-left: 5px">đã báo cáo bài viết này với lí do: </p>
+                                        <p style="color: red;margin-left: 5px">${r.reason}</p>
+                                    </div>
+                        <div style="display: flex">
+                                <div class="d-flex">
+                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                </div>
+                            <div style="margin-left: 15px">
+                                    <h6>${r.post.user.username}</h6>
+                                    <p>${r.post.datePost}</p>
+                                </div>
+                        </div>
                         <h6>${r.post.title}</h6>
                         <p>${r.post.content}</p>
                         <c:if test="${not empty r.post.img}">
                             <img class="img-fluid" src="${r.post.img}" alt="" width="800px" height="300px"> <br>         
                         </c:if>
-                            <div style="display: flex">
+                            <div style="display: flex; margin-top: 10px">
                                 <form action="MainController">
                                     <input type="hidden" name="reportType" value="${r.reportType}">
                                     <input type="hidden" name="postId" value="${r.post.postId}">
