@@ -158,6 +158,22 @@
         <servlet-name>ViewPendingPostDetailController</servlet-name>
         <servlet-class>Staff.ViewPendingPostDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePolicyController</servlet-name>
+        <servlet-class>Staff.UpdatePolicyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPolicyController</servlet-name>
+        <servlet-class>Staff.GetAllPolicyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditPolicyPage</servlet-name>
+        <servlet-class>Staff.EditPolicyPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPendingExchangeDetail</servlet-name>
+        <servlet-class>Staff.ViewPendingExchangeDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -315,6 +331,22 @@
     <servlet-mapping>
         <servlet-name>ViewPendingPostDetailController</servlet-name>
         <url-pattern>/ViewPendingPostDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePolicyController</servlet-name>
+        <url-pattern>/UpdatePolicyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPolicyController</servlet-name>
+        <url-pattern>/GetAllPolicyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPolicyPage</servlet-name>
+        <url-pattern>/EditPolicyPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPendingExchangeDetail</servlet-name>
+        <url-pattern>/ViewPendingExchangeDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

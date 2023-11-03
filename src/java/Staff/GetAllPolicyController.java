@@ -6,7 +6,9 @@
 
 package Staff;
 
-import DAO.PostDAO;
+import DAO.PolicyDAO;
+import Model.Policy;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,18 +16,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 
 /**
  *
  * @author Admin
  */
-public class ApprovePostController extends HttpServlet {
-   private final String DEFAULT_PAGE = "errorPage.jsp";
-   private final String GET_PENDING_POST = "GetPendingPost";
-   private final String GET_PENDING_EXCHANGE = "GetPendingExchange";
+public class GetAllPolicyController extends HttpServlet {
+   private final String ERROR_PAGE="errorPage.jsp";
+   private final String RESULT_PAGE="PolicyStaffPage.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,35 +37,18 @@ public class ApprovePostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int postId = Integer.parseInt(request.getParameter("postId"));
-        int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
-        String url = DEFAULT_PAGE;
-        int updateStatus = 2; //2 = approve
-        try{
-            if(postTypeId == 4){
-                PostDAO dao = new PostDAO();
-                boolean result = dao.ApprovePost(postId, updateStatus);
-                if(result){
-                    url = GET_PENDING_EXCHANGE;
-                }
-            } else {
-                PostDAO dao = new PostDAO();
-                boolean result = dao.ApprovePost(postId, updateStatus);
-                if(result){
-                    url = GET_PENDING_POST;
-                }
-            }
-                
-            
+        String url = ERROR_PAGE;
+        try  {
+            PolicyDAO dao = new PolicyDAO();
+            dao.getAllPolicy();
+            List<Policy> result = dao.getPolicyList();
+            request.setAttribute("POLICY_LIST", result);
+            url = RESULT_PAGE;
         } catch (SQLException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (NamingException ex) {
-           Logger.getLogger(ApprovePostController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(GetAllPolicyController.class.getName()).log(Level.SEVERE, null, ex);
        }finally {
-            //2.2 transfer Dispatcher
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     } 
 

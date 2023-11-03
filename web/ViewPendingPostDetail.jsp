@@ -75,27 +75,24 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
+                <form action="GetPendingPost">
+                    <button class="return-button">Quay lại</button>
+                </form>
                 <div class="post-style">
                     <c:set var="p" value ="${requestScope.POST}"/>
                     
                         <div>
                                             <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
                             </div>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
+                            <div style="display: flex">
+                                <div class="d-flex">
                                                 <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <h6>${p.user.username}</h6>
+                                </div>
+                            <div style="margin-left: 15px">
+                                    <h6>${p.user.username}</h6>
                                             <p>${p.datePost}</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                </div>
+                            </div>
                         <h6>${p.title}</h6>
                         <p>${p.content}</p>
                         <c:if test="${not empty p.img}">
@@ -103,6 +100,7 @@
                         </c:if>
                         <form action="MainController" method="GET">
                             <input type="hidden" name="postId" value="${p.postId}">
+                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
                             <button class="approve-button" name="action" value="Approve">Chấp nhận</button>
                         </form><br>
                         <form name="declineform" action="MainController" onsubmit="return validate()" method="GET">
@@ -117,7 +115,7 @@
                                 <input class="decline-button" type="submit" name="action" value="Decline">
                             </select>-->
                             <input type="hidden" name="postId" value="${p.postId}">
-
+                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
                         </form>
                 </div>
             </div>
