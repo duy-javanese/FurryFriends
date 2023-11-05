@@ -1,13 +1,12 @@
 <%-- 
-    Document   : ViewPendingPostDetail
-    Created on : Nov 2, 2023, 1:12:40 PM
+    Document   : ViewReportDetail
+    Created on : Nov 5, 2023, 11:49:43 PM
     Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,19 +23,8 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
-        <script>
-            function validate(){
-                var reason = document.getElementById('declineReason').value;
-                if (reason == ""){
-                    alert("Hãy chọn một lý do");
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        </script>
         
-        <title>Chi tiết bài viết</title>
+        <title>Chi tiết bài báo cáo</title>
     </head>
     <body>
         <div class="wrapper">
@@ -86,51 +74,7 @@
             </header>
             <!--end header -->
             <!--Start page-wrapper -->
-            <div class="page-wrapper">
-                <form action="GetPendingPost">
-                    <button class="return-button">Quay lại</button>
-                </form>
-                <div class="post-style">
-                    <c:set var="p" value ="${requestScope.POST}"/>
-                    
-                        <div>
-                                            <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
-                            </div>
-                            <div style="display: flex">
-                                <div class="d-flex">
-                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                </div>
-                            <div style="margin-left: 15px">
-                                    <h6>${p.user.username}</h6>
-                                            <p>${p.datePost}</p>
-                                </div>
-                            </div>
-                        <h6>${p.title}</h6>
-                        <p>${p.content}</p>
-                        <c:if test="${not empty p.img}">
-                            <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px"> <br>         
-                        </c:if>
-                        <form action="MainController" method="POST">
-                            <input type="hidden" name="postId" value="${p.postId}">
-                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
-                            <button class="approve-button" name="action" value="Approve">Chấp nhận</button>
-                        </form><br>
-                        <form name="declineform" action="MainController" onsubmit="return validate()" method="POST">
-<!--                            <button class="decline-button" name="action" value="Decline">Từ chối</button>-->
-<!--                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>-->
-                            <select class="search-User-box" name="declineReason" id="declineReason">
-                                <option value="">Chọn một lý do</option>
-                                <option value="Bôi nhọ cá nhân, tổ chức, nhà nước">Bôi nhọ cá nhân, tổ chức, nhà nước</option>
-                                <option value="Ảnh đồi trụy">Ảnh đồi trụy</option>
-                                <option value="Sai chuyên mục">Sai chuyên mục</option>
-                                <input class="decline-button" type="submit" name="action" value="Từ chối">
-                            </select>
-                            <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
-                            <input type="hidden" name="postId" value="${p.postId}">
-                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
-                        </form>
-                </div>
-            </div>
+            
             <!--end page-wrapper -->
         </div>
     </body>

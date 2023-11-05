@@ -103,7 +103,7 @@
                                                 <c:set var="result" value ="${requestScope.SEARCH_RESULT}"/>
                                                 <c:if test="${not empty result}">
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
-                                                <thead>
+                                                <thead style="text-align: center">
                                                     <tr>
                                                         <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
@@ -114,7 +114,7 @@
                                                         <th scope="col" style="width: 200px;">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="text-align: center">
                                                     <c:forEach items="${result}" var="dto" varStatus="counter">
                                                         <form action="MainController" method="POST">
                                                     <tr>
@@ -125,14 +125,14 @@
                                                         <td>${dto.point}</td>
                                                         <td>
                                                             <select name="txtStatus">
-                                                                                    <option ${(dto.status) ?  "selected": ""} value="true">Active</option>
+                                                                                    <option ${(dto.status) ?  "selected": ""} value="true">Hoạt động</option>
                                                                                     <option ${(not dto.status) ?  "selected": ""} value="false">BAN</option>
                                                                                 </select>
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="txtID" value="${dto.userId}" />
                                                             <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
-                                                            <button class="ban-user-button" name="action" value="Update user status">Ban</button>
+                                                            <button class="ban-user-button" name="action" value="Update user status">Cập nhật trạng thái</button>
                                                         </td>
                                                     </tr>
                                                         </form>
@@ -154,7 +154,7 @@
                                                         <h2>List of users:</h2>
                                                     </div>
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
-                                                <thead>
+                                                <thead style="text-align: center">
                                                     <tr>
                                                         <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
@@ -165,7 +165,7 @@
                                                         <th scope="col" style="width: 200px;">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="text-align: center">
                                                     <c:forEach items="${result}" var="dto" varStatus="counter">
                                                         <form action="MainController" method="POST">
                                                     <tr>
@@ -176,14 +176,14 @@
                                                         <td>${dto.point}</td>
                                                         <td>
                                                             <select name="txtStatus">
-                                                                                    <option ${(dto.status) ?  "selected": ""} value="true">Active</option>
+                                                                                    <option ${(dto.status) ?  "selected": ""} value="true">Hoạt động</option>
                                                                                     <option ${(not dto.status) ?  "selected": ""} value="false">BAN</option>
                                                                                 </select>
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="txtID" value="${dto.userId}" />
                                                             <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
-                                                                                <input type="submit" value="Update user status" name="action" />
+                                                            <button class="ban-user-button" name="action" value="Update user status">Cập nhật trạng thái</button>
                                                         </td>
                                                     </tr>
                                                         </form>

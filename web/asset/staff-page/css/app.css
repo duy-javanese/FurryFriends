@@ -33,40 +33,16 @@ File: app.css
 /* General */
 /*======================== PendingPostList ========================*/
 .return-button{
+    font-size: large;
     margin-top: 10px;
     margin-left: 10px;
     padding: 5px;
     border: 0;
-    background: #ff9907;
+    background: #ffc930;
     color: white;
     border-radius: 5px;
 }
-.listPendingPost{
-    padding-top: 30px;
-}
- .listPendingPost table th, td {
-                border: 2px solid black;
-}
 
-.listPendingPost table {
-                border-collapse: collapse;
-                width: 1000px;
-                margin: 0 auto;
-}
-
-.listPendingPost th, td {
-                padding: 10px
-}
-
-.listPendingPost th{
-                text-align: center;
-                background: grey;
-                color: white;
-}
-
-.listPendingPost td{
-                background: white;
-}
 /*======================== PendingPostList ========================*/
 /*======================== Staff report page ========================*/
 .hide-post-button{
@@ -78,9 +54,9 @@ File: app.css
                 padding: 5px;
 }
 .ban-user-button{
-    font-size: large;
+        font-size: large;
         color: white;
-        background-color: red;
+        background-color: #ffc930;
         border-radius: 5px;
         padding: 5px;
         border: 0;
@@ -121,6 +97,19 @@ File: app.css
 /*======================== user manage page ========================*/
 
 /*========================= button ==========================*/
+.category-selection{
+    height: 36px;
+    border-radius: 4px;
+    font-size: medium;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.view-detail-button{
+    border: 0;
+    border-radius: 5px;
+    font-size: medium;
+}
 .menuButton{
                 width: 100%;
                 background-color: #171717;
@@ -158,7 +147,6 @@ File: app.css
 }
 
 .decline-button{
-                margin-top: 10px;
                 font-size: large;
                 border: 0;
                 border-radius: 5px;

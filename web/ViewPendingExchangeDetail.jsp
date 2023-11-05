@@ -24,6 +24,17 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
+        <script>
+            function validate(){
+                var reason = document.getElementById('declineReason').value;
+                if (reason == ""){
+                    alert("Hãy chọn một lý do");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        </script>
         <title>Chi tiết bài trao đổi</title>
     </head>
     <body>
@@ -75,6 +86,9 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
+                <form action="GetPendingExchange">
+                    <button class="return-button">Quay lại</button>
+                </form>
                 <div class="post-style">
                     <c:set var="e" value ="${requestScope.EXCHANGE}"/>
                         <div>
@@ -100,9 +114,19 @@
                             <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
                             <button class="approve-button" name="action" value="Approve">Approve</button>
                         </form><br>
-                        <form action="MainController" method="GET">
-                            <button class="decline-button" name="action" value="Decline">Decline</button>
-                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>
+                        <form name="declineform" action="MainController" onsubmit="return validate()" method="POST">
+<!--                            <button class="decline-button" name="action" value="Decline">Decline</button>
+                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>-->
+                            <select class="search-User-box" name="declineReason" id="declineReason">
+                                <option value="">Chọn một lý do</option>
+                                <option value="Giá không hợp lí">Giá không hợp lí</option>
+                                <option value="Không trao đổi cụ thể">Không trao đổi cụ thể</option>
+                                <option value="Thiếu thông tin">Thiếu thông tin</option>
+                                <option value="Sử dụng hình ảnh từ trên mạng">Sử dụng hình ảnh từ trên mạng</option>
+                                <option value="Sai chuyên mục">Sai chuyên mục</option>
+                                <input class="decline-button" type="submit" name="action" value="Từ chối">
+                            </select>
+                            <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
                             <input type="hidden" name="postId" value="${e.post.postId}">
                             <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
                         </form>

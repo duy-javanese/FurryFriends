@@ -24,8 +24,34 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
+        <script src="https://kit.fontawesome.com/337871dc56.js" crossorigin="anonymous"></script>
         <style type="text/css">
-            
+            .listPendingPost{
+    padding-top: 30px;
+}
+ .listPendingPost table th, td {
+                border: 2px solid black;
+}
+
+.listPendingPost table {
+                border-collapse: collapse;
+                width: 1000px;
+                margin: 0 auto;
+}
+
+.listPendingPost th, td {
+                padding: 10px
+}
+
+.listPendingPost th{
+                text-align: center;
+                background: grey;
+                color: white;
+}
+
+.listPendingPost td{
+                background: white;
+}
         </style>
         <title>Duyệt bài trao đổi</title>
     </head>
@@ -73,60 +99,79 @@
                                                                     </a>
                                                             </div>
                                             </nav>
-                </div>
+                </div> 
             </header>
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <c:set var="result" value ="${requestScope.PENDING_EXCHANGE_LIST}"/>
-                <div class="listPendingPost">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Tiêu đề bài viết
-                                </th>
-                                <th>
-                                    Danh mục
-                                </th>
-                                <th>
-                                    Giá
-                                </th>
-                                <th>
-                                    Ngày tạo bài viết
-                                </th>
-                                <th>
-                                    Hành động
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${result}" var="e" varStatus="counter">
-                                <tr>
-                                    <td>
-                                        ${e.post.title}
-                                    </td>
-                                    <td>
-                                        ${e.post.category.categoryName}
-                                    </td>
-                                    <td>
-                                        ${e.price} VNĐ
-                                    </td>
-                                    <td>
-                                        ${e.post.datePost}
-                                    </td>
-                                    <td>
-                                        <form action="MainController">
-                                            <input type="hidden" name="ExchangeId" value="${e.exchangeId}">
-                                            <button name="action" value="ViewPendExchangeDetail">Xem chi tiết</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                <h1 style="text-align: center; margin-top: 100px">DANH SÁCH BÀI TRAO ĐỔI ĐANG CHỜ DUYỆT</h1>
+                <div style="margin-top: 50px; margin-left: 360px">
+                    <form action="MainController">
+                        <input class="search-User-box" type="text" name="txtSearchValue" 
+                            value="${param.txtSearchValue}" placeholder="Nhập tiêu đề bài trao đổi"/>
+                        <select class="category-selection" name="categoryId">
+                            <option value="0">Danh mục</option>
+                            <c:forEach var="c" items="${sessionScope.categories}">
+                                <option value="${c.categoryId}">${c.categoryName}</option>
                             </c:forEach>
-                        </tbody>
-                        
-                    </table>
+                        </select>
+                        <button class="user-page-button" name="action" value="SearchPendingExchange"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                    </form>
                 </div>
+<!--====================================================== List pending exchange ======================================================-->
+                <c:set var="result" value ="${requestScope.PENDING_EXCHANGE_LIST}"/>
+                <c:if test="${not empty result}">
+                    <div class="listPendingPost">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tiêu đề bài viết
+                                    </th>
+                                    <th>
+                                        Danh mục
+                                    </th>
+                                    <th>
+                                        Giá
+                                    </th>
+                                    <th>
+                                        Ngày tạo bài viết
+                                    </th>
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${result}" var="e" varStatus="counter">
+                                    <tr>
+                                        <td>
+                                            ${e.post.title}
+                                        </td>
+                                        <td>
+                                            ${e.post.category.categoryName}
+                                        </td>
+                                        <td>
+                                            ${e.price} VNĐ
+                                        </td>
+                                        <td>
+                                            ${e.post.datePost}
+                                        </td>
+                                        <td>
+                                            <form action="MainController">
+                                                <input type="hidden" name="ExchangeId" value="${e.exchangeId}">
+                                                <button class="view-detail-button" name="action" value="ViewPendExchangeDetail">Xem chi tiết</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                </div>
+                </c:if>
+                <c:if test="${empty result}">
+                    <h3 style="text-align: center">"Hiện tại không có bài trao đổi nào đang chờ duyệt"</h3>
+                </c:if>
                 
             </div>
             <!--end page-wrapper -->

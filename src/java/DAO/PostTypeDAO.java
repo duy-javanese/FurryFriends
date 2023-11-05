@@ -53,4 +53,22 @@ public class PostTypeDAO extends DBContext {
         }
         return null;
     }
+    
+    public ArrayList<PostType> GetPostTypeForSearchPost() {
+        ArrayList<PostType> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [postType]"
+                    + "  Where postTypeId = 1 or postTypeId = 2 or postTypeId = 3 ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new PostType(rs.getInt("postTypeId"), 
+                rs.getString("postTypeName")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostTypeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

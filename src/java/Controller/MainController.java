@@ -28,22 +28,26 @@ private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatus";
 private static final String REGISTER = "RegisterController";
 private static final String ADD_STAFF = "AddStaffController";
 private static final String GET_ALL_USER_CONTROLLER = "GetAllUserController";
-private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
-private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
-private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange";
 private static final String GET_ALL_STAFF_CONTROLLER = "GetAllStaffController";
 private static final String UPDATE_ABOUT_US = "UpdateAboutUsController";
 private static final String UPDATE_CONTACT = "UpdateContactController";
 private static final String UPDATE_LOGO = "UpdateLogoController";
 private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
 private static final String BAN_USER_CONTROLLER="BanUserController";
-private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String GET_REPORTED_POST="GetReportedPost";
-private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPostDetailController";
 private static final String GET_POLICY="GetAllPolicyController";
 private static final String EDIT_POLICY_PAGE_CONTROLLER="EditPolicyPage";
 private static final String UPDATE_POLICY_CONTROLLER="UpdatePolicyController";
+
+// Staff Exchange and post management
+private static final String SEARCH_PENDING_EXCHANGE_CONTROLLER = "SearchPendingExchangeController";
+private static final String SEARCH_PENDING_POST_CONTROLLER = "SearchPendingPostController";
 private static final String VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER="ViewPendingExchangeDetail";
+private static final String GET_PENDING_EXCHANGE_CONTROLLER="GetPendingExchange";
+private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPostDetailController";
+private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
+private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
+private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -88,7 +92,7 @@ private static final String VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER="ViewPending
             else if (action.equals("Approve")){
                 url = APPROVE_POST_CONTROLLER;
             }
-            else if (action.equals("Decline")){
+            else if (action.equals("Từ chối")){
                 url = DECLINE_POST_CONTROLLER;
             }
             else if (action.equals("ExchangeApprovement")){
@@ -132,6 +136,12 @@ private static final String VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER="ViewPending
             }
             else if (action.equals("ViewPendExchangeDetail")){
                 url = VIEW_PENDING_EXCHANGE_DETAIL_CONTROLLER;
+            }
+            else if (action.equals("SearchPendingExchange")){
+                url = SEARCH_PENDING_EXCHANGE_CONTROLLER;
+            }
+            else if (action.equals("SearchPendingPost")){
+                url = SEARCH_PENDING_POST_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
