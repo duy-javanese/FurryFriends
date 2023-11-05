@@ -7,13 +7,20 @@
 package Staff;
 
 import DAO.PostDAO;
+import DAO.PostTypeDAO;
+import Model.Post;
+import Model.PostType;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -22,10 +29,9 @@ import javax.naming.NamingException;
  *
  * @author Admin
  */
-public class DeclinePostController extends HttpServlet {
-   private final String DEFAULT_PAGE = "errorPage.jsp";
-   private final String PENDING_POST_PAGE = "GetPendingPost";
-   private final String PENDING_EXCHANGE_PAGE = "GetPendingExchange";
+public class SearchPendingPostController extends HttpServlet {
+   private final String ERROR_PAGE="errorPage.jsp";
+   private final String RESULT_PAGE="SearchPendingPostPage.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,34 +42,47 @@ public class DeclinePostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int postId = Integer.parseInt(request.getParameter("postId"));
-        String declineReason = request.getParameter("declineReason");
+        String searchValue = request.getParameter("txtSearchValue");
         int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
-        String url = DEFAULT_PAGE;
-        int updateStatus=3; //3 = decline
+        PostTypeDAO ptDao = new PostTypeDAO();
+        PostDAO pDao = new PostDAO();
+        HttpSession session = request.getSession();
+        ArrayList<PostType> listType = ptDao.GetPostTypeForSearchPost();
+        String url = ERROR_PAGE;
         try  {
-                PostDAO dao = new PostDAO();
-                boolean result = dao.DeclinePost(postId, updateStatus, declineReason);
-                if(postTypeId == 4){
-                    if(result){
-                        url = PENDING_EXCHANGE_PAGE;
-                    }
+            if (!searchValue.trim().isEmpty()){
+                if(postTypeId== 0){
+                    pDao.searchPostByTitle(searchValue);
                 }
                 else {
-                    if(result){
-                        url = PENDING_POST_PAGE;
-                    }
+                    pDao.searchPostByTitleAndType(searchValue, postTypeId);
                 }
-            
-        } catch (SQLException ex) {
-           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
+                List<Post> result = pDao.getPostSearchResult();
+                session.setAttribute("types", listType);
+                request.setAttribute("SEARCH_POST_RESULT", result);
+                url = RESULT_PAGE;
+            }
+            if(searchValue.isEmpty()){
+                if(postTypeId== 0){
+                    url = "GetPendingPost";
+                }
+                else {
+                    pDao.searchPostByType(postTypeId);
+                    List<Post> result = pDao.getPostSearchResult();
+                    session.setAttribute("types", listType);
+                    request.setAttribute("SEARCH_POST_RESULT", result);
+                    url = RESULT_PAGE;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+           Logger.getLogger(SearchPendingPostController.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(SearchPendingPostController.class.getName()).log(Level.SEVERE, null, ex);
        } catch (NamingException ex) {
-           Logger.getLogger(DeclinePostController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(SearchPendingPostController.class.getName()).log(Level.SEVERE, null, ex);
        }finally {
-            //2.2 transfer Dispatcher
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     } 
 

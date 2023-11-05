@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -169,5 +170,197 @@ public class ExchangeDAO extends DBContext {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    private List<Exchange> ExchangeSearchResult;
+
+    public List<Exchange> getExchangeSearchResult() {
+        return ExchangeSearchResult;
+    }
+    
+    
+    
+    public void searchExchangeByTitle(String searchValue)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                
+                String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
+                        + "From post as p, exchange as e "
+                        + "where p.post_id = e.post_id and p.status = 1 and (p.title like ?);";
+
+                
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+
+                
+                rs = stm.executeQuery();
+
+                
+                while (rs.next()) {
+                    
+                    int exchangeId = rs.getInt("exchange_id");
+                    
+                    PostDAO pDao = new PostDAO();
+                    Post post = pDao.GetPostById(rs.getInt("post_id"));
+                    
+                    boolean isFree = rs.getBoolean("is_free");
+                
+                    double price = rs.getDouble("price");
+                
+                    String address = rs.getString("address");
+                
+                    boolean isFinish = rs.getBoolean("isFinish");
+                    Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
+                    
+                    if (this.ExchangeSearchResult == null) {
+                        this.ExchangeSearchResult = new ArrayList<>();
+                    }
+                    this.ExchangeSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void searchExchangeByTitleAndCategory(String searchValue, int categoryId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                
+                String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
+                        + "From post as p, exchange as e "
+                        + "where p.post_id = e.post_id and p.category_id = ? and p.status = 1 and (p.title like ?);";
+
+                
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+                stm.setString(2, "%" + searchValue + "%");
+
+                
+                rs = stm.executeQuery();
+
+                
+                while (rs.next()) {
+                    
+                    int exchangeId = rs.getInt("exchange_id");
+                    
+                    PostDAO pDao = new PostDAO();
+                    Post post = pDao.GetPostById(rs.getInt("post_id"));
+                    
+                    boolean isFree = rs.getBoolean("is_free");
+                
+                    double price = rs.getDouble("price");
+                
+                    String address = rs.getString("address");
+                
+                    boolean isFinish = rs.getBoolean("isFinish");
+                    Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
+                    
+                    if (this.ExchangeSearchResult == null) {
+                        this.ExchangeSearchResult = new ArrayList<>();
+                    }
+                    this.ExchangeSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void searchExchangeByCategoryId(int categoryId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                
+                String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
+                        + "From post as p, exchange as e "
+                        + "where p.post_id = e.post_id and p.category_id = ? and p.status = 1";
+
+                
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+
+                
+                rs = stm.executeQuery();
+
+                
+                while (rs.next()) {
+                    
+                    int exchangeId = rs.getInt("exchange_id");
+                    
+                    PostDAO pDao = new PostDAO();
+                    Post post = pDao.GetPostById(rs.getInt("post_id"));
+                    
+                    boolean isFree = rs.getBoolean("is_free");
+                
+                    double price = rs.getDouble("price");
+                
+                    String address = rs.getString("address");
+                
+                    boolean isFinish = rs.getBoolean("isFinish");
+                    Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
+                    
+                    if (this.ExchangeSearchResult == null) {
+                        this.ExchangeSearchResult = new ArrayList<>();
+                    }
+                    this.ExchangeSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }

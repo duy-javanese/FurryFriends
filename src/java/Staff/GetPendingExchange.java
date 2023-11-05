@@ -6,7 +6,9 @@
 
 package Staff;
 
+import DAO.CategoryDAO;
 import DAO.ExchangeDAO;
+import Model.Category;
 import Model.Exchange;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -15,7 +17,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,14 +41,18 @@ public class GetPendingExchange extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        CategoryDAO cDao = new CategoryDAO();
         String url = EXCHANGE_APPROVEMENT_PAGE;
         try {
             ExchangeDAO eDao = new ExchangeDAO();
             
             eDao.getPendingExchangeList();
+            ArrayList<Category> categories = cDao.GetAllCategories();
             
             List<Exchange> result = eDao.getPendingExchange();
             
+            session.setAttribute("categories", categories);
             request.setAttribute("PENDING_EXCHANGE_LIST", result);
                 url = RESULT_PAGE;
         } catch (SQLException ex) {
