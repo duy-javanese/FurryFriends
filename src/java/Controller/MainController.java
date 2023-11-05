@@ -36,6 +36,8 @@ private static final String UPDATE_ABOUT_US = "UpdateAboutUsController";
 private static final String UPDATE_CONTACT = "UpdateContactController";
 private static final String UPDATE_LOGO = "UpdateLogoController";
 private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
+private static final String ADMIN_GET_ALL_USER = "AdminGetAllUserController";
+private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -100,6 +102,12 @@ private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
             }
             else if (action.equals("UpdateStaffStatus")){
                 url = UPDATE_STAFF_STATUS;
+            }
+            else if (action.equals("AdminGetAllUser")){
+                url = ADMIN_GET_ALL_USER;
+            }
+            else if (action.equals("AdminUpdateUserStatus")){
+                url = ADMIN_UPDATE_USER_STATUS;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

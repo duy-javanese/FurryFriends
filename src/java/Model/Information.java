@@ -11,15 +11,25 @@ package Model;
  */
 public class Information {
 
+    private String logoPath;
     private String aboutUs;
-    private String phone;
+    private String contact;
 
     public Information() {
     }
 
-    public Information(String aboutUs, String phone) {
+    public Information(String logoPath, String aboutUs, String contact) {
+        this.logoPath = logoPath;
         this.aboutUs = aboutUs;
-        this.phone = phone;
+        this.contact = contact;
+    }
+
+    public String getLogoPath() {
+        return logoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
     }
 
     public String getAboutUs() {
@@ -30,12 +40,12 @@ public class Information {
         this.aboutUs = aboutUs;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getContact() {
+        return contact;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
 }

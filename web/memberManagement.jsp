@@ -1,6 +1,6 @@
 <%-- 
-    Document   : staffManagement
-    Created on : Oct 28, 2023, 2:01:06 PM
+    Document   : memberManagement
+    Created on : Nov 5, 2023, 11:18:20 PM
     Author     : DUY
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Staff Management Page</title>
+        <title>User Management Page</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -120,7 +120,7 @@
         </div>
         <div>
             <form action="MainController" method="POST">
-                <button type="submit" name="action" value="GetAllStaff">Lấy danh sách quản trị viên</button>
+                <button type="submit" name="action" value="AdminGetAllUser">Lấy danh sách người dùng</button>
             </form>
             <table border="1">
                 <thead>
@@ -135,7 +135,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="acc" varStatus="counter" items="${requestScope.LIST_STAFF}">
+                    <c:forEach var="acc" varStatus="counter" items="${requestScope.LIST_USER}">
                         <tr>
                             <td>${counter.count}</td>
                             <td><c:out value="${acc.getUsername()}"></c:out></td>
@@ -148,7 +148,7 @@
                                         <span style="color: green; font-weight: bold;">Đang hoạt động</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span style="color: red; font-weight: bold;">Dừng hoạt động</span>
+                                        <span style="color: red; font-weight: bold;">Đang bị cấm</span>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -156,7 +156,7 @@
                                 <form class="updateStatus" action="MainController" method="post">
                                     <input type="hidden" name="id" value="${acc.getUserId()}">
                                     <input type="hidden" name="status" value="<c:if test='${acc.isStatus()}'>false</c:if><c:if test='${!acc.isStatus()}'>true</c:if>">
-                                        <input type="hidden" name="action" value="UpdateStaffStatus">
+                                        <input type="hidden" name="action" value="AdminUpdateUserStatus">
                                         <button type="button" class="confirmButton">Đổi trạng thái</button>
                                     </form>
                                     <script>

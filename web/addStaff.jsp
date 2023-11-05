@@ -100,11 +100,12 @@
                 <li><a href="configPage.jsp">Cấu hình hệ thống</a></li>
                 <li><a href="addStaff.jsp">Thêm mới quản trị viên</a></li>
                 <li><a href="staffManagement.jsp">Quản lí quản trị viên</a></li>
+                <li><a href="memberManagement.jsp">Quản lí người dùng</a></li>
             </ul>
         </div>
         <div>
             <form action="MainController" method="post">
-                <label for="username">Tên người dùng:</label>
+                <label for="username">Tên đăng nhập:</label>
                 ${requestScope.USERNAME_ERROR}
                 <input type="text" id="username" name="username" required>
                 

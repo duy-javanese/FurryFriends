@@ -33,14 +33,14 @@
                 padding: 10px;
             }
 
-            ul {
+            #menu ul {
                 list-style: none;
                 padding: 0;
                 text-align: center;
                 margin-left: 0;
             }
 
-            li {
+            #menu li {
                 display: inline;
                 margin-right: 20px;
             }
@@ -61,12 +61,55 @@
                 padding: 20px;
             }
 
-            h2 {
+            #users {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            #staffs {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            #posts {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            #users h2 {
                 background-color: #fff;
                 color: #333;
                 padding: 10px;
                 font-family: Arial, sans-serif;
                 border-bottom: 1px solid #ccc;
+                margin: 0;
+            }
+
+            #staffs h2 {
+                background-color: #fff;
+                color: #333;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+                border-bottom: 1px solid #ccc;
+                margin: 0;
+            }
+
+            #posts h2 {
+                background-color: #fff;
+                color: #333;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+                border-bottom: 1px solid #ccc;
+                margin: 0;
             }
         </style>
     </head>
@@ -78,12 +121,15 @@
                 <li><a href="configPage.jsp">Cấu hình hệ thống</a></li>
                 <li><a href="addStaff.jsp">Thêm mới quản trị viên</a></li>
                 <li><a href="staffManagement.jsp">Quản lí quản trị viên</a></li>
+                <li><a href="memberManagement.jsp">Quản lí người dùng</a></li>
             </ul>
         </div>
-        <div>
+        <div id="users">
             <h2>Thành viên</h2>
-            Số lượng người dùng: 
-            <%
+            <ul>
+                <li>
+                    Số lượng người dùng:
+                    <%
             try {
                 InformationDAO dao = new InformationDAO();
                 int userCount = dao.countUsers();
@@ -92,8 +138,11 @@
                 e.printStackTrace();
                 out.println("N/A");
             }
-            %> (Có 
-            <%
+                    %>
+                </li>
+                <li>
+                    Bị cấm:
+                    <%
             try {
                 InformationDAO dao = new InformationDAO();
                 int userCount = dao.countBannedUsers();
@@ -102,19 +151,29 @@
                 e.printStackTrace();
                 out.println("N/A");
             }
-            %> người dùng hiện đang bị cấm)<br>
-            Số lượng quản trị viên: 
-            <%
-            try {
-                InformationDAO dao = new InformationDAO();
-                int staffCount = dao.countStaffs();
-                out.println(staffCount);
-            } catch (Exception e) {
-                e.printStackTrace();
-                out.println("N/A");
-            }
-            %> (Có 
-            <%
+                    %>
+                </li>
+            </ul>
+        </div>
+        <div id="staffs">
+            <h2>Quản trị viên</h2>
+            <ul>
+                <li>
+                    Số lượng quản trị viên:
+                    <%
+        try {
+            InformationDAO dao = new InformationDAO();
+            int staffCount = dao.countStaffs();
+            out.println(staffCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("N/A");
+        }
+                    %>
+                </li>
+                <li>
+                    Dừng hoạt động:
+                    <%
             try {
                 InformationDAO dao = new InformationDAO();
                 int staffCount = dao.countInactiveStaffs();
@@ -123,21 +182,27 @@
                 e.printStackTrace();
                 out.println("N/A");
             }
-            %> quản trị viên hiện đang dừng hoạt động)<br>
+                    %>
+                </li>
+            </ul>
         </div>
-        <div>
+        <div id="posts">
             <h2>Bài đăng</h2>
-            Số lượng bài viết:
-            <%
-            try {
-                InformationDAO dao = new InformationDAO();
-                int postCount = dao.countPosts();
-                out.println(postCount);
-            } catch (Exception e) {
-                e.printStackTrace();
-                out.println("N/A");
-            }
-            %><br>
+            <ul>
+                <li>
+                    Số lượng bài viết:
+                    <%
+                    try {
+                        InformationDAO dao = new InformationDAO();
+                        int postCount = dao.countPosts();
+                        out.println(postCount);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        out.println("N/A");
+                    }
+                    %>
+                </li>
+            </ul> 
         </div>
     </body>
 </html>

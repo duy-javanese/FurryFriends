@@ -56,7 +56,7 @@
                 <div class="single-footer-widget mail-chimp">
                     <h6 class="mb-20">Contact</h6>
                     <div>
-                        <%= (info.getPhone() != null) ? info.getPhone() : "Chưa có thông tin" %>
+                        <%= (info.getContact() != null) ? info.getContact() : "Chưa có thông tin" %>
                     </div>
                 </div>
             </div>
