@@ -7,6 +7,7 @@ package DAO;
 
 import DBUtils.DBContext;
 import Model.Category;
+import Model.Comment;
 import Model.Exchange;
 import Model.Post;
 import Model.Report;
@@ -18,12 +19,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
-public class ReportDAO {
+public class ReportDAO extends DBUtils.DBContext {
     
     private List<Report> ReportedPostList;
 
@@ -181,5 +184,41 @@ public class ReportDAO {
             }
         }
         return result;
+    }
+    
+    public Report GetReportById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [report]\n"
+                    + "  Where report_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                UserDAO uDao = new UserDAO();
+                User user = uDao.GetUserById(rs.getInt("reporter_id"));
+
+                String reportType = rs.getString("report_type");
+
+                PostDAO pDao = new PostDAO();
+                Post post = pDao.GetPostById(rs.getInt("post_id"));
+
+                CommentDAO cDao = new CommentDAO();
+                Comment comment = cDao.GetCommentById(rs.getInt("comment_id"));
+                
+                ExchangeDAO eDao = new ExchangeDAO();
+                Exchange exchange = eDao.GetExchangeById(rs.getInt("exchange_id"));
+                
+                String reason = rs.getString("reason");
+                
+                boolean reportStatus = rs.getBoolean("report_status");
+
+                return new Report(id, user, reportType, post, comment, exchange, reason, rs.getDate("report_date"), reportStatus);
+               
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

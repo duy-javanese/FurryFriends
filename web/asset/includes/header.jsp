@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/style.css">
 
-    <style>
+    <style>    
         /* The Modal (hidden by default) */
         .modal {
             display: none;
@@ -137,8 +137,8 @@
                     <ul class="nav navbar-nav navbar-right navbar-social">
                         <li><a href="https://zalo.me" style="text-decoration: none; color: black"><span class="ti-themify-favicon"></span> Tin nhắn</a></li>
                     </ul>
-                </div> 
-            </div>
+                </div>
+            </div>                   
         </nav>
     </div>
 </header>

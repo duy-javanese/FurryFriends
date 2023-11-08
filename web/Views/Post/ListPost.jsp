@@ -64,7 +64,7 @@
                                                             background: red;
                                                              </c:if>
                                                             <c:if test="${p.status.postStatusId eq 2}">
-                                                            background: #30ff3c;
+                                                            background: #1bf227;
                                                              </c:if>
                                                             <c:if test="${p.status.postStatusId eq 1}">
                                                             background: #ffc930;

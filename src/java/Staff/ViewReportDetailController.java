@@ -6,8 +6,8 @@
 
 package Staff;
 
-import DAO.PostDAO;
-import Model.Post;
+import DAO.ReportDAO;
+import Model.Report;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,9 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class ViewPendingPostDetailController extends HttpServlet {
+public class ViewReportDetailController extends HttpServlet {
    private static final String ERROR = "errorPage.jsp";
-   private static final String VIEW_PENDING_POST_DETAIL_PAGE="ViewPendingPostDetail.jsp";
+   private static final String VIEW_REPORT_DETAIL_PAGE="ViewReportDetail.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -32,14 +32,13 @@ public class ViewPendingPostDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int postId = Integer.parseInt(request.getParameter("postId"));
+        int reportId = Integer.parseInt(request.getParameter("reportId"));
         String url = ERROR;
         try  {
-            PostDAO dao = new PostDAO();
-            Post p =dao.GetPostById(postId);
-            request.setAttribute("POST", p);
-            url = VIEW_PENDING_POST_DETAIL_PAGE;
+            ReportDAO rDao = new ReportDAO();
+            Report dto = rDao.GetReportById(reportId);
+            request.setAttribute("REPORT", dto);
+            url = VIEW_REPORT_DETAIL_PAGE;
         }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

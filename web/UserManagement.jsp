@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
 	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
+        
+        <script src="https://kit.fontawesome.com/337871dc56.js" crossorigin="anonymous"></script>
         <style type="text/css">
             
         </style>
@@ -35,23 +37,29 @@
             <!--sidebar wrapper -->
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
-				<div>
-					<img src="asset/images/logo-icon.png" class="logo-icon" alt="logo icon">
-				</div>
-				<div>
+                                <div>
+                                    <img class="rounded-circle" src="/asset/img/furryfriends-1.png" alt="" width="42px" height="42px">
+                                </div>
+				<div style="margin-left: 15px">
 					<h4 class="logo-text">Furry Friends</h4>
 				</div>
 			</div>
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
                             <form action="MainController">
-                                <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
-                        <button class="selected-button" name="action" value="Get all user">Quản lí người dùng</button><br/>
-                        <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
-                        <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
-                        <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
-                        <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
-                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
+<!--                                <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
+                                <button class="selected-button" name="action" value="Get all user">Quản lí người dùng</button><br/>
+                                <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
+                                <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                                <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
+                                <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
+                                <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
+                                <a href="StaffPage.jsp">Thống kê</a>
+                                <a style="background: #ff9907" href="GetAllUserController">Quản lí người dùng</a>
+                                <a href="GetPendingPost">Bài viết</a>
+                                <a href="GetPendingExchange">Bài trao đổi</a>
+                                <a href="GetReportedPost">Báo cáo từ người dùng</a>
+                                <a href="logout">Đăng xuất</a>
                             </form>
 			</ul>
 			<!--end navigation-->
@@ -83,8 +91,8 @@
                             <form action="MainController">
                                     <input class="search-User-box" type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
-                                    <input class="user-page-button" type="submit" value="Search User" name="action" />
-                                    
+<!--                                    <input class="user-page-button" type="submit" value="Search User" name="action" />-->
+                                    <button class="user-page-button" value="Search User" name="action"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
                                     
                                 </form>
                                     <form action="MainController">

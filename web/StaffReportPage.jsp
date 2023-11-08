@@ -60,9 +60,9 @@
             <div class="sidebar-wrapper" data-simplebar="true">
                 <div class="sidebar-header">
                     <div>
-                        <img src="asset/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                        <img class="rounded-circle" src="/asset/img/furryfriends-1.png" alt="" width="42px" height="42px">
                     </div>
-                    <div>
+                    <div style="margin-left: 15px">
                         <h4 class="logo-text">Furry Friends</h4>
                     </div>
                     <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
@@ -71,12 +71,17 @@
                 <!--navigation-->
                 <ul class="metismenu" id="menu">
                     <form action="MainController">
-                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
+<!--                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
                         <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
                         <button class="menuButton" name="action" value="PostApprovement">Bài viết</button><br/>
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
                         <button class="selected-button" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
-                        <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
+                        <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>-->
+                        <a href="StaffPage.jsp">Thống kê</a>
+                        <a href="GetAllUserController">Quản lí người dùng</a>
+                        <a href="GetPendingPost">Bài viết</a>
+                        <a href="GetPendingExchange">Bài trao đổi</a>
+                        <a style="background: #ff9907" href="GetReportedPost">Báo cáo từ người dùng</a>
                         <a href="logout">Đăng xuất</a>
                     </form>		
                 </ul>
@@ -145,7 +150,7 @@
                                     <td>
                                         <form action="MainController">
                                             <input type="hidden" name="reportId" value="${r.reportId}">
-                                            <button class="view-detail-button" name="action" value="ViewPendPostDetail">Xem chi tiết</button>
+                                            <button class="view-detail-button" name="action" value="ViewReportDetail">Xem chi tiết</button>
                                         </form>
                                     </td>
                                 </tr>

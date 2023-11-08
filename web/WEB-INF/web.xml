@@ -182,6 +182,10 @@
         <servlet-name>SearchPendingPostController</servlet-name>
         <servlet-class>Staff.SearchPendingPostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewReportDetailController</servlet-name>
+        <servlet-class>Staff.ViewReportDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -363,6 +367,10 @@
     <servlet-mapping>
         <servlet-name>SearchPendingPostController</servlet-name>
         <url-pattern>/SearchPendingPostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReportDetailController</servlet-name>
+        <url-pattern>/ViewReportDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
