@@ -25,6 +25,20 @@ public class Report {
     public Report() {
     }
 
+    public Report(int reportId, User reporter, String reportType, Post post, Comment comment, Exchange exchange, String reason, Date reportDate, boolean reportStatus) {
+        this.reportId = reportId;
+        this.reporter = reporter;
+        this.reportType = reportType;
+        this.post = post;
+        this.comment = comment;
+        this.exchange = exchange;
+        this.reason = reason;
+        this.reportDate = reportDate;
+        this.reportStatus = reportStatus;
+    }
+
+    
+    
     // Constructor for Reported post
     public Report(int reportId, User reporter, String reportType, Post post, String reason, Date reportDate, boolean reportStatus) {
         this.reportId = reportId;

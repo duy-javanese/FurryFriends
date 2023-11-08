@@ -155,15 +155,6 @@ File: app.css
                 padding: 5px;
                 width: 100px
 }
-
-.selected-button{
-                width: 100%;
-                background-color: #ff9907;
-                color: white;
-                margin-bottom: 8px;
-                font-size: larger;
-                border: 0;
-}
 /*========================= button ==========================*/
 
 /*========================= Post approvement =========================*/
@@ -779,13 +770,13 @@ a {
 	align-items: center;
 
 
-	justify-content: left;
+	justify-content: center;
 
 
 	padding: 8px 15px;
 
 
-	font-size: 15px;
+	font-size: 18px;
 
 
 	color: #5f5f5f;

@@ -48,6 +48,7 @@ private static final String VIEW_PENDING_POST_DETAIL_CONTROLLER="ViewPendingPost
 private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
 private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
+private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -142,6 +143,9 @@ private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAnd
             }
             else if (action.equals("SearchPendingPost")){
                 url = SEARCH_PENDING_POST_CONTROLLER;
+            }
+            else if (action.equals("ViewReportDetail")){
+                url = VIEW_REPORT_DETAIL_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
