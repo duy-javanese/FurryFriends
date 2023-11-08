@@ -32,7 +32,7 @@
                         <!-- Type Post -->
                         <div class="form-floating mt-5">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    name="type" onchange="chooseTypePost(this)">
+                                    name="type" onchange="chooseTypePost(this)" required>
                                 <option selected disabled value="">Danh mục bài viết</option>
                                 <c:forEach items="${types}" var="t">
                                     <c:if test="${t.postTypeId != PostExchange}">
@@ -45,19 +45,17 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" required>
+                                   placeholder="Tiêu đề bài viết" name="title" minlength="25" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài viết <span style="color: red">*</span></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                name="content" required>
-                                          
-                            </textarea>
+                                      name="content" minlength="250" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Ảnh bài viết <span style="color: red">*</span></label>
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
-                                   multiple required>
+                                   required>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

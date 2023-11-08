@@ -16,22 +16,41 @@ import java.util.logging.Logger;
  */
 public class LikePostDAO extends DBUtils.DBContext {
 
-    public void InsertLike(int userId, int postId) {
+    public int InsertLike(int userId, int postId) {
         try {
-            String sql = "INSERT INTO [dbo].[LikePost]\n"
-                    + "           ([UserId]\n"
-                    + "           ,[PostId])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?)";
+            String sql = "SELECT *\n"
+                    + "  FROM [LikePost]\n"
+                    + "  Where UserId = ? and PostId = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, userId);
             stm.setInt(2, postId);
-
-            stm.executeUpdate();
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                sql = "DELETE FROM [dbo].[LikePost]\n"
+                        + "      WHERE UserId = ?\n"
+                        + "	  and PostId = ?";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, userId);
+                stm.setInt(2, postId);
+                stm.executeUpdate();
+                return -1;
+            } else {
+                sql = "INSERT INTO [dbo].[LikePost]\n"
+                        + "           ([UserId]\n"
+                        + "           ,[PostId])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?)";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, userId);
+                stm.setInt(2, postId);
+                stm.executeUpdate();
+                return 1;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(LikePostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
 
     public int GetTotalLikePost(int postId) {
@@ -41,7 +60,7 @@ public class LikePostDAO extends DBUtils.DBContext {
                     + "  Where PostId = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, postId);
-            
+
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);

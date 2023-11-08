@@ -86,7 +86,7 @@ public class HomePage extends HttpServlet {
 
         if (session.getAttribute("msg") != null) {
             msg = (String) session.getAttribute("msg");
-            session.removeAttribute("msg");
+            session.setAttribute("msg",null);
         }
 
         session.setAttribute("types", listType);

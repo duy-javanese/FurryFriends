@@ -97,15 +97,15 @@
                                 ${post.content}
                             </p>
                             <div class="d-flex">
-                                <a href="likePost?postId=${post.postId}" class="ml-3"><i class="ti-heart"></i>Thích</a>
-                                <a href="interestPost?postId=${post.postId}" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
+                                <a href="likePost?postId=${post.postId}" class="ml-3"><i class="ti-heart mr-1"></i>Thích</a>
+                                <a href="interestPost?postId=${post.postId}" class="ml-3"><i class="ti-face-smile mr-1"></i>Quan tâm</a>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt"></i>Báo cáo bài viết</button>
+                                <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>
                             </div>
                             <div class="news_d_footer flex-column flex-sm-row">
-                                <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>${totalLike} người thích</a>
-                                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>${post.comments.size()} bình luận</a>
+                                <a href="#"><span class="align-middle"><i class="ti-heart"></i></span>${totalLike}người thích</a>
+                                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle"><i class="ti-themify-favicon"></i></span>${post.comments.size()} bình luận</a>
                                 <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
                                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#"><i class="fab fa-twitter"></i></a>

@@ -32,7 +32,7 @@
                         <!-- Type Post -->
                         <div class="form-floating mt-5">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    name="type" onchange="chooseTypePost(this)">
+                                    name="type" onchange="chooseTypePost(this)" required>
                                 <option selected disabled value="">Danh mục bài viết</option>
                                 <c:forEach items="${types}" var="t">
                                     <c:if test="${t.postTypeId != PostExchange}">
@@ -47,17 +47,16 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" value="${post.title}" required>
+                                   placeholder="Tiêu đề bài viết" name="title" value="${post.title}" required minlength="25">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài viết <span style="color: red">*</span></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                      name="content" required>${post.content}</textarea>
+                                      name="content" required minlength="250">${post.content}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Thay đổi ảnh bài viết <span style="color: red">*</span></label>
-                            <input class="form-control" type="file" name="file" id="file" accept="image/*"
-                                   multiple>
+                            <input class="form-control" type="file" name="file" id="file" accept="image/*">
                             <img src="${post.img}" alt="alt" width="160px" height="160px" style="background-size: cover"/>
                             <input type="hidden" name="existImg" value="${post.img}">
                             <input type="hidden" name="postId" value="${post.postId}">

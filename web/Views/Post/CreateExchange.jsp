@@ -31,7 +31,7 @@
                         <!-- Category Post -->
                         <div class="form-floating mt-5">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    name="category">
+                                    name="category" required>
                                 <option selected disabled value="">Danh mục trao đổi</option>
                                 <c:forEach items="${categories}" var="c">
                                     <option value="${c.categoryId}">${c.categoryName}</option>
@@ -43,29 +43,29 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài trao đổi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title">
+                                   placeholder="Tiêu đề bài viết" name="title" required minlength="25">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài trao đổi <span style="color: red">*</span></label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                      name="content"></textarea>
+                                      name="content" required minlength="250"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Ảnh bài trao đổi <span style="color: red">*</span></label>
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
-                                   multiple required>
+                                   required>
                         </div>
 
                         <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
-                            <input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="number" step="0.00000001" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" required min="0">
                             <span class="input-group-text">.00</span>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Địa chỉ trao đổi thú cưng" name="address">
+                                   placeholder="Địa chỉ trao đổi thú cưng" name="address" required minlength="100">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

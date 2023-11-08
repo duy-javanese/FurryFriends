@@ -19,6 +19,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Random;
+import java.util.UUID;
 import javax.management.relation.Role;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
@@ -62,7 +64,22 @@ public class LoginEmailController extends HttpServlet {
             account = new User();
             account.setEmail(user.getEmail());
             account.setEmailId(user.getId());
-            account.setUsername("New_User");
+
+            int length = 10; // Length of the random string
+            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            StringBuilder randomString = new StringBuilder();
+
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++) {
+                int index = random.nextInt(characters.length());
+                char randomChar = characters.charAt(index);
+                randomString.append(randomChar);
+            }
+
+            String randomStringResult = randomString.toString();
+
+            account.setUsername(randomStringResult);
 
             UserRole role = new UserRole();
             role.setRoleId(Constant.CustomerRole);
