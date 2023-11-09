@@ -81,14 +81,14 @@
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/findPostByPostType?postType=-1">
                                         Tất cả bài viết
                                     </a>
                                 </li>
                                 <c:forEach var="t" items="${sessionScope.types}">
                                     <c:if test="${sessionScope.PostExchange != t.postTypeId}">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="/findPostByPostType?postType=${t.postTypeId}">
                                                 ${t.postTypeName}
                                             </a>
                                         </li>
@@ -102,13 +102,13 @@
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/findPostByPostType?postType=${sessionScope.PostExchange}">
                                         Tất cả bài viết
                                     </a>
                                 </li>
                                 <c:forEach var="c" items="${sessionScope.categories}">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="findPostByPostTypeAndCategory?postType=${sessionScope.PostExchange}&categoryId=${c.categoryId}">
                                             ${c.categoryName}
                                         </a>
                                     </li>

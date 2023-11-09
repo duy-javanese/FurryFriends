@@ -128,6 +128,18 @@
         <servlet-name>ListUserInterestedController</servlet-name>
         <servlet-class>Controller.User.ListUserInterestedController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListPostInterestedController</servlet-name>
+        <servlet-class>Controller.User.ListPostInterestedController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindPostByPostTypeController</servlet-name>
+        <servlet-class>Controller.Post.FindPostByPostTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
+        <servlet-class>Controller.Post.FindPostByPostTypeAndCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -255,6 +267,18 @@
     <servlet-mapping>
         <servlet-name>ListUserInterestedController</servlet-name>
         <url-pattern>/listUserInterested</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPostInterestedController</servlet-name>
+        <url-pattern>/listPostInterested</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindPostByPostTypeController</servlet-name>
+        <url-pattern>/findPostByPostType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
+        <url-pattern>/findPostByPostTypeAndCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
