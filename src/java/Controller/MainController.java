@@ -152,6 +152,7 @@ private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusCon
             }
             else if (action.equals("RejectReport")){
                 url = REJECT_REPORT_CONTROLLER;
+            }
             else if (action.equals("AdminGetAllUser")){
                 url = ADMIN_GET_ALL_USER;
             }

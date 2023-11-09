@@ -175,6 +175,8 @@
     <servlet>
         <servlet-name>RejectReportController</servlet-name>
         <servlet-class>Staff.RejectReportController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ListUserInterestedController</servlet-name>
         <servlet-class>Controller.User.ListUserInterestedController</servlet-class>
     </servlet>
@@ -365,6 +367,8 @@
     <servlet-mapping>
         <servlet-name>RejectReportController</servlet-name>
         <url-pattern>/RejectReportController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ListUserInterestedController</servlet-name>
         <url-pattern>/listUserInterested</url-pattern>
     </servlet-mapping>
