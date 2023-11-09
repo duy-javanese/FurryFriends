@@ -81,14 +81,14 @@
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/findPostByPostType?postType=-1">
                                         Tất cả bài viết
                                     </a>
                                 </li>
                                 <c:forEach var="t" items="${sessionScope.types}">
                                     <c:if test="${sessionScope.PostExchange != t.postTypeId}">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="/findPostByPostType?postType=${t.postTypeId}">
                                                 ${t.postTypeName}
                                             </a>
                                         </li>
@@ -102,13 +102,13 @@
                             <ul class="dropdown-menu">
                                 <!-- list post type -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/findPostByPostType?postType=${sessionScope.PostExchange}">
                                         Tất cả bài viết
                                     </a>
                                 </li>
                                 <c:forEach var="c" items="${sessionScope.categories}">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="findPostByPostTypeAndCategory?postType=${sessionScope.PostExchange}&categoryId=${c.categoryId}">
                                             ${c.categoryName}
                                         </a>
                                     </li>
@@ -135,7 +135,7 @@
                         </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-social">
-                        <li><a href="#"><span class="ti-themify-favicon"></span></a> Tin nhắn</li>
+                        <li><a href="https://zalo.me" style="text-decoration: none; color: black"><span class="ti-themify-favicon"></span>Tin nhắn</a></li>
                     </ul>
                 </div>
             </div>                   

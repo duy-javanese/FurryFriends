@@ -10,9 +10,9 @@ package Model;
  */
 public class Constant {
     
-    public final static String GOOGLE_CLIENT_ID = "583964261490-qa8kt76ed9evd3l597jn9hmsnrm6s97q.apps.googleusercontent.com";
+    public final static String GOOGLE_CLIENT_ID = "382906068061-s75kbnhom986nlav15ufode1pjo0d5j9.apps.googleusercontent.com";
 
-    public final static String GOOGLE_CLIENT_SECRET = "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";
+    public final static String GOOGLE_CLIENT_SECRET = "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";
 
     public final static String GOOGLE_REDIRECT_URI = "http://localhost:9999/loginEmail";
 

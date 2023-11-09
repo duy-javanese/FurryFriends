@@ -41,9 +41,18 @@ public class InterestPostController extends HttpServlet {
             int postId = Integer.parseInt(request.getParameter("postId"));
 
             InterestPostDAO ipDao = new InterestPostDAO();
-            ipDao.Insert(account.getUserId(), postId);
-
-            session.setAttribute("msg", "Quan tâm bài viết thành công!");
+            int status = ipDao.Insert(account.getUserId(), postId);
+            switch (status) {
+                case 1:
+                    session.setAttribute("msg", "Quan tâm bài viết thành công!");
+                    break;
+                case -1:
+                    session.setAttribute("msg", "Bỏ quan tâm bài viết thành công!");
+                    break;
+                default:
+                    session.setAttribute("msg", "Đã có lỗi xảy ra!");
+                    break;
+            }
             response.sendRedirect(url);
         }
     }

@@ -25,6 +25,8 @@ public class Post {
     private PostStatus status;
     private Exchange exchange;
     private ArrayList<Comment> comments;
+    private ArrayList<User> userInterested;
+    private ArrayList<User> userLike;
 
     public Post() {
     }
@@ -175,6 +177,23 @@ public class Post {
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
+
+    public ArrayList<User> getUserInterested() {
+        return userInterested;
+    }
+
+    public void setUserInterested(ArrayList<User> userInterested) {
+        this.userInterested = userInterested;
+    }
+
+    public ArrayList<User> getUserLike() {
+        return userLike;
+    }
+
+    public void setUserLike(ArrayList<User> userLike) {
+        this.userLike = userLike;
+    }
+    
     
     @Override
     public String toString() {

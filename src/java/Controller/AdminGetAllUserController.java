@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import DAO.InformationDAO;
-import Model.Information;
+import DAO.UserDAO;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,18 +14,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 /**
  *
  * @author DUY
  */
-@WebServlet(name = "UpdateContactController", urlPatterns = {"/UpdateContactController"})
-public class UpdateContactController extends HttpServlet {
+@WebServlet(name = "AdminGetAllUserController", urlPatterns = {"/AdminGetAllUserController"})
+public class AdminGetAllUserController extends HttpServlet {
 
-    private static final String ERROR = "configPage.jsp";
-    private static final String SUCCESS = "configPage.jsp";
+    private static final String ERROR = "errorPage.jsp";
+    private static final String SUCCESS = "memberManagement.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,25 +39,16 @@ public class UpdateContactController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        Information information = new Information();
-        boolean check = false;
-        InformationDAO dao = new InformationDAO();
         try {
-            String phone = request.getParameter("phone");
-            if (phone != null && !phone.isEmpty()) {
-                boolean checkPhone = checkPhone(phone);
-                if (checkPhone) {
-                    information.setContact(phone);
-                    check = dao.updateContact(information);
-                    if (check) {
-                        url = SUCCESS;
-                    }
-                } else {
-                    request.setAttribute("PHONE_ERROR", "Số điện thoại không hợp lệ!");
-                }
+            UserDAO dao = new UserDAO();
+            dao.getAllUser();
+            List<User> result = dao.getUserList();
+            if (result.size() > 0) {
+                request.setAttribute("LIST_USER", result);
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at UpdateContactController: " + e.toString());
+            log("Error at GetAllStaffController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -103,10 +93,4 @@ public class UpdateContactController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static boolean checkPhone(String phone) {
-        String regex = "0\\d{9}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
-    }
 }

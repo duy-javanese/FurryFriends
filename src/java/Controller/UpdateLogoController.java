@@ -8,21 +8,29 @@ package Controller;
 import DAO.InformationDAO;
 import Model.Information;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
  * @author DUY
  */
-@WebServlet(name = "UpdateContactController", urlPatterns = {"/UpdateContactController"})
-public class UpdateContactController extends HttpServlet {
+@WebServlet(name = "UpdateLogoController", urlPatterns = {"/UpdateLogoController"})
+@MultipartConfig
+public class UpdateLogoController extends HttpServlet {
 
     private static final String ERROR = "configPage.jsp";
     private static final String SUCCESS = "configPage.jsp";
@@ -40,25 +48,34 @@ public class UpdateContactController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        Information information = new Information();
-        boolean check = false;
         InformationDAO dao = new InformationDAO();
+        Information information = new Information();
         try {
-            String phone = request.getParameter("phone");
-            if (phone != null && !phone.isEmpty()) {
-                boolean checkPhone = checkPhone(phone);
-                if (checkPhone) {
-                    information.setContact(phone);
-                    check = dao.updateContact(information);
+            List<Part> fileParts = request.getParts().stream().filter(part -> "logo".equals(part.getName())).collect(Collectors.toList());
+            String realPath = getServletContext().getRealPath("") + "img";
+            for (Part part : fileParts) {
+                UUID uuid = UUID.randomUUID();
+                String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                String fileExtension = FilenameUtils.getExtension(filename);
+                if (checkImage(fileExtension)) {
+                    if (!Files.exists(Paths.get(realPath))) {
+                        Files.createDirectory(Paths.get(realPath));
+                    }
+                    filename = uuid + "." + fileExtension;
+                    part.write(realPath + File.separator + filename);
+                    String pathImage = "img" + "/" + filename;
+                    information.setLogoPath(pathImage);
+                    boolean check = dao.updateLogo(information);
                     if (check) {
                         url = SUCCESS;
                     }
                 } else {
-                    request.setAttribute("PHONE_ERROR", "Số điện thoại không hợp lệ!");
+                    request.setAttribute("LOGO_ERROR", "Định dạng logo không hợp lệ!");
+                    url = ERROR;
                 }
             }
         } catch (Exception e) {
-            log("Error at UpdateContactController: " + e.toString());
+            log("Error at UpdateLogoController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -103,10 +120,8 @@ public class UpdateContactController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static boolean checkPhone(String phone) {
-        String regex = "0\\d{9}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
+    private boolean checkImage(String extension) {
+        String[] imageExtensions = {"jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp"};
+        return Arrays.asList(imageExtensions).contains(extension.toLowerCase());
     }
 }

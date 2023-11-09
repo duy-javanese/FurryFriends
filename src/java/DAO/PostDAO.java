@@ -214,10 +214,8 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT count(*) as total\n"
                     + "  FROM [post]\n"
-                    + "  Where isPublic = ?\n"
-                    + "  and userId = ?\n";
+                    + "  Where userId = ?\n";
             HashMap<Integer, Object> setter = new HashMap<>();
-            setter.put(++count, Constant.PostPublic);
             //find by user id
             setter.put(++count, userId);
 
@@ -262,16 +260,135 @@ public class PostDAO extends DBUtils.DBContext {
         return -1;
     }
 
+    public ArrayList<Post> GetPostByUserInsterested(int offset, int recordsPerPage,
+            int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        ArrayList<Post> list = new ArrayList<>();
+        try {
+            int count = 0;
+            String sql = "SELECT DISTINCT ipost.PostId\n"
+                    + "  FROM [InterestPost] ipost\n"
+                    + "  left join post p\n"
+                    + "  on p.post_id = ipost.PostId\n"
+                    + "  Where p.userID = ? and ipost.UserId != ?";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            //find by user id
+            setter.put(++count, userId);
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            sql += " order by ipost.PostId\n";
+            sql += "  offset ? ROW\n"
+                    + "  FETCH Next ? Rows only";
+            setter.put(++count, offset);
+            setter.put(++count, recordsPerPage);
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            Post p;
+            while (rs.next()) {
+                p = new Post();
+                p = GetPostById(rs.getInt("PostId"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int GetNoOfRecordsPostByUserInsterested(int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        try {
+            int count = 0;
+            String sql = "SELECT Count(DISTINCT ipost.PostId)\n"
+                    + "  FROM [InterestPost] ipost\n"
+                    + "  left join post p\n"
+                    + "  on p.post_id = ipost.PostId\n"
+                    + "  Where p.userID = ? and ipost.UserId != ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            //find by user id
+            setter.put(++count, userId);
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
         Post p = pDao.GetPostById(7);
-        ArrayList<Post> list = pDao.GetPostPagnition(0, 3);
+        ArrayList<Post> list = pDao.GetPostPagnition(0, 3, -1, -1);
         System.out.println(list.size());
         System.out.println(p.getContent());
         pDao.InsertPost(p);
     }
 
-    public ArrayList<Post> GetPostPagnition(int offset, int recordsPerPage) {
+    public ArrayList<Post> GetPostPagnition(int offset, int recordsPerPage, int postType, int category) {
         ArrayList<Post> list = new ArrayList<>();
         try {
             int count = 0;
@@ -281,6 +398,15 @@ public class PostDAO extends DBUtils.DBContext {
             HashMap<Integer, Object> setter = new HashMap<>();
             setter.put(++count, Constant.PostPublic);
             setter.put(++count, Constant.StatusPostAccept);
+
+            if (postType != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, postType);
+            }
+            if (category != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, category);
+            }
 
             sql += " order by post_id\n";
             sql += "  offset ? ROW\n"
@@ -306,7 +432,7 @@ public class PostDAO extends DBUtils.DBContext {
         return list;
     }
 
-    public int GetNoOfRecordsPost() {
+    public int GetNoOfRecordsPost(int postType, int category) {
         try {
             int count = 0;
             String sql = "SELECT count(*) as total\n"
@@ -315,6 +441,15 @@ public class PostDAO extends DBUtils.DBContext {
             HashMap<Integer, Object> setter = new HashMap<>();
             setter.put(++count, Constant.PostPublic);
             setter.put(++count, Constant.StatusPostAccept);
+
+            if (postType != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, postType);
+            }
+            if (category != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, category);
+            }
 
             PreparedStatement stm = connection.prepareStatement(sql);
             for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
@@ -785,4 +920,182 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
+    public ArrayList<User> GetUserInterested(int postId) {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [InterestPost]\n"
+                    + "  Where PostId = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            ResultSet rs = stm.executeQuery();
+
+            UserDAO uDao = new UserDAO();
+            while (rs.next()) {
+                User u = uDao.GetUserById(rs.getInt("UserId"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public ArrayList<Post> GetPostInterestedByUser(int offset, int recordsPerPage, int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        ArrayList<Post> list = new ArrayList<>();
+        try {
+            int count = 0;
+            String sql = "SELECT *\n"
+                    + "  FROM [InterestPost]\n"
+                    + "  Where UserId = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            //find by user id
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            sql += " order by PostId\n";
+            sql += "  offset ? ROW\n"
+                    + "  FETCH Next ? Rows only";
+            setter.put(++count, offset);
+            setter.put(++count, recordsPerPage);
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            Post p;
+            while (rs.next()) {
+                p = new Post();
+                p = GetPostById(rs.getInt("PostId"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int GetNoOfRecordsPostInterestedByUser(int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        try {
+            int count = 0;
+            String sql = "SELECT count(*)\n"
+                    + "  FROM [InterestPost]\n"
+                    + "  Where UserId = ?\n";
+            HashMap<Integer, Object> setter = new HashMap<>();
+            //find by user id
+            setter.put(++count, userId);
+
+            if (!textSearch.isEmpty() && !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += " and title like ?\n";
+                setter.put(++count, textSearch);
+            }
+
+            if (categoryId != -1) {
+                sql += " and category_id = ?\n";
+                setter.put(++count, categoryId);
+            }
+
+            if (typeId != -1) {
+                sql += " and post_type = ?\n";
+                setter.put(++count, typeId);
+            }
+
+            if (status != -1) {
+                sql += " and status = ?\n";
+                setter.put(++count, status);
+            }
+
+            if (isPublic != -1) {
+                sql += " and isPublic = ?";
+                setter.put(++count, isPublic);
+            }
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public ArrayList<Post> GetTop3Post() {
+        ArrayList<Post> list = new ArrayList<>();
+        try {
+            String sql = "SELECT Top 3 PostId, count(*)\n"
+                    + "  FROM [InterestPost]\n"
+                    + "  Group by PostId";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            Post p;
+            while (rs.next()) {
+                p = new Post();
+                p = GetPostById(rs.getInt("PostId"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public ArrayList<User> GetUserLike(int postId) {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [LikePost]\n"
+                    + "  Where PostId = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            ResultSet rs = stm.executeQuery();
+
+            UserDAO uDao = new UserDAO();
+            while (rs.next()) {
+                User u = uDao.GetUserById(rs.getInt("UserId"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
 }

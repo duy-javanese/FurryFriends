@@ -83,6 +83,14 @@
             button:hover {
                 background-color: #ff6600;
             }
+
+            .logo-input {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 100%;
+                margin-bottom: 20px;
+            }
         </style>
     </head>
     <body>
@@ -97,9 +105,18 @@
                 <li><a href="configPage.jsp">Cấu hình hệ thống</a></li>
                 <li><a href="addStaff.jsp">Thêm mới quản trị viên</a></li>
                 <li><a href="staffManagement.jsp">Quản lí quản trị viên</a></li>
+                <li><a href="memberManagement.jsp">Quản lí người dùng</a></li>
             </ul>
         </div>
         <div>
+            <form action="UpdateLogoController" method="post" enctype="multipart/form-data">
+                <label for="logo">Logo:</label>
+                ${requestScope.LOGO_ERROR}
+                <input id="logo" class="logo-input" type="file" name="logo" accept="image/*" required=""/>
+                <button type="submit" name="action" value="UpdateLogo">Cập nhật</button><br><br>
+                <label>Đang hiển thị:</label>
+                <img src="<%=info.getLogoPath()%>" alt="logo" width="250" height="250">
+            </form>
             <form action="MainController" method="post">
                 <label for="about">About Us:</label>
                 <textarea id="about" name="about" rows="4" required></textarea>
@@ -112,12 +129,12 @@
 
             <form action="MainController" method="post">
                 <label for="phoneNumber">Contact:</label>
-                ${requestScope.ERROR}
+                ${requestScope.PHONE_ERROR}
                 <input type="text" id="phoneNumber" name="phone" required="">
                 <button type="submit" name="action" value="UpdateContact">Cập nhật</button><br><br>
                 <label>Đang hiển thị:</label>
                 <%
-                    out.print(info.getPhone());
+                    out.print(info.getContact());
                 %>
             </form>
         </div>

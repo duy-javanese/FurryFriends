@@ -5,6 +5,7 @@
 package DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,22 +16,40 @@ import java.util.logging.Logger;
  */
 public class InterestPostDAO extends DBUtils.DBContext {
 
-    public void Insert(int userId, int postId) {
+    public int Insert(int userId, int postId) {
         try {
-            String sql = "INSERT INTO [dbo].[InterestPost]\n"
-                    + "           ([UserId]\n"
-                    + "           ,[PostId])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?)";
+            String sql = "SELECT *\n"
+                    + "  FROM [InterestPost]\n"
+                    + "  Where UserId = ? and PostId = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, userId);
             stm.setInt(2, postId);
-
-            stm.executeUpdate();
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                sql = "DELETE FROM [dbo].[InterestPost]\n"
+                        + "      WHERE UserId = ? and PostId = ?";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, userId);
+                stm.setInt(2, postId);
+                stm.executeUpdate();
+                return -1;
+            } else {
+                sql = "INSERT INTO [dbo].[InterestPost]\n"
+                        + "           ([UserId]\n"
+                        + "           ,[PostId])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?)";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, userId);
+                stm.setInt(2, postId);
+                stm.executeUpdate();
+                return 1;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(LikePostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
     }
 
 }

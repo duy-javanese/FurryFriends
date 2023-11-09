@@ -82,8 +82,20 @@
                                         </ul>
                                     </div>
                                     <div class="d-flex gap-5">
-                                        <a href="likePost?postId=${p.postId}" class="ml-3"><i class="ti-heart"></i>Thích</a>
-                                        <a href="interestPost?postId=${p.postId}" class="ml-3"><i class="ti-face-smile"></i>Quan tâm</a>
+                                        <a href="likePost?postId=${p.postId}" class="ml-3
+                                           <c:forEach items="${p.userLike}" var="ul">
+                                               <c:if test="${ul.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-heart mr-1"></i>Thích</a>
+                                        <a href="interestPost?postId=${p.postId}" class="ml-3
+                                           <c:forEach items="${p.userInterested}" var="ui">
+                                               <c:if test="${ui.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
                                     </div>
                                     <div class="details mt-20">
                                         <a href="viewPostDetails?postId=${p.postId}">
@@ -155,86 +167,35 @@
                                 <div class="single-sidebar-widget post-category-widget">
                                     <h4 class="single-sidebar-widget__title">Post Type</h4>
                                     <ul class="cat-list mt-20">
-                                        <li>
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>Technology</p>
-                                                <p>(03)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>Software</p>
-                                                <p>(09)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>Lifestyle</p>
-                                                <p>(12)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>Shopping</p>
-                                                <p>(02)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>Food</p>
-                                                <p>(10)</p>
-                                            </a>
-                                        </li>
+                                        <c:forEach items="${sessionScope.types}" var="t">
+                                            <li>
+                                                <a href="/findPostByPostType?postType=${t.postTypeId}" class="d-flex justify-content-between">
+                                                    <p>${t.postTypeName}</p>
+                                                </a>
+                                            </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
 
                                 <div class="single-sidebar-widget popular-post-widget">
                                     <h4 class="single-sidebar-widget__title">Popular Post</h4>
                                     <div class="popular-post-list">
-                                        <div class="single-post-list">
-                                            <div class="thumb">
-                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb1.png" alt="">
-                                                <ul class="thumb-info">
-                                                    <li><a href="#">Adam Colinge</a></li>
-                                                    <li><a href="#">Dec 15</a></li>
-                                                </ul>
+                                        <c:forEach items="${sessionScope.top3Post}" var="p3">
+                                            <div class="single-post-list">
+                                                <div class="thumb">
+                                                    <img class="card-img rounded-0" src="${p3.img}" alt="">
+                                                    <ul class="thumb-info">
+                                                        <li><a href="viewPostDetails?postId=${p3.postId}">${p3.user.username}</a></li>
+                                                        <li><a href="viewPostDetails?postId=${p3.postId}">${p3.datePost}</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="details mt-20">
+                                                    <a href="blog-single.html">
+                                                        <h6>${p3.content.substring(0, 100)}...</h6>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="details mt-20">
-                                                <a href="blog-single.html">
-                                                    <h6>Accused of assaulting flight attendant miktake alaways</h6>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="single-post-list">
-                                            <div class="thumb">
-                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb2.png" alt="">
-                                                <ul class="thumb-info">
-                                                    <li><a href="#">Adam Colinge</a></li>
-                                                    <li><a href="#">Dec 15</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="details mt-20">
-                                                <a href="blog-single.html">
-                                                    <h6>Tennessee outback steakhouse the
-                                                        worker diagnosed</h6>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="single-post-list">
-                                            <div class="thumb">
-                                                <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb3.png" alt="">
-                                                <ul class="thumb-info">
-                                                    <li><a href="#">Adam Colinge</a></li>
-                                                    <li><a href="#">Dec 15</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="details mt-20">
-                                                <a href="blog-single.html">
-                                                    <h6>Tennessee outback steakhouse the
-                                                        worker diagnosed</h6>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
 

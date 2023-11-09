@@ -13,6 +13,7 @@ import Model.Comment;
 import Model.Constant;
 import Model.Post;
 import Model.PostType;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 public class HomePage extends HttpServlet {
 
     private int recordsPerPage = 4;
+    private int postType = -1;
+    private int category = -1;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +48,22 @@ public class HomePage extends HttpServlet {
         PostDAO pDao = new PostDAO();
         CategoryDAO cDao = new CategoryDAO();
         CommentDAO cmDao = new CommentDAO();
-        
+
         //get session
         HttpSession session = request.getSession();
-        
+
+        if (request.getSession().getAttribute("postTypeId") != null) {
+            postType = (int) request.getSession().getAttribute("postTypeId");
+        } else {
+            postType = -1;
+        }
+
+        if (request.getSession().getAttribute("categoryId") != null) {
+            category = (int) request.getSession().getAttribute("categoryId");
+        } else {
+            category = -1;
+        }
+
         //pagenition 
         int page = 1;
 
@@ -62,15 +77,24 @@ public class HomePage extends HttpServlet {
 
         //get all post
         ArrayList<Post> posts = pDao.GetPostPagnition((page - 1) * recordsPerPage,
-                recordsPerPage);
+                recordsPerPage, postType, category);
         for (Post post : posts) {
             ArrayList<Comment> comments = cmDao.GetCommentByPostId(post.getPostId());
             post.setComments(comments);
+
+            ArrayList<User> listUI = pDao.GetUserInterested(post.getPostId());
+            post.setUserInterested(listUI);
+            
+            ArrayList<User> listUL = pDao.GetUserLike(post.getPostId());
+            post.setUserLike(listUL);
         }
         
+
+        ArrayList<Post> top3Post = pDao.GetTop3Post();
+
         ArrayList<Category> categories = cDao.GetAllCategories();
 
-        int noOfRecords = pDao.GetNoOfRecordsPost();
+        int noOfRecords = pDao.GetNoOfRecordsPost(postType, category);
 
         int noOfPages = (int) Math.ceil((double) noOfRecords
                 / recordsPerPage);
@@ -86,13 +110,21 @@ public class HomePage extends HttpServlet {
 
         if (session.getAttribute("msg") != null) {
             msg = (String) session.getAttribute("msg");
-            session.removeAttribute("msg");
+            session.setAttribute("msg", null);
         }
 
+        session.setAttribute("top3Post", top3Post);
         session.setAttribute("types", listType);
         request.setAttribute("msg", msg);
         session.setAttribute("PostExchange", Constant.PostExchange);
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+    }
+
+    public static void main(String[] args) {
+        PostTypeDAO ptDao = new PostTypeDAO();
+        //get list type post
+        ArrayList<PostType> listType = ptDao.GetAllPostType();
+        System.out.println(listType.size());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
