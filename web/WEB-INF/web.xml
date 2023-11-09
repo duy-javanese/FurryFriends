@@ -124,6 +124,10 @@
         <servlet-name>EditProfileController</servlet-name>
         <servlet-class>Controller.User.EditProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListUserInterestedController</servlet-name>
+        <servlet-class>Controller.User.ListUserInterestedController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -247,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUserInterestedController</servlet-name>
+        <url-pattern>/listUserInterested</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

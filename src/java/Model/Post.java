@@ -25,6 +25,7 @@ public class Post {
     private PostStatus status;
     private Exchange exchange;
     private ArrayList<Comment> comments;
+    private ArrayList<User> userInterested;
 
     public Post() {
     }
@@ -175,6 +176,15 @@ public class Post {
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
+
+    public ArrayList<User> getUserInterested() {
+        return userInterested;
+    }
+
+    public void setUserInterested(ArrayList<User> userInterested) {
+        this.userInterested = userInterested;
+    }
+    
     
     @Override
     public String toString() {
