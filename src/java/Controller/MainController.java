@@ -172,6 +172,12 @@ private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
             else if (action.equals("RejectReport")){
                 url = REJECT_REPORT_CONTROLLER;
             }
+            else if (action.equals("AdminGetAllUser")){
+                url = ADMIN_GET_ALL_USER;
+            }
+            else if (action.equals("AdminUpdateUserStatus")){
+                url = ADMIN_UPDATE_USER_STATUS;
+            }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
