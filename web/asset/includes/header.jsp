@@ -135,7 +135,7 @@
                         </c:if>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-social">
-                        <li><a href="#"><span class="ti-themify-favicon"></span></a> Tin nhắn</li>
+                        <li><a href="https://zalo.me" style="text-decoration: none; color: black"><span class="ti-themify-favicon"></span>Tin nhắn</a></li>
                     </ul>
                 </div> 
             </div>
