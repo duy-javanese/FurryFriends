@@ -383,7 +383,7 @@ public class PostDAO extends DBUtils.DBContext {
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
         Post p = pDao.GetPostById(7);
-        ArrayList<Post> list = pDao.GetPostPagnition(0, 3, -1,-1);
+        ArrayList<Post> list = pDao.GetPostPagnition(0, 3, -1, -1);
         System.out.println(list.size());
         System.out.println(p.getContent());
         pDao.InsertPost(p);
@@ -828,6 +828,28 @@ public class PostDAO extends DBUtils.DBContext {
                 p = new Post();
                 p = GetPostById(rs.getInt("PostId"));
                 list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public ArrayList<User> GetUserLike(int postId) {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [LikePost]\n"
+                    + "  Where PostId = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            ResultSet rs = stm.executeQuery();
+
+            UserDAO uDao = new UserDAO();
+            while (rs.next()) {
+                User u = uDao.GetUserById(rs.getInt("UserId"));
+                list.add(u);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);

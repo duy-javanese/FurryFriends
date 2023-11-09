@@ -82,8 +82,20 @@
                                         </ul>
                                     </div>
                                     <div class="d-flex gap-5">
-                                        <a href="likePost?postId=${p.postId}" class="ml-3"><i class="ti-heart mr-1"></i>Thích</a>
-                                        <a href="interestPost?postId=${p.postId}" class="ml-3"><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                        <a href="likePost?postId=${p.postId}" class="ml-3
+                                           <c:forEach items="${p.userLike}" var="ul">
+                                               <c:if test="${ul.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-heart mr-1"></i>Thích</a>
+                                        <a href="interestPost?postId=${p.postId}" class="ml-3
+                                           <c:forEach items="${p.userInterested}" var="ui">
+                                               <c:if test="${ui.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
                                     </div>
                                     <div class="details mt-20">
                                         <a href="viewPostDetails?postId=${p.postId}">

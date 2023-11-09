@@ -13,6 +13,7 @@ import Model.Comment;
 import Model.Constant;
 import Model.Post;
 import Model.PostType;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -80,7 +81,14 @@ public class HomePage extends HttpServlet {
         for (Post post : posts) {
             ArrayList<Comment> comments = cmDao.GetCommentByPostId(post.getPostId());
             post.setComments(comments);
+
+            ArrayList<User> listUI = pDao.GetUserInterested(post.getPostId());
+            post.setUserInterested(listUI);
+            
+            ArrayList<User> listUL = pDao.GetUserLike(post.getPostId());
+            post.setUserLike(listUL);
         }
+        
 
         ArrayList<Post> top3Post = pDao.GetTop3Post();
 
