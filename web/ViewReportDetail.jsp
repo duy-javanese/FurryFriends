@@ -89,8 +89,8 @@
                 <div class="post-style">
                                     <div style="display: flex">
                                         <p style="color: #00ff33">${r.reporter.username} </p>
-                                        <p style="margin-left: 5px">đã báo cáo bài viết này với lí do: </p>
-                                        <p style="color: red;margin-left: 5px">${r.reason}</p>
+                                        <p style="margin-left: 5px">đã báo cáo bài viết này với lí do </p>
+                                        <p style="color: red;margin-left: 5px"> ${r.reportContent.reportcontent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </p>
                                     </div>
                         <div style="display: flex">
                                 <div class="d-flex">
@@ -118,7 +118,13 @@
                                     <input type="hidden" name="reportType" value="${r.reportType}">
                                     <input type="hidden" name="userId" value="${r.post.user.userId}">
                                     <button class="ban-user-button" name="action" value="Ban">Ban người dùng này</button>
-                                </form>   
+                                </form>
+                                <form action="MainController">
+                                    <input type="hidden" name="reportId" value="${r.reportId}">
+                                    <input type="hidden" name="reportType" value="${r.reportType}">
+                                    <input type="hidden" name="userId" value="${r.post.user.userId}">
+                                    <button class="reject-report-button" name="action" value="RejectReport">Từ chối báo cáo</button>
+                                </form>
                             </div>
                              
                     </div>

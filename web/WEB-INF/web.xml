@@ -172,6 +172,10 @@
         <servlet-name>ViewReportDetailController</servlet-name>
         <servlet-class>Staff.ViewReportDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RejectReportController</servlet-name>
+        <servlet-class>Staff.RejectReportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -343,6 +347,10 @@
     <servlet-mapping>
         <servlet-name>ViewReportDetailController</servlet-name>
         <url-pattern>/ViewReportDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectReportController</servlet-name>
+        <url-pattern>/RejectReportController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

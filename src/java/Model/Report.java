@@ -21,11 +21,12 @@ public class Report {
     private String reason;
     private Date reportDate;
     private boolean reportStatus;
+    private ReportContent reportContent;
 
     public Report() {
     }
 
-    public Report(int reportId, User reporter, String reportType, Post post, Comment comment, Exchange exchange, String reason, Date reportDate, boolean reportStatus) {
+    public Report(int reportId, User reporter, String reportType, Post post, Comment comment, Exchange exchange, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
         this.reportId = reportId;
         this.reporter = reporter;
         this.reportType = reportType;
@@ -35,12 +36,16 @@ public class Report {
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
+        this.reportContent = reportContent;
     }
+
+    
 
     
     
     // Constructor for Reported post
-    public Report(int reportId, User reporter, String reportType, Post post, String reason, Date reportDate, boolean reportStatus) {
+
+    public Report(int reportId, User reporter, String reportType, Post post, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
         this.reportId = reportId;
         this.reporter = reporter;
         this.reportType = reportType;
@@ -48,11 +53,12 @@ public class Report {
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
+        this.reportContent = reportContent;
     }
-    
+
     // Constructor for Reported Exchange
 
-    public Report(int reportId, User reporter, String reportType, Exchange exchange, String reason, Date reportDate, boolean reportStatus) {
+    public Report(int reportId, User reporter, String reportType, Exchange exchange, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
         this.reportId = reportId;
         this.reporter = reporter;
         this.reportType = reportType;
@@ -60,7 +66,9 @@ public class Report {
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
+        this.reportContent = reportContent;
     }
+    
      
 
     public int getReportId() {
@@ -136,6 +144,14 @@ public class Report {
         this.reportStatus = reportStatus;
     }
 
+    public void setReportContent(ReportContent reportContent) {
+        this.reportContent = reportContent;
+    }
+    
+    public ReportContent getReportContent() {
+        return reportContent;
+    }
+    
     @Override
     public String toString() {
         return "Report{" + "reportId=" + reportId + ", reporter=" + reporter + ", reportType=" + reportType + ", post=" + post + ", comment=" + comment + ", exchange=" + exchange + ", reason=" + reason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + '}';

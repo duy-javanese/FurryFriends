@@ -11,6 +11,7 @@ import Model.Comment;
 import Model.Exchange;
 import Model.Post;
 import Model.Report;
+import Model.ReportContent;
 import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,7 +48,7 @@ public class ReportDAO extends DBUtils.DBContext {
             if (conn != null) {
                 String sql = "Select * "
                         + "From report "
-                        + "Where report_status = 0 AND report_type='Post' ";
+                        + "Where report_status = 1 AND report_type='Post' ";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -67,7 +68,10 @@ public class ReportDAO extends DBUtils.DBContext {
                     
                     boolean reportStatus = rs.getBoolean("report_status");
                     
-                    Report dto = new Report(reportId, reporter, reportType, post, reason, rs.getDate("report_date"), reportStatus);
+                    ReportContentDAO rcDao = new ReportContentDAO();
+                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
+                    
+                    Report dto = new Report(reportId, reporter, reportType, post, reason, rs.getDate("report_date"), reportStatus, reportContent);
                     
                     
                     if (this.ReportedPostList == null) {
@@ -108,7 +112,7 @@ public class ReportDAO extends DBUtils.DBContext {
             if (conn != null) {
                 String sql = "Select * "
                         + "From report "
-                        + "Where report_status = 0 AND report_type='Exchange' ";
+                        + "Where report_status = 1 AND report_type='Exchange' ";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -127,7 +131,10 @@ public class ReportDAO extends DBUtils.DBContext {
                     
                     boolean reportStatus = rs.getBoolean("report_status");
                     
-                    Report dto = new Report(reportId, reporter, reportType, exchangeId, reason, rs.getDate("report_date"), reportStatus);
+                    ReportContentDAO rcDao = new ReportContentDAO();
+                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
+                    
+                    Report dto = new Report(reportId, reporter, reportType, exchangeId, reason, rs.getDate("report_date"), reportStatus, reportContent);
                     
                     
                     if (this.ReportedExchangeList == null) {
@@ -163,7 +170,7 @@ public class ReportDAO extends DBUtils.DBContext {
 
             if (con != null) {
                 //2. create SQL String
-                String sql = "UPDATE report SET report_status = 1 WHERE report_id = ?";
+                String sql = "UPDATE report SET report_status = 0 WHERE report_id = ?";
                 //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, reportId);
@@ -212,9 +219,14 @@ public class ReportDAO extends DBUtils.DBContext {
                 String reason = rs.getString("reason");
                 
                 boolean reportStatus = rs.getBoolean("report_status");
+                
+                ReportContentDAO rcDao = new ReportContentDAO();
+                ReportContent reportcontent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
 
-                return new Report(id, user, reportType, post, comment, exchange, reason, rs.getDate("report_date"), reportStatus);
+                return new Report(id, user, reportType, post, comment, exchange, reason, rs.getDate("report_date"), reportStatus, reportcontent);
                
+                
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
