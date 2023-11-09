@@ -65,7 +65,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
                             <input type="number" step="0.00000001" min="0" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" value="${post.exchange.price}" required>
-                            <span class="input-group-text">.00</span>
+<!--                            <span class="input-group-text">.00</span>-->
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
