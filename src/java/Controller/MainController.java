@@ -55,6 +55,7 @@ private static final String APPROVE_POST_CONTROLLER="ApprovePostController";
 private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailController";
+private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -167,6 +168,9 @@ private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailContr
             }
             else if (action.equals("ViewReportDetail")){
                 url = VIEW_REPORT_DETAIL_CONTROLLER;
+            }
+            else if (action.equals("RejectReport")){
+                url = REJECT_REPORT_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

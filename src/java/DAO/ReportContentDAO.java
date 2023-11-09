@@ -34,4 +34,25 @@ public class ReportContentDAO extends DBUtils.DBContext {
         }
         return list;
     }
+    
+    public ReportContent GetReportContentById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [ReportContent]\n"
+                    + "  Where ReportContentId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                
+                String reportContent = rs.getString("ReportContent");
+                boolean deleteFlag = rs.getBoolean("deleteFlag");
+
+                return new ReportContent(id, reportContent, deleteFlag);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -174,7 +174,7 @@
                 </div>
                 </c:if>
                 <c:if test="${empty result}">
-                    <h3 style="text-align: center">"Hiện tại không có bài trao đổi nào đang chờ duyệt"</h3>
+                    <h3 style="text-align: center; margin-top: 50px">"Hiện tại không có bài trao đổi nào đang chờ duyệt"</h3>
                 </c:if>
                 
             </div>

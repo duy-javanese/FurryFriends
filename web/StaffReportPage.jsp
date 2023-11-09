@@ -138,10 +138,10 @@
                                         </c:if>
                                     </td>
                                     <td>
-                                        <div style="display: flex">
+                                        <div >
                                             <p style="color: #00ff33">${r.reporter.username} </p>
-                                            <p style="margin-left: 5px">đã báo cáo bài viết này với lí do: </p>
-                                            <p style="color: red;margin-left: 5px">${r.reason}</p>
+                                            <p style="margin-left: 5px">đã báo cáo bài viết này với lí do </p>
+                                            <p style="color: red;margin-left: 5px"> ${r.reportContent.reportcontent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </p>
                                         </div>
                                     </td>
                                     <td>
