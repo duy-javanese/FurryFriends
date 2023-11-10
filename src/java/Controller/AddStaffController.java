@@ -13,6 +13,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +23,7 @@ import java.util.regex.Pattern;
  * @author DUY
  */
 public class AddStaffController extends HttpServlet {
-    
+
     private static final String ERROR = "addStaff.jsp";
     private static final String SUCCESS = "addStaff.jsp";
 
@@ -48,12 +50,20 @@ public class AddStaffController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-            if (username.length() < 6 || username.length() > 30) {
-                request.setAttribute("USERNAME_ERROR", "Tên người dùng phải từ 6 - 30 kí tự!");
+            if (!checkUsername(username)) {
+                request.setAttribute("USERNAME_ERROR", "Tên đăng nhập không được bắt đầu bằng số hoặc khoảng trống!");
+                check = false;
+            }
+            if (username.length() < 6 || username.length() > 20) {
+                request.setAttribute("USERNAME_ERROR", "Tên đăng nhập phải từ 6 - 20 kí tự!");
+                check = false;
+            }
+            if (password.length() < 6 || password.length() > 30) {
+                request.setAttribute("PASSWORD_ERROR", "Mật khẩu phải từ 6 - 30 kí tự!");
                 check = false;
             }
             if (!confirmPassword.equals(password)) {
-                request.setAttribute("PASSWORD_ERROR", "Mật khẩu không khớp!");
+                request.setAttribute("CONFIRM_PASSWORD_ERROR", "Mật khẩu không khớp!");
                 check = false;
             }
             if (!checkEmail(email)) {
@@ -66,19 +76,32 @@ public class AddStaffController extends HttpServlet {
             }
             if (check) {
                 user.setUsername(username);
-                user.setPwd(password);
+                user.setPwd(hashMD5(password));
                 user.setEmail(email);
                 user.setPhone(phone);
                 user.setAddress(address);
+                boolean checkExists = true;
                 boolean checkUsername = dao.isUserExists(user.getUsername());
-                if (!checkUsername) {
+                if (checkUsername) {
+                    request.setAttribute("USERNAME_ERROR", "Tên đăng nhập đã tồn tại!");
+                    checkExists = false;
+                }
+                boolean checkEmail = dao.isEmailExists(user.getEmail());
+                if (checkEmail) {
+                    request.setAttribute("EMAIL_ERROR", "Email đã tồn tại!");
+                    checkExists = false;
+                }
+                boolean checkPhone = dao.isPhoneExists(user.getPhone());
+                if (checkPhone) {
+                    request.setAttribute("PHONE_ERROR", "Số điện thoại đã tồn tại!");
+                    checkExists = false;
+                }
+                if (checkExists) {
                     boolean checkAdd = dao.addStaff(user);
                     if (checkAdd) {
                         url = SUCCESS;
                         request.setAttribute("SUCCESS", "Quản trị viên " + user.getUsername() + " đã được tạo thành công!");
                     }
-                } else {
-                    request.setAttribute("USERNAME_ERROR", "Username đã tồn tại!");
                 }
             }
         } catch (Exception e) {
@@ -126,7 +149,15 @@ public class AddStaffController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
+    private static boolean checkUsername(String username) {
+        char firstChar = username.charAt(0);
+        if (Character.isDigit(firstChar) || firstChar == ' ') {
+            return false;
+        }
+        return true;
+    }
+
     private static boolean checkEmail(String email) {
         String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.[A-Za-z]{2,4}$";
         Pattern pattern = Pattern.compile(regex);
@@ -139,5 +170,17 @@ public class AddStaffController extends HttpServlet {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phone);
         return matcher.matches();
+    }
+
+    private String hashMD5(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        byte[] byteData = md.digest();
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : byteData) {
+            sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 }

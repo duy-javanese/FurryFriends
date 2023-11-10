@@ -91,6 +91,40 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public boolean isEmailExists(String email) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE email = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
+    public boolean isPhoneExists(String phone) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE phone_num = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, phone);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
     public boolean addUser(User user) {
         try {
             String sql = "INSERT INTO users (username, pwd, email, phone_num, user_status, role_id, user_address, point) "
@@ -407,7 +441,7 @@ public class UserDAO extends DBContext {
             statement.setString(4, user.getPhone());
             statement.setString(5, user.getAddress());
             statement.setInt(6, user.getUserId());
-            
+
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
