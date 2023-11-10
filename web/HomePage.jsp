@@ -35,9 +35,8 @@
                          background-size: cover"
                          >
                         <div class="hero-banner__content">
+                            <h1>FurryFriends</h1>
                             <h3>Blog & Trading</h3>
-                            <h1>Pet trading platform</h1>
-                            <h4>October 1, 2023</h4>
                         </div>
                     </div>
                 </div>
