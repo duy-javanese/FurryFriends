@@ -33,13 +33,8 @@
                      background-size: cover"
                      >
                     <div class="hero-banner__content">
-                        <h1>Blog details</h1>
-                        <nav aria-label="breadcrumb" class="banner-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
-                            </ol>
-                        </nav>
+                        <h1>FurryFriends</h1>
+                        <h3>Blog & Trading</h3>
                     </div>
                 </div>
             </div>
@@ -88,7 +83,7 @@
                                             <p>${post.datePost}</p>
                                         </div>
                                         <div class="d-flex">
-                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                            <img width="42" height="42" src="${pageContext.request.contextPath}/asset/img/paw.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +147,7 @@
                                     <div class="single-comment justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
-                                                <img src="asset/img/blog/c1.jpg" alt="">
+                                                <img src="${pageContext.request.contextPath}/asset/img/paw.png" alt="" height="42" width="42">
                                             </div>
                                             <div class="desc">
                                                 <h5><a href="#">${c.user.username}</a></h5>

@@ -343,4 +343,66 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return postCount;
     }
+
+    public int countBlogs() throws SQLException {
+        int postCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS post_count FROM dbo.post WHERE post_type IN (1, 2, 3)";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    postCount = rs.getInt("post_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return postCount;
+    }
+
+    public int countExchangePosts() throws SQLException {
+        int postCount = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(*) AS post_count FROM dbo.post WHERE post_type IN (4)";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    postCount = rs.getInt("post_count");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return postCount;
+    }
 }

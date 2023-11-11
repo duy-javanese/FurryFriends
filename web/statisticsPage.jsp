@@ -213,17 +213,41 @@
         <div id="posts">
             <h2>Bài đăng</h2>
             <ul>
-                <li>
-                    Số lượng bài viết:
+                Số lượng bài viết:
+                <%
+                try {
+                    InformationDAO dao = new InformationDAO();
+                    int postCount = dao.countPosts();
+                    out.println(postCount);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    out.println("N/A");
+                }
+                %>
+                <li style="margin-left: 30px">
+                    Bài viết chia sẻ:
                     <%
-                    try {
-                        InformationDAO dao = new InformationDAO();
-                        int postCount = dao.countPosts();
-                        out.println(postCount);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        out.println("N/A");
-                    }
+            try {
+                InformationDAO dao = new InformationDAO();
+                int postCount = dao.countBlogs();
+                out.println(postCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("N/A");
+            }
+                    %>
+                </li>
+                <li style="margin-left: 30px">
+                    Bài viết trao đổi:
+                    <%
+            try {
+                InformationDAO dao = new InformationDAO();
+                int postCount = dao.countExchangePosts();
+                out.println(postCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("N/A");
+            }
                     %>
                 </li>
             </ul> 
