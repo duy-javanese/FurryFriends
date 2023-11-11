@@ -51,7 +51,7 @@ public class AddStaffController extends HttpServlet {
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             if (!checkUsername(username)) {
-                request.setAttribute("USERNAME_ERROR", "Tên đăng nhập không được bắt đầu bằng số hoặc khoảng trống!");
+                request.setAttribute("USERNAME_ERROR", "Tên đăng nhập không hợp lệ!");
                 check = false;
             }
             if (username.length() < 6 || username.length() > 20) {
@@ -75,7 +75,7 @@ public class AddStaffController extends HttpServlet {
                 check = false;
             }
             if (check) {
-                user.setUsername(username);
+                user.setUsername(username.toLowerCase());
                 user.setPwd(hashMD5(password));
                 user.setEmail(email);
                 user.setPhone(phone);
@@ -151,10 +151,18 @@ public class AddStaffController extends HttpServlet {
     }// </editor-fold>
 
     private static boolean checkUsername(String username) {
-        char firstChar = username.charAt(0);
-        if (Character.isDigit(firstChar) || firstChar == ' ') {
+        // Kiểm tra không bắt đầu bằng số hoặc khoảng trắng
+        if (username.matches("^[0-9\\s].*")) {
             return false;
         }
+
+        // Kiểm tra không chứa kí tự đặc biệt
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9\\s]");
+        Matcher matcher = pattern.matcher(username);
+        if (matcher.find()) {
+            return false;
+        }
+
         return true;
     }
 

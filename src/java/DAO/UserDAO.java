@@ -48,7 +48,7 @@ public class UserDAO extends DBContext {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [users]\n"
-                    + "  Where username = ? and pwd = ?";
+                    + "  Where username = ? COLLATE SQL_Latin1_General_CP1_CS_AS and pwd = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, pwd);

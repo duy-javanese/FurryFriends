@@ -83,7 +83,7 @@ public class LoginController extends HttpServlet {
             String username = request.getParameter("username");
             String pwd = request.getParameter("pwd");
             String hashedPwd = hashMD5(pwd);
-            User account = uDao.doLogin(username, hashedPwd);
+            User account = uDao.doLogin(username.toLowerCase(), hashedPwd);
             if (account != null) {
                 request.getSession().setAttribute("account", account);
                 response.sendRedirect("home");
