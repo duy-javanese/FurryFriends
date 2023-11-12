@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @author DUY
  */
 public class InformationDAO extends DBUtils.DBContext {
-
+    
     public static Information getInfor() throws SQLException {
         Information information = new Information();
         Connection conn = null;
@@ -26,14 +26,15 @@ public class InformationDAO extends DBUtils.DBContext {
         try {
             conn = DBContext.getConnection();
             if (conn != null) {
-                String sql = "SELECT logoPath, aboutUs, contact FROM configuration WHERE id = 1";
+                String sql = "SELECT logoPath, aboutUs, contact, notification FROM configuration WHERE id = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String logoPath = rs.getString("logoPath");
                     String aboutUs = rs.getString("aboutUs");
                     String contact = rs.getString("contact");
-                    information = new Information(logoPath, aboutUs, contact);
+                    String notification = rs.getString("notification");
+                    information = new Information(logoPath, aboutUs, contact, notification);
                 }
             }
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return information;
     }
-
+    
     public boolean updateLogo(Information information) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -76,7 +77,32 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return check;
     }
-
+    
+    public boolean updateNotification(Information information) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE configuration SET notification = ? WHERE id = 1";
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, information.getNotification());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     public boolean updateAboutUs(Information information) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -101,7 +127,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return check;
     }
-
+    
     public boolean updateContact(Information information) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -126,7 +152,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return check;
     }
-
+    
     public int countUsers() throws SQLException {
         int userCount = 0;
         Connection conn = null;
@@ -157,7 +183,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return userCount;
     }
-
+    
     public int countActiveUsers() throws SQLException {
         int userCount = 0;
         Connection conn = null;
@@ -188,7 +214,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return userCount;
     }
-
+    
     public int countBannedUsers() throws SQLException {
         int userCount = 0;
         Connection conn = null;
@@ -219,7 +245,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return userCount;
     }
-
+    
     public int countStaffs() throws SQLException {
         int staffCount = 0;
         Connection conn = null;
@@ -250,7 +276,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return staffCount;
     }
-
+    
     public int countActiveStaffs() throws SQLException {
         int staffCount = 0;
         Connection conn = null;
@@ -281,7 +307,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return staffCount;
     }
-
+    
     public int countInactiveStaffs() throws SQLException {
         int staffCount = 0;
         Connection conn = null;
@@ -312,7 +338,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return staffCount;
     }
-
+    
     public int countPosts() throws SQLException {
         int postCount = 0;
         Connection conn = null;
@@ -343,7 +369,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return postCount;
     }
-
+    
     public int countBlogs() throws SQLException {
         int postCount = 0;
         Connection conn = null;
@@ -374,7 +400,7 @@ public class InformationDAO extends DBUtils.DBContext {
         }
         return postCount;
     }
-
+    
     public int countExchangePosts() throws SQLException {
         int postCount = 0;
         Connection conn = null;
