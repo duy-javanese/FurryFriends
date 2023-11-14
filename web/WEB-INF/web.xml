@@ -147,6 +147,8 @@
     <servlet>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <servlet-class>Controller.Post.FindPostByPostTypeAndCategoryController</servlet-class>
+    </servlet>    
+    <servlet>
         <servlet-name>BanUserController</servlet-name>
         <servlet-class>Staff.BanUserController</servlet-class>
     </servlet>
@@ -353,6 +355,8 @@
     <servlet-mapping>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <url-pattern>/findPostByPostTypeAndCategory</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>BanUserController</servlet-name>
         <url-pattern>/BanUserController</url-pattern>
     </servlet-mapping>
