@@ -10,15 +10,15 @@ package Model;
  */
 public class ReportContent {
     private int reportContentId;
-    private String reportcontent;
+    private String reportContent;
     private boolean deleteFlag;
 
     public ReportContent() {
     }
 
-    public ReportContent(int reportContentId, String reportcontent, boolean deleteFlag) {
+    public ReportContent(int reportContentId, String reportContent, boolean deleteFlag) {
         this.reportContentId = reportContentId;
-        this.reportcontent = reportcontent;
+        this.reportContent = reportContent;
         this.deleteFlag = deleteFlag;
     }
 
@@ -30,12 +30,12 @@ public class ReportContent {
         this.reportContentId = reportContentId;
     }
 
-    public String getReportcontent() {
-        return reportcontent;
+    public String getReportContent() {
+        return reportContent;
     }
 
-    public void setReportcontent(String reportcontent) {
-        this.reportcontent = reportcontent;
+    public void setReportContent(String reportContent) {
+        this.reportContent = reportContent;
     }
 
     public boolean isDeleteFlag() {
@@ -45,6 +45,8 @@ public class ReportContent {
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+    
     
     
     

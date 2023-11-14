@@ -12,6 +12,6 @@
         <title>Error Page</title>
     </head>
     <body>
-        <h1>Lỗi cmnr mày ơi!</h1>
+        <h1>Lỗi</h1>
     </body>
 </html>

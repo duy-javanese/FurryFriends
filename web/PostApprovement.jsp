@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -51,6 +52,21 @@
 
             .listPendingPost td{
                             background: white;
+            }
+            .post-box{
+                background: white;
+                margin: 30px 135px;
+                border: 2px solid;
+                border-radius: 5px;
+                display: flex;
+                padding: 10px;
+            }
+            .img-box{
+                height: 100%;
+                border: 1px solid;
+                width: 200px;
+                border-radius: 5px;
+                object-fit: cover;
             }
         </style>
         <title>Duyệt bài viết</title>
@@ -110,7 +126,7 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 100px">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
+                <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
                 <div style="margin-top: 50px; margin-left: 360px">
                     <form action="MainController" method="POST">
                         <input class="search-User-box" type="text" name="txtSearchValue" 
@@ -126,47 +142,35 @@
                 </div>
                 <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
                 <c:if test="${not empty result}">
-                    <div class="listPendingPost">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Loại bài viết
-                                </th>
-                                <th>
-                                    Tiêu đề bài viết
-                                </th>
-                                <th>
-                                    Ngày tạo bài viết
-                                </th>
-                                <th>
-                                    Hành động
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${result}" var="p" varStatus="counter">
-                                <tr>
-                                    <td>
-                                        ${p.postType.postTypeName}
-                                    </td>
-                                    <td>
-                                        ${p.title}
-                                    </td>
-                                    <td>
-                                        ${p.datePost}
-                                    </td>
-                                    <td>
-                                        <form action="MainController">
+                    <c:forEach items="${result}" var="p" varStatus="counter">
+                        <div class="post-box">
+                            <div><img src="${p.img}" class="img-box"></div>
+                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
+                                <div style="display: flex; justify-content: space-between">
+                                    <h4>${p.title}</h4>
+                                    <h6 style="color: coral;">${p.postType.postTypeName}</h6>
+                                </div>
+                                <div style="display: flex">
+                                    <p style="color: #878787;">${p.user.username}</p>
+                                </div>
+                                <div>
+                                    <c:if test="${fn:length(p.content) > 100}">
+                                        <h6>${p.content.substring(0, 100)}...</h6>
+                                    </c:if>
+                                    <c:if test="${fn:length(p.content) < 100}">
+                                        <h6>${p.content}</h6>
+                                    </c:if>
+                                </div>
+                                <div style="display: flex; justify-content: space-between">
+                                    <p>${p.datePost}</p>
+                                    <form action="MainController">
                                             <input type="hidden" name="postId" value="${p.postId}">
-                                            <button class="view-detail-button" name="action" value="ViewPendPostDetail">Xem chi tiết</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                                            <button class="view-detail-button" name="action" value="ViewPendPostDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </c:if>
                 <c:if test="${empty result}">
                     <h3 style="text-align: center; margin-top: 50px">"Hiện tại không có bài biết nào đang chờ duyệt"</h3>
