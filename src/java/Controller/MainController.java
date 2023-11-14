@@ -167,6 +167,7 @@ private static final String SEND_NOTIFICATION = "SendNotificationController";
             }
             else if (action.equals("Get Reported Exchange")){
                 url = GET_REPORTED_EXCHANGE_CONTROLLER;
+            }
             else if (action.equals("SendNotification")){
                 url = SEND_NOTIFICATION;
             }
