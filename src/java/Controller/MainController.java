@@ -56,6 +56,10 @@ private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailController";
 private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
+private static final String ADMIN_GET_ALL_USER = "AdminGetAllUserController";
+private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusController";
+private static final String GET_REPORTED_POST_CONTROLLER = "GetReportedPost";
+private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExchange";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -177,6 +181,12 @@ private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
             }
             else if (action.equals("AdminUpdateUserStatus")){
                 url = ADMIN_UPDATE_USER_STATUS;
+            }
+            else if (action.equals("Get Reported Post")){
+                url = GET_REPORTED_POST_CONTROLLER;
+            }
+            else if (action.equals("Get Reported Exchange")){
+                url = GET_REPORTED_EXCHANGE_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

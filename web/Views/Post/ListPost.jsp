@@ -60,6 +60,9 @@
                                         <td>
                                                 <p style="
                                                             padding: 8px 0;
+                                                            <c:if test="${p.status.postStatusId eq 4}">
+                                                            background: red;
+                                                             </c:if>
                                                             <c:if test="${p.status.postStatusId eq 3}">
                                                             background: red;
                                                              </c:if>
@@ -71,7 +74,7 @@
                                                              </c:if>
                                                             color: white;
                                                             text-align: center;
-                                                            width: 125px;
+                                                            
                                                             border-radius: 30px;
                                                             margin: 0;
                                                             /* font-size: medium; */

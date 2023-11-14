@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 public class GetReportedExchange extends HttpServlet {
    private final String ERROR_PAGE = "errorPage.jsp";
-   private final String RESULT_PAGE = "StaffReportPage.jsp";
+   private final String RESULT_PAGE = "StaffReportedExchange.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
