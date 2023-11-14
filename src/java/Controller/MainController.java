@@ -188,6 +188,9 @@ private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExcha
             else if (action.equals("Get Reported Exchange")){
                 url = GET_REPORTED_EXCHANGE_CONTROLLER;
             }
+            else if (action.equals("SendNotification")){
+                url = SEND_NOTIFICATION;
+            }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
