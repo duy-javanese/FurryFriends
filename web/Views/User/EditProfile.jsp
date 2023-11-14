@@ -100,7 +100,7 @@
                         <div class="card-body text-center">
                             <form action="MainController" method="POST">
                             <!-- Profile picture image-->
-                            <img class="img-account-profile rounded-circle mb-2" src="${pageContext.request.contextPath}/asset/img/paw.png" alt="">
+                            <img class="img-account-profile rounded-circle mb-2" style="object-fit: cover;width: 165px;" src="${sessionScope.account.img}" alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                             <!-- Profile picture upload button-->
