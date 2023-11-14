@@ -14,14 +14,16 @@ public class Information {
     private String logoPath;
     private String aboutUs;
     private String contact;
+    private String notification;
 
     public Information() {
     }
 
-    public Information(String logoPath, String aboutUs, String contact) {
+    public Information(String logoPath, String aboutUs, String contact, String notification) {
         this.logoPath = logoPath;
         this.aboutUs = aboutUs;
         this.contact = contact;
+        this.notification = notification;
     }
 
     public String getLogoPath() {
@@ -46,6 +48,14 @@ public class Information {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getNotification() {
+        return notification;
+    }
+
+    public void setNotification(String notification) {
+        this.notification = notification;
     }
 
 }

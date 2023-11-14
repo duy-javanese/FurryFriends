@@ -48,7 +48,7 @@ public class UserDAO extends DBContext {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [users]\n"
-                    + "  Where username = ? and pwd = ?";
+                    + "  Where username = ? COLLATE SQL_Latin1_General_CP1_CS_AS and pwd = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, pwd);
@@ -82,6 +82,40 @@ public class UserDAO extends DBContext {
                     + "WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
+    public boolean isEmailExists(String email) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE email = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
+    public boolean isPhoneExists(String phone) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE phone_num = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, phone);
             ResultSet resultSet = statement.executeQuery();
 
             return resultSet.next();
