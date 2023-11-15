@@ -34,5 +34,5 @@ public class PostType {
     public String getPostTypeName() {
         return postTypeName;
     }
-    
+
 }

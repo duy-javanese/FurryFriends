@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ViewReportDetail
-    Created on : Nov 5, 2023, 11:49:43 PM
+    Document   : statisticViewPostDetail
+    Created on : Nov 15, 2023, 9:18:31 PM
     Author     : Admin
 --%>
 
@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         
-        <title>Chi tiết bài báo cáo</title>
+        <title>Chi tiết bài viết</title>
     </head>
     <body>
         <div class="wrapper">
@@ -49,11 +49,11 @@
                         <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
                         <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
-                        <a href="viewStatisticController">Thống kê</a>
+                        <a style="background: #ff9907"  href="viewStatisticController">Thống kê</a>
                         <a href="GetAllUserController">Quản lí người dùng</a>
                         <a href="GetPendingPost">Bài viết</a>
                         <a href="GetPendingExchange">Bài trao đổi</a>
-<!--                        <a style="background: #ff9907" href="GetReportedPost">Báo cáo từ người dùng</a>-->
+<!--                        <a href="GetReportedPost">Báo cáo từ người dùng</a>-->
                         <a href="logout">Đăng xuất</a>
                     </form>		
                 </ul>
@@ -80,54 +80,36 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <form action="GetReportedPost">
+                <form action="viewStatisticController">
                     <button class="return-button">Quay lại</button>
                 </form>
-                <c:set var="r" value ="${requestScope.REPORT}"/>
-                <div class="post-style">
-                                    <div style="display: flex">
-                                        <h4 style="color: #00ff33">${r.reporter.username} </h4>
-                                        <h4 style="margin-left: 5px">đã báo cáo bài viết này với lí do </h4>
-                                    </div>
-                                        <h4 style="color: red;margin-bottom: 20px"> ${r.reportContent.reportContent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </h4>
-                                    
-                        <div style="display: flex">
-                                <div class="d-flex">
-                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                </div>
-                            <div style="margin-left: 15px">
-                                    <h6>${r.post.user.username}</h6>
-                                    <p>${r.post.datePost}</p>
-                                </div>
-                        </div>
-                        <h6>${r.post.title}</h6>
-                        <p>${r.post.content}</p>
-                        <c:if test="${not empty r.post.img}">
-                            <img class="img-fluid" src="${r.post.img}" alt="" width="800px" height="300px"> <br>         
+            <div class="post-style">
+                    <c:set var="p" value ="${requestScope.POST}"/>
+                        <c:if test="${not empty p.img}">
+                            <img src="${p.img}" class="detail-img-box"> <br>         
                         </c:if>
-                            <div style="display: flex; margin-top: 10px">
-                                <form action="MainController">
-                                    <input type="hidden" name="reportType" value="${r.reportType}">
-                                    <input type="hidden" name="postId" value="${r.post.postId}">
-                                    <input type="hidden" name="reportId" value="${r.reportId}">
-                                    <button class="hide-post-button" name="action" value="HidePost">Ẩn bài viết này</button>
-                                </form>
-                                <form action="MainController">
-                                    <input type="hidden" name="reportId" value="${r.reportId}">
-                                    <input type="hidden" name="reportType" value="${r.reportType}">
-                                    <input type="hidden" name="userId" value="${r.post.user.userId}">
-                                    <button class="ban-user-button" name="action" value="Ban">Cấm người dùng này</button>
-                                </form>
-                                <form action="MainController">
-                                    <input type="hidden" name="reportId" value="${r.reportId}">
-                                    <input type="hidden" name="reportType" value="${r.reportType}">
-                                    <input type="hidden" name="userId" value="${r.post.user.userId}">
-                                    <button class="reject-report-button" name="action" value="RejectReport">Từ chối báo cáo</button>
-                                </form>
+<!--                            <div>
+                                            <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
+                            </div>-->
+                            <h4 class="pending-post-detail-title">${p.title}</h4>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex">
+                                    <div class="d-flex">
+                                                    <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                    </div>
+                                    <div style="margin-left: 15px">
+                                        <h6>${p.user.username}</h6>
+                                                <p>${p.datePost}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                                <h6 style="color: coral;">${p.postType.postTypeName}</h6>
+                                </div>
                             </div>
-                             
-                    </div>
+                        <p>${p.content}</p>
+                </div>
             </div>
+                
             <!--end page-wrapper -->
         </div>
     </body>

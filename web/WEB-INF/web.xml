@@ -192,6 +192,14 @@
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <servlet-class>Controller.Post.FindPostByPostTypeAndCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewStatisticController</servlet-name>
+        <servlet-class>Staff.viewStatisticController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>statisticViewPostDetail</servlet-name>
+        <servlet-class>Staff.statisticViewPostDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -383,6 +391,14 @@
     <servlet-mapping>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <url-pattern>/findPostByPostTypeAndCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewStatisticController</servlet-name>
+        <url-pattern>/viewStatisticController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>statisticViewPostDetail</servlet-name>
+        <url-pattern>/statisticViewPostDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

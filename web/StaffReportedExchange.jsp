@@ -65,8 +65,6 @@
                     <div style="margin-left: 15px">
                         <h4 class="logo-text">Furry Friends</h4>
                     </div>
-                    <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
-                    </div>
                 </div>
                 <!--navigation-->
                 <ul class="metismenu" id="menu">
@@ -77,11 +75,11 @@
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
                         <button class="selected-button" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>-->
-                        <a href="StaffPage.jsp">Thống kê</a>
+                        <a href="viewStatisticController">Thống kê</a>
                         <a href="GetAllUserController">Quản lí người dùng</a>
                         <a href="GetPendingPost">Bài viết</a>
                         <a href="GetPendingExchange">Bài trao đổi</a>
-                        <a style="background: #ff9907" href="GetReportedPost">Báo cáo từ người dùng</a>
+<!--                        <a style="background: #ff9907" href="GetReportedPost">Báo cáo từ người dùng</a>-->
                         <a href="logout">Đăng xuất</a>
                     </form>		
                 </ul>
@@ -94,7 +92,7 @@
                                             <nav class="navbar navbar-expand">
                                                 <div class="user-box dropdown">
                                                                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                            <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                                                                            
                                                                             <div class="user-info ps-3">
                                                                                     <c:if test="${sessionScope.account != null}">
                                                                                         <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>

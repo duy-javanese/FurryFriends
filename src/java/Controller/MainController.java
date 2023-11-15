@@ -54,6 +54,7 @@ private static final String ADMIN_GET_ALL_USER = "AdminGetAllUserController";
 private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusController";
 private static final String GET_REPORTED_POST_CONTROLLER = "GetReportedPost";
 private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExchange";
+private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticViewPostDetail";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -167,6 +168,10 @@ private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExcha
             else if (action.equals("Get Reported Exchange")){
                 url = GET_REPORTED_EXCHANGE_CONTROLLER;
             }
+            else if (action.equals("ViewPostDetail")){
+                url = STATISTIC_VIEW_POST_DETAIL_CONTROLLER;
+            }
+            
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {

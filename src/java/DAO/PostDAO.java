@@ -1098,4 +1098,62 @@ public class PostDAO extends DBUtils.DBContext {
         return list;
     }
 
+    public int getYearTotalPost(int i) {
+        int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select YEAR(datePosted) as year, count(post_id) as 'NumOfPost' from post where YEAR(datePosted) = ? GROUP BY YEAR(datePosted)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, i);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                numofPost = rs.getInt("NumOfPost");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return numofPost;
+    }
+    
+    public int getTotalPostByStatus(int statusId) {
+        int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select status, count(post_id) as 'NumOfPost' from post where status = ? group by status";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, statusId);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                numofPost = rs.getInt("NumOfPost");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return numofPost;
+    }
+    
+    public Post GetMostLikedPost() {
+        try {
+            String sql = "SELECT TOP 1 PostId, COUNT(LikePostId) AS NumberOfLikes\n" +
+                            "FROM LikePost\n" +
+                            "GROUP BY PostId\n" +
+                            "ORDER BY NumberOfLikes DESC ;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                
+               PostDAO pDao = new PostDAO();
+               Post post = pDao.GetPostById(rs.getInt("PostId"));
+
+                return post;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

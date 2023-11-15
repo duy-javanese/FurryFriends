@@ -93,11 +93,11 @@
                         <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
                         <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
-                        <a href="StaffPage.jsp">Thống kê</a>
+                        <a href="viewStatisticController">Thống kê</a>
                         <a href="GetAllUserController">Quản lí người dùng</a>
                         <a href="GetPendingPost">Bài viết</a>
                         <a style="background: #ff9907" href="GetPendingExchange">Bài trao đổi</a>
-                        <a href="GetReportedPost">Báo cáo từ người dùng</a>
+<!--                        <a href="GetReportedPost">Báo cáo từ người dùng</a>-->
                         <a href="logout">Đăng xuất</a>
                     </form>		
                 </ul>
@@ -110,7 +110,7 @@
                                             <nav class="navbar navbar-expand">
                                                 <div class="user-box dropdown">
                                                                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                            <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                                                                            
                                                                             <div class="user-info ps-3">
                                                                                     <c:if test="${sessionScope.account != null}">
                                                                                         <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
