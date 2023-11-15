@@ -75,6 +75,13 @@
                                                         <i class="fa-solid fa-pen"></i>
                                                     </button>
                                                 </form>
+                                                <form action="deletePost" method="post">
+                                                    <input type="hidden" value="${p.postId}" name="postId">
+                                                    <button type="submit"
+                                                            class="btn btn-outline-danger me-2">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

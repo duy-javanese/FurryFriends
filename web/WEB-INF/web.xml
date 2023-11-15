@@ -192,6 +192,10 @@
         <servlet-name>ReplyCommentController</servlet-name>
         <servlet-class>Controller.User.ReplyCommentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePostController</servlet-name>
+        <servlet-class>Controller.User.DeletePostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -383,6 +387,10 @@
     <servlet-mapping>
         <servlet-name>ReplyCommentController</servlet-name>
         <url-pattern>/replyComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostController</servlet-name>
+        <url-pattern>/deletePost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

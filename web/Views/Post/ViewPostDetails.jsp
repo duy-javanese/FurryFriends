@@ -92,8 +92,22 @@
                                 ${post.content}
                             </p>
                             <div class="d-flex">
-                                <a href="likePost?postId=${post.postId}" class="ml-3"><i class="ti-heart mr-1"></i>Thích</a>
-                                <a href="interestPost?postId=${post.postId}" class="ml-3"><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                <a href="likePost?postId=${post.postId}" class="ml-3
+                                   <c:forEach items="${post.userLike}" var="ul">
+                                       <c:if test="${ul.userId == sessionScope.account.userId}">
+                                           text-danger
+                                       </c:if>
+                                   </c:forEach>
+                                   "><i class="ti-heart mr-1"></i>Thích</a>
+                                <c:if test="${post.postType.postTypeId == 4}">
+                                    <a href="interestPost?postId=${post.postId}" class="ml-3
+                                       <c:forEach items="${post.userInterested}" var="ui">
+                                           <c:if test="${ui.userId == sessionScope.account.userId}">
+                                               text-danger
+                                           </c:if>
+                                       </c:forEach>
+                                       "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                </c:if>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>

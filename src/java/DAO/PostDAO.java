@@ -84,9 +84,11 @@ public class PostDAO extends DBUtils.DBContext {
                     + "           ,[isPublic]\n"
                     + "           ,[datePosted]\n"
                     + "           ,[reason]\n"
-                    + "           ,[status])\n"
+                    + "           ,[status]\n"
+                    + "           ,[deleteFlag])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -105,6 +107,7 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setDate(7, post.getDatePost());
             stm.setString(8, post.getReason());
             stm.setInt(9, post.getStatus().getPostStatusId());
+            stm.setBoolean(10, false);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +126,8 @@ public class PostDAO extends DBUtils.DBContext {
                     + "           ,[isPublic]\n"
                     + "           ,[datePosted]\n"
                     + "           ,[reason]\n"
-                    + "           ,[status])\n"
+                    + "           ,[status]\n"
+                    + "           ,[deleteFlag])\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
@@ -159,7 +163,7 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT *\n"
                     + "  FROM [post]\n"
-                    + "  Where userId = ?\n";
+                    + "  Where userId = ? and deleteFlag = 0\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -219,7 +223,7 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT count(*) as total\n"
                     + "  FROM [post]\n"
-                    + "  Where userId = ?\n";
+                    + "  Where userId = ? and deleteFlag = 0\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -274,7 +278,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "  FROM [InterestPost] ipost\n"
                     + "  left join post p\n"
                     + "  on p.post_id = ipost.PostId\n"
-                    + "  Where p.userID = ? and ipost.UserId != ?";
+                    + "  Where p.userID = ? and ipost.UserId != ? and p.deleteFlag = 0";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -337,7 +341,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "  FROM [InterestPost] ipost\n"
                     + "  left join post p\n"
                     + "  on p.post_id = ipost.PostId\n"
-                    + "  Where p.userID = ? and ipost.UserId != ?\n";
+                    + "  Where p.userID = ? and ipost.UserId != ? and p.deleteFlag = 0\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -399,7 +403,7 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT *\n"
                     + "  FROM [post]\n"
-                    + "  Where isPublic = ? and status = ?\n";
+                    + "  Where isPublic = ? and status = ? and deleteFlag = 0\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             setter.put(++count, Constant.PostPublic);
             setter.put(++count, Constant.StatusPostAccept);
@@ -442,7 +446,7 @@ public class PostDAO extends DBUtils.DBContext {
             int count = 0;
             String sql = "SELECT count(*) as total\n"
                     + "  FROM [post]\n"
-                    + "  Where isPublic = ? and status = ?\n";
+                    + "  Where isPublic = ? and status = ? and deleteFlag = 0\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             setter.put(++count, Constant.PostPublic);
             setter.put(++count, Constant.StatusPostAccept);
@@ -1152,5 +1156,18 @@ public class PostDAO extends DBUtils.DBContext {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void deletePost(int postId) {
+        try {
+            String sql = "UPDATE [dbo].[post]\n"
+                    + "   SET [deleteFlag] = 1\n"
+                    + " WHERE post_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

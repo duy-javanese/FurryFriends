@@ -55,15 +55,6 @@
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
                                    required>
                         </div>
-                        <div class="form-floating mt-5">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
-                                    name="category" required>
-                                <option selected value="1">Bán</option>
-                                <option value="2">Trao đổi thú cưng</option>
-                                <option value="3">Trao tặng</option>
-                            </select>
-                            <label for="floatingSelect">Lựa chọn hình thức</label>
-                        </div>
                         <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
