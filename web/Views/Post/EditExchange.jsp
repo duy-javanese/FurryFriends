@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài trao đổi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" value="${post.title}" required minlength="25">
+                                   placeholder="Tiêu đề bài viết" name="title" value="${post.title}" required minlength="15" maxlength="50">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài trao đổi <span style="color: red">*</span></label>
@@ -64,7 +65,8 @@
                         <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
-                            <input type="number" step="0.00000001" min="0" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" value="${post.exchange.price}" required>
+                            <fmt:formatNumber value="${post.exchange.price}" pattern="#.0" var="formattedPrice" />
+                            <input type="number" step="any" min="0" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" value="${formattedPrice}" required>
 <!--                            <span class="input-group-text">.00</span>-->
                         </div>
                         <div class="mb-3">

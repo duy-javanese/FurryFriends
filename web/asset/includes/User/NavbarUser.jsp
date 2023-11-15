@@ -12,14 +12,6 @@
          style="width: 280px; height: calc(100vh - 133px);background-color: bisque">
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="dashBoard" class="nav-link">
-                <svg class="bi me-2" width="16" height="16">
-                <use xlink:href="#speedometer2"></use>
-                </svg>
-                Dashboard
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="userProfile" class="nav-link link-dark">
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>

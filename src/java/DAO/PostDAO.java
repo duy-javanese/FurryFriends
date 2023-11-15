@@ -96,7 +96,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)";
+                    + "           ,0)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, post.getUser().getUserId());
             stm.setInt(2, post.getPostType().getPostTypeId());
@@ -107,7 +107,7 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setDate(7, post.getDatePost());
             stm.setString(8, post.getReason());
             stm.setInt(9, post.getStatus().getPostStatusId());
-            stm.setBoolean(10, false);
+
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,7 +138,8 @@ public class PostDAO extends DBUtils.DBContext {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)";
+                    + "           ,?\n"
+                    + "           ,0)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, post.getUser().getUserId());
             stm.setInt(2, post.getCategory().getCategoryId());
@@ -194,7 +195,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, isPublic);
             }
 
-            sql += " order by datePosted\n";
+            sql += " order by datePosted desc\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
@@ -310,7 +311,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, isPublic);
             }
 
-            sql += " order by ipost.datePosted\n";
+            sql += " order by ipost.datePosted desc\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
@@ -417,7 +418,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, category);
             }
 
-            sql += " order by post_id\n";
+            sql += " order by datePosted desc\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
@@ -654,6 +655,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "      ,[title] = ?\n"
                     + "      ,[post_content] = ?\n"
                     + "      ,[post_img] = ?\n"
+                    + "      ,[status] = ?\n"
                     + " WHERE post_id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, post.getPostType().getPostTypeId());
@@ -661,6 +663,7 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setString(3, post.getContent());
             stm.setString(4, post.getImg());
             stm.setInt(5, post.getPostId());
+            stm.setInt(6, post.getStatus().getPostStatusId());
 
             stm.executeUpdate();
         } catch (SQLException ex) {

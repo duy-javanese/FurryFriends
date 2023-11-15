@@ -43,7 +43,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài trao đổi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" required minlength="15">
+                                   placeholder="Tiêu đề bài viết" name="title" required minlength="15" maxlength="50">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài trao đổi <span style="color: red">*</span></label>
@@ -58,7 +58,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
-                            <input type="number" step="0.00000001" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" required min="0">
+                            <input type="number" step="any" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" required min="0">
                             <!--                            <span class="input-group-text">.00</span>-->
                         </div>
                         <div class="mb-3">
