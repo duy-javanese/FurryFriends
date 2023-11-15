@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +74,10 @@
                 margin-left: 1rem;
                 margin-right: 1rem;
             }
+            .edit-profile-box{
+                margin-left: 22rem;
+                margin-right: 5rem;
+            }
         </style>
     </head>
 
@@ -80,70 +86,83 @@
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
         <!-- Dashboard Products wrapper -->
-        <div class="container-xl px-4 mt-4">
+        <div class="edit-profile-box">
             <!-- Account page navigation-->
             <h4>Chỉnh sửa thông tin cá nhân</h4>
             <hr class="mt-0 mb-4">
+           
             <div class="row">
+                
                 <div class="col-xl-4">
                     <!-- Profile picture card-->
                     <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Profile Picture</div>
+                        <div class="card-header">Ảnh đại diện</div>
                         <div class="card-body text-center">
+                            <form action="MainController" method="POST">
                             <!-- Profile picture image-->
                             <img class="img-account-profile rounded-circle mb-2" style="object-fit: cover;width: 165px;" src="${sessionScope.account.img}" alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                             <!-- Profile picture upload button-->
-                            <button class="btn btn-primary" type="button">Upload new image</button>
+
+                            <input class="form-control" type="file" name="avatar" id="avatar" accept="image/*">
+                            <input type="hidden" name="existAvatar" value="${requestScope.account.img}">
+                            <button class="btn btn-primary" type="button" name="action" value="UpdateAvatar">Upload new image</button>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header">Account Details</div>
+                        <div class="card-header">Thông tin cá nhân</div>
                         <div class="card-body">
-                            <form action="editProfile" method="post">
+                             <form action="editProfile" method="post">
                                 <!-- Form Group (username)-->
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputUsername">Username</label>
-                                        <input name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.username}" required>
+                                        <label style="font-weight: 500" for="inputUsername">Tên đăng nhập</label><br>
+<!--                                        <input name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.username}" required>-->
+                                        ${sessionScope.account.username}
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputUsername">Mật khẩu</label>
-                                        <input name="pwd" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.pwd}" required>
+                                        <label style="font-weight: 500" for="inputLocation">Số điện thoại</label>
+                                        <input name="phone" class="form-control" id="inputLocation" type="text" value="${sessionScope.account.phone}" required>
+                                        <c:if test="${not empty requestScope.EDIT_PHONE_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_PHONE_ERROR}*</p>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!-- Form Row        -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (organization name)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                        <input name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="${sessionScope.account.email}" required>
+                                        <label style="font-weight: 500" for="inputEmailAddress">Địa chỉ email</label>
+                                        <input name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Nhập email" value="${sessionScope.account.email}" required>
+                                        
+                                        <c:if test="${not empty requestScope.EDIT_EMAIL_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_EMAIL_ERROR}*</p>
+                                        </c:if>
                                     </div>
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLocation">Số điện thoại</label>
-                                        <input name="phone" class="form-control" id="inputLocation" type="text" value="${sessionScope.account.phone}" required>
-                                    </div>
-                                </div>
-                                <!-- Form Row-->
-                                <div class="row gx-3 mb-3">
-                                    <!-- Form Group (birthday)-->
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Địa chỉ</label>
-                                        <input name="address" class="form-control" id="inputBirthday" type="text" name="birthday" value="${sessionScope.account.address}" required>
+                                        <label style="font-weight: 500" for="inputBirthday">Địa chỉ</label>
+                                        <input name="address" class="form-control" type="text" placeholder="Nhập địa chỉ" value="${sessionScope.account.address}" required>
+                                        <c:if test="${not empty requestScope.EDIT_ADDRESS_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_ADDRESS_ERROR}*</p>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
+                                <input type="hidden" name="userId" value="${sessionScope.account.userId}">
+                                <input type="hidden" name="avatar" value="${sessionScope.account.img}">
                                 <button class="btn btn-primary" type="submit">Lưu</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>             
+            </div>           
+                                    
         </div>
 
         <%@ include file="../../asset/includes/User/FooterUser.jsp" %>

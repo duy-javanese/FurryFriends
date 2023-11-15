@@ -70,7 +70,27 @@ File: app.css
                 background: #ff3030;
                 color: white;
                 padding: 5px;
-                padding: 5px;
+                margin-left: 5px;
+}
+
+.chosen-button{
+    border: 0;
+    font-size: large;
+    color: white;
+    background: #ffc930;
+    width: 120px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.not-chosen-button{
+    border: 0;
+    font-size: large;
+    color: white;
+    background: #c4c4c4;
+    width: 120px;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 /*======================== Staff report page ========================*/
 /*======================== user manage page ========================*/
@@ -168,6 +188,34 @@ File: app.css
 /*========================= button ==========================*/
 
 /*========================= Post approvement =========================*/
+.pending-post-detail-title{
+                font-size: 36px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                margin-top: 30px;
+            }
+.detail-img-box{
+                height: 100%;
+                border: 1px solid;
+                width: 100%;
+                border-radius: 5px;
+                object-fit: cover;
+            }
+.post-box{
+                background: white;
+                margin: 30px 135px;
+                border: 2px solid;
+                border-radius: 5px;
+                display: flex;
+                padding: 10px;
+            }
+            .img-box{
+                height: 100%;
+                border: 1px solid;
+                width: 200px;
+                border-radius: 5px;
+                object-fit: cover;
+            }
 .main_blog_details h4{
     font-size:36px;
     font-weight:700;

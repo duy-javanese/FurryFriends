@@ -6,8 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="DAO.InformationDAO" %>
-<%@ page import="Model.Information" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -37,8 +35,9 @@
                          background-size: cover"
                          >
                         <div class="hero-banner__content">
-                            <h1>FurryFriends</h1>
                             <h3>Blog & Trading</h3>
+                            <h1>Pet trading platform</h1>
+                            <h4>October 1, 2023</h4>
                         </div>
                     </div>
                 </div>
@@ -58,6 +57,7 @@
                                     <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
                                     <h3><a href="#">${p.title}</a></h3>
                                     <p>${p.content.substring(0, 100)}...</p>
+
                                 </div>
                             </div>
                         </c:forEach>
@@ -151,19 +151,17 @@
                         </div>
 
                         <!-- Start Blog Post Siddebar -->
-                        <%
-        try {
-            Information info = InformationDAO.getInfor();
-                        %>
                         <div class="col-lg-4 sidebar-widgets">
                             <div class="widget-wrap">
                                 <div class="single-sidebar-widget newsletter-widget">
-                                    <h4 class="single-sidebar-widget__title">Thông báo</h4>
+                                    <h4 class="single-sidebar-widget__title">Newsletter</h4>
                                     <div class="form-group mt-30">
                                         <div class="col-autos">
-                                            <strong><%= (info.getNotification() != null) ? info.getNotification() : "Không có thông báo" %></strong>
+                                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = 'Enter email'">
                                         </div>
                                     </div>
+                                    <button class="bbtns d-block mt-20 w-100">Subcribe</button>
                                 </div>
 
 
@@ -233,11 +231,6 @@
                                 </div>
                             </div>
                         </div>
-                        <%
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-                        %>
                     </div>
                     <!-- End Blog Post Siddebar -->
                 </div>

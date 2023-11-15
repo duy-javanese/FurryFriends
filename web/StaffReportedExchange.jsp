@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -112,14 +111,13 @@
                 <h1 style="text-align: center; margin-top: 10%">XỬ LÍ BÁO CÁO TỪ NGƯỜI DÙNG</h1>
                 <form action="MainController" method="POST">
                     <div style="display: flex; justify-content: center; margin-top: 50px">
-                        <button class="chosen-button" name="action" value="Get Reported Post">Bài viết</button>
-                        <button class="not-chosen-button" name="action" value="Get Reported Exchange">Bài trao đổi</button>
-                        <button class="not-chosen-button" name="action" value="Get Reported Comment">Bài trao đổi</button>
+                        <button class="not-chosen-button" name="action" value="Get Reported Post">Bài viết</button>
+                        <button class="chosen-button" name="action" value="Get Reported Exchange">Bài trao đổi</button>
+                        <button class="not-chosen-button" name="action" value="Get Reported Comment">Bình luận</button>
                     </div>
-                    
                 </form>
                 
-                <c:set var="result" value ="${requestScope.REPORTED_POST_LIST}"/>
+                <c:set var="result" value ="${requestScope.REPORTED_ECHANGE_LIST}"/>
                 <c:if test="${not empty result}">
                     <div class="listPendingPost">
                         <table>
@@ -168,38 +166,6 @@
                         </tbody>
                     </table>
                     </div>
-                    <c:forEach items="${result}" var="r" varStatus="counter">
-                        <p style="color: #00ff33">${r.reporter.username} </p>
-                        <div class="post-box">
-                            <div><img src="${r.post.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${r.post.title}</h4>
-                                    <h6 style="color: coral;">${r.post.postType.postTypeName}</h6>
-                                </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${r.post.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(r.post.content) > 100}">
-                                        <h6>${r.post.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(r.post.content) < 100}">
-                                        <h6>${r.post.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${r.post.datePost}</p>
-                                    <form action="MainController">
-                                            <input type="hidden" name="reportId" value="${r.reportId}">
-                                            <button class="view-detail-button" name="action" value="ViewReportDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
-                                </div>
-                                            
-                            </div>
-                            
-                        </div>
-                    </c:forEach>
                 </c:if>
                 <c:if test="${ empty result}">
                     <h3 style="text-align: center; margin-top: 50px">"Hiện tại không còn báo cáo nào khác từ người dùng"</h3>

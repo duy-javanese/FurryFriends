@@ -35,6 +35,14 @@
                 }
             }
         </script>
+        <style>
+            .pending-post-detail-title{
+                font-size: 36px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                margin-top: 30px;
+            }
+        </style>
         <title>Chi tiết bài trao đổi</title>
     </head>
     <body>
@@ -97,23 +105,29 @@
                 </form>
                 <div class="post-style">
                     <c:set var="e" value ="${requestScope.EXCHANGE}"/>
-                        <div>
-                            <h5 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h5>
-                        </div>
-                        <div style="display: flex">
+                        <c:if test="${not empty e.post.img}">
+                             <img src="${e.post.img}" class="detail-img-box"> <br>        
+                        </c:if>
+                        <h4 class="pending-post-detail-title">${e.post.title}</h4>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="display: flex">
                                 <div class="d-flex">
                                                 <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
                                 </div>
-                            <div style="margin-left: 15px">
+                                <div style="margin-left: 15px">
                                     <h6>${e.post.user.username}</h6>
                                             <p>${e.post.datePost}</p>
                                 </div>
                             </div>
-                        <h5>${e.post.title}</h5>
+                            <div>
+                                <h6 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h6>
+                            </div>
+                        </div>
+                        
+                        
+                        
                         <p>${e.post.content}</p>
-                        <c:if test="${not empty e.post.img}">
-                            <img class="img-fluid" src="${e.post.img}" alt="" width="800px" height="300px"> <br>         
-                        </c:if>
+                       
                             <h5>Price:</h5><h5 style="color: red">${e.price} VNĐ</h5>
                         <form action="MainController" method="GET">
                             <input type="hidden" name="postId" value="${e.post.postId}">

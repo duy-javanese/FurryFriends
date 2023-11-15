@@ -25,9 +25,9 @@
                             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                                 <form action="editProfile" method="get">
                                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                                        <img src="${pageContext.request.contextPath}/asset/img/paw.png"
+                                        <img src="${sessionScope.account.img}"
                                              alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                             style="width: 150px; z-index: 1">
+                                             style="width: 150px; z-index: 1; height: 140px; object-fit: cover">
                                         <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                                                 style="z-index: 1;">
                                             Chỉnh sửa profile

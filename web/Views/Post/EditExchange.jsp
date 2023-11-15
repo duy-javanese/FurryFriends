@@ -70,7 +70,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Địa chỉ trao đổi thú cưng" name="address" value="${post.exchange.address}" required>
+                                   placeholder="Địa chỉ trao đổi thú cưng" name="address" minlength="100" value="${post.exchange.address}" required>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

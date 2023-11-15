@@ -89,15 +89,7 @@
             button:hover {
                 background-color: #ff6600;
             }
-
-            .error-text {
-                color: red;
-            }
-
-            .success-text {
-                color: green;
-            }
-
+            
         </style>
     </head>
     <body>
@@ -114,30 +106,29 @@
         <div>
             <form action="MainController" method="post">
                 <label for="username">Tên đăng nhập:</label>
-                <span class="error-text">${requestScope.USERNAME_ERROR}</span>
+                ${requestScope.USERNAME_ERROR}
                 <input type="text" id="username" name="username" required>
-
+                
                 <label for="password">Mật khẩu:</label>
-                <span class="error-text">${requestScope.PASSWORD_ERROR}</span>
                 <input type="password" id="password" name="password" required>
 
                 <label for="confirmPassword">Nhập lại mật khẩu:</label>
-                <span class="error-text">${requestScope.CONFIRM_PASSWORD_ERROR}</span>
+                ${requestScope.PASSWORD_ERROR}
                 <input type="password" id="confirmPassword" name="confirm_password" required>
 
                 <label for="email">Email:</label>
-                <span class="error-text">${requestScope.EMAIL_ERROR}</span>
+                ${requestScope.EMAIL_ERROR}
                 <input type="email" id="email" name="email" required>
 
                 <label for="phone">Số điện thoại:</label>
-                <span class="error-text">${requestScope.PHONE_ERROR}</span>
+                ${requestScope.PHONE_ERROR}
                 <input type="text" id="phone" name="phone" required>
 
                 <label for="address">Địa chỉ:</label>
                 <input type="text" id="address" name="address" required>
 
                 <button type="submit" name="action" value="AddStaff">Thêm quản trị viên</button>
-                <span class="success-text">${requestScope.SUCCESS}</span>
+                ${requestScope.SUCCESS}
             </form>
         </div>
     </body>
