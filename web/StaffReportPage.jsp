@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -109,16 +108,7 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 10%">XỬ LÍ BÁO CÁO TỪ NGƯỜI DÙNG</h1>
-                <form action="MainController" method="POST">
-                    <div style="display: flex; justify-content: center; margin-top: 50px">
-                        <button class="chosen-button" name="action" value="Get Reported Post">Bài viết</button>
-                        <button class="not-chosen-button" name="action" value="Get Reported Exchange">Bài trao đổi</button>
-                        <button class="not-chosen-button" name="action" value="Get Reported Comment">Bài trao đổi</button>
-                    </div>
-                    
-                </form>
-                
+                <a href="GetReportedPost">Get reported post</a><br>
                 <c:set var="result" value ="${requestScope.REPORTED_POST_LIST}"/>
                 <c:if test="${not empty result}">
                     <div class="listPendingPost">
@@ -151,7 +141,7 @@
                                         <div >
                                             <p style="color: #00ff33">${r.reporter.username} </p>
                                             <p style="margin-left: 5px">đã báo cáo bài viết này với lí do </p>
-                                            <p style="color: red;margin-left: 5px"> ${r.reportContent.reportContent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </p>
+                                            <p style="color: red;margin-left: 5px"> ${r.reportContent.reportcontent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </p>
                                         </div>
                                     </td>
                                     <td>
@@ -168,43 +158,67 @@
                         </tbody>
                     </table>
                     </div>
-                    <c:forEach items="${result}" var="r" varStatus="counter">
-                        <p style="color: #00ff33">${r.reporter.username} </p>
-                        <div class="post-box">
-                            <div><img src="${r.post.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${r.post.title}</h4>
-                                    <h6 style="color: coral;">${r.post.postType.postTypeName}</h6>
+                </c:if>
+                <c:forEach items="${result}" var="r" varStatus="counter">
+                    <div class="post-style">
+                                    <div style="display: flex">
+                                        <p style="color: #00ff33">${r.reporter.username} </p>
+                                        <p style="margin-left: 5px">đã báo cáo bài viết này với lí do: </p>
+                                        <p style="color: red;margin-left: 5px">${r.reason}</p>
+                                    </div>
+                        <div style="display: flex">
+                                <div class="d-flex">
+                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
                                 </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${r.post.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(r.post.content) > 100}">
-                                        <h6>${r.post.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(r.post.content) < 100}">
-                                        <h6>${r.post.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
+                            <div style="margin-left: 15px">
+                                    <h6>${r.post.user.username}</h6>
                                     <p>${r.post.datePost}</p>
-                                    <form action="MainController">
-                                            <input type="hidden" name="reportId" value="${r.reportId}">
-                                            <button class="view-detail-button" name="action" value="ViewReportDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
                                 </div>
-                                            
-                            </div>
-                            
                         </div>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${ empty result}">
-                    <h3 style="text-align: center; margin-top: 50px">"Hiện tại không còn báo cáo nào khác từ người dùng"</h3>
-                </c:if>
-                
+                        <h6>${r.post.title}</h6>
+                        <p>${r.post.content}</p>
+                        <c:if test="${not empty r.post.img}">
+                            <img class="img-fluid" src="${r.post.img}" alt="" width="800px" height="300px"> <br>         
+                        </c:if>
+                            <div style="display: flex; margin-top: 10px">
+                                <form action="MainController">
+                                    <input type="hidden" name="reportType" value="${r.reportType}">
+                                    <input type="hidden" name="postId" value="${r.post.postId}">
+                                    <input type="hidden" name="reportId" value="${r.reportId}">
+                                    <button class="hide-post-button" name="action" value="HidePost">Ẩn bài viết này</button>
+                                </form>
+                                <form action="MainController">
+                                    <input type="hidden" name="reportId" value="${r.reportId}">
+                                    <input type="hidden" name="reportType" value="${r.reportType}">
+                                    <input type="hidden" name="userId" value="${r.post.user.userId}">
+                                    <button class="ban-user-button" name="action" value="Ban">Ban người dùng này</button>
+                                </form>   
+                            </div>
+                             
+                    </div>
+                      
+                </c:forEach>
+                <a href="GetReportedExchange">Get reported exchange</a>
+                <c:set var="result" value ="${requestScope.REPORTED_ECHANGE_LIST}"/>
+                <c:forEach items="${result}" var="r" varStatus="counter">
+                    
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p style="color: #00ff33">${r.reporter.username} </p>
+                                </td>
+                                <td>
+                                    <p>đã báo cáo bài viết này với lí do: </p>
+                                </td>
+                                <td>
+                                    <p style="color: red">${r.reason}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </c:forEach>
                 
             </div>
             <!--end page-wrapper -->

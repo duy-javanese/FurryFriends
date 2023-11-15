@@ -22,7 +22,7 @@ public class DBContext {
         try {
             String user = "sa";
             String pass = "12345";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=FurryFriends";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_FurryFriends";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
@@ -33,7 +33,7 @@ public class DBContext {
     public static Connection getConnection() throws ClassNotFoundException, SQLException{
         Connection conn= null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url= "jdbc:sqlserver://localhost:1433;databaseName=FurryFriends";
+        String url= "jdbc:sqlserver://localhost:1433;databaseName=SWP391_FurryFriends";
         conn= DriverManager.getConnection(url, "sa", "12345");
         return conn;
     }

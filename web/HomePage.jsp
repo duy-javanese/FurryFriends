@@ -58,7 +58,6 @@
                                     <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
                                     <h3><a href="#">${p.title}</a></h3>
                                     <p>${p.content.substring(0, 100)}...</p>
-
                                 </div>
                             </div>
                         </c:forEach>

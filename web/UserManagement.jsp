@@ -60,9 +60,7 @@
                                 <a href="GetPendingExchange">Bài trao đổi</a>
                                 <a href="GetReportedPost">Báo cáo từ người dùng</a>
                                 <a href="logout">Đăng xuất</a>
-                                
                             </form>
-                            
 			</ul>
 			<!--end navigation-->
 		</div>
@@ -87,10 +85,9 @@
                 <!--end header -->
                 <!--Start page-wrapper -->
                 <div class="userpage-wrapper">
-                    
-                    <div style=" align-items: center; display: flex; flex-direction: column; margin-top: 10%">
-                        <h1 style="margin-bottom: 20px;">QUẢN LÍ NGƯỜI DÙNG</h1>
-                        <div style="display: flex; margin-bottom: 20px;">
+                    <div class="page-content">
+                        <h1>User Management</h1>
+                        <div style="display: flex">
                             <form action="MainController">
                                     <input class="search-User-box" type="text" name="txtSearchValue" 
                                                        value="${param.txtSearchValue}" placeholder="Nhập tên người dùng"/>
@@ -99,8 +96,7 @@
                                     
                                 </form>
                                     <form action="MainController">
-<!--                                        <input class="user-page-button" type="submit" value="Get all user" name="action" />-->
-                                        <button class="user-page-button" type="submit" value="Get all user" name="action">Danh sách người dùng</button>
+                                        <input class="user-page-button" type="submit" value="Get all user" name="action" />
                                     </form>
                         </div>
                                 
@@ -117,13 +113,13 @@
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
                                                 <thead style="text-align: center">
                                                     <tr>
-                                                        <th scope="col">Tài khoản</th>
+                                                        <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Số điện thoại</th>
-                                                        <th scope="col">Địa chỉ</th>
-                                                        <th scope="col">Điểm</th>
-                                                        <th scope="col">Trạng thái</th>
-                                                        <th scope="col" style="width: 200px;">Hành động</th>
+                                                        <th scope="col">Phone number</th>
+                                                        <th scope="col">address</th>
+                                                        <th scope="col">Points</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="width: 200px;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody style="text-align: center">
@@ -135,28 +131,15 @@
                                                         <td>${dto.phone}</td>
                                                         <td>${dto.address}</td>
                                                         <td>${dto.point}</td>
-                                                         <c:if test="${not dto.status}">
-                                                        <td style="color: red; font-weight: bold">
-                                                                Dừng hoạt động
-                                                            </c:if>
-                                                            <c:if test="${dto.status}">
-                                                        <td style="color: green; font-weight: bold">        
-                                                                Đang hoạt động
-                                                            </c:if>   
-<!--                                                            <select name="txtStatus">
+                                                        <td>
+                                                            <select name="txtStatus">
                                                                                     <option ${(dto.status) ?  "selected": ""} value="true">Hoạt động</option>
                                                                                     <option ${(not dto.status) ?  "selected": ""} value="false">BAN</option>
-                                                                                </select>-->
+                                                                                </select>
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="txtID" value="${dto.userId}" />
                                                             <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
-                                                            <c:if test="${not dto.status}">
-                                                                <input type="hidden" name="txtStatus" value="true" />
-                                                            </c:if>
-                                                            <c:if test="${dto.status}">
-                                                                <input type="hidden" name="txtStatus" value="false" />
-                                                            </c:if>
                                                             <button class="ban-user-button" name="action" value="Update user status">Cập nhật trạng thái</button>
                                                         </td>
                                                     </tr>
@@ -176,18 +159,18 @@
                                             <c:set var="result" value ="${requestScope.LIST_USER}"/>
                                                 <c:if test="${not empty result}">
                                                     <div class="page-content">
-                                                        <h2>Danh sách người dùng:</h2>
+                                                        <h2>List of users:</h2>
                                                     </div>
                                             <table  class="table project-list-table table-nowrap align-middle table-borderless">
                                                 <thead style="text-align: center">
                                                     <tr>
-                                                        <th scope="col">Tài khoản</th>
+                                                        <th scope="col">Username</th>
                                                         <th scope="col">Email</th>
-                                                        <th scope="col">Số điện thoại</th>
-                                                        <th scope="col">Địa chỉ</th>
-                                                        <th scope="col">Điểm</th>
-                                                        <th scope="col">Trạng thái</th>
-                                                        <th scope="col" style="width: 200px;">Hành động</th>
+                                                        <th scope="col">Phone number</th>
+                                                        <th scope="col">address</th>
+                                                        <th scope="col">Points</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col" style="width: 200px;">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody style="text-align: center">
@@ -199,26 +182,13 @@
                                                         <td>${dto.phone}</td>
                                                         <td>${dto.address}</td>
                                                         <td>${dto.point}</td>
-                                                            <c:if test="${not dto.status}">
-                                                        <td style="color: red; font-weight: bold">
-                                                                Dừng hoạt động
-                                                            </c:if>
-                                                            <c:if test="${dto.status}">
-                                                        <td style="color: green; font-weight: bold">        
-                                                                Đang hoạt động
-                                                            </c:if>
-<!--                                                            <select name="txtStatus">
+                                                        <td>
+                                                            <select name="txtStatus">
                                                                                     <option ${(dto.status) ?  "selected": ""} value="true">Hoạt động</option>
                                                                                     <option ${(not dto.status) ?  "selected": ""} value="false">BAN</option>
-                                                                                </select>-->
+                                                                                </select>
                                                         </td>
                                                         <td>
-                                                            <c:if test="${not dto.status}">
-                                                                <input type="hidden" name="txtStatus" value="true" />
-                                                            </c:if>
-                                                            <c:if test="${dto.status}">
-                                                                <input type="hidden" name="txtStatus" value="false" />
-                                                            </c:if>
                                                             <input type="hidden" name="txtID" value="${dto.userId}" />
                                                             <input type="hidden"  name="lastSearchValue" value="${searchValue}"/>
                                                             <button class="ban-user-button" name="action" value="Update user status">Cập nhật trạng thái</button>

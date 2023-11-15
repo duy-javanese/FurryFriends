@@ -185,5 +185,5 @@
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
     </body>
-    
+
 </html>

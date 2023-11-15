@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -53,21 +52,6 @@
 .listPendingPost td{
                 background: white;
 }
-.post-box{
-                background: white;
-                margin: 30px 135px;
-                border: 2px solid;
-                border-radius: 5px;
-                display: flex;
-                padding: 10px;
-            }
-            .img-box{
-                height: 100%;
-                border: 1px solid;
-                width: 200px;
-                border-radius: 5px;
-                object-fit: cover;
-            }
         </style>
         <title>Duyệt bài trao đổi</title>
     </head>
@@ -124,7 +108,7 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI TRAO ĐỔI ĐANG CHỜ DUYỆT</h1>
+                <h1 style="text-align: center; margin-top: 100px">DANH SÁCH BÀI TRAO ĐỔI ĐANG CHỜ DUYỆT</h1>
                 <div style="margin-top: 50px; margin-left: 360px">
                     <form action="MainController">
                         <input class="search-User-box" type="text" name="txtSearchValue" 
@@ -141,36 +125,53 @@
 <!--====================================================== List pending exchange ======================================================-->
                 <c:set var="result" value ="${requestScope.PENDING_EXCHANGE_LIST}"/>
                 <c:if test="${not empty result}">
-                    <c:forEach items="${result}" var="e" varStatus="counter">
-                        <div class="post-box">
-                            <div><img src="${e.post.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${e.post.title}</h4>
-                                    <h6 style="color: coral;">${e.post.category.categoryName}</h6>
-                                </div>
-                                <h6 style="color: red">${e.price} VNĐ</h6>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${e.post.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(e.post.content) > 100}">
-                                        <h6>${e.post.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(e.post.content) < 100}">
-                                        <h6>${e.post.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${e.post.datePost}</p>
-                                    <form action="MainController">
+                    <div class="listPendingPost">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tiêu đề bài viết
+                                    </th>
+                                    <th>
+                                        Danh mục
+                                    </th>
+                                    <th>
+                                        Giá
+                                    </th>
+                                    <th>
+                                        Ngày tạo bài viết
+                                    </th>
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${result}" var="e" varStatus="counter">
+                                    <tr>
+                                        <td>
+                                            ${e.post.title}
+                                        </td>
+                                        <td>
+                                            ${e.post.category.categoryName}
+                                        </td>
+                                        <td>
+                                            ${e.price} VNĐ
+                                        </td>
+                                        <td>
+                                            ${e.post.datePost}
+                                        </td>
+                                        <td>
+                                            <form action="MainController">
                                                 <input type="hidden" name="ExchangeId" value="${e.exchangeId}">
-                                                <button class="view-detail-button" name="action" value="ViewPendExchangeDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
+                                                <button class="view-detail-button" name="action" value="ViewPendExchangeDetail">Xem chi tiết</button>
                                             </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                </div>
                 </c:if>
                 <c:if test="${empty result}">
                     <h3 style="text-align: center; margin-top: 50px">"Hiện tại không có bài trao đổi nào đang chờ duyệt"</h3>

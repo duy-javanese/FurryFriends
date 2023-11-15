@@ -88,11 +88,10 @@
                 <c:set var="r" value ="${requestScope.REPORT}"/>
                 <div class="post-style">
                                     <div style="display: flex">
-                                        <h4 style="color: #00ff33">${r.reporter.username} </h4>
-                                        <h4 style="margin-left: 5px">đã báo cáo bài viết này với lí do </h4>
+                                        <p style="color: #00ff33">${r.reporter.username} </p>
+                                        <p style="margin-left: 5px">đã báo cáo bài viết này với lí do </p>
+                                        <p style="color: red;margin-left: 5px"> ${r.reportContent.reportcontent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </p>
                                     </div>
-                                        <h4 style="color: red;margin-bottom: 20px"> ${r.reportContent.reportContent} <c:if test="${not empty r.reason}">: ${r.reason}</c:if> </h4>
-                                    
                         <div style="display: flex">
                                 <div class="d-flex">
                                                 <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
@@ -118,7 +117,7 @@
                                     <input type="hidden" name="reportId" value="${r.reportId}">
                                     <input type="hidden" name="reportType" value="${r.reportType}">
                                     <input type="hidden" name="userId" value="${r.post.user.userId}">
-                                    <button class="ban-user-button" name="action" value="Ban">Cấm người dùng này</button>
+                                    <button class="ban-user-button" name="action" value="Ban">Ban người dùng này</button>
                                 </form>
                                 <form action="MainController">
                                     <input type="hidden" name="reportId" value="${r.reportId}">

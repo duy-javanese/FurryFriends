@@ -35,21 +35,7 @@
                 }
             }
         </script>
-        <style>
-            .detail-img-box{
-                height: 100%;
-                border: 1px solid;
-                width: 100%;
-                border-radius: 5px;
-                object-fit: cover;
-            }
-            .pending-post-detail-title{
-                font-size: 36px;
-                font-weight: 700;
-                margin-bottom: 20px;
-                margin-top: 30px;
-            }
-        </style>
+        
         <title>Chi tiết bài viết</title>
     </head>
     <body>
@@ -112,28 +98,24 @@
                 </form>
                 <div class="post-style">
                     <c:set var="p" value ="${requestScope.POST}"/>
-                        <c:if test="${not empty p.img}">
-                            <img src="${p.img}" class="detail-img-box"> <br>         
-                        </c:if>
-<!--                            <div>
+                    
+                        <div>
                                             <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
-                            </div>-->
-                            <h4 class="pending-post-detail-title">${p.title}</h4>
-                            <div style="display: flex; justify-content: space-between;">
-                                <div style="display: flex">
-                                    <div class="d-flex">
-                                                    <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
-                                    </div>
-                                    <div style="margin-left: 15px">
-                                        <h6>${p.user.username}</h6>
-                                                <p>${p.datePost}</p>
-                                    </div>
+                            </div>
+                            <div style="display: flex">
+                                <div class="d-flex">
+                                                <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
                                 </div>
-                                <div>
-                                                <h6 style="color: coral;">${p.postType.postTypeName}</h6>
+                            <div style="margin-left: 15px">
+                                    <h6>${p.user.username}</h6>
+                                            <p>${p.datePost}</p>
                                 </div>
                             </div>
+                        <h6>${p.title}</h6>
                         <p>${p.content}</p>
+                        <c:if test="${not empty p.img}">
+                            <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px"> <br>         
+                        </c:if>
                         <form action="MainController" method="POST">
                             <input type="hidden" name="postId" value="${p.postId}">
                             <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">

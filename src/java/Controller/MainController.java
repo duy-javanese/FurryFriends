@@ -50,6 +50,7 @@ private static final String DECLINE_POST_CONTROLLER="DeclinePostController";
 private static final String HIDE_REPORTED_POST_AND_EXCHANGE="HideReportedPostAndExchange";
 private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailController";
 private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
+<<<<<<< HEAD
 private static final String ADMIN_GET_ALL_USER = "AdminGetAllUserController";
 private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusController";
 private static final String GET_REPORTED_POST_CONTROLLER = "GetReportedPost";
@@ -74,6 +75,8 @@ private static final String VIEW_REPORT_DETAIL_CONTROLLER="ViewReportDetailContr
 private static final String REJECT_REPORT_CONTROLLER="RejectReportController";
 private static final String GET_REPORTED_POST_CONTROLLER = "GetReportedPost";
 private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExchange";
+=======
+>>>>>>> parent of 2e3df0e (Đổi giao diện staff page, cập nhật chức năng thay đổi thông tin cá nhân)
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -229,6 +232,7 @@ private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExcha
             else if (action.equals("AdminUpdateUserStatus")){
                 url = ADMIN_UPDATE_USER_STATUS;
             }
+<<<<<<< HEAD
             else if (action.equals("Get Reported Post")){
                 url = GET_REPORTED_POST_CONTROLLER;
             }
@@ -238,6 +242,8 @@ private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExcha
             else if (action.equals("SendNotification")){
                 url = SEND_NOTIFICATION;
             }
+=======
+>>>>>>> parent of 2e3df0e (Đổi giao diện staff page, cập nhật chức năng thay đổi thông tin cá nhân)
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
