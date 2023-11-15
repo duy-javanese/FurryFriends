@@ -662,8 +662,8 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setString(2, post.getTitle());
             stm.setString(3, post.getContent());
             stm.setString(4, post.getImg());
-            stm.setInt(5, post.getPostId());
-            stm.setInt(6, post.getStatus().getPostStatusId());
+            stm.setInt(5, post.getStatus().getPostStatusId());
+            stm.setInt(6, post.getPostId());
 
             stm.executeUpdate();
         } catch (SQLException ex) {
