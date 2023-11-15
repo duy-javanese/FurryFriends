@@ -90,13 +90,15 @@
                                                </c:if>
                                            </c:forEach>
                                            "><i class="ti-heart mr-1"></i>Thích</a>
-                                        <a href="interestPost?postId=${p.postId}" class="ml-3
-                                           <c:forEach items="${p.userInterested}" var="ui">
-                                               <c:if test="${ui.userId == sessionScope.account.userId}">
-                                                   text-danger
-                                               </c:if>
-                                           </c:forEach>
-                                           "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                        <c:if test="${p.postType.postTypeId != 1}">
+                                            <a href="interestPost?postId=${p.postId}" class="ml-3
+                                               <c:forEach items="${p.userInterested}" var="ui">
+                                                   <c:if test="${ui.userId == sessionScope.account.userId}">
+                                                       text-danger
+                                                   </c:if>
+                                               </c:forEach>
+                                               "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                        </c:if>
                                     </div>
                                     <div class="details mt-20">
                                         <a href="viewPostDetails?postId=${p.postId}">
