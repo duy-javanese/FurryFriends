@@ -114,10 +114,7 @@
                                 </c:forEach>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="listProduct">Phụ kiện Chó Mèo</a>
-
-                            <!--                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>-->
-                            <c:if test="${sessionScope.account == null}">
+                        <c:if test="${sessionScope.account == null}">
                             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
                             </c:if>
                             <c:if test="${sessionScope.account != null}">

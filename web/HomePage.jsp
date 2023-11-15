@@ -170,7 +170,7 @@
 
 
                                 <div class="single-sidebar-widget post-category-widget">
-                                    <h4 class="single-sidebar-widget__title">Post Type</h4>
+                                    <h4 class="single-sidebar-widget__title">Loại bài viết</h4>
                                     <ul class="cat-list mt-20">
                                         <c:forEach items="${sessionScope.types}" var="t">
                                             <li>
@@ -183,7 +183,7 @@
                                 </div>
 
                                 <div class="single-sidebar-widget popular-post-widget">
-                                    <h4 class="single-sidebar-widget__title">Popular Post</h4>
+                                    <h4 class="single-sidebar-widget__title">Bài viết phổ biến</h4>
                                     <div class="popular-post-list">
                                         <c:forEach items="${sessionScope.top3Post}" var="p3">
                                             <div class="single-post-list">

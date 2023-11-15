@@ -194,7 +194,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, isPublic);
             }
 
-            sql += " order by post_id\n";
+            sql += " order by datePosted\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
@@ -310,7 +310,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, isPublic);
             }
 
-            sql += " order by ipost.PostId\n";
+            sql += " order by ipost.datePosted\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
