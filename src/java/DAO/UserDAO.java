@@ -448,4 +448,38 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public boolean BanUser(int userID) 
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            //1. Make connection
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                //2. create SQL String
+                String sql = "UPDATE users SET user_status = 0 WHERE userID = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userID);
+                //4. Excute querry to get Result set
+                int effectRow = stm.executeUpdate();
+                //5. Process Result set
+                if (effectRow > 0) {
+                    result = true;
+                }
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result ;
+    }
 }

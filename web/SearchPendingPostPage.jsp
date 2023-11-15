@@ -1,6 +1,6 @@
 <%-- 
-    Document   : PostApprovement
-    Created on : Oct 15, 2023, 11:49:34 PM
+    Document   : SearchPendingPostPage
+    Created on : Nov 5, 2023, 6:26:21 PM
     Author     : Admin
 --%>
 
@@ -11,20 +11,20 @@
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <link href="asset/staff-page/css/pace.min.css" rel="stylesheet" />
-        <script src="asset/staff-page/js/pace.min.js"></script>
-
+	<script src="asset/staff-page/js/pace.min.js"></script>
+        
         <link href="asset/staff-page/css/bootstrap.min.css" rel="stylesheet">
-        <link href="asset/staff-page/css/bootstrap-extended.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-        <link href="asset/staff-page/css/app.css" rel="stylesheet">
-        <link href="asset/staff-page/css/icons.css" rel="stylesheet">
-
+	<link href="asset/staff-page/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	<link href="asset/staff-page/css/app.css" rel="stylesheet">
+	<link href="asset/staff-page/css/icons.css" rel="stylesheet">
+        
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
-        <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
-        <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
+	<link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
+	<link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <script src="https://kit.fontawesome.com/337871dc56.js" crossorigin="anonymous"></script>
         <style>
             .listPendingPost{
@@ -119,12 +119,12 @@
                                                                     </a>
                                                             </div>
                                             </nav>
-                </div>
+                </div> 
             </header>
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
+                <h1 style="text-align: center; margin-top: 100px">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
                 <div style="margin-top: 50px; margin-left: 360px">
                     <form action="MainController" method="POST">
                         <input class="search-User-box" type="text" name="txtSearchValue" 
@@ -138,25 +138,23 @@
                         <button class="user-page-button" name="action" value="SearchPendingPost"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
                     </form>
                 </div>
-                <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
+                <c:set var="result" value ="${requestScope.SEARCH_POST_RESULT}"/>
                 <c:if test="${not empty result}">
                     <c:forEach items="${result}" var="p" varStatus="counter">
                         <div class="post-box">
                             <div><img src="${p.img}" class="img-box"></div>
                             <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                 <div style="display: flex; justify-content: space-between">
-                                    <h4>${p.title}</h4>
-                                    <h6 style="color: coral;">${p.postType.postTypeName}</h6>
+                                    <h5>${p.title}</h5>
+                                    <h5 style="color: coral;">${p.postType.postTypeName}</h5>
                                 </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${p.user.username}</p>
-                                </div>
+                                <h6>${p.user.username}</h6>
                                 <div>
                                     <c:if test="${fn:length(p.content) > 100}">
-                                        <h6>${p.content.substring(0, 100)}...</h6>
+                                        <p>${p.content.substring(0, 100)}...</p>
                                     </c:if>
                                     <c:if test="${fn:length(p.content) < 100}">
-                                        <h6>${p.content}</h6>
+                                        <p>${p.content}</p>
                                     </c:if>
                                 </div>
                                 <div style="display: flex; justify-content: space-between">
@@ -171,23 +169,20 @@
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty result}">
-                    <h3 style="text-align: center; margin-top: 50px">"Hiện tại không có bài biết nào đang chờ duyệt"</h3>
-                </c:if>
-            </div>
+                    <h2 style="text-align: center; margin-top: 50px">"Bài viết bạn đang tìm không tồn tại"</h2>
+                </c:if>  
             <!--end page-wrapper -->
-
         </div>
-        <!--end wrapper-->
         <!-- Bootstrap JS -->
-        <script src="asset/staff-page/js/bootstrap.bundle.min.js"></script>
-        <!--plugins-->
-        <script src="asset/staff-page/js/jquery.min.js"></script>
-        <script src="asset/staff-page/plugins/simplebar/js/simplebar.min.js"></script>
-        <script src="asset/staff-page/plugins/metismenu/js/metisMenu.min.js"></script>
-        <script src="asset/staff-page/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-        <script src="asset/staff-page/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-        <script src="asset/staff-page/js/index5.js"></script>
-        <!--app JS-->
-        <script src="asset/staff-page/js/app.js"></script>
+	<script src="asset/staff-page/js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="asset/staff-page/js/jquery.min.js"></script>
+	<script src="asset/staff-page/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="asset/staff-page/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="asset/staff-page/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="asset/staff-page/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+	<script src="asset/staff-page/js/index5.js"></script>
+	<!--app JS-->
+	<script src="asset/staff-page/js/app.js"></script>
     </body>
 </html>
