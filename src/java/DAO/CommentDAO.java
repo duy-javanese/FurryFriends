@@ -28,9 +28,11 @@ public class CommentDAO extends DBUtils.DBContext {
                     + "           ,[userID]\n"
                     + "           ,[commentValue]\n"
                     + "           ,[createdDate]\n"
-                    + "           ,[sta])\n"
+                    + "           ,[sta]\n"
+                    + "           ,[isParent])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -41,6 +43,40 @@ public class CommentDAO extends DBUtils.DBContext {
             stm.setString(3, cmt);
             stm.setDate(4, createdDate);
             stm.setBoolean(5, true);
+            stm.setBoolean(6, true);
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void InsertCommentReply(int postId, int userId, String cmt, Date createdDate, int cmntId) {
+        try {
+            String sql = "INSERT INTO [dbo].[comment]\n"
+                    + "           ([post_id]\n"
+                    + "           ,[userID]\n"
+                    + "           ,[commentValue]\n"
+                    + "           ,[createdDate]\n"
+                    + "           ,[sta]\n"
+                    + "           ,[isParent]\n"
+                    + "           ,[parentId])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            stm.setInt(2, userId);
+            stm.setString(3, cmt);
+            stm.setDate(4, createdDate);
+            stm.setBoolean(5, true);
+            stm.setBoolean(6, false);
+            stm.setInt(7, cmntId);
 
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -113,7 +149,7 @@ public class CommentDAO extends DBUtils.DBContext {
         }
         return list;
     }
-    
+
     public static void main(String[] args) {
         CommentDAO cDao = new CommentDAO();
         ArrayList<Comment> list = cDao.getCommentChildById(2);

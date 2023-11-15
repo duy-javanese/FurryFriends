@@ -5,12 +5,17 @@
 
 package Controller.User;
 
+import DAO.CommentDAO;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -27,18 +32,23 @@ public class ReplyCommentController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ReplyCommentController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ReplyCommentController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        HttpSession session = request.getSession();
+        User account = (User) session.getAttribute("account");
+        String url = request.getHeader("Referer");
+        if (account == null) {
+            session.setAttribute("msg", "Bạn cần đăng nhập để thực hiện hành động này!");
+            response.sendRedirect(url);
+        } else {
+            int postId = Integer.parseInt(request.getParameter("postId"));
+            int parentId = Integer.parseInt(request.getParameter("parentId"));
+            String cmt = request.getParameter("comment");
+            Date createdDate = Date.valueOf(LocalDate.now());
+            
+            CommentDAO cDao = new CommentDAO();
+            cDao.InsertCommentReply(postId,account.getUserId(),cmt,createdDate,parentId);
+
+            session.setAttribute("msg", "Bình luận bài viết thành công!");
+            response.sendRedirect(url);
         }
     } 
 

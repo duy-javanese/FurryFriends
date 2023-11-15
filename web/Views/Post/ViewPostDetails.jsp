@@ -159,11 +159,15 @@
                                         </div>
                                     </div>
                                     <div class="pr-5 mb-2">
-                                        <p>Trả lời bình luận của ${c.user.username}:</p>
-                                        <textarea rows="3" class="form-control ml-4 mb-3"></textarea>
-                                        <div class="justify-content-end d-flex">
-                                            <button class="btn btn-outline-secondary">Trả lời</button>
-                                        </div>
+                                        <form action="replyComment" method="post">
+                                            <p>Trả lời bình luận của ${c.user.username}:</p>
+                                            <input value="${post.postId}" name="postId" type="hidden">
+                                            <input value="${c.commentId}" name="parentId" type="hidden">
+                                            <textarea name="comment" rows="3" class="form-control ml-4 mb-3" placeholder="Bình luận" required></textarea>
+                                            <div class="justify-content-end d-flex">
+                                                <button type="submit" class="btn btn-outline-secondary">Trả lời</button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <c:forEach items="${c.childrens}" var="ch">
                                         <div class="comment-list left-padding">
@@ -215,121 +219,39 @@
                                 <button class="bbtns d-block mt-20 w-100">Subcribe</button>
                             </div>
 
-
                             <div class="single-sidebar-widget post-category-widget">
-                                <h4 class="single-sidebar-widget__title">Catgory</h4>
+                                <h4 class="single-sidebar-widget__title">Post Type</h4>
                                 <ul class="cat-list mt-20">
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Technology</p>
-                                            <p>(03)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Software</p>
-                                            <p>(09)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Lifestyle</p>
-                                            <p>(12)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Shopping</p>
-                                            <p>(02)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>Food</p>
-                                            <p>(10)</p>
-                                        </a>
-                                    </li>
+                                    <c:forEach items="${sessionScope.types}" var="t">
+                                        <li>
+                                            <a href="/findPostByPostType?postType=${t.postTypeId}" class="d-flex justify-content-between">
+                                                <p>${t.postTypeName}</p>
+                                            </a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
 
                             <div class="single-sidebar-widget popular-post-widget">
                                 <h4 class="single-sidebar-widget__title">Popular Post</h4>
                                 <div class="popular-post-list">
-                                    <div class="single-post-list">
-                                        <div class="thumb">
-                                            <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb1.png" alt="">
-                                            <ul class="thumb-info">
-                                                <li><a href="#">Adam Colinge</a></li>
-                                                <li><a href="#">Dec 15</a></li>
-                                            </ul>
+                                    <c:forEach items="${sessionScope.top3Post}" var="p3">
+                                        <div class="single-post-list">
+                                            <div class="thumb">
+                                                <img class="card-img rounded-0" src="${p3.img}" alt="">
+                                                <ul class="thumb-info">
+                                                    <li><a href="viewPostDetails?postId=${p3.postId}">${p3.user.username}</a></li>
+                                                    <li><a href="viewPostDetails?postId=${p3.postId}">${p3.datePost}</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="details mt-20">
+                                                <a href="blog-single.html">
+                                                    <h6>${p3.content.substring(0, 100)}...</h6>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="details mt-20">
-                                            <a href="blog-single.html">
-                                                <h6>Accused of assaulting flight attendant miktake alaways</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="single-post-list">
-                                        <div class="thumb">
-                                            <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb2.png" alt="">
-                                            <ul class="thumb-info">
-                                                <li><a href="#">Adam Colinge</a></li>
-                                                <li><a href="#">Dec 15</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="details mt-20">
-                                            <a href="blog-single.html">
-                                                <h6>Tennessee outback steakhouse the
-                                                    worker diagnosed</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="single-post-list">
-                                        <div class="thumb">
-                                            <img class="card-img rounded-0" src="asset/img/blog/thumb/thumb3.png" alt="">
-                                            <ul class="thumb-info">
-                                                <li><a href="#">Adam Colinge</a></li>
-                                                <li><a href="#">Dec 15</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="details mt-20">
-                                            <a href="blog-single.html">
-                                                <h6>Tennessee outback steakhouse the
-                                                    worker diagnosed</h6>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
-                            </div>
-
-                            <div class="single-sidebar-widget tag_cloud_widget">
-                                <h4 class="single-sidebar-widget__title">Popular Post</h4>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">project</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">love</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">travel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">software</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">illustration</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
