@@ -75,16 +75,15 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-center">
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/findPostByPostType?postType=-1">
+                                Tất cả các bài viết
+                            </a>
+                        </li>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">Bài viết chia sẻ</a>
                             <ul class="dropdown-menu">
-                                <!-- list post type -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/findPostByPostType?postType=-1">
-                                        Tất cả bài viết
-                                    </a>
-                                </li>
                                 <c:forEach var="t" items="${sessionScope.types}">
                                     <c:if test="${sessionScope.PostExchange != t.postTypeId}">
                                         <li class="nav-item">
