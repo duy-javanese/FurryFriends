@@ -7,9 +7,7 @@
 package Staff;
 
 import DAO.PostDAO;
-import DAO.PostTypeDAO;
 import Model.Post;
-import Model.PostType;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,9 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,19 +38,15 @@ public class GetPendingPost extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        PostTypeDAO ptDao = new PostTypeDAO();
         String url = POST_APPROVEMENT_PAGE;
         try {
             
                 PostDAO dao = new PostDAO();
 
-                ArrayList<PostType> listType = ptDao.GetPostTypeForSearchPost();
                 dao.getPendingPostList();
 
                 //3. process DAO
                 List<Post> result = dao.getPendingPost();
-                session.setAttribute("types", listType);
                 request.setAttribute("PENDING_LIST", result);
                 url = RESULT_PAGE;
         } catch (SQLException ex) {

@@ -43,7 +43,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài trao đổi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Tiêu đề bài viết" name="title" required minlength="25">
+                                   placeholder="Tiêu đề bài viết" name="title" required minlength="15">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung bài trao đổi <span style="color: red">*</span></label>
@@ -65,7 +65,7 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 
-                                   placeholder="Địa chỉ trao đổi thú cưng" name="address" required minlength="100">
+                                   placeholder="Địa chỉ trao đổi thú cưng" name="address" required value="Thành phố Hồ Chí Minh">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

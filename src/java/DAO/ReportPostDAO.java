@@ -25,15 +25,13 @@ public class ReportPostDAO extends DBUtils.DBContext {
                     + "           ,[report_date]\n"
                     + "           ,[report_status]\n"
                     + "           ,[report_content_id])\n"
-                    + "           ([reporter_type]\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,'Post')";
+                    + "           ,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, userId);
             stm.setInt(2, postId);

@@ -48,7 +48,7 @@ public class UserDAO extends DBContext {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [users]\n"
-                    + "  Where username = ? and pwd = ?";
+                    + "  Where username = ? COLLATE SQL_Latin1_General_CP1_CS_AS and pwd = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, pwd);
@@ -57,7 +57,7 @@ public class UserDAO extends DBContext {
                 UserRoleDAO rDao = new UserRoleDAO();
                 UserRole role = rDao.getRoleById(rs.getInt("role_id"));
 
-                return new  User(rs.getInt("userID"),
+                return new User(rs.getInt("userID"),
                         username,
                         pwd,
                         rs.getString("email"),
@@ -65,8 +65,7 @@ public class UserDAO extends DBContext {
                         rs.getBoolean("user_status"),
                         role,
                         rs.getString("user_address"),
-                        rs.getInt("point"),
-                        rs.getString("avatar"));
+                        rs.getInt("point"));
             }
 
         } catch (SQLException ex) {
@@ -82,6 +81,40 @@ public class UserDAO extends DBContext {
                     + "WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
+    public boolean isEmailExists(String email) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE email = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ nếu cần
+            return false;
+        }
+    }
+
+    public boolean isPhoneExists(String phone) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM users\n"
+                    + "WHERE phone_num = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, phone);
             ResultSet resultSet = statement.executeQuery();
 
             return resultSet.next();
@@ -131,7 +164,7 @@ public class UserDAO extends DBContext {
 
             if (con != null) {
                 //2.Create SQL String
-                String sql = "Select * "
+                String sql = "Select userID, username, email, phone_num, user_address, point,user_status "
                         + "From users "
                         + "Where username Like ? and role_id=3";
 
@@ -150,12 +183,11 @@ public class UserDAO extends DBContext {
                     String email = rs.getString("email");
                     String phone_num = rs.getString("phone_num");
                     String user_address = rs.getString("user_address");
-                    String avatar = rs.getString("avatar");
                     int point = Integer.parseInt(rs.getString("point"));
                     boolean status = rs.getBoolean("user_status");
-                    
+
                     //5.2 set values to DTO
-                   User dto = new User(userID, username, email, phone_num, status, user_address, point, avatar);
+                    User dto = new User(userID, username, email, phone_num, user_address, point, status);
 
                     //5.3 update account List
                     if (this.userList == null) {
@@ -396,75 +428,24 @@ public class UserDAO extends DBContext {
     public void UpdateUser(User user) {
         try {
             String sql = "UPDATE [dbo].[users]\n"
-                    + "   SET [email] = ?\n"
+                    + "   SET [username] = ?\n"
+                    + "      ,[pwd] = ?\n"
+                    + "      ,[email] = ?\n"
                     + "      ,[phone_num] = ?\n"
                     + "      ,[user_address] = ?\n"
                     + " WHERE userID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getEmail());
-            statement.setString(2, user.getPhone());
-            statement.setString(3, user.getAddress());
-            statement.setInt(4, user.getUserId());
-            
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPwd());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhone());
+            statement.setString(5, user.getAddress());
+            statement.setInt(6, user.getUserId());
+
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean BanUser(int userID) 
-            throws SQLException, ClassNotFoundException, NamingException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        boolean result = false;
-
-        try {
-            //1. Make connection
-            con = DBContext.getConnection();
-
-            if (con != null) {
-                //2. create SQL String
-                String sql = "UPDATE users SET user_status = 0 WHERE userID = ?";
-                //3. Create statement
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, userID);
-                //4. Excute querry to get Result set
-                int effectRow = stm.executeUpdate();
-                //5. Process Result set
-                if (effectRow > 0) {
-                    result = true;
-                }
-
-            }
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return result ;
-    }
-    
-    public void UpdateUser(String email, String phone, String address, int id) {
-        try {
-            String sql = "UPDATE [dbo].[users]\n"
-                    + "   SET [email] = ?\n"
-                    + "      ,[phone_num] = ?\n"
-                    + "      ,[user_address] = ?\n"
-                    + " WHERE userID = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, email);
-            statement.setString(2, phone);
-            statement.setString(3, address);
-            statement.setInt(4, id);
-            
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    
 }

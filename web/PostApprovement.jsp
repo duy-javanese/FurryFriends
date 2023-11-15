@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -25,48 +24,54 @@
         <link rel="stylesheet" href="asset/staff-page/css/dark-theme.css" />
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
-        <script src="https://kit.fontawesome.com/337871dc56.js" crossorigin="anonymous"></script>
-        <style>
-            .listPendingPost{
-                padding-top: 30px;
+        <style type="text/css">
+            .selected-button{
+                width: 100%;
+                background-color: #ff9907;
+                color: white;
+                margin-bottom: 8px;
+                font-size: larger;
+                border: 0;
             }
-             .listPendingPost table th, td {
-                            border: 2px solid black;
+            .menuButton{
+                width: 100%;
+                background-color: #171717;
+                color: white;
+                margin-bottom: 8px;
+                font-size: larger;
+                border: 0;
             }
-
-            .listPendingPost table {
-                            border-collapse: collapse;
-                            width: 1000px;
-                            margin: 0 auto;
+            .search-User-box{
+                width: 330px;
+                height: 36px;
+                border-radius: 4px;
+                padding-left: 13px;
             }
-
-            .listPendingPost th, td {
-                            padding: 10px
-            }
-
-            .listPendingPost th{
-                            text-align: center;
-                            background: grey;
-                            color: white;
-            }
-
-            .listPendingPost td{
-                            background: white;
-            }
-            .post-box{
+            .post-style{
                 background: white;
-                margin: 30px 135px;
-                border: 2px solid;
-                border-radius: 5px;
-                display: flex;
-                padding: 10px;
+                margin-left: 100px;
+                padding: 21px;
+                border-radius: 10px;
+                margin-right: 100px;
+                margin-bottom: 50px;
             }
-            .img-box{
-                height: 100%;
-                border: 1px solid;
-                width: 200px;
+            .approve-button{
+                margin-top: 10px;
+                font-size: large;
+                border: 0;
                 border-radius: 5px;
-                object-fit: cover;
+                background: #30ff3c;
+                color: white;
+                padding: 5px;
+            }
+            .decline-button{
+                margin-top: 10px;
+                font-size: large;
+                border: 0;
+                border-radius: 5px;
+                background: #ff3030;
+                color: white;
+                padding: 5px;
             }
         </style>
         <title>Duyệt bài viết</title>
@@ -77,28 +82,23 @@
             <div class="sidebar-wrapper" data-simplebar="true">
                 <div class="sidebar-header">
                     <div>
-                        <img class="rounded-circle" src="/asset/img/furryfriends-1.png" alt="" width="42px" height="42px">
+                        <img src="asset/images/logo-icon.png" class="logo-icon" alt="logo icon">
                     </div>
-                    <div style="margin-left: 15px">
+                    <div>
                         <h4 class="logo-text">Furry Friends</h4>
+                    </div>
+                    <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
                     </div>
                 </div>
                 <!--navigation-->
                 <ul class="metismenu" id="menu">
                     <form action="MainController">
-<!--                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
+                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
                         <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
                         <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
                         <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
-                        <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
                         <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
-                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
-                        <a href="viewStatisticController">Thống kê</a>
-                        <a href="GetAllUserController">Quản lí người dùng</a>
-                        <a style="background: #ff9907"  href="GetPendingPost">Bài viết</a>
-                        <a href="GetPendingExchange">Bài trao đổi</a>
-<!--                        <a href="GetReportedPost">Báo cáo từ người dùng</a>-->
-                        <a href="logout">Đăng xuất</a>
+                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>
                     </form>		
                 </ul>
                 <!--end navigation-->
@@ -110,11 +110,9 @@
                                             <nav class="navbar navbar-expand">
                                                 <div class="user-box dropdown">
                                                                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                            
+                                                                            <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
                                                                             <div class="user-info ps-3">
-                                                                                    <c:if test="${sessionScope.account != null}">
-                                                                                        <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
-                                                                                    </c:if>
+                                                                                    <p class="user-name mb-0">Hello #</p>
                                                                             </div>
                                                                     </a>
                                                             </div>
@@ -124,55 +122,42 @@
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
-                <div style="margin-top: 50px; margin-left: 360px">
-                    <form action="MainController" method="POST">
-                        <input class="search-User-box" type="text" name="txtSearchValue" 
-                            value="${param.txtSearchValue}" placeholder="Nhập tiêu đề bài viết"/>
-                        <select class="category-selection" name="postTypeId">
-                            <option value="0">Loại bài viết</option>
-                            <c:forEach var="t" items="${sessionScope.types}">
-                                <option value="${t.postTypeId}">${t.postTypeName}</option>
-                            </c:forEach>
-                        </select>
-                        <button class="user-page-button" name="action" value="SearchPendingPost"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
-                    </form>
-                </div>
                 <c:set var="result" value ="${requestScope.PENDING_LIST}"/>
-                <c:if test="${not empty result}">
-                    <c:forEach items="${result}" var="p" varStatus="counter">
-                        <div class="post-box">
-                            <div><img src="${p.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${p.title}</h4>
-                                    <h6 style="color: coral;">${p.postType.postTypeName}</h6>
-                                </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${p.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(p.content) > 100}">
-                                        <h6>${p.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(p.content) < 100}">
-                                        <h6>${p.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${p.datePost}</p>
-                                    <form action="MainController">
-                                            <input type="hidden" name="postId" value="${p.postId}">
-                                            <button class="view-detail-button" name="action" value="ViewPendPostDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty result}">
-                    <h3 style="text-align: center; margin-top: 50px">"Hiện tại không có bài biết nào đang chờ duyệt"</h3>
-                </c:if>
+                <c:forEach items="${result}" var="p" varStatus="counter">
+
+                    <div class="post-style">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img width="42" height="42" src="asset/img/blog/user-img.png" alt="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>${p.user.username}</h5>
+                                        <p>${p.datePost}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h6>${p.title}</h6>
+                        <p>${p.content}</p>
+                        <c:if test="${not empty p.img}">
+                            <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px"> <br>         
+                        </c:if>
+                        <form action="MainController" method="GET">
+                            <input type="hidden" name="postId" value="${p.postId}">
+                            <button class="approve-button" name="action" value="Approve">Approve</button>
+                        </form><br>
+                        <form action="MainController" method="GET">
+                            <button class="decline-button" name="action" value="Decline">Decline</button>
+                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>
+                            <input type="hidden" name="postId" value="${p.postId}">
+
+                        </form>
+                    </div>
+                </c:forEach>
             </div>
             <!--end page-wrapper -->
 

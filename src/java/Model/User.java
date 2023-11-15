@@ -19,26 +19,11 @@ public class User {
     private UserRole role;
     private String address;
     private int point;
-    private String img;
-    
+
     public User() {
     }
 
     //Construction to search members
-
-    public User(int userId, String username, String email, String phone, boolean status, String address, int point, String img) {
-        this.userId = userId;
-        this.username = username;
-        this.email = email;
-        this.phone = phone;
-        this.status = status;
-        this.address = address;
-        this.point = point;
-        this.img = img;
-    }
-
-    
-
     public User(int userId, String username, String email, String phone, String address, int point, boolean status) {
         this.userId = userId;
         this.username = username;
@@ -48,25 +33,6 @@ public class User {
         this.point = point;
         this.status = status;
     }
-
-    // Login by username and pass construction
-
-    public User(int userId, String username, String pwd, String email, String phone, boolean status, UserRole role, String address, int point, String img) {
-        this.userId = userId;
-        this.username = username;
-        this.pwd = pwd;
-        this.email = email;
-        this.phone = phone;
-        this.status = status;
-        this.role = role;
-        this.address = address;
-        this.point = point;
-        this.img = img;
-    }
-    
-
-    
-    
 
     public User(int userId, String username, String pwd, String email, String emailId, String phone, boolean status, UserRole role, String address, int point) {
         this.userId = userId;
@@ -175,15 +141,11 @@ public class User {
         this.emailId = emailId;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
     
+    @Override
+    public String toString() {
+        return "User{" + "userId=" + userId + ", username=" + username + ", pwd=" + pwd + ", email=" + email + ", phone=" + phone + ", status=" + status + ", role=" + role + ", address=" + address + ", point=" + point + '}';
+    }
     
     
 }

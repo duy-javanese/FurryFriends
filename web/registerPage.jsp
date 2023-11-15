@@ -8,6 +8,12 @@
 <!DOCTYPE html>
 <html>
 
+    <style>
+        .error-text {
+            color: red;
+        }
+    </style>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register</title>
@@ -39,39 +45,40 @@
                          aria-labelledby="pills-register-tab">
                         <form action="MainController" method="post">
                             <h6>Tên đăng nhập <span class="text-danger">*</span></h6>
-                            ${requestScope.USERNAME_ERROR}
+                            <span class="error-text">${requestScope.USERNAME_ERROR}</span>
                             <input type="text" class="form-control mb-3" name="username" required
                                    placeholder="Nhập tên đăng nhập" aria-label="Username">
 
                             <h6>Mật khẩu <span class="text-danger">*</span></h6>
+                            <span class="error-text">${requestScope.PASSWORD_ERROR}</span>
                             <input type="password" class="form-control mb-3" name="password" required
                                    placeholder="Nhập mật khẩu" aria-label="Password">
 
                             <h6>Nhập lại mật khẩu <span class="text-danger">*</span></h6>
-                            ${requestScope.PASSWORD_ERROR}
+                            <span class="error-text">${requestScope.CONFIRM_PASSWORD_ERROR}</span>
                             <input type="password" class="form-control mb-3" name="confirm_password" required
                                    placeholder="Nhập lại mật khẩu" aria-label="Confirm Password">
 
                             <h6>Email <span class="text-danger">*</span></h6>
-                            ${requestScope.EMAIL_ERROR}
+                            <span class="error-text">${requestScope.EMAIL_ERROR}</span>
                             <input type="email" class="form-control mb-3" name="email" required
                                    placeholder="Nhập địa chỉ Email" aria-label="Email">
 
                             <h6>Số điện thoại <span class="text-danger">*</span></h6>
-                            ${requestScope.PHONE_ERROR}
+                            <span class="error-text">${requestScope.PHONE_ERROR}</span>
                             <input type="tel" class="form-control mb-3" name="phone" required
                                    placeholder="Nhập số điện thoại" aria-label="Phone">
 
                             <h6>Địa chỉ <span class="text-danger">*</span></h6>
                             <input type="text" class="form-control mb-3" name="address" required
                                    placeholder="Nhập địa chỉ" aria-label="Address">
-                            
+
                             <div class="mb-3">
                                 <a href="loginPage.jsp" class="forget-pass-btn">
                                     Đăng nhập
                                 </a>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-dark w-100 mb-2" name="action" value="Register">Đăng ký</button>
                         </form>
                     </div>

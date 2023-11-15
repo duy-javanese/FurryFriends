@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -75,46 +73,29 @@ public class EditProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        boolean validate = true;
         User account = (User) session.getAttribute("account");
-        
-        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        String username = request.getParameter("username");
+        String pwd = request.getParameter("pwd");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        String avatar = request.getParameter("avatar");
-        
-        if (!checkEmail(email)) {
-                request.setAttribute("EDIT_EMAIL_ERROR", "Email không hợp lệ!");
-                validate = false;
-            }
-        if (!checkPhone(phone)) {
-                request.setAttribute("EDIT_PHONE_ERROR", "Số điện thoại không hợp lệ!");
-                validate = false;
-            }
-        if (!checkAddress(address)) {
-                request.setAttribute("EDIT_ADDRESS_ERROR", "Địa chỉ không hợp lệ!");
-                validate = false;
-            }
-        
-        if (validate){
-            User user = new User();
-            user.setUserId(account.getUserId());
-            user.setEmail(email);
-            user.setPhone(phone);
-            user.setAddress(address);
-            user.setImg(avatar);
-        
+
+        User user = new User();
+        user.setUserId(account.getUserId());
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPwd(pwd);
+        user.setPhone(phone);
+        user.setAddress(address);
+
         UserDAO uDao = new UserDAO();
         uDao.UpdateUser(user);
         
+        user = uDao.GetUserById(account.getUserId());
         session.setAttribute("account", user);
-        response.sendRedirect("userProfile");
-        }
-        else{
-            request.getRequestDispatcher("Views/User/EditProfile.jsp").forward(request, response);
-        }
         
+        response.sendRedirect("userProfile");
     }
     
     public static void main(String[] args) {
@@ -139,25 +120,5 @@ public class EditProfileController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private static boolean checkEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+)\\.[A-Za-z]{2,4}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
 
-    private static boolean checkPhone(String phone) {
-        String regex = "0\\d{9}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(phone);
-        return matcher.matches();
-    }
-    
-    private static boolean checkAddress(String address) {
-        String regex = ".*[a-zA-Z].{9,}";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(address);
-        return matcher.matches();
-    }
 }

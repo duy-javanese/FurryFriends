@@ -127,12 +127,23 @@
         <div id="users">
             <h2>Thành viên</h2>
             <ul>
-                <li>
-                    Số lượng người dùng:
+                Số lượng người dùng:
+                <%
+        try {
+            InformationDAO dao = new InformationDAO();
+            int userCount = dao.countUsers();
+            out.println(userCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("N/A");
+        }
+                %>
+                <li style="margin-left: 30px; color: green">
+                    Đang hoạt động:
                     <%
             try {
                 InformationDAO dao = new InformationDAO();
-                int userCount = dao.countUsers();
+                int userCount = dao.countActiveUsers();
                 out.println(userCount);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -140,8 +151,8 @@
             }
                     %>
                 </li>
-                <li>
-                    Bị cấm:
+                <li style="margin-left: 30px; color: red">
+                    Đang bị cấm:
                     <%
             try {
                 InformationDAO dao = new InformationDAO();
@@ -158,20 +169,33 @@
         <div id="staffs">
             <h2>Quản trị viên</h2>
             <ul>
-                <li>
-                    Số lượng quản trị viên:
+
+                Số lượng quản trị viên:
+                <%
+    try {
+        InformationDAO dao = new InformationDAO();
+        int staffCount = dao.countStaffs();
+        out.println(staffCount);
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.println("N/A");
+    }
+                %>
+
+                <li style="margin-left: 30px; color: green">
+                    Đang hoạt động:
                     <%
-        try {
-            InformationDAO dao = new InformationDAO();
-            int staffCount = dao.countStaffs();
-            out.println(staffCount);
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.println("N/A");
-        }
+            try {
+                InformationDAO dao = new InformationDAO();
+                int staffCount = dao.countActiveStaffs();
+                out.println(staffCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("N/A");
+            }
                     %>
                 </li>
-                <li>
+                <li style="margin-left: 30px; color: red">
                     Dừng hoạt động:
                     <%
             try {
@@ -189,17 +213,41 @@
         <div id="posts">
             <h2>Bài đăng</h2>
             <ul>
-                <li>
-                    Số lượng bài viết:
+                Số lượng bài viết:
+                <%
+                try {
+                    InformationDAO dao = new InformationDAO();
+                    int postCount = dao.countPosts();
+                    out.println(postCount);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    out.println("N/A");
+                }
+                %>
+                <li style="margin-left: 30px">
+                    Bài viết chia sẻ:
                     <%
-                    try {
-                        InformationDAO dao = new InformationDAO();
-                        int postCount = dao.countPosts();
-                        out.println(postCount);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        out.println("N/A");
-                    }
+            try {
+                InformationDAO dao = new InformationDAO();
+                int postCount = dao.countBlogs();
+                out.println(postCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("N/A");
+            }
+                    %>
+                </li>
+                <li style="margin-left: 30px">
+                    Bài viết trao đổi:
+                    <%
+            try {
+                InformationDAO dao = new InformationDAO();
+                int postCount = dao.countExchangePosts();
+                out.println(postCount);
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("N/A");
+            }
                     %>
                 </li>
             </ul> 

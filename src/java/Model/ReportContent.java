@@ -15,7 +15,7 @@ public class ReportContent {
 
     public ReportContent() {
     }
-
+    
     public ReportContent(int reportContentId, String reportContent, boolean deleteFlag) {
         this.reportContentId = reportContentId;
         this.reportContent = reportContent;
@@ -45,9 +45,6 @@ public class ReportContent {
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
-
-    
-    
     
     
 }

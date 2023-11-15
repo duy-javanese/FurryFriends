@@ -153,24 +153,12 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <form class="updateStatus" action="MainController" method="post">
+                                <form action="MainController" method="post">
                                     <input type="hidden" name="id" value="${acc.getUserId()}">
                                     <input type="hidden" name="status" value="<c:if test='${acc.isStatus()}'>false</c:if><c:if test='${!acc.isStatus()}'>true</c:if>">
                                         <input type="hidden" name="action" value="UpdateStaffStatus">
-                                        <button type="button" class="confirmButton">Đổi trạng thái</button>
+                                        <button type="submit">Đổi trạng thái</button>
                                     </form>
-                                    <script>
-                                        var confirmButtons = document.querySelectorAll('.confirmButton');
-                                        confirmButtons.forEach(function (button) {
-                                            button.addEventListener('click', function () {
-                                                var form = button.closest('.updateStatus');
-                                                var confirmed = confirm('Bạn muốn thay đổi trạng thái của tài khoản này?');
-                                                if (confirmed) {
-                                                    form.submit();
-                                                }
-                                            });
-                                        });
-                                    </script>
                                 </td>
                             </tr>
                     </c:forEach>

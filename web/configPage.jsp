@@ -91,6 +91,10 @@
                 width: 100%;
                 margin-bottom: 20px;
             }
+
+            .error-text {
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -111,15 +115,26 @@
         <div>
             <form action="UpdateLogoController" method="post" enctype="multipart/form-data">
                 <label for="logo">Logo:</label>
-                ${requestScope.LOGO_ERROR}
+                <span class="error-text">${requestScope.LOGO_ERROR}</span>
                 <input id="logo" class="logo-input" type="file" name="logo" accept="image/*" required=""/>
                 <button type="submit" name="action" value="UpdateLogo">Cập nhật</button><br><br>
                 <label>Đang hiển thị:</label>
                 <img src="<%=info.getLogoPath()%>" alt="logo" width="250" height="250">
             </form>
+
             <form action="MainController" method="post">
-                <label for="about">About Us:</label>
-                <textarea id="about" name="about" rows="4" required></textarea>
+                <label for="notification">Thông báo:</label>
+                <textarea id="notification" name="notification" rows="2" required="" maxlength="250"></textarea>
+                <button type="submit" name="action" value="SendNotification">Cập nhật</button><br><br>
+                <label>Đang hiển thị:</label>
+                <%
+                    out.print(info.getNotification());
+                %>
+            </form>
+
+            <form action="MainController" method="post">
+                <label for="about">Về chúng tôi:</label>
+                <textarea id="about" name="about" rows="2" required="" maxlength="250"></textarea>
                 <button type="submit" name="action" value="UpdateAboutUs">Cập nhật</button><br><br>
                 <label>Đang hiển thị:</label>
                 <%
@@ -128,8 +143,8 @@
             </form>
 
             <form action="MainController" method="post">
-                <label for="phoneNumber">Contact:</label>
-                ${requestScope.PHONE_ERROR}
+                <label for="phoneNumber">Liên hệ:</label>
+                <span class="error-text">${requestScope.PHONE_ERROR}</span>
                 <input type="text" id="phoneNumber" name="phone" required="">
                 <button type="submit" name="action" value="UpdateContact">Cập nhật</button><br><br>
                 <label>Đang hiển thị:</label>

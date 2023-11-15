@@ -24,8 +24,7 @@ import javax.naming.NamingException;
  */
 public class DeclinePostController extends HttpServlet {
    private final String DEFAULT_PAGE = "errorPage.jsp";
-   private final String PENDING_POST_PAGE = "GetPendingPost";
-   private final String PENDING_EXCHANGE_PAGE = "GetPendingExchange";
+   private final String RESULT_PAGE = "GetPendingPost";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -38,21 +37,14 @@ public class DeclinePostController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int postId = Integer.parseInt(request.getParameter("postId"));
         String declineReason = request.getParameter("declineReason");
-        int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
         String url = DEFAULT_PAGE;
         int updateStatus=3; //3 = decline
         try  {
+                
                 PostDAO dao = new PostDAO();
                 boolean result = dao.DeclinePost(postId, updateStatus, declineReason);
-                if(postTypeId == 4){
-                    if(result){
-                        url = PENDING_EXCHANGE_PAGE;
-                    }
-                }
-                else {
-                    if(result){
-                        url = PENDING_POST_PAGE;
-                    }
+                if(result){
+                    url = RESULT_PAGE;
                 }
             
         } catch (SQLException ex) {

@@ -125,58 +125,6 @@
         <servlet-class>Controller.User.EditProfileController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetReportedPost</servlet-name>
-        <servlet-class>Staff.GetReportedPost</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetReportedExchange</servlet-name>
-        <servlet-class>Staff.GetReportedExchange</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BanUserController</servlet-name>
-        <servlet-class>Staff.BanUserController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HideReportedPostAndExchange</servlet-name>
-        <servlet-class>Staff.HideReportedPostAndExchange</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewPendingPostDetailController</servlet-name>
-        <servlet-class>Staff.ViewPendingPostDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdatePolicyController</servlet-name>
-        <servlet-class>Staff.UpdatePolicyController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetAllPolicyController</servlet-name>
-        <servlet-class>Staff.GetAllPolicyController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditPolicyPage</servlet-name>
-        <servlet-class>Staff.EditPolicyPage</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewPendingExchangeDetail</servlet-name>
-        <servlet-class>Staff.ViewPendingExchangeDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchPendingExchangeController</servlet-name>
-        <servlet-class>Staff.SearchPendingExchangeController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchPendingPostController</servlet-name>
-        <servlet-class>Staff.SearchPendingPostController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewReportDetailController</servlet-name>
-        <servlet-class>Staff.ViewReportDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RejectReportController</servlet-name>
-        <servlet-class>Staff.RejectReportController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListUserInterestedController</servlet-name>
         <servlet-class>Controller.User.ListUserInterestedController</servlet-class>
     </servlet>
@@ -191,14 +139,6 @@
     <servlet>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <servlet-class>Controller.Post.FindPostByPostTypeAndCategoryController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>viewStatisticController</servlet-name>
-        <servlet-class>Staff.viewStatisticController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>statisticViewPostDetail</servlet-name>
-        <servlet-class>Staff.statisticViewPostDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
@@ -325,58 +265,6 @@
         <url-pattern>/editProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetReportedPost</servlet-name>
-        <url-pattern>/GetReportedPost</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetReportedExchange</servlet-name>
-        <url-pattern>/GetReportedExchange</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BanUserController</servlet-name>
-        <url-pattern>/BanUserController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HideReportedPostAndExchange</servlet-name>
-        <url-pattern>/HideReportedPostAndExchange</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewPendingPostDetailController</servlet-name>
-        <url-pattern>/ViewPendingPostDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdatePolicyController</servlet-name>
-        <url-pattern>/UpdatePolicyController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetAllPolicyController</servlet-name>
-        <url-pattern>/GetAllPolicyController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditPolicyPage</servlet-name>
-        <url-pattern>/EditPolicyPage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewPendingExchangeDetail</servlet-name>
-        <url-pattern>/ViewPendingExchangeDetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchPendingExchangeController</servlet-name>
-        <url-pattern>/SearchPendingExchangeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchPendingPostController</servlet-name>
-        <url-pattern>/SearchPendingPostController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewReportDetailController</servlet-name>
-        <url-pattern>/ViewReportDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RejectReportController</servlet-name>
-        <url-pattern>/RejectReportController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ListUserInterestedController</servlet-name>
         <url-pattern>/listUserInterested</url-pattern>
     </servlet-mapping>
@@ -391,14 +279,6 @@
     <servlet-mapping>
         <servlet-name>FindPostByPostTypeAndCategoryController</servlet-name>
         <url-pattern>/findPostByPostTypeAndCategory</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>viewStatisticController</servlet-name>
-        <url-pattern>/viewStatisticController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>statisticViewPostDetail</servlet-name>
-        <url-pattern>/statisticViewPostDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
