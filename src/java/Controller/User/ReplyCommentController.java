@@ -3,28 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Post;
+package Controller.User;
 
-import DAO.CommentDAO;
-import DAO.LikePostDAO;
-import DAO.PostDAO;
-import DAO.ReportContentDAO;
-import Model.Comment;
-import Model.Post;
-import Model.ReportContent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author dell
  */
-public class ViewPostDetailsController extends HttpServlet {
+public class ReplyCommentController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,32 +27,18 @@ public class ViewPostDetailsController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int postId = Integer.parseInt(request.getParameter("postId"));
-        PostDAO pDao = new PostDAO();
-        Post p = pDao.GetPostById(postId);
-        if (p == null) {
-            request.getSession().setAttribute("msg", "Bài viết hiện không khả thi!");
-            response.sendRedirect("home");
-        } else {
-            LikePostDAO lpDao = new LikePostDAO();
-            int totalLike = lpDao.GetTotalLikePost(p.getPostId());
-            
-            CommentDAO cDao = new CommentDAO();
-            ArrayList<Comment> comments = cDao.GetCommentByPostId(postId);
-            for (Comment comment : comments) {
-                ArrayList<Comment> commentChild = cDao.getCommentChildById(comment.getCommentId());
-                comment.setChildrens(commentChild);
-            }
-            
-            ReportContentDAO rpDao = new ReportContentDAO();
-            ArrayList<ReportContent> reports = rpDao.GetListReportContent();
-            
-            p.setComments(comments);
-            
-            request.setAttribute("reports", reports);
-            request.setAttribute("totalLike", totalLike);
-            request.setAttribute("post", p);
-            request.getRequestDispatcher("Views/Post/ViewPostDetails.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ReplyCommentController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ReplyCommentController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 

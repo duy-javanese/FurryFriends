@@ -64,7 +64,7 @@ public class CommentDAO extends DBUtils.DBContext {
                 UserDAO uDao = new UserDAO();
                 User user = uDao.GetUserById(rs.getInt("userID"));
 
-                return new Comment(cmntId, post, user, rs.getString("commentValue"), rs.getDate("createdDate"), rs.getBoolean("sta"));
+                return new Comment(cmntId, post, user, rs.getString("commentValue"), rs.getDate("createdDate"), rs.getBoolean("sta"), rs.getBoolean("isParent"), rs.getInt("parentId"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +78,7 @@ public class CommentDAO extends DBUtils.DBContext {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [comment]\n"
-                    + "  Where post_id = ?";
+                    + "  Where post_id = ? and isParent = 1";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, postId);
             ResultSet rs = stm.executeQuery();
@@ -91,5 +91,32 @@ public class CommentDAO extends DBUtils.DBContext {
             Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public ArrayList<Comment> getCommentChildById(int commentId) {
+        ArrayList<Comment> list = new ArrayList<>();
+        CommentDAO cmDao = new CommentDAO();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM[comment]\n"
+                    + "  Where isParent = 0 and parentId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, commentId);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Comment cmt = cmDao.GetCommentById(rs.getInt("comment_id"));
+                list.add(cmt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+        CommentDAO cDao = new CommentDAO();
+        ArrayList<Comment> list = cDao.getCommentChildById(2);
+        System.out.println(list.size());
     }
 }

@@ -55,12 +55,16 @@
                             <input class="form-control" type="file" name="file" id="file" accept="image/*"
                                    required>
                         </div>
-
+                        <select name="option">
+                            <option value="1" selected>Bán</option>
+                            <option value="2">Trao đổi</option>
+                            <option value="3">Tặng</option>
+                        </select>
                         <label for="exampleFormControlInput1" class="form-label">Giá<span style="color: red">*</span></label>
                         <div class="input-group mb-3">
                             <span class="input-group-text">VNĐ</span>
                             <input type="number" step="0.00000001" name="price" class="form-control" aria-label="Amount (to the nearest dollar)" required min="0">
-<!--                            <span class="input-group-text">.00</span>-->
+                            <!--                            <span class="input-group-text">.00</span>-->
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Địa chỉ trao đổi thú cưng <span style="color: red">*</span></label>

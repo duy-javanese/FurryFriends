@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,9 @@ public class Comment {
     private String commentValue;
     private Date createdDate;
     private boolean status;
+    private boolean isParent;
+    private int parentId;
+    private ArrayList<Comment> childrens;
 
     public Comment() {
     }
@@ -36,6 +40,17 @@ public class Comment {
         this.commentValue = commentValue;
         this.createdDate = createdDate;
         this.status = status;
+    }
+
+    public Comment(int commentId, Post post, User user, String commentValue, Date createdDate, boolean status, boolean isParent, int parentId) {
+        this.commentId = commentId;
+        this.post = post;
+        this.user = user;
+        this.commentValue = commentValue;
+        this.createdDate = createdDate;
+        this.status = status;
+        this.isParent = isParent;
+        this.parentId = parentId;
     }
     
     public Date getCreatedDate() {
@@ -84,6 +99,31 @@ public class Comment {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean isIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(boolean isParent) {
+        this.isParent = isParent;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+
+    public ArrayList<Comment> getChildrens() {
+        return childrens;
+    }
+
+    public void setChildrens(ArrayList<Comment> childrens) {
+        this.childrens = childrens;
     }
     
     

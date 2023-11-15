@@ -157,31 +157,35 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <!--                                    <div class="reply-btn">
-                                                                                <a href="" class="btn-reply text-uppercase">reply</a> 
-                                                                            </div>-->
                                     </div>
+                                    <div class="pr-5 mb-2">
+                                        <p>Trả lời bình luận của ${c.user.username}:</p>
+                                        <textarea rows="3" class="form-control ml-4 mb-3"></textarea>
+                                        <div class="justify-content-end d-flex">
+                                            <button class="btn btn-outline-secondary">Trả lời</button>
+                                        </div>
+                                    </div>
+                                    <c:forEach items="${c.childrens}" var="ch">
+                                        <div class="comment-list left-padding">
+                                            <div class="single-comment justify-content-between d-flex">
+                                                <div class="user justify-content-between d-flex">
+                                                    <div class="thumb">
+                                                        <img src="${pageContext.request.contextPath}/asset/img/paw.png" alt="" height="42" width="42">
+                                                    </div>
+                                                    <div class="desc">
+                                                        <h5><a href="#">${ch.user.username}</a></h5>
+                                                        <p class="date">${ch.createdDate}</p>
+                                                        <p class="comment">
+                                                            ${ch.commentValue}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </c:forEach>
                             </div>	
-                            <!--                            <div class="comment-list left-padding">
-                                                            <div class="single-comment justify-content-between d-flex">
-                                                                <div class="user justify-content-between d-flex">
-                                                                    <div class="thumb">
-                                                                        <img src="asset/img/blog/c2.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="desc">
-                                                                        <h5><a href="#">Elsie Cunningham</a></h5>
-                                                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                                        <p class="comment">
-                                                                            Never say goodbye till the end comes!
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="reply-btn">
-                                                                    <a href="" class="btn-reply text-uppercase">reply</a> 
-                                                                </div>
-                                                            </div>
-                                                        </div>		                                             				-->
+
                         </div>
                         <div class="comment-form">
                             <h4>Tạo bình luận</h4>
