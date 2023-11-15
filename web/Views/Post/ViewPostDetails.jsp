@@ -98,6 +98,10 @@
                             <div class="d-flex justify-content-end">
                                 <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>
                             </div>
+                            <c:if test="${post.postType.postTypeId == 4}">
+                                <p>Giá bán: ${post.exchange.price}đ</p>
+                                <p>Địa chỉ: ${post.exchange.address}đ</p>
+                            </c:if>
                             <div class="news_d_footer flex-column flex-sm-row">
                                 <a href="#"><span class="align-middle"><i class="ti-heart"></i></span>${totalLike}người thích</a>
                                 <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle"><i class="ti-themify-favicon"></i></span>${post.comments.size()} bình luận</a>

@@ -110,10 +110,8 @@ public class ExchangeDAO extends DBContext {
             stm.setInt(1, postId);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                PostDAO pDao = new PostDAO();
-                Post post = pDao.GetPostById(rs.getInt("post_id"));
                 return new Exchange(rs.getInt("exchange_id"),
-                        post,
+                        null,
                         rs.getBoolean("is_free"),
                         rs.getDouble("price"),
                         rs.getString("address"),
