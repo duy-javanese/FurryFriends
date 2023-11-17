@@ -428,19 +428,15 @@ public class UserDAO extends DBContext {
     public void UpdateUser(User user) {
         try {
             String sql = "UPDATE [dbo].[users]\n"
-                    + "   SET [username] = ?\n"
-                    + "      ,[pwd] = ?\n"
-                    + "      ,[email] = ?\n"
+                    + "   SET [email] = ?\n"
                     + "      ,[phone_num] = ?\n"
                     + "      ,[user_address] = ?\n"
                     + " WHERE userID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPwd());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getPhone());
-            statement.setString(5, user.getAddress());
-            statement.setInt(6, user.getUserId());
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getAddress());
+            statement.setInt(4, user.getUserId());
 
             statement.executeUpdate();
         } catch (SQLException e) {

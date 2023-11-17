@@ -279,7 +279,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "  FROM [InterestPost] ipost\n"
                     + "  left join post p\n"
                     + "  on p.post_id = ipost.PostId\n"
-                    + "  Where p.userID = ? and ipost.UserId != ? and p.deleteFlag = 0";
+                    + "  Where p.userID = ? and ipost.UserId != ?";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -311,7 +311,7 @@ public class PostDAO extends DBUtils.DBContext {
                 setter.put(++count, isPublic);
             }
 
-            sql += " order by ipost.datePosted desc\n";
+            sql += " order by ipost.PostId\n";
             sql += "  offset ? ROW\n"
                     + "  FETCH Next ? Rows only";
             setter.put(++count, offset);
@@ -548,7 +548,7 @@ public class PostDAO extends DBUtils.DBContext {
 
             if (con != null) {
                 //2. create SQL String
-                String sql = "UPDATE post SET status = ? WHERE post_id = ?";
+                String sql = "UPDATE post SET status = ?, reason = null WHERE post_id = ?";
                 //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, status);

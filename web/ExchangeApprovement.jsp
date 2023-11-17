@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="DAO.InformationDAO" %>
+<%@ page import="Model.Information" %>
 <!DOCTYPE html>
 <html lang="en" class="color-sidebar sidebarcolor3 color-header headercolor5">
     <head>
@@ -71,14 +73,35 @@
         </style>
         <title>Duyệt bài trao đổi</title>
     </head>
+    <c:if test="${sessionScope.account == null}">
+            <c:redirect url="loginPage.jsp"></c:redirect>
+    </c:if>
+
+    <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 2}">
+    <!-- Người dùng đã đăng nhập nhưng không phải là ADMIN -->
+        <h1>Bạn không có quyền truy cập trang web này.</h1>
+        <c:redirect url="HomePage.jsp"></c:redirect>
+    </c:if>
     <body>
         <div class="wrapper">
             <!--sidebar wrapper -->
             <div class="sidebar-wrapper" data-simplebar="true">
                 <div class="sidebar-header">
+                    <%
+        try {
+            Information info = InformationDAO.getInfor();
+%>
                     <div>
-                        <img class="rounded-circle" src="/asset/img/furryfriends-1.png" alt="" width="42px" height="42px">
+                        <%
+    String logoPath = (info.getLogoPath() != null) ? info.getLogoPath() : "${pageContext.request.contextPath}/asset/img/furryfriends-1.png";
+                    %>
+                        <img class="rounded-circle" src="<%= logoPath %>" alt="" width="42px" height="42px">
                     </div>
+                    <%
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
                     <div style="margin-left: 15px">
                         <h4 class="logo-text">Furry Friends</h4>
                     </div>

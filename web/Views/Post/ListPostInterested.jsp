@@ -22,7 +22,7 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Bài biết của tôi</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Bài viết của tôi</h1>
                 </div>
 
                 <!-- Content Row -->
@@ -36,7 +36,6 @@
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Chế độ bài viết</th>
-                                    <th>Trạng thái bài viết</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
@@ -45,7 +44,7 @@
                                     <tr>
                                         <td>${p.postId}</td>
                                         <td>
-                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover"/>
+                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
                                         <td>${p.title}</td>
                                         <td>${p.postType.postTypeName}</td>
@@ -57,7 +56,6 @@
                                                 Riêng tư
                                             </c:if>
                                         </td>
-                                        <td>${p.status.postStatusValue}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <form action="viewPostDetails" method="post">

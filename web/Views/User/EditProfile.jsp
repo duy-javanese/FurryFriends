@@ -93,25 +93,6 @@
            
             <div class="row">
                 
-                <div class="col-xl-4">
-                    <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Ảnh đại diện</div>
-                        <div class="card-body text-center">
-                            <form action="MainController" method="POST">
-                            <!-- Profile picture image-->
-                            <img class="img-account-profile rounded-circle mb-2" style="object-fit: cover;width: 165px;" src="${sessionScope.account.img}" alt="">
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                            <!-- Profile picture upload button-->
-
-                            <input class="form-control" type="file" name="avatar" id="avatar" accept="image/*">
-                            <input type="hidden" name="existAvatar" value="${requestScope.account.img}">
-                            <button class="btn btn-primary" type="button" name="action" value="UpdateAvatar">Upload new image</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-xl-8">
                     <!-- Account details card-->
                     <div class="card mb-4">
@@ -155,7 +136,6 @@
                                 </div>
                                 <!-- Save changes button-->
                                 <input type="hidden" name="userId" value="${sessionScope.account.userId}">
-                                <input type="hidden" name="avatar" value="${sessionScope.account.img}">
                                 <button class="btn btn-primary" type="submit">Lưu</button>
                             </form>
                         </div>

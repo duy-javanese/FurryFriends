@@ -52,7 +52,7 @@
                         <c:forEach items="${posts}" var="p">
                             <div class="card blog__slide text-center">
                                 <div class="blog__slide__img">
-                                    <img class="card-img rounded-0" src="${p.img}" alt="" width="150px" height="150px"/>
+                                    <img class="card-img rounded-0" src="${p.img}" style="object-fit: cover" alt="" width="150px" height="150px"/>
                                 </div>
                                 <div class="blog__slide__content" onclick="redirect('viewPostDetails?postId=${p.postId}')">
                                     <a class="blog__slide__label" href="#">${p.postType.postTypeName}</a>
@@ -182,27 +182,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="single-sidebar-widget popular-post-widget">
-                                    <h4 class="single-sidebar-widget__title">Bài viết phổ biến</h4>
-                                    <div class="popular-post-list">
-                                        <c:forEach items="${sessionScope.top3Post}" var="p3">
-                                            <div class="single-post-list">
-                                                <div class="thumb">
-                                                    <img class="card-img rounded-0" src="${p3.img}" alt="">
-                                                    <ul class="thumb-info">
-                                                        <li><a href="viewPostDetails?postId=${p3.postId}">${p3.user.username}</a></li>
-                                                        <li><a href="viewPostDetails?postId=${p3.postId}">${p3.datePost}</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="details mt-20">
-                                                    <a href="blog-single.html">
-                                                        <h6>${p3.content.substring(0, 100)}...</h6>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <%

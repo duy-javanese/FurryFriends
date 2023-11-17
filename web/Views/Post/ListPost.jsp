@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Danh sách bài viết của tôi</title>
         <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -22,7 +22,7 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Bài biết của tôi</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Bài viết của tôi</h1>
                 </div>
 
                 <!-- Content Row -->
@@ -31,7 +31,7 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
@@ -43,9 +43,9 @@
                             <tbody>
                                 <c:forEach items="${posts}" var="p">
                                     <tr>
-                                        <td>${p.postId}</td>
+                                       
                                         <td>
-                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover"/>
+                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
                                         <td>${p.title}</td>
                                         <td>${p.postType.postTypeName}</td>
@@ -57,7 +57,26 @@
                                                 Riêng tư
                                             </c:if>
                                         </td>
-                                        <td>${p.status.postStatusValue}</td>
+                                        <td>
+                                            <c:if test="${p.status.postStatusId == 1}">
+                                                <p style="background: gold; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
+                                            </c:if>
+                                            <c:if test="${p.status.postStatusId == 3}">
+                                                <p style="background: red; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
+                                            </c:if>
+                                            <c:if test="${p.status.postStatusId == 2}">
+                                                <p style="background: green; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
+                                            </c:if>
+                                            
+                                                ${p.status.postStatusValue}
+                                            </p>
+                                            <c:if test="${not empty p.reason}">
+                                                <p style="color: red">
+                                                    Lý do : ${p.reason}
+                                                </p>
+                                            </c:if>
+                                            
+                                        </td>
                                         <td>
                                             <div class="d-flex">
                                                 <form action="viewPostDetails" method="post">

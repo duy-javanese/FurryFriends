@@ -85,12 +85,26 @@ public class LoginController extends HttpServlet {
             String hashedPwd = hashMD5(pwd);
             User account = uDao.doLogin(username.toLowerCase(), hashedPwd);
             if (account != null) {
-                request.getSession().setAttribute("account", account);
-                response.sendRedirect("home");
-            } else {
+                if(account.isStatus()==true){
+                    if( account.getRole().getRoleId() == 1){
+                    request.getSession().setAttribute("account", account);
+                    response.sendRedirect("statisticsPage.jsp");
+                }
+                    if( account.getRole().getRoleId() == 2){
+                        request.getSession().setAttribute("account", account);
+                        response.sendRedirect("viewStatisticController");
+                    }
+                    if( account.getRole().getRoleId() == 3){
+                        request.getSession().setAttribute("account", account);
+                        response.sendRedirect("home");
+                    }
+                }
+                else {
                 request.setAttribute("isFail", true);
                 request.getRequestDispatcher("loginPage.jsp").forward(request, response);
             }
+                
+            } 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

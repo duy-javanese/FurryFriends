@@ -94,7 +94,7 @@ private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticView
             else if (action.equals("Approve")){
                 url = APPROVE_POST_CONTROLLER;
             }
-            else if (action.equals("Decline")){
+            else if (action.equals("Từ chối")){
                 url = DECLINE_POST_CONTROLLER;
             }
             else if (action.equals("ExchangeApprovement")){

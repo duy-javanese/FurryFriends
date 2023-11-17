@@ -60,16 +60,7 @@
                                     <p class="lead fw-normal mb-0">Bài viết gần đây</p>
                                     <p class="mb-0"><a href="/listPost" class="text-muted">Xem tất cả</a></p>
                                 </div>
-                                <div class="row g-2">
-                                    <div class="col mb-2">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                             alt="image 1" class="w-100 rounded-3">
-                                    </div>
-                                    <div class="col mb-2">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                             alt="image 1" class="w-100 rounded-3">
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

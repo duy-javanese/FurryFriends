@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * @author dell
  */
 public class ListUserInterestedController extends HttpServlet {
-   
+
     private int recordsPerPage = 5;
     private String textSearch = null;
     private int categoryId = -1;

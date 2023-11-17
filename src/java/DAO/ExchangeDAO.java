@@ -61,7 +61,7 @@ public class ExchangeDAO extends DBContext {
             if (conn != null) {
                 String sql = "Select e.exchange_id, p.post_id, e.is_free, e.price, e.address, e.isFinish "
                         + "From post as p, exchange as e "
-                        + "Where e.post_id = p.post_id and p.post_type=4 and p.status = 1";
+                        + "Where e.post_id = p.post_id and p.post_type=4 and p.status = 1 and p.deleteFlag=0";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {

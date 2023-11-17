@@ -69,7 +69,7 @@ public class UserProfileController extends HttpServlet {
         } else {
             int totalPost = pDao.GetNoOfRecordsPostByUser(account.getUserId());
             request.setAttribute("totalPost", totalPost);
-            request.getRequestDispatcher("Views/Post/User/UserProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("Views/User/UserProfile.jsp").forward(request, response);
         }
     }
 

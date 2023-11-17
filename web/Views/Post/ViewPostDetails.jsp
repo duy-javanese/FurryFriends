@@ -4,7 +4,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Chi tiết bài viết</title>
         <link href="asset/css/Login/layout.css" rel="stylesheet" type="text/css"/>
         <link href="asset/css/Login/login.css" rel="stylesheet" type="text/css"/>
         <link href="asset/css/Login/layout.css" rel="stylesheet" type="text/css"/>
@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="main_blog_details">
-                            <img class="img-fluid" src="${post.img}" alt="" width="800px" height="300px">
+                            <img class="img-fluid" src="${post.img}" style="object-fit: cover" alt="" width="800px" height="300px">
                             <a href="#"><h4>${post.title}</h4></a>
                             <div class="user_details">
                                 <div class="float-left">
@@ -109,13 +109,16 @@
                                        "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
                                 </c:if>
                             </div>
-                            <div class="d-flex justify-content-end">
+<!--                            <div class="d-flex justify-content-end">
                                 <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>
-                            </div>
-                            <c:if test="${post.postType.postTypeId == 4}">
-                                <p>Giá bán: ${post.exchange.price}đ</p>
-                                <p>Địa chỉ: ${post.exchange.address}đ</p>
+                            </div>-->
+<div style="margin-top :30px">
+                                <c:if test="${post.postType.postTypeId == 4}">
+                                <p style="font-weight: bold">Giá bán:</p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
+                                <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}đ</p>
                             </c:if>
+                            </div>
+                            
                             <div class="news_d_footer flex-column flex-sm-row">
                                 <a href="#"><span class="align-middle"><i class="ti-heart"></i></span>${totalLike}người thích</a>
                                 <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle"><i class="ti-themify-favicon"></i></span>${post.comments.size()} bình luận</a>
@@ -250,27 +253,7 @@
                                 </ul>
                             </div>
 
-                            <div class="single-sidebar-widget popular-post-widget">
-                                <h4 class="single-sidebar-widget__title">Bài viết phổ biến</h4>
-                                <div class="popular-post-list">
-                                    <c:forEach items="${sessionScope.top3Post}" var="p3">
-                                        <div class="single-post-list">
-                                            <div class="thumb">
-                                                <img class="card-img rounded-0" src="${p3.img}" alt="">
-                                                <ul class="thumb-info">
-                                                    <li><a href="viewPostDetails?postId=${p3.postId}">${p3.user.username}</a></li>
-                                                    <li><a href="viewPostDetails?postId=${p3.postId}">${p3.datePost}</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="details mt-20">
-                                                <a href="blog-single.html">
-                                                    <h6>${p3.content.substring(0, 100)}...</h6>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

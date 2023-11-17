@@ -22,7 +22,7 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Bài biết của tôi</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Bài viết của tôi</h1>
                 </div>
 
                 <!-- Content Row -->
@@ -31,21 +31,20 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Chế độ bài viết</th>
-                                    <th>Trạng thái bài viết</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${posts}" var="p">
                                     <tr>
-                                        <td>${p.postId}</td>
+                                        
                                         <td>
-                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover"/>
+                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
                                         <td>${p.title}</td>
                                         <td>${p.postType.postTypeName}</td>
@@ -57,7 +56,6 @@
                                                 Riêng tư
                                             </c:if>
                                         </td>
-                                        <td>${p.status.postStatusValue}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <button href="/admin-product-detail.html" type="button"
@@ -91,7 +89,7 @@
                                                                             <tbody>
                                                                                 <c:forEach items="${p.userInterested}" var="ui">
                                                                                     <tr>
-                                                                                        <td><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                                                                        <td><img src="${pageContext.request.contextPath}/asset/img/paw.png"
                                                                                                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                                                                                  style="width: 150px; z-index: 1"></td>
 

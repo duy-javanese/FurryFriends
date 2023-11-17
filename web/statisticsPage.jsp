@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="DAO.InformationDAO"%>
 <!DOCTYPE html>
 <html>
@@ -113,6 +114,15 @@
             }
         </style>
     </head>
+    <c:if test="${sessionScope.account == null}">
+            <c:redirect url="loginPage.jsp"></c:redirect>
+    </c:if>
+
+    <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 1}">
+    <!-- Người dùng đã đăng nhập nhưng không phải là ADMIN -->
+        <h1>Bạn không có quyền truy cập trang web này.</h1>
+        <c:redirect url="HomePage.jsp"></c:redirect>
+    </c:if>
     <body>
         <h1>Admin Management</h1>
         <div id="menu">

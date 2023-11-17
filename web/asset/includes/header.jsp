@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="DAO.InformationDAO" %>
+<%@ page import="Model.Information" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,9 +65,21 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container box_1620">
                 <!-- Brand and toggle get grouped for better mobile display -->
+                <%
+        try {
+            Information info = InformationDAO.getInfor();
+%>
                 <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/home">
-                    <img class="rounded-circle" src="${pageContext.request.contextPath}/asset/img/furryfriends-1.png" alt="" width="80px" height="80px">
+                    <%
+    String logoPath = (info.getLogoPath() != null) ? info.getLogoPath() : "${pageContext.request.contextPath}/asset/img/furryfriends-1.png";
+                    %>
+                    <img class="rounded-circle" src="<%= logoPath %>" alt="" width="80px" height="80px">
                 </a>
+                <%
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -122,7 +136,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">${sessionScope.account.username}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="/userProfile">Thông tin cá nhân</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="userProfile">Thông tin cá nhân</a></li>
                                     <li class="nav-item"><a class="nav-link" href="listPost">Bài viết của tôi</a></li>
                                     <li class="nav-item"><a class="nav-link" href="createPost">Tạo bài viết</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/logout">Đăng xuất</a></li>
