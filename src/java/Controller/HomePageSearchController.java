@@ -26,7 +26,8 @@ import javax.naming.NamingException;
  * @author Admin
  */
 public class HomePageSearchController extends HttpServlet {
-   private final String ERROR_PAGE = "errorPage.jsp";
+   private final String ERROR_PAGE = "home";
+   private final String DEFAULT_PAGE = "";
     private final String RESULT_PAGE = "/Views/Post/HomePageSearchResult.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

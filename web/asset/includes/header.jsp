@@ -237,7 +237,7 @@ e.printStackTrace();
         </nav>
         <div class="homepage-search">
             <div style="position: relative">
-                <form action="MainController">
+                <form action="MainController" method="POST">
                     <input oninput="searchByTitle(this)" onblur="hideSearchResults()" onclick="showSearchResults()"  class="homepage-search-box" type="text" name="txtSearchValue" 
                            value="${param.txtSearchValue}" placeholder="Nhập nội dung tìm kiếm"/>
                     <button class="homepage-search-button" name="action" value="Home Page Search"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
