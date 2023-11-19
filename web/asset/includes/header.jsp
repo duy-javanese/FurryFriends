@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="DAO.InformationDAO" %>
 <%@ page import="Model.Information" %>
 <head>
@@ -24,6 +25,8 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/style.css">
 
+    <script src="https://kit.fontawesome.com/337871dc56.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         /* The Modal (hidden by default) */
         .modal {
@@ -56,19 +59,101 @@
             color: #000;
             font-size: 20px;
         }
+        .homepage-search{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .homepage-search-box{
+            width: 450px;
+            padding: 7px;
+            border-radius: 5px;
+        }
+        .homepage-search-button{
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 0;
+            background: #ffc930;
+        }
+        .search-ajax-result{
+            position: absolute;
+            top: 50px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: white;
+            width: 100%;
+           
+        }
+        .each-ajax-result{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
 
     </style>
+    <script>
+        function showSearchResults() {
+    var searchAjaxContent = document.getElementById('searchAjaxContent');
+    searchAjaxContent.style.display = 'flex';
+}
+        
+        function hideSearchResults() {
+        var searchAjaxContent = document.getElementById('searchAjaxContent');
+        var inputValue = document.getElementsByName('txtSearchValue')[0].value.trim();
+
+        // Kiểm tra xem ô input có giá trị hay không
+        if (inputValue === '') {
+            // Nếu không, ẩn searchAjaxContent
+            searchAjaxContent.style.display = "none";
+        }
+    }
+        
+        function searchByTitle(param) {
+            var txtSearch = param.value;
+
+            
+            $.ajax({
+                url: "/SearchAjaxHomePage",
+                type: "get", //send it through get method
+                data: {
+                    txt: txtSearch
+                },
+                success: function (data) {
+                    var row = document.getElementById("searchAjaxContent");
+                    row.innerHTML = data;
+                    
+                    var searchResults = row.getElementsByClassName("each-ajax-result");
+                    var maxHeight = 300;
+
+                    if (searchResults.length > 3) { // Chỉ định số lượng tối đa trước khi hiển thị thanh cuộn
+                        row.style.height = maxHeight + "px";
+                        row.style.overflowY = "scroll";
+                    } else {
+                        row.style.height = "auto";
+                        row.style.overflowY = "visible";
+                    }
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }
+    </script>
 </head>
 <!--================Header Menu Area =================-->
 <header class="header_area">
-    <div class="main_menu">
+    <div class="main_menu" >
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container box_1620">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <%
         try {
             Information info = InformationDAO.getInfor();
-%>
+                %>
                 <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/home">
                     <%
     String logoPath = (info.getLogoPath() != null) ? info.getLogoPath() : "${pageContext.request.contextPath}/asset/img/furryfriends-1.png";
@@ -79,7 +164,7 @@
 } catch (Exception e) {
 e.printStackTrace();
 }
-%>
+                %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -150,6 +235,20 @@ e.printStackTrace();
                 </div> 
             </div>
         </nav>
+        <div class="homepage-search">
+            <div style="position: relative">
+                <form action="MainController">
+                    <input oninput="searchByTitle(this)" onblur="hideSearchResults()" onclick="showSearchResults()"  class="homepage-search-box" type="text" name="txtSearchValue" 
+                           value="${param.txtSearchValue}" placeholder="Nhập nội dung tìm kiếm"/>
+                    <button class="homepage-search-button" name="action" value="Home Page Search"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                </form>
+                <div id="searchAjaxContent" class="search-ajax-result" >
+                    <div class="each-ajax-result">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 <%@ include file="toast.jsp" %>

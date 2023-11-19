@@ -34,6 +34,7 @@ private static final String UPDATE_CONTACT = "UpdateContactController";
 private static final String UPDATE_LOGO = "UpdateLogoController";
 private static final String UPDATE_STAFF_STATUS = "UpdateStaffStatusController";
 private static final String SEND_NOTIFICATION = "SendNotificationController";
+private static final String HOMEPAGE_SEARCH_CONTROLLER="HomePageSearchController";
 
 private static final String SEARCH_PENDING_EXCHANGE_CONTROLLER = "SearchPendingExchangeController";
 private static final String SEARCH_PENDING_POST_CONTROLLER = "SearchPendingPostController";
@@ -144,6 +145,9 @@ private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticView
             }
             else if (action.equals("SearchPendingPost")){
                 url = SEARCH_PENDING_POST_CONTROLLER;
+            }
+            else if (action.equals("Home Page Search")){
+                url = HOMEPAGE_SEARCH_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

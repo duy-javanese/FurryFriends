@@ -196,6 +196,14 @@
         <servlet-name>DeletePostController</servlet-name>
         <servlet-class>Controller.User.DeletePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchAjaxHomePage</servlet-name>
+        <servlet-class>Controller.SearchAjaxHomePage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomePageSearchController</servlet-name>
+        <servlet-class>Controller.HomePageSearchController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -391,6 +399,14 @@
     <servlet-mapping>
         <servlet-name>DeletePostController</servlet-name>
         <url-pattern>/deletePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAjaxHomePage</servlet-name>
+        <url-pattern>/SearchAjaxHomePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomePageSearchController</servlet-name>
+        <url-pattern>/HomePageSearchController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
