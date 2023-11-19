@@ -119,6 +119,7 @@
                 <li><a href="addStaff.jsp">Thêm mới quản trị viên</a></li>
                 <li><a href="staffManagement.jsp">Quản lí quản trị viên</a></li>
                 <li><a href="memberManagement.jsp">Quản lí người dùng</a></li>
+                <li><a href="logout">Đăng xuất</a></li>
             </ul>
         </div>
         <div>
