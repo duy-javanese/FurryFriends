@@ -130,11 +130,6 @@ e.printStackTrace();
                     <c:set var="thisYear" value ="${requestScope.LIST_POST_OF_THIS_YEAR}"/>
                     <c:set var="thisYearTotal" value ="${requestScope.THIS_YEAR_TOTAL_POST}"/>
                     
-                    <c:set var="FirsPtd" value ="${requestScope.FIRST_POST_TYPE_DETAIL}"/>
-                    <c:set var="SecondPtd" value ="${requestScope.SECOND_POST_TYPE_DETAIL}"/>
-                    <c:set var="ThirdPtd" value ="${requestScope.THIRD_POST_TYPE_DETAIL}"/>
-                    <c:set var="ForthPtd" value ="${requestScope.FORTH_POST_TYPE_DETAIL}"/>
-                    
                     <c:set var="TotalPendingP" value ="${requestScope.TOTAL_PENDING_POST}"/>
                     <c:set var="TotalApprovedP" value ="${requestScope.TOTAL_APPROVED_POST}"/>
                     <c:set var="TotalRejectedP" value ="${requestScope.TOTAL_REJECTED_POST}"/>
@@ -144,9 +139,8 @@ e.printStackTrace();
                     <c:set var="ActiveStaff" value ="${requestScope.ACTIVE_STAFF}"/>
                     <c:set var="BannedStaff" value ="${requestScope.BANNED_STAFF}"/>
                     
-                    <c:set var="FirCate" value ="${requestScope.FIRST_CATEGORY_DETAIL}"/>
-                    <c:set var="SecCate" value ="${requestScope.SECOND_CATEGORY_DETAIL}"/>
-                    <c:set var="ThiCate" value ="${requestScope.THIRD_CATEGORY_DETAIL}"/>
+                    <c:set var="postType" value ="${requestScope.POSTTYPE_TOTAL_PER_TYPE}"/>
+                    <c:set var="category" value ="${requestScope.CATEGORY_TOTAL_PER_CATE}"/>
                     
                     <c:set var="mlp" value ="${requestScope.MOST_LIKED_POST}"/>
                     <c:set var="mlpt" value ="${requestScope.MOST_LIKED_POST_TOTAL}"/>
@@ -203,11 +197,11 @@ e.printStackTrace();
                                 </figure>
                         </div>
                         <div class="pie-chart-Style">
-                            <h4 style="color: coral; text-align: center; margin-top: 30px; margin-bottom: 30px">CÁC LOẠI TRAO ĐỔI</h4>
-                            <figure class="highcharts-figure">
-                                <div id="categoryDetail"></div>
-                                <h6 style="text-align: center">Số bài trao đổi đã hoàn thành: ${finishedExchangeQuantity}</h6>
-                            </figure>
+                            <h4 style="color: coral; text-align: center; margin-top: 30px; margin-bottom: 30px">CÁC DANH MỤC TRAO ĐỔI</h4>
+                                <figure class="highcharts-figure">
+                                    <div id="categoryDetail"></div>
+                                    <h5></h5>
+                                </figure>
                         </div>
                     </div>
                     <div class="big-box-Style" style="display: flex; justify-content: space-around">
@@ -318,130 +312,120 @@ e.printStackTrace();
         <!--HighChart-->
         <script>
             <!-------------------------------- Category Detail -------------------------------->
-            Highcharts.chart('categoryDetail', {
-                chart: {
-                    type: 'pie'
-                },
-                title: {
-                    text: ''
-                },
-                tooltip: {
-                    valueSuffix: ' bài'
-                },
-                subtitle: {
-                    text:
-                    ''
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: [{
-                            enabled: true,
-                            distance: 20
-                        }, {
-                            enabled: true,
-                            distance: -40,
-                            format: '{point.percentage:.1f}%',
-                            style: {
-                                fontSize: '1.2em',
-                                textOutline: 'none',
-                                opacity: 0.7
-                            },
-                            filter: {
-                                operator: '>',
-                                property: 'percentage',
-                                value: 10
-                            }
-                        }]
-                    }
-                },
-                series: [
-                    {
-                        name: 'Số lượng ',
-                        colorByPoint: true,
-                        data: [
-                            {
-                                name: 'Chó',
-                                y: ${FirCate}
-                            },
-                            {
-                                name: 'Mèo',
-                                y: ${SecCate}
-                            },
-                            {
-                                name: 'Dịch vụ và dụng cụ',
-                                y: ${ThiCate}
-                            }
-                        ]
-                    }
-                ]
+
+<c:if test="${not empty category}">
+                        var categoryData = [];
+
+        // Sử dụng vòng lặp để tạo đối tượng dữ liệu cho series
+        <c:forEach var="cat" items="${category}">
+            categoryData.push({
+                name: '${cat.category.categoryName}',
+                y: ${cat.quantity}
             });
-            
+        </c:forEach>
+
+        Highcharts.chart('categoryDetail', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                valueSuffix: ' bài'
+            },
+            subtitle: {
+                text: ''
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: [{
+                        enabled: true,
+                        distance: 20
+                    }, {
+                        enabled: true,
+                        distance: -40,
+                        format: '{point.percentage:.1f}%',
+                        style: {
+                            fontSize: '1.2em',
+                            textOutline: 'none',
+                            opacity: 0.7
+                        },
+                        filter: {
+                            operator: '>',
+                            property: 'percentage',
+                            value: 10
+                        }
+                    }]
+                }
+            },
+            series: [{
+                name: 'Số lượng ',
+                colorByPoint: true,
+                data: categoryData
+            }]
+        });
+                    </c:if>
+
             <!-------------------------------- Post Type Detail -------------------------------->
-            Highcharts.chart('postTypeDetail', {
-                chart: {
-                    type: 'pie'
-                },
-                title: {
-                    text: ''
-                },
-                tooltip: {
-                    valueSuffix: ' bài'
-                },
-                subtitle: {
-                    text:
-                    ''
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: [{
-                            enabled: true,
-                            distance: 20
-                        }, {
-                            enabled: true,
-                            distance: -40,
-                            format: '{point.percentage:.1f}%',
-                            style: {
-                                fontSize: '1.2em',
-                                textOutline: 'none',
-                                opacity: 0.7
-                            },
-                            filter: {
-                                operator: '>',
-                                property: 'percentage',
-                                value: 10
-                            }
-                        }]
-                    }
-                },
-                series: [
-                    {
-                        name: 'Số lượng ',
-                        colorByPoint: true,
-                        data: [
-                            {
-                                name: 'Sức khỏe cún cưng',
-                                y: ${FirsPtd}
-                            },
-                            {
-                                name: 'Cung cấp thông tin thú cưng',
-                                y: ${SecondPtd}
-                            },
-                            {
-                                name: 'Mẹo nuôi chó mèo',
-                                y: ${ThirdPtd}
-                            },
-                            {
-                                name: 'Bài viết trao đổi',
-                                y: ${ForthPtd}
-                            }
-                        ]
-                    }
-                ]
+                    <c:if test="${not empty postType}">
+                        var postTypeData = [];
+
+        // Sử dụng vòng lặp để tạo đối tượng dữ liệu cho series
+        <c:forEach var="pt" items="${postType}">
+            postTypeData.push({
+                name: '${pt.postType.postTypeName}',
+                y: ${pt.quantity}
             });
+        </c:forEach>
+
+        Highcharts.chart('postTypeDetail', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                valueSuffix: ' bài'
+            },
+            subtitle: {
+                text: ''
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: [{
+                        enabled: true,
+                        distance: 20
+                    }, {
+                        enabled: true,
+                        distance: -40,
+                        format: '{point.percentage:.1f}%',
+                        style: {
+                            fontSize: '1.2em',
+                            textOutline: 'none',
+                            opacity: 0.7
+                        },
+                        filter: {
+                            operator: '>',
+                            property: 'percentage',
+                            value: 10
+                        }
+                    }]
+                }
+            },
+            series: [{
+                name: 'Số lượng ',
+                colorByPoint: true,
+                data: postTypeData
+            }]
+        });
+                    </c:if>
+            
             
             <!--------------------------------Num of posts created this year and last year -------------------------------->
             // Create a new Date object

@@ -89,7 +89,18 @@
                                                    text-danger
                                                </c:if>
                                            </c:forEach>
-                                           "><i class="ti-heart mr-1"></i>Thích</a>
+                                           "><i class="ti-thumb-up mr-1"></i>Thích</a>
+                                           
+                                        <c:if test="${sessionScope.account.userId != p.user.userId}">
+                                               <a href="SavePostController?postId=${p.postId}" class="ml-3
+                                            <c:forEach items="${p.userSave}" var="uS">
+                                                <c:if test="${uS.userId == sessionScope.account.userId}">
+                                                    text-danger
+                                                </c:if>
+                                            </c:forEach>
+                                   "><i class="ti-heart mr-1"></i>Lưu</a>
+                                        </c:if>
+                                        
                                         <c:if test="${p.postType.postTypeId == 4}">
                                             <a href="interestPost?postId=${p.postId}" class="ml-3
                                                <c:forEach items="${p.userInterested}" var="ui">

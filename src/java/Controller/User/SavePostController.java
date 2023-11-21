@@ -1,17 +1,15 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
-package Controller.Post;
+package Controller.User;
 
-import DAO.CommentDAO;
 import DAO.LikePostDAO;
 import DAO.PostDAO;
-import DAO.ReportContentDAO;
-import Model.Comment;
+import DAO.SavePostDao;
 import Model.Post;
-import Model.ReportContent;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,13 +17,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-public class ViewPostDetailsController extends HttpServlet {
+public class SavePostController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,42 +34,30 @@ public class ViewPostDetailsController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int postId = Integer.parseInt(request.getParameter("postId"));
-        PostDAO pDao = new PostDAO();
-        Post p = pDao.GetPostById(postId);
-        if (p == null) {
-            request.getSession().setAttribute("msg", "Bài viết hiện không khả thi!");
-            response.sendRedirect("home");
+//        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User account = (User) session.getAttribute("account");
+        String url = request.getHeader("Referer");
+        if (account == null) {
+            session.setAttribute("msg", "Bạn cần đăng nhập để thực hiện hành động này!");
+            response.sendRedirect(url);
         } else {
-            LikePostDAO lpDao = new LikePostDAO();
-            int totalLike = lpDao.GetTotalLikePost(p.getPostId());
-            
-            CommentDAO cDao = new CommentDAO();
-            ArrayList<Comment> comments = cDao.GetCommentByPostId(postId);
-            
-            
-            ArrayList<User> listUI = pDao.GetUserInterested(p.getPostId());
-            p.setUserInterested(listUI);
-            
-            ArrayList<User> listUL = pDao.GetUserLike(p.getPostId());
-            p.setUserLike(listUL);
-            
-            ArrayList<User> listUS = pDao.GetUserSave(p.getPostId());
-            p.setUserSave(listUS);
-            for (Comment comment : comments) {
-                ArrayList<Comment> commentChild = cDao.getCommentChildById(comment.getCommentId());
-                comment.setChildrens(commentChild);
+            int postId = Integer.parseInt(request.getParameter("postId"));
+
+            SavePostDao sDao = new SavePostDao();
+            int status = sDao.InsertSave(account.getUserId(), postId);
+            switch (status) {
+                case 1:
+                    session.setAttribute("msg", "Lưu bài viết thành công!");
+                    break;
+                case -1:
+                    session.setAttribute("msg", "Bỏ lưu bài viết thành công!");
+                    break;
+                default:
+                    session.setAttribute("msg", "Đã có lỗi xảy ra!");
+                    break;
             }
-            
-            ReportContentDAO rpDao = new ReportContentDAO();
-            ArrayList<ReportContent> reports = rpDao.GetListReportContent();
-            
-            p.setComments(comments);
-            
-            request.setAttribute("reports", reports);
-            request.setAttribute("totalLike", totalLike);
-            request.setAttribute("post", p);
-            request.getRequestDispatcher("Views/Post/ViewPostDetails.jsp").forward(request, response);
+            response.sendRedirect(url);
         }
     } 
 

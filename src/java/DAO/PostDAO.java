@@ -1189,7 +1189,7 @@ public class PostDAO extends DBUtils.DBContext {
 
                 String sql = "Select * "
                         + "From post "
-                        + "where title like ? and status = 2 and isPublic = 1";
+                        + "where title like ? and status = 2 and isPublic = 1 and deleteFlag=0";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -1238,5 +1238,27 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
         return searchAjaxResult;
+    }
+    
+    public ArrayList<User> GetUserSave(int postId) {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [savePost]\n"
+                    + "  Where PostId = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, postId);
+            ResultSet rs = stm.executeQuery();
+
+            UserDAO uDao = new UserDAO();
+            while (rs.next()) {
+                User u = uDao.GetUserById(rs.getInt("UserId"));
+                list.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }

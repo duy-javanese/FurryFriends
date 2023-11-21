@@ -27,6 +27,7 @@ public class Post {
     private ArrayList<Comment> comments;
     private ArrayList<User> userInterested;
     private ArrayList<User> userLike;
+    private ArrayList<User> userSave;
 
     public Post() {
     }
@@ -193,6 +194,15 @@ public class Post {
     public void setUserLike(ArrayList<User> userLike) {
         this.userLike = userLike;
     }
+
+    public ArrayList<User> getUserSave() {
+        return userSave;
+    }
+
+    public void setUserSave(ArrayList<User> userSave) {
+        this.userSave = userSave;
+    }
+    
     
     
     @Override

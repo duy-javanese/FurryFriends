@@ -14,6 +14,7 @@ public class statisticModel {
     private int quantity;
     private PostType postType;
     private Post post;
+    private Category category;
     
     public statisticModel() {
     }
@@ -69,6 +70,19 @@ public class statisticModel {
     @Override
     public String toString() {
         return "statisticModel{" + "object=" + object + ", quantity=" + quantity + ", postType=" + postType + ", post=" + post + '}';
+    }
+
+    public statisticModel(int quantity, Category category) {
+        this.quantity = quantity;
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     

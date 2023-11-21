@@ -87,6 +87,9 @@ public class HomePage extends HttpServlet {
             
             ArrayList<User> listUL = pDao.GetUserLike(post.getPostId());
             post.setUserLike(listUL);
+            
+            ArrayList<User> listUS = pDao.GetUserSave(post.getPostId());
+            post.setUserSave(listUS);
         }
         
 

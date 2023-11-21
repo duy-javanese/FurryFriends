@@ -62,19 +62,13 @@ public class viewStatisticController extends HttpServlet {
             request.setAttribute("TOTAL_APPROVED_POST", pDao.getTotalPostByStatus(2));
             request.setAttribute("TOTAL_REJECTED_POST", pDao.getTotalPostByStatus(3));
             
-            request.setAttribute("FIRST_POST_TYPE_DETAIL", dao.getPostTypeQuantity(1));
-            request.setAttribute("SECOND_POST_TYPE_DETAIL", dao.getPostTypeQuantity(2));
-            request.setAttribute("THIRD_POST_TYPE_DETAIL", dao.getPostTypeQuantity(3));
-            request.setAttribute("FORTH_POST_TYPE_DETAIL", dao.getPostTypeQuantity(4));
+            request.setAttribute("POSTTYPE_TOTAL_PER_TYPE", dao.PostTypeTotalPerType());
+            request.setAttribute("CATEGORY_TOTAL_PER_CATE", dao.CategoryTotalPerCate());
             
             request.setAttribute("ACTIVE_USER", iDao.countUsers());
             request.setAttribute("BANNED_USER", iDao.countBannedUsers());
             request.setAttribute("ACTIVE_STAFF", iDao.countStaffs());
             request.setAttribute("BANNED_STAFF", iDao.countInactiveStaffs());
-            
-            request.setAttribute("FIRST_CATEGORY_DETAIL", dao.getCategoryQuantity(1));
-            request.setAttribute("SECOND_CATEGORY_DETAIL", dao.getCategoryQuantity(2));
-            request.setAttribute("THIRD_CATEGORY_DETAIL", dao.getCategoryQuantity(3));
             
             request.setAttribute("MOST_LIKED_POST", pDao.GetMostLikedPost());
             request.setAttribute("MOST_LIKED_POST_TOTAL", lDao.GetTotalLikePost(pDao.GetMostLikedPost().getPostId()));
@@ -165,8 +159,8 @@ public class viewStatisticController extends HttpServlet {
             }
             if(!check) quantityOfPost.add(0);
         }
-            System.out.println(lDao.GetTotalLikePost(pDao.GetMostLikedPost().getPostId()));
-            System.out.println(dao.GetMostInteractedPost());
+            System.out.println(dao.CategoryTotalPerCate());
+            
         } catch (SQLException ex) {
            Logger.getLogger(viewStatisticController.class.getName()).log(Level.SEVERE, null, ex);
        }

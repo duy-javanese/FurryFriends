@@ -6,6 +6,7 @@
 package DAO;
 
 import DBUtils.DBContext;
+import Model.Category;
 import Model.Post;
 import Model.PostType;
 import Model.statisticModel;
@@ -205,5 +206,79 @@ public class statisticModelDAO extends DBUtils.DBContext {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public List<statisticModel> PostTypeTotalPerType() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<statisticModel> postType = new ArrayList<statisticModel>();
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = " select post_type, count(post_type) as 'NumOfPost' from post group by post_type ";
+                ptm = conn.prepareStatement(sql);
+                
+                rs = ptm.executeQuery();
+                
+                while (rs.next()) {
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType pt = ptDao.GetTypeById(rs.getInt("post_type"));
+                    int quantity = rs.getInt("NumOfPost");
+                    
+                    postType.add(new statisticModel(quantity, pt));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return postType;
+    }
+    
+    public List<statisticModel> CategoryTotalPerCate() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<statisticModel> categorylist = new ArrayList<statisticModel>();
+        try {
+            conn = DBContext.getConnection();
+            if (conn != null) {
+                String sql = " select category_id, count(category_id) as 'NumOfPost' from post where post_type = 4 group by category_id ";
+                ptm = conn.prepareStatement(sql);
+                
+                rs = ptm.executeQuery();
+                
+                while (rs.next()) {
+                    CategoryDAO cDao = new CategoryDAO();
+                    Category cate = cDao.GetCategoryById(rs.getInt("category_id"));
+                    int quantity = rs.getInt("NumOfPost");
+                    
+                    categorylist.add(new statisticModel(quantity, cate));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return categorylist;
     }
 }

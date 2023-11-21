@@ -67,5 +67,13 @@
                 Bài viết quan tâm 
             </a>
         </li>
+        <li class="nav-item">
+            <a href="/ListSavePostController" class="nav-link link-dark">
+                <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid"></use>
+                </svg>
+                Bài viết đã lưu 
+            </a>
+        </li>
     </ul>
 </section>

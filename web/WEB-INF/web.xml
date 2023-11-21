@@ -204,6 +204,14 @@
         <servlet-name>HomePageSearchController</servlet-name>
         <servlet-class>Controller.HomePageSearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SavePostController</servlet-name>
+        <servlet-class>Controller.User.SavePostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListSavePostController</servlet-name>
+        <servlet-class>Controller.User.ListSavePostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -407,6 +415,14 @@
     <servlet-mapping>
         <servlet-name>HomePageSearchController</servlet-name>
         <url-pattern>/HomePageSearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SavePostController</servlet-name>
+        <url-pattern>/SavePostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSavePostController</servlet-name>
+        <url-pattern>/ListSavePostController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
