@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="DAO.InformationDAO" %>
 <%@ page import="Model.Information" %>
+<%@ page import="DAO.CategoryDAO" %>
+<%@ page import="Model.Category" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,6 +59,14 @@
                 border-radius: 5px;
             }
 
+            table {
+                background-color: #fff;
+                padding: 20px;
+                margin: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
             label {
                 display: block;
                 margin-bottom: 10px;
@@ -69,6 +80,14 @@
                 margin-bottom: 20px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
+            }
+
+            table input[type="text"] {
+                width: auto;
+                padding: 5px;
+                margin-bottom: 0;
+                border: none;
+                border-radius: 0;
             }
 
             button {
@@ -101,6 +120,8 @@
         <%
         try {
             Information info = InformationDAO.getInfor();
+            CategoryDAO categoryDAO = new CategoryDAO();
+            ArrayList<Category> categories = categoryDAO.GetAllCategories();
         %>
         <h1>Admin Management</h1>
         <div id="menu">
@@ -153,6 +174,51 @@
                     out.print(info.getContact());
                 %>
             </form>
+
+            <form action="MainController" method="post">
+                <label for="category_name">Thêm mới danh mục:</label>
+                <span class="error-text">${requestScope.CATEGORY_ERROR}</span>
+                <input type="text" id="category_name" name="category_name" required="">
+                <button type="submit" name="action" value="AddCategory">Thêm mới</button><br><br>
+                <label>Danh mục hiện có:</label>
+                <span class="error-text">${requestScope.DELETE_ERROR}</span>
+            </form>
+
+            <table border="1" class="category_table exclude-styles">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Danh mục</th>
+                        <th>Cập nhật</th>
+                        <th>Xoá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        for (int i = 0; i < categories.size(); i++) {
+                            Category category = categories.get(i);
+                    %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                <form action="MainController" method="POST">
+                    <td>
+                        <input type="text" name="category_name_update" value="<%= category.getCategoryName() %>" required="">
+                    </td>
+                    <td>
+                        <input type="hidden" name="id" value="<%= category.getCategoryId() %>">
+                        <button type="submit" name="action" value="UpdateCategory">Cập nhật</button>
+                    </td>
+                </form>
+                <form action="MainController" method="POST">
+                    <td>
+                        <input type="hidden" name="id" value="<%= category.getCategoryId() %>">
+                        <button type="submit" name="action" value="DeleteCategory">Xoá</button>
+                    </td>
+                </form>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
         </div>
         <%
     } catch (Exception e) {

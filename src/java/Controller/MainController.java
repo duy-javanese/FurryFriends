@@ -51,6 +51,9 @@ private static final String ADMIN_UPDATE_USER_STATUS = "AdminUpdateUserStatusCon
 private static final String GET_REPORTED_POST_CONTROLLER = "GetReportedPost";
 private static final String GET_REPORTED_EXCHANGE_CONTROLLER = "GetReportedExchange";
 private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticViewPostDetail";
+private static final String ADD_CATEGORY = "AddCategoryController";
+private static final String UPDATE_CATEGORY = "UpdateCategoryController";
+private static final String DELETE_CATEGORY = "DeleteCategoryController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -148,6 +151,15 @@ private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticView
             }
             else if (action.equals("Home Page Search")){
                 url = HOMEPAGE_SEARCH_CONTROLLER;
+            }
+            else if (action.equals("AddCategory")){
+                url = ADD_CATEGORY;
+            }
+            else if (action.equals("UpdateCategory")){
+                url = UPDATE_CATEGORY;
+            }
+            else if (action.equals("DeleteCategory")){
+                url = DELETE_CATEGORY;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
