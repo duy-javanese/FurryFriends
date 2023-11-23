@@ -212,6 +212,10 @@
         <servlet-name>ListSavePostController</servlet-name>
         <servlet-class>Controller.User.ListSavePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePostPublicStatus</servlet-name>
+        <servlet-class>Controller.User.UpdatePostPublicStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -423,6 +427,10 @@
     <servlet-mapping>
         <servlet-name>ListSavePostController</servlet-name>
         <url-pattern>/ListSavePostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePostPublicStatus</servlet-name>
+        <url-pattern>/UpdatePostPublicStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -79,6 +79,23 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
+                                                <form action="UpdatePostPublicStatus" method="get">
+                                                    <input type="hidden" value="${p.postId}" name="postId">
+                                                    <c:if test="${p.isPublic==true}">
+                                                        <input type="hidden" value="false" name="PublicStatus">
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success me-2">
+                                                            <i class="fa-solid fa-eye-slash"></i>
+                                                        </button>
+                                                    </c:if>
+                                                    <c:if test="${p.isPublic==false}">
+                                                        <input type="hidden" value="true" name="PublicStatus">
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success me-2">
+                                                            <i class="fa-regular fa-eye-slash"></i>
+                                                        </button>
+                                                    </c:if>
+                                                </form>
                                                 <form action="viewPostDetails" method="post">
                                                     <input type="hidden" value="${p.postId}" name="postId">
                                                     <button type="submit"

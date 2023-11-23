@@ -1261,4 +1261,24 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return list;
     }
+    
+    public boolean updatePostPublicStatus(int postId, boolean status) {
+         boolean result = false;
+        try {
+            String sql = "UPDATE [dbo].[post]\n"
+                    + "   SET [isPublic] = ? \n"
+                    + " WHERE post_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(2, postId);
+            stm.setBoolean(1, status);
+            stm.executeUpdate();
+            int effectRow = stm.executeUpdate();
+            if (effectRow > 0) {
+                    result = true;
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }
