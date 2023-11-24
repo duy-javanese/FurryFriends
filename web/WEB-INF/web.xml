@@ -216,6 +216,10 @@
         <servlet-name>UpdatePostPublicStatus</servlet-name>
         <servlet-class>Controller.User.UpdatePostPublicStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewOtherUserController</servlet-name>
+        <servlet-class>Controller.User.ViewOtherUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -431,6 +435,10 @@
     <servlet-mapping>
         <servlet-name>UpdatePostPublicStatus</servlet-name>
         <url-pattern>/UpdatePostPublicStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOtherUserController</servlet-name>
+        <url-pattern>/ViewOtherUserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

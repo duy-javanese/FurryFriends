@@ -1281,4 +1281,62 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return result;
     }
+    
+    public List<Post> getPostByUserID(int userId) {
+        List<Post> list = new ArrayList<>();
+        try {
+            String sql = "select * from post where userID = ? and post_type !=4 and isPublic=1 and status=2 and deleteFlag=0;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+
+            PostDAO pDao = new PostDAO();
+            while (rs.next()) {
+                Post p = pDao.GetPostById(rs.getInt("post_id"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public int getTotalShowedPostOfUser(int userId) {
+        int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select count(post_id) as NumOfPost from post where userID = ? and post_type!=4 and isPublic=1 and status=2 and deleteFlag=0;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                numofPost = rs.getInt("NumOfPost");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return numofPost;
+    }
+    
+    public int getTotalShowedExchangeOfUser(int userId) {
+        int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select count(post_id) as NumOfPost from post where userID = ? and post_type=4 and isPublic=1 and status=2 and deleteFlag=0;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                numofPost = rs.getInt("NumOfPost");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return numofPost;
+    }
 }

@@ -79,7 +79,10 @@
                                 <div class="float-right mt-sm-0 mt-3">
                                     <div class="media">
                                         <div class="media-body">
-                                            <h5>${post.user.username}</h5>
+                                            <form action="MainController" method="get">
+                                                <input type="hidden" name="userId" value="${post.user.userId}">
+                                                <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${post.user.username}</h5></button>
+                                            </form>
                                             <p>${post.datePost}</p>
                                         </div>
                                         <div class="d-flex">
@@ -182,7 +185,10 @@
                                                 <img src="${pageContext.request.contextPath}/asset/img/paw.png" alt="" height="42" width="42">
                                             </div>
                                             <div class="desc">
-                                                <h5><a href="#">${c.user.username}</a></h5>
+                                                <form action="MainController" method="get">
+                                                <input type="hidden" name="userId" value="${c.user.userId}">
+                                                <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${c.user.username}</h5></button>
+                                                </form>
                                                 <p class="date">${c.createdDate}</p>
                                                 <p class="comment">
                                                     ${c.commentValue}

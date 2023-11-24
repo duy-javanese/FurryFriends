@@ -91,8 +91,6 @@
             <h4>Chỉnh sửa thông tin cá nhân</h4>
             <hr class="mt-0 mb-4">
            
-            <div class="row">
-                
                 <div class="col-xl-8">
                     <!-- Account details card-->
                     <div class="card mb-4">

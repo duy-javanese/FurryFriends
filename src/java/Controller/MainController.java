@@ -54,6 +54,8 @@ private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticView
 private static final String ADD_CATEGORY = "AddCategoryController";
 private static final String UPDATE_CATEGORY = "UpdateCategoryController";
 private static final String DELETE_CATEGORY = "DeleteCategoryController";
+
+private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -160,6 +162,12 @@ private static final String DELETE_CATEGORY = "DeleteCategoryController";
             }
             else if (action.equals("DeleteCategory")){
                 url = DELETE_CATEGORY;
+            }
+            else if (action.equals("viewUserListPost")){
+                url = VIEW_OTHER_USER_PROFILE_CONTROLLER;
+            }
+            else if (action.equals("viewUserListExchange")){
+                url = VIEW_OTHER_USER_PROFILE_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());
