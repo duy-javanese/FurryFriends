@@ -112,9 +112,7 @@
     </c:if>
 
     <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 1}">
-    <!-- Người dùng đã đăng nhập nhưng không phải là ADMIN -->
-        <h1>Bạn không có quyền truy cập trang web này.</h1>
-        <c:redirect url="HomePage.jsp"></c:redirect>
+        <c:redirect url="home"></c:redirect>
     </c:if>
     <body>
         <h1>Admin Management</h1>

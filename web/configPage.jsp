@@ -4,6 +4,7 @@
 <%@ page import="DAO.CategoryDAO" %>
 <%@ page import="Model.Category" %>
 <%@ page import="java.util.ArrayList" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -116,6 +117,13 @@
             }
         </style>
     </head>
+    <c:if test="${sessionScope.account == null}">
+            <c:redirect url="loginPage.jsp"></c:redirect>
+    </c:if>
+
+    <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 1}">
+        <c:redirect url="home"></c:redirect>
+    </c:if>
     <body>
         <%
         try {
