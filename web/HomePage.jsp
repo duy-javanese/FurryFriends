@@ -77,7 +77,7 @@
                                     <div class="thumb">
                                         <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px">
                                         <ul class="thumb-info">
-                                            <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
+                                            <li><a href="#"><i class="ti-user"></i>${p.user.username}</a></li>
                                             <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
                                             <li><a href="#"><i class="ti-themify-favicon"></i>${p.comments.size()} Bình luận</a></li>
                                         </ul>
@@ -101,7 +101,7 @@
                                    "><i class="ti-heart mr-1"></i>Lưu</a>
                                         </c:if>
                                         
-                                        <c:if test="${p.postType.postTypeId == 4}">
+                                        <c:if test="${sessionScope.account.userId != p.user.userId}">
                                             <a href="interestPost?postId=${p.postId}" class="ml-3
                                                <c:forEach items="${p.userInterested}" var="ui">
                                                    <c:if test="${ui.userId == sessionScope.account.userId}">
