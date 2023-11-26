@@ -7,6 +7,8 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,13 +38,16 @@ public class InterestPostDAO extends DBUtils.DBContext {
             } else {
                 sql = "INSERT INTO [dbo].[InterestPost]\n"
                         + "           ([UserId]\n"
-                        + "           ,[PostId])\n"
+                        + "           ,[PostId]\n"
+                        + "           ,[DateTime])\n"
                         + "     VALUES\n"
                         + "           (?\n"
+                        + "           ,?\n"
                         + "           ,?)";
                 stm = connection.prepareStatement(sql);
                 stm.setInt(1, userId);
                 stm.setInt(2, postId);
+                stm.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
                 stm.executeUpdate();
                 return 1;
             }

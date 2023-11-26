@@ -40,19 +40,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${posts}" var="p">
+                                <c:forEach items="${ip}" var="ip">
                                     <tr>
                                         
                                         <td>
-                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
+                                            <img src="${ip.post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
-                                        <td>${p.title}</td>
-                                        <td>${p.postType.postTypeName}</td>
+                                        <td>${ip.post.title}</td>
+                                        <td>${ip.post.postType.postTypeName}</td>
                                         <td>
-                                            <c:if test="${p.isPublic == true}">
+                                            <c:if test="${ip.post.isPublic == true}">
                                                 Công khai
                                             </c:if>
-                                            <c:if test="${p.isPublic == false}">
+                                            <c:if test="${ip.post.isPublic == false}">
                                                 Riêng tư
                                             </c:if>
                                         </td>
@@ -60,11 +60,11 @@
                                             <div class="d-flex">
                                                 <button href="/admin-product-detail.html" type="button"
                                                         class="btn btn-outline-success me-2" data-bs-toggle="modal"
-                                                        data-bs-target="#itemDetail_${p.postId}">
+                                                        data-bs-target="#itemDetail_${ip.post.postId}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
                                                 <!--Modal View Detail-->
-                                                <div class="modal fade" id="itemDetail_${p.postId}" tabindex="-1"
+                                                <div class="modal fade" id="itemDetail_${ip.post.postId}" tabindex="-1"
                                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                                         <div class="modal-content">
@@ -83,11 +83,12 @@
                                                                                     <th>Email</th>
                                                                                     <th>Số điện thoại</th>
                                                                                     <th>Trạng thái</th>
+                                                                                    <th>Thời gian</th>
                                                                                     <th>Hành động</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <c:forEach items="${p.userInterested}" var="ui">
+                                                                                <c:forEach items="${ip.userInterested}" var="ui">
                                                                                     <tr>
                                                                                         <td><img src="${pageContext.request.contextPath}/asset/img/paw.png"
                                                                                                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
@@ -103,6 +104,7 @@
                                                                                                 Vô hiệu hóa
                                                                                             </c:if>
                                                                                         </td>
+                                                                                        <td>${ip.datetime}</td>
                                                                                         <td>
                                                                                             <c:if test="${ui.status == true}">
                                                                                                 <a href="https://zalo.me/${ui.phone}" class="btn btn-outline-primary d-flex align-items-center g-3" role="button">

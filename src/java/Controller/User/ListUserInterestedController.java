@@ -6,6 +6,7 @@
 package Controller.User;
 
 import DAO.PostDAO;
+import Model.InterestedPost;
 import Model.Post;
 import Model.User;
 import java.io.IOException;
@@ -87,11 +88,11 @@ public class ListUserInterestedController extends HttpServlet {
                 textSearch = "";
             }
 
-            ArrayList<Post> posts = pDao.GetPostByUserInsterested((page - 1) * recordsPerPage,
+            ArrayList<InterestedPost> interestedPost = pDao.GetPostByUserInsterested((page - 1) * recordsPerPage,
                     recordsPerPage, account.getUserId(), textSearch, categoryId,
                     typeId, status, isPublic);
-            for (Post post : posts) {
-                ArrayList<User> listUI = pDao.GetUserInterested(post.getPostId());
+            for (InterestedPost post : interestedPost) {
+                ArrayList<User> listUI = pDao.GetUserInterested(post.getPost().getPostId());
                 post.setUserInterested(listUI);
             }
 
@@ -105,18 +106,18 @@ public class ListUserInterestedController extends HttpServlet {
             request.setAttribute("currentPage", page);
             request.setAttribute("noOfRecords", noOfRecords);
 
-            request.setAttribute("posts", posts);
+            request.setAttribute("ip", interestedPost);
 
             request.getRequestDispatcher("/Views/Post/ListUserInterested.jsp").forward(request, response);
         }
     }
 
-//    public static void main(String[] args) {
-//        PostDAO pDao = new PostDAO();
-//        ArrayList<Post> posts = pDao.GetPostByUser(0,
-//                3, 3, "", -1, -1, -1, -1);
-//        System.out.println(posts.size());
-//    }
+    public static void main(String[] args) {
+        PostDAO pDao = new PostDAO();
+        ArrayList<InterestedPost> interestedPost = pDao.GetPostByUserInsterested(0,
+                3, 18, "", -1, -1, -1, -1);
+        System.out.println(interestedPost.size());
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
