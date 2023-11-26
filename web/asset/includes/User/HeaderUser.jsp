@@ -5,22 +5,35 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="DAO.InformationDAO" %>
+<%@ page import="Model.Information" %>
 <!-- This container belong to HEADER ADMIN; DONT copy to JSP, JUST INCLUDE -->
 <header style="background-color: white;" class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+    <%
+        try {
+            Information info = InformationDAO.getInfor();
+    %>
     <a href="home" class="d-flex align-items-center ms-4 mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <img style="width: 200px; height: 100px; object-fit: contain;" src="${pageContext.request.contextPath}/asset/img/furryfriends-1.png" alt="logo">
+        <%
+    String logoPath = (info.getLogoPath() != null) ? info.getLogoPath() : "${pageContext.request.contextPath}/asset/img/furryfriends-1.png";
+        %>
+        <img style="width: 200px; height: 100px; object-fit: contain;" src="<%= logoPath %>" alt="logo">
     </a>
-
+    <%
+    } catch (Exception e) {
+    e.printStackTrace();
+    }
+    %>
     <div class="d-flex align-items-center gap-2 me-3">
-<!--         <li class="nav-item"><a href="#san-pham" class="nav-link link-dark">Products</a></li> 
-        <div class="nav-item"><a href="/cart.html" class="nav-link link-dark">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Cart: 2 products</a></div>
-
-         If do not login, show this      
-        <a href="/login.html" type="button" class="btn btn-outline-none me-2">
-            <i class="fa-solid fa-user-plus me-1"></i>
-            Log in</a>-->
+        <!--         <li class="nav-item"><a href="#san-pham" class="nav-link link-dark">Products</a></li> 
+                <div class="nav-item"><a href="/cart.html" class="nav-link link-dark">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart: 2 products</a></div>
+        
+                 If do not login, show this      
+                <a href="/login.html" type="button" class="btn btn-outline-none me-2">
+                    <i class="fa-solid fa-user-plus me-1"></i>
+                    Log in</a>-->
 
         <!-- If login, show this      -->
         <div class="dropdown">
