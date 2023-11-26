@@ -34,7 +34,8 @@
 
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
-                                    <th>Phân loại bài viết</th>
+                                    <th>Danh mục bài viết</th>
+                                    <th>Phân loại</th>
                                     <th>Chế độ bài viết</th>
                                     <th>Trạng thái bài viết</th>
                                     <th>Hành động</th>
@@ -49,6 +50,7 @@
                                         </td>
                                         <td>${p.title}</td>
                                         <td>${p.postType.postTypeName}</td>
+                                        <td>${p.category.categoryName}</td>
                                         <td>
                                             <c:if test="${p.isPublic == true}">
                                                 Công khai

@@ -80,7 +80,7 @@
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Ảnh</th>
-                                                                                    <th>Email</th>
+                                                                                    <th>User name</th>
                                                                                     <th>Số điện thoại</th>
                                                                                     <th>Trạng thái</th>
                                                                                     <th>Thời gian</th>
@@ -94,7 +94,7 @@
                                                                                                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                                                                                  style="width: 150px; z-index: 1"></td>
 
-                                                                                        <td>${ui.email}</td>
+                                                                                        <td>${ui.username}</td>
                                                                                         <td>${ui.phone}</td>
                                                                                         <td>
                                                                                             <c:if test="${ui.status == true}">

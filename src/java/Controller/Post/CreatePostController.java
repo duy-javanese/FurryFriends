@@ -120,6 +120,9 @@ public class CreatePostController extends HttpServlet {
             PostType type = new PostType();
             type.setPostTypeId(typeId);
 
+            Category category = new Category();
+            category.setCategoryId(Integer.parseInt(request.getParameter("category")));
+            
             String title = request.getParameter("title");
             String content = request.getParameter("content");
 
@@ -133,6 +136,7 @@ public class CreatePostController extends HttpServlet {
             post.setUser(account);
             post.setPostType(type);
             post.setTitle(title);
+            post.setCategory(category);
             post.setContent(content);
             post.setIsPublic(true);
             post.setDatePost(createDate);
