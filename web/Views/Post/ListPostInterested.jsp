@@ -58,7 +58,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <form action="viewPostDetails" method="post">
+                                                <form action="viewPostDetails" method="get">
                                                     <input type="hidden" value="${p.postId}" name="postId">
                                                     <button type="submit"
                                                             class="btn btn-outline-success me-2">

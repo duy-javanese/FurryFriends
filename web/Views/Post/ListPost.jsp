@@ -91,7 +91,7 @@
                                                     <c:if test="${p.isPublic==false}">
                                                         <input type="hidden" value="true" name="PublicStatus">
                                                         <button type="submit"
-                                                            class="btn btn-outline-success me-2">
+                                                            class="btn btn-outline-danger me-2">
                                                             <i class="fa-regular fa-eye-slash"></i>
                                                         </button>
                                                     </c:if>

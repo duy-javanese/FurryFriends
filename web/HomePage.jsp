@@ -77,7 +77,7 @@
                                     <div class="thumb">
                                         <img class="img-fluid" src="${p.img}" alt="" width="800px" height="300px">
                                         <ul class="thumb-info">
-                                            <li><a href="#"><i class="ti-user"></i>${p.user.role.roleName}</a></li>
+                                            <li><a href="#"><i class="ti-user"></i>${p.user.username}</a></li>
                                             <li><a href="#"><i class="ti-notepad"></i>${p.datePost}</a></li>
                                             <li><a href="#"><i class="ti-themify-favicon"></i>${p.comments.size()} Bình luận</a></li>
                                         </ul>
@@ -90,18 +90,18 @@
                                                </c:if>
                                            </c:forEach>
                                            "><i class="ti-thumb-up mr-1"></i>Thích</a>
-                                           
+
                                         <c:if test="${sessionScope.account.userId != p.user.userId}">
-                                               <a href="SavePostController?postId=${p.postId}" class="ml-3
-                                            <c:forEach items="${p.userSave}" var="uS">
-                                                <c:if test="${uS.userId == sessionScope.account.userId}">
-                                                    text-danger
-                                                </c:if>
-                                            </c:forEach>
-                                   "><i class="ti-heart mr-1"></i>Lưu</a>
+                                            <a href="SavePostController?postId=${p.postId}" class="ml-3
+                                               <c:forEach items="${p.userSave}" var="uS">
+                                                   <c:if test="${uS.userId == sessionScope.account.userId}">
+                                                       text-danger
+                                                   </c:if>
+                                               </c:forEach>
+                                               "><i class="ti-heart mr-1"></i>Lưu</a>
                                         </c:if>
-                                        
-                                        <c:if test="${p.postType.postTypeId == 4}">
+
+                                        <c:if test="${sessionScope.account.userId != p.user.userId and p.postType.postTypeId == 4}">
                                             <a href="interestPost?postId=${p.postId}" class="ml-3
                                                <c:forEach items="${p.userInterested}" var="ui">
                                                    <c:if test="${ui.userId == sessionScope.account.userId}">
@@ -117,6 +117,11 @@
                                         </a>
                                         <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <p>${p.content.substring(0, 200)}...</p>
+                                        <c:if test="${p.postType.postTypeId == 4}">
+                                            <div class="d-flex gap-2">
+                                                <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                            </div>
+                                        </c:if>
                                         <a class="button" href="viewPostDetails?postId=${p.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
                                     </div>
                                 </div>
@@ -193,7 +198,7 @@
                                     </ul>
                                 </div>
 
-                                
+
                             </div>
                         </div>
                         <%
