@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import DAO.CategoryDAO;
-import Model.Category;
+import DAO.PostTypeDAO;
+import Model.PostType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DUY
  */
-@WebServlet(name = "DeleteCategoryController", urlPatterns = {"/DeleteCategoryController"})
-public class DeleteCategoryController extends HttpServlet {
+@WebServlet(name = "AddPostTypeController", urlPatterns = {"/AddPostTypeController"})
+public class AddPostTypeController extends HttpServlet {
 
     private static final String ERROR = "configPage.jsp";
     private static final String SUCCESS = "configPage.jsp";
@@ -38,20 +38,28 @@ public class DeleteCategoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        CategoryDAO dao = new CategoryDAO();
-        Category category = new Category();
+        PostTypeDAO dao = new PostTypeDAO();
+        PostType postType = new PostType();
+        boolean checkExists;
+        boolean checkAdd;
         try {
-            int category_id = Integer.parseInt(request.getParameter("category_id"));
-            category.setCategoryId(category_id);
-            boolean check = dao.deleteCategory(category);
-            if (check) {
-                url = SUCCESS;
+            String postType_name = request.getParameter("postType_name");
+            if (postType_name != null && !postType_name.isEmpty()) {
+                checkExists = dao.isPostTypeExists(postType_name);
+                if (checkExists) {
+                    request.setAttribute("POSTTYPE_ERROR", "Thể loại bài viết đã tồn tại!");
+                } else {
+                    postType.setPostTypeName(postType_name);
+                    do {
+                        checkAdd = dao.addPostType(postType);
+                    } while (checkAdd == false);
+                    if (checkAdd) {
+                        url = SUCCESS;
+                    }
+                }
             }
         } catch (Exception e) {
-            log("Error at DeleteCategoryController: " + e.toString());
-            if (e.toString().contains("conflicted")) {
-                request.setAttribute("DELETE_CATEGORY_ERROR", "Danh mục này đã có bài viết vì vậy không thể xoá!");
-            }
+            log("Error at AddPostTypeController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

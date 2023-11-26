@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import DAO.CategoryDAO;
-import Model.Category;
+import DAO.PostTypeDAO;
+import Model.PostType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DUY
  */
-@WebServlet(name = "DeleteCategoryController", urlPatterns = {"/DeleteCategoryController"})
-public class DeleteCategoryController extends HttpServlet {
+@WebServlet(name = "DeletePostTypeController", urlPatterns = {"/DeletePostTypeController"})
+public class DeletePostTypeController extends HttpServlet {
 
     private static final String ERROR = "configPage.jsp";
     private static final String SUCCESS = "configPage.jsp";
@@ -38,19 +38,19 @@ public class DeleteCategoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        CategoryDAO dao = new CategoryDAO();
-        Category category = new Category();
+        PostTypeDAO dao = new PostTypeDAO();
+        PostType postType = new PostType();
         try {
-            int category_id = Integer.parseInt(request.getParameter("category_id"));
-            category.setCategoryId(category_id);
-            boolean check = dao.deleteCategory(category);
+            int postType_id = Integer.parseInt(request.getParameter("postType_id"));
+            postType.setPostTypeId(postType_id);
+            boolean check = dao.deletePostType(postType);
             if (check) {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at DeleteCategoryController: " + e.toString());
+            log("Error at DeletePostTypeController: " + e.toString());
             if (e.toString().contains("conflicted")) {
-                request.setAttribute("DELETE_CATEGORY_ERROR", "Danh mục này đã có bài viết vì vậy không thể xoá!");
+                request.setAttribute("DELETE_POSTTYPE_ERROR", "Thể loại này đã có bài viết vì vậy không thể xoá!");
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
