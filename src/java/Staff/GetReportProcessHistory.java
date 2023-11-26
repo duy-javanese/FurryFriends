@@ -15,14 +15,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Admin
  */
-public class ViewReportDetailController extends HttpServlet {
-   private static final String ERROR = "errorPage.jsp";
-   private static final String VIEW_REPORT_DETAIL_PAGE="ViewReportedContentDetail.jsp";
+public class GetReportProcessHistory extends HttpServlet {
+   private final String ERROR_PAGE = "errorPage.jsp";
+   private final String RESULT_PAGE = "StaffReportPage.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -32,21 +36,15 @@ public class ViewReportDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int reportId = Integer.parseInt(request.getParameter("reportId"));
-        int postType = Integer.parseInt(request.getParameter("postType"));
-        String url = ERROR;
-        try  {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR_PAGE;
+        try {
             ReportDAO rDao = new ReportDAO();
-            if (postType != 4) {
-                Report dto = rDao.GetReportPostById(reportId);
-                request.setAttribute("REPORTED_POST", dto);
-            }
-            else {
-                Report dto = rDao.GetReportExchangeById(reportId);
-                request.setAttribute("REPORTED_EXCHANGE", dto);
-            }
-            
-            url = VIEW_REPORT_DETAIL_PAGE;
+            List<Report> ProcessReportHistory = rDao.getProcessReportHistory();
+            request.setAttribute("PROCESS_REPORT_HISTORY", ProcessReportHistory);
+            request.setAttribute("TOTAL_REPORTED_POST", rDao.getTotalReportedPost());
+            request.setAttribute("TOTAL_REPORTED_EXCHANGE", rDao.getTotalReportedExchange());
+            url = RESULT_PAGE;
         }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
@@ -88,9 +86,5 @@ public class ViewReportDetailController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    public static void main(String[] args) {
-        ReportDAO rDao = new ReportDAO();
-        Report dto = rDao.GetReportExchangeById(2);
-        System.out.println(dto);
-    }
+
 }

@@ -14,6 +14,7 @@ import Model.Report;
 import Model.ReportContent;
 import Model.User;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,9 +47,9 @@ public class ReportDAO extends DBUtils.DBContext {
         try {
             conn = DBContext.getConnection();
             if (conn != null) {
-                String sql = "Select * "
-                        + "From report "
-                        + "Where report_status = 1 AND report_type='Post' ";
+                String sql = "select *\n" +
+                            "from report as r, post as p\n" +
+                            "where r.post_id = p.post_id and p.post_type!=4 and p.isPublic=1 and p.status=2 and p.deleteFlag=0 and r.report_status=1;";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -60,18 +61,16 @@ public class ReportDAO extends DBUtils.DBContext {
                     PostDAO pDao = new PostDAO();
                     Post post = pDao.GetPostById(rs.getInt("post_id"));
                     
-                    String reportType = rs.getString("report_type");
-                    
                     String reason = rs.getString("reason");
                     
                     //Date
                     
-                    boolean reportStatus = rs.getBoolean("report_status");
+                    int reportStatus = rs.getInt("report_status");
                     
                     ReportContentDAO rcDao = new ReportContentDAO();
-                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
+                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("reportContent_id"));
                     
-                    Report dto = new Report(reportId, reporter, reportType, post, reason, rs.getDate("report_date"), reportStatus, reportContent);
+                    Report dto = new Report(reportId, reporter, post, reason, rs.getDate("report_date"), reportStatus, reportContent);
                     
                     
                     if (this.ReportedPostList == null) {
@@ -110,9 +109,9 @@ public class ReportDAO extends DBUtils.DBContext {
         try {
             conn = DBContext.getConnection();
             if (conn != null) {
-                String sql = "Select * "
-                        + "From report "
-                        + "Where report_status = 1 AND report_type='Exchange' ";
+                String sql = "select *\n" +
+                            "from report as r, post as p, exchange as e\n" +
+                            "where r.post_id = p.post_id and e.post_id = p.post_id and p.isPublic=1 and p.status=2 and p.deleteFlag=0 and r.report_status=1;";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -126,15 +125,14 @@ public class ReportDAO extends DBUtils.DBContext {
                     
                     String reason = rs.getString("reason");
                     
-                    String reportType = rs.getString("report_type");
                     //Date
                     
-                    boolean reportStatus = rs.getBoolean("report_status");
+                    int reportStatus = rs.getInt("report_status");
                     
                     ReportContentDAO rcDao = new ReportContentDAO();
-                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
+                    ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("reportContent_id"));
                     
-                    Report dto = new Report(reportId, reporter, reportType, exchangeId, reason, rs.getDate("report_date"), reportStatus, reportContent);
+                    Report dto = new Report(reportId, reporter, reason, rs.getDate("report_date"), reportStatus, reportContent, exchangeId);
                     
                     
                     if (this.ReportedExchangeList == null) {
@@ -193,7 +191,7 @@ public class ReportDAO extends DBUtils.DBContext {
         return result;
     }
     
-    public Report GetReportById(int id) {
+    public Report GetReportPostById(int id) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [report]\n"
@@ -205,32 +203,199 @@ public class ReportDAO extends DBUtils.DBContext {
                 UserDAO uDao = new UserDAO();
                 User user = uDao.GetUserById(rs.getInt("reporter_id"));
 
-                String reportType = rs.getString("report_type");
-
                 PostDAO pDao = new PostDAO();
                 Post post = pDao.GetPostById(rs.getInt("post_id"));
-
-                CommentDAO cDao = new CommentDAO();
-                Comment comment = cDao.GetCommentById(rs.getInt("comment_id"));
-                
-                ExchangeDAO eDao = new ExchangeDAO();
-                Exchange exchange = eDao.GetExchangeById(rs.getInt("exchange_id"));
                 
                 String reason = rs.getString("reason");
                 
-                boolean reportStatus = rs.getBoolean("report_status");
+                int reportStatus = rs.getInt("report_status");
                 
                 ReportContentDAO rcDao = new ReportContentDAO();
-                ReportContent reportcontent = rcDao.GetReportContentById(rs.getInt("report_content_id"));
-
-                return new Report(id, user, reportType, post, comment, exchange, reason, rs.getDate("report_date"), reportStatus, reportcontent);
+                ReportContent reportcontent = rcDao.GetReportContentById(rs.getInt("reportContent_id"));
+                
+                return new Report(id, user, post, reason, rs.getDate("report_date"), reportStatus, reportcontent);
                
-                
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public void InsertReportPost(int userId, int postId, int reportContentId, String reason, Date date) {
+        try {
+            String sql = "INSERT INTO [dbo].[report]\n"
+                    + "           ([reporter_id]\n"
+                    + "           ,[post_id]\n"
+                    + "           ,[reason]\n"
+                    + "           ,[report_date]\n"
+                    + "           ,[report_status]\n"
+                    + "           ,[reportContent_id])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            stm.setInt(2, postId);
+            stm.setString(3, reason);
+            stm.setDate(4, date);
+            stm.setInt(5, 1);
+            stm.setInt(6, reportContentId);
+            
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportPostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int getTotalReportedExchange() {
+        int total = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select count(r.report_id) as total\n" +
+                        "from report as r, post as p, exchange as e\n" +
+                        "where r.post_id = p.post_id and e.post_id = p.post_id and p.isPublic=1 and p.status=2 and p.deleteFlag=0 and r.report_status=1;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return total;
+    }
+    
+    public int getTotalReportedPost() {
+        int total = 0; // Initialize with a default value (e.g., -1) in case no records exist.
+
+        try {
+            String sql = "select count(r.report_id) as total\n" +
+                        "from report as r, post as p\n" +
+                        "where r.post_id = p.post_id and p.post_type!=4 and p.isPublic=1 and p.status=2 and p.deleteFlag=0 and r.report_status=1;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return total;
+    }
+    
+    public Report GetReportExchangeById(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [report]\n"
+                    + "  Where report_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                UserDAO uDao = new UserDAO();
+                User user = uDao.GetUserById(rs.getInt("reporter_id"));
+
+                ExchangeDAO eDao = new ExchangeDAO();
+                Exchange exchange = eDao.usePostIdToGetExchange(rs.getInt("post_id"));
+                
+                String reason = rs.getString("reason");
+                
+                int reportStatus = rs.getInt("report_status");
+                
+                ReportContentDAO rcDao = new ReportContentDAO();
+                ReportContent reportcontent = rcDao.GetReportContentById(rs.getInt("reportContent_id"));
+                
+                return new Report(id, user, reason, rs.getDate("report_date"), reportStatus, reportcontent, exchange);
+               
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean UpdateReportResult(int reportId, int reportStatus, int staffId, Date processDate)
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            //1. Make connection
+            con = DBContext.getConnection();
+
+            if (con != null) {
+                //2. create SQL String
+                String sql = "UPDATE report SET report_status = ?, process_staff_id = ?, process_date = ? WHERE report_id = ?";
+                //3. Create statement
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, reportStatus);
+                stm.setInt(2, staffId);
+                stm.setDate(3, processDate);
+                stm.setInt(4, reportId);
+                //4. Excute querry to get Result set
+                int effectRow = stm.executeUpdate();
+                //5. Process Result set
+                if (effectRow > 0) {
+                    result = true;
+                }
+
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+    
+    public List<Report> getProcessReportHistory() {
+        List<Report> list = new ArrayList<>();
+        try {
+            String sql = "select * from report where report_status != 1";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            PostDAO pDao = new PostDAO();
+            UserDAO uDao = new UserDAO();
+            ReportContentDAO rcDao = new ReportContentDAO();
+            while (rs.next()) {
+                int report_id = rs.getInt("report_id");
+                
+                User reporter = uDao.GetUserById(rs.getInt("reporter_id"));
+                
+                Post post = pDao.GetPostById(rs.getInt("post_id"));
+                
+                String reason = rs.getString("reason");
+                
+                //reprortDate
+                
+                int reportStatus = rs.getInt("report_status");
+                
+                ReportContent reportContent = rcDao.GetReportContentById(rs.getInt("reportContent_id"));
+                
+                User staff = uDao.GetUserById(rs.getInt("process_staff_id"));
+                
+                //processDate
+                
+                list.add(new Report(report_id, reporter, post, reason, rs.getDate("report_date"), reportStatus, reportContent, rs.getDate("process_date"), staff));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }

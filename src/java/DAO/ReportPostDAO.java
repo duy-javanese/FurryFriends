@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class ReportPostDAO extends DBUtils.DBContext {
 
-    public void InsertReportPost(int userId, int postId, int reportId, String reason, Date date) {
+    public void InsertReportPost(int userId, int postId, int reportContentId, String reason, Date date) {
         try {
             String sql = "INSERT INTO [dbo].[report]\n"
                     + "           ([reporter_id]\n"
@@ -38,7 +38,7 @@ public class ReportPostDAO extends DBUtils.DBContext {
             stm.setString(3, reason);
             stm.setDate(4, date);
             stm.setBoolean(5, true);
-            stm.setInt(6, reportId);
+            stm.setInt(6, reportContentId);
             
             stm.executeUpdate();
         } catch (SQLException ex) {

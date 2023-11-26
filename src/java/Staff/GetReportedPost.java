@@ -43,6 +43,8 @@ public class GetReportedPost extends HttpServlet {
             dao.getReportedPost();
             List<Report> result = dao.getReportedPostList();
             request.setAttribute("REPORTED_POST_LIST", result);
+            request.setAttribute("TOTAL_REPORTED_POST", dao.getTotalReportedPost());
+            request.setAttribute("TOTAL_REPORTED_EXCHANGE", dao.getTotalReportedExchange());
             url = RESULT_PAGE;
         } catch (SQLException ex) {
            Logger.getLogger(GetReportedPost.class.getName()).log(Level.SEVERE, null, ex);

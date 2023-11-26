@@ -4,6 +4,7 @@
  */
 package Controller.User;
 
+import DAO.ReportDAO;
 import DAO.ReportPostDAO;
 import Model.User;
 import java.io.IOException;
@@ -41,12 +42,12 @@ public class ReportPostController extends HttpServlet {
             response.sendRedirect(url);
         } else {
             int postId = Integer.parseInt(request.getParameter("postId"));
-            int reportId = Integer.parseInt(request.getParameter("reportId"));
+            int reportContentId = Integer.parseInt(request.getParameter("reportId"));
             String reason = request.getParameter("reason");
             Date date = Date.valueOf(LocalDate.now());
 
-            ReportPostDAO rpDao = new ReportPostDAO();
-            rpDao.InsertReportPost(account.getUserId(), postId, reportId, reason, date);
+            ReportDAO rpDao = new ReportDAO();
+            rpDao.InsertReportPost(account.getUserId(), postId, reportContentId, reason, date);
 
             session.setAttribute("msg", "Báo cáo bài viết thành công!");
             response.sendRedirect(url);

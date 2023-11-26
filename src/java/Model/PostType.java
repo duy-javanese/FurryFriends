@@ -34,5 +34,11 @@ public class PostType {
     public String getPostTypeName() {
         return postTypeName;
     }
+
+    @Override
+    public String toString() {
+        return "PostType{" + "postTypeId=" + postTypeId + ", postTypeName=" + postTypeName + '}';
+    }
+ 
     
 }

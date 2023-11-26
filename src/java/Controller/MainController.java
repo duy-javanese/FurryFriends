@@ -56,6 +56,9 @@ private static final String UPDATE_CATEGORY = "UpdateCategoryController";
 private static final String DELETE_CATEGORY = "DeleteCategoryController";
 
 private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserController";
+private static final String VIEW_REPORTED_CONTENT_DETAIL_CONTROLLER="ViewReportDetailController";
+private static final String BAN_REPORTED_USER="BanUserController";
+private static final String PROCESS_REPORT_HISTORY_CONTROLLER="GetReportProcessHistory";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -168,6 +171,21 @@ private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserCon
             }
             else if (action.equals("viewUserListExchange")){
                 url = VIEW_OTHER_USER_PROFILE_CONTROLLER;
+            }
+            else if (action.equals("ViewReportDetail")){
+                url = VIEW_REPORTED_CONTENT_DETAIL_CONTROLLER;
+            }
+            else if (action.equals("HideReportedContent")){
+                url = HIDE_REPORTED_POST_AND_EXCHANGE;
+            }
+            else if (action.equals("RejectReportedContent")){
+                url = REJECT_REPORT_CONTROLLER;
+            }
+            else if (action.equals("BanReportedUser")){
+                url = BAN_REPORTED_USER;
+            }
+            else if (action.equals("ReportProcessHitory")){
+                url = PROCESS_REPORT_HISTORY_CONTROLLER;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -14,41 +14,38 @@ import java.sql.Date;
 public class Report {
     private int reportId;
     private User reporter; // who report
-    private String reportType;
     private Post post;
-    private Comment comment;
-    private Exchange exchange;
     private String reason;
     private Date reportDate;
-    private boolean reportStatus;
+    private int reportStatus;
     private ReportContent reportContent;
-
+    private Date processDate;
+    private User processStaff;
+    private Exchange exchange;
+    
     public Report() {
     }
 
-    public Report(int reportId, User reporter, String reportType, Post post, Comment comment, Exchange exchange, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
+    public Report(int reportId, User reporter, Post post, String reason, Date reportDate, int reportStatus, ReportContent reportContent, Date processDate, User processStaff) {
         this.reportId = reportId;
         this.reporter = reporter;
-        this.reportType = reportType;
         this.post = post;
-        this.comment = comment;
-        this.exchange = exchange;
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
         this.reportContent = reportContent;
+        this.processDate = processDate;
+        this.processStaff = processStaff;
     }
-
     
-
+    
+    
     
     
     // Constructor for Reported post
-
-    public Report(int reportId, User reporter, String reportType, Post post, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
+    public Report(int reportId, User reporter, Post post, String reason, Date reportDate, int reportStatus, ReportContent reportContent) {   
         this.reportId = reportId;
         this.reporter = reporter;
-        this.reportType = reportType;
         this.post = post;
         this.reason = reason;
         this.reportDate = reportDate;
@@ -58,19 +55,17 @@ public class Report {
 
     // Constructor for Reported Exchange
 
-    public Report(int reportId, User reporter, String reportType, Exchange exchange, String reason, Date reportDate, boolean reportStatus, ReportContent reportContent) {
+    public Report(int reportId, User reporter, String reason, Date reportDate, int reportStatus, ReportContent reportContent, Exchange exchange) {
         this.reportId = reportId;
         this.reporter = reporter;
-        this.reportType = reportType;
-        this.exchange = exchange;
         this.reason = reason;
         this.reportDate = reportDate;
         this.reportStatus = reportStatus;
         this.reportContent = reportContent;
+        this.exchange = exchange;
     }
     
-     
-
+    
     public int getReportId() {
         return reportId;
     }
@@ -83,41 +78,16 @@ public class Report {
         return reporter;
     }
 
-    public void setReporterId(User reporter) {
+    public void setReporter(User reporter) {
         this.reporter = reporter;
     }
 
-    public String getReportType() {
-        return reportType;
-    }
-
-    public void setReportType(String reportType) {
-        this.reportType = reportType;
-    }
-
-    
     public Post getPost() {
         return post;
     }
 
-    public void setPostId(Post post) {
+    public void setPost(Post post) {
         this.post = post;
-    }
-
-    public Comment getComment() {
-        return comment;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment= comment;
-    }
-
-    public Exchange getExchange() {
-        return exchange;
-    }
-
-    public void setExchangeId(Exchange exchange) {
-        this.exchange = exchange;
     }
 
     public String getReason() {
@@ -136,28 +106,49 @@ public class Report {
         this.reportDate = reportDate;
     }
 
-    public boolean isReportStatus() {
+    public int getReportStatus() {
         return reportStatus;
     }
 
-    public void setReportStatus(boolean reportStatus) {
+    public void setReportStatus(int reportStatus) {
         this.reportStatus = reportStatus;
+    }
+
+    public ReportContent getReportContent() {
+        return reportContent;
     }
 
     public void setReportContent(ReportContent reportContent) {
         this.reportContent = reportContent;
     }
-    
-    public ReportContent getReportContent() {
-        return reportContent;
+
+    public Date getProcessDate() {
+        return processDate;
     }
-    
+
+    public void setProcessDate(Date processDate) {
+        this.processDate = processDate;
+    }
+
+    public User getProcessStaff() {
+        return processStaff;
+    }
+
+    public void setProcessStaff(User processStaff) {
+        this.processStaff = processStaff;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
+    }
+
     @Override
     public String toString() {
-        return "Report{" + "reportId=" + reportId + ", reporter=" + reporter + ", reportType=" + reportType + ", post=" + post + ", comment=" + comment + ", exchange=" + exchange + ", reason=" + reason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + '}';
+        return "Report{" + "reportId=" + reportId + ", reporter=" + reporter + ", post=" + post + ", reason=" + reason + ", reportDate=" + reportDate + ", reportStatus=" + reportStatus + ", reportContent=" + reportContent + ", processDate=" + processDate + ", processStaff=" + processStaff + ", exchange=" + exchange + '}';
     }
 
-
-
-    
 }
