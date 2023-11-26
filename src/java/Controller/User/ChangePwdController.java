@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -35,6 +36,8 @@ public class ChangePwdController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, NoSuchAlgorithmException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        
         UserDAO uDao = new UserDAO();
         String username = request.getParameter("userName");
         String oldPwd = request.getParameter("oldPwd");
@@ -64,7 +67,9 @@ public class ChangePwdController extends HttpServlet {
         if (validate){
             String hashNewPwd = hashMD5(RnewPwd);
             uDao.changePwd(hashNewPwd, userId);
-            response.sendRedirect("userProfile");
+            session.setAttribute("msg", "Đổi mật khẩu thành công, bạn vui lòng đăng nhập lại");
+            request.getSession().setAttribute("account", null);
+            response.sendRedirect("loginPage.jsp");
         }else{
             request.getRequestDispatcher("Views/User/ChangePwd.jsp").forward(request, response);
         }

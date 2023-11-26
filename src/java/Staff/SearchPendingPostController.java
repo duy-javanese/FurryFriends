@@ -6,8 +6,10 @@
 
 package Staff;
 
+import DAO.CategoryDAO;
 import DAO.PostDAO;
 import DAO.PostTypeDAO;
+import Model.Category;
 import Model.Post;
 import Model.PostType;
 import jakarta.servlet.RequestDispatcher;
@@ -44,35 +46,54 @@ public class SearchPendingPostController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String searchValue = request.getParameter("txtSearchValue");
         int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         PostTypeDAO ptDao = new PostTypeDAO();
+        CategoryDAO cDao = new CategoryDAO();
         PostDAO pDao = new PostDAO();
         HttpSession session = request.getSession();
         ArrayList<PostType> listType = ptDao.GetPostTypeForSearchPost();
+        ArrayList<Category> categories = cDao.GetAllCategories();
         String url = ERROR_PAGE;
         try  {
             if (!searchValue.trim().isEmpty()){
-                if(postTypeId== 0){
+                if(postTypeId== 0 && categoryId == 0){
                     pDao.searchPostByTitle(searchValue);
                 }
-                else {
+                else if (postTypeId!= 0 && categoryId == 0){
                     pDao.searchPostByTitleAndType(searchValue, postTypeId);
+                }
+                else if (postTypeId == 0 && categoryId != 0){
+                    pDao.searchPostByTitleAndCate(searchValue, categoryId);
+                }
+                else if (postTypeId != 0 && categoryId != 0){
+                    pDao.searchPostByTitleAndCateAndType(searchValue, categoryId, postTypeId);
                 }
                 List<Post> result = pDao.getPostSearchResult();
                 session.setAttribute("types", listType);
+                session.setAttribute("categories", categories);
                 request.setAttribute("SEARCH_POST_RESULT", result);
                 url = RESULT_PAGE;
             }
-            if(searchValue.isEmpty()){
-                if(postTypeId== 0){
+            if(searchValue.trim().isEmpty()){
+                if(postTypeId== 0 && categoryId == 0){
                     url = "GetPendingPost";
                 }
-                else {
+                else if (postTypeId != 0 && categoryId == 0) {
                     pDao.searchPostByType(postTypeId);
-                    List<Post> result = pDao.getPostSearchResult();
-                    session.setAttribute("types", listType);
-                    request.setAttribute("SEARCH_POST_RESULT", result);
                     url = RESULT_PAGE;
                 }
+                else if (postTypeId == 0 && categoryId != 0) {
+                    pDao.searchPostByCategory(categoryId);
+                    url = RESULT_PAGE;
+                }
+                else if (postTypeId != 0 && categoryId != 0) {
+                    pDao.searchPostByCategoryAndPostType(categoryId, postTypeId);
+                    url = RESULT_PAGE;
+                }
+                    List<Post> result = pDao.getPostSearchResult();
+                    session.setAttribute("types", listType);
+                    session.setAttribute("categories", categories);
+                    request.setAttribute("SEARCH_POST_RESULT", result);
             }
         } catch (ClassNotFoundException ex) {
            Logger.getLogger(SearchPendingPostController.class.getName()).log(Level.SEVERE, null, ex);

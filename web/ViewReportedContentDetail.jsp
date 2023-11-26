@@ -157,6 +157,7 @@ e.printStackTrace();
                                     <input type="hidden" name="postType" value="${reP.post.postType.postTypeId}">
                                     <input type="hidden" name="userId" value="${reP.post.user.userId}">
                                     <input type="hidden" name="staffId" value="${sessionScope.account.userId}">
+                                    <input type="hidden" name="reason" value="${reP.reportContent.reportContent}">
                                     <div style="display: flex; gap : 15px">
                                         <button class="process-report-button" name="action" value="HideReportedContent">Ẩn bài viết này</button>
                                         <button class="process-report-button" name="action" value="RejectReportedContent">Từ chối báo cáo</button>
@@ -208,6 +209,7 @@ e.printStackTrace();
                                     <input type="hidden" name="postType" value="${reE.exchange.post.postType.postTypeId}">
                                     <input type="hidden" name="userId" value="${reE.exchange.post.user.userId}">
                                     <input type="hidden" name="staffId" value="${sessionScope.account.userId}">
+                                    <input type="hidden" name="reason" value="${reE.reportContent.reportContent}">
                                     <div style="display: flex; gap : 15px">
                                         <button class="process-report-button" name="action" value="HideReportedContent">Ẩn bài viết này</button>
                                         <button class="process-report-button" name="action" value="RejectReportedContent">Từ chối báo cáo</button>

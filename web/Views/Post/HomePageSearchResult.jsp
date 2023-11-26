@@ -71,6 +71,11 @@
                                             <h3>${p.title}</h3>
                                         </a>
                                         <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
+                                        <c:if test="${p.postType.postTypeId == 4}">
+                                            <div class="d-flex gap-2">
+                                                <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                            </div>
+                                        </c:if>
                                         <p>${p.content.substring(0, 200)}...</p>
                                         <a class="button" href="viewPostDetails?postId=${p.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
                                     </div>

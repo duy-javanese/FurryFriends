@@ -148,14 +148,22 @@ e.printStackTrace();
             <!--Start page-wrapper -->
             <div class="page-wrapper">
                 <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
-                <div style="margin-top: 50px; margin-left: 360px">
+                <div style="margin-top: 50px; margin-left: 250px">
                     <form action="MainController" method="POST">
                         <input class="search-User-box" type="text" name="txtSearchValue" 
                             value="${param.txtSearchValue}" placeholder="Nhập tiêu đề bài viết"/>
                         <select class="category-selection" name="postTypeId">
                             <option value="0">Loại bài viết</option>
                             <c:forEach var="t" items="${sessionScope.types}">
-                                <option value="${t.postTypeId}">${t.postTypeName}</option>
+                                <c:if test="${t.postTypeId !=4}">
+                                    <option value="${t.postTypeId}">${t.postTypeName}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <select class="category-selection" name="categoryId">
+                            <option value="0">Danh mục</option>
+                            <c:forEach var="c" items="${sessionScope.categories}">
+                                <option value="${c.categoryId}">${c.categoryName}</option>
                             </c:forEach>
                         </select>
                         <button class="user-page-button" name="action" value="SearchPendingPost"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
@@ -169,8 +177,13 @@ e.printStackTrace();
                             <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                 <div style="display: flex; justify-content: space-between">
                                     <h4>${p.title}</h4>
-                                    <h6 style="color: coral;">${p.postType.postTypeName}</h6>
                                 </div>
+                                <h6 style="color: coral;">
+                                        ${p.postType.postTypeName}
+                                        <c:if test="${ not empty p.category.categoryId}">
+                                            : ${p.category.categoryName}
+                                        </c:if>
+                                    </h6>
                                 <div style="display: flex">
                                     <p style="color: #878787;">${p.user.username}</p>
                                 </div>

@@ -45,19 +45,20 @@ public class HideReportedPostAndExchange extends HttpServlet {
         int postType = Integer.parseInt(request.getParameter("postType"));
         int reportId = Integer.parseInt(request.getParameter("reportId"));
         int staffId = Integer.parseInt(request.getParameter("staffId"));
+        String reason = request.getParameter("reason");
         try {
             PostDAO pDao = new PostDAO();
             ReportDAO rDao = new ReportDAO();
             Date processDate = Date.valueOf(LocalDate.now());
             if (postType != 4) {
-                boolean result = pDao.HideReportedPost(postId);
+                boolean result = pDao.HideReportedPost(postId, reason);
                 boolean updateReportStatus = rDao.UpdateReportResult(reportId, 2, staffId, processDate);
                 if (result && updateReportStatus) {
                     url = "GetReportedPost";
                 }
             }
             if (postType == 4) {
-                boolean result = pDao.HideReportedPost(postId);
+                boolean result = pDao.HideReportedPost(postId, reason);
                 boolean updateReportStatus = rDao.UpdateReportResult(reportId, 2, staffId, processDate);
                 if (result && updateReportStatus) {
                     url = "GetReportedExchange";

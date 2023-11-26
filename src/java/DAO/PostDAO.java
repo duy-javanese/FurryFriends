@@ -879,7 +879,7 @@ public class PostDAO extends DBUtils.DBContext {
         return list;
     }
 
-    public boolean HideReportedPost(int postId)
+    public boolean HideReportedPost(int postId, String reason)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -891,10 +891,11 @@ public class PostDAO extends DBUtils.DBContext {
 
             if (con != null) {
                 //2. create SQL String
-                String sql = "UPDATE post SET status = 4 WHERE post_id = ?";
+                String sql = "UPDATE post SET status = 4 and reason = ? WHERE post_id = ?";
                 //3. Create statement
                 stm = con.prepareStatement(sql);
-                stm.setInt(1, postId);
+                stm.setString(1, reason);
+                stm.setInt(2, postId);
                 //4. Excute querry to get Result set
                 int effectRow = stm.executeUpdate();
                 //5. Process Result set
@@ -934,7 +935,7 @@ public class PostDAO extends DBUtils.DBContext {
 
                 String sql = "Select * "
                         + "From post "
-                        + "where title like ? and status =1 and (post_type = 1 or post_type = 2 or post_type = 3)";
+                        + "where title like ? and status =1 and post_type != 4 and deleteFlag = 0 ";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -998,7 +999,7 @@ public class PostDAO extends DBUtils.DBContext {
 
                 String sql = "Select * "
                         + "From post "
-                        + "where title like ? and post_type = ? and status = 1";
+                        + "where title like ? and post_type = ? and status = 1 and deleteFlag = 0";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -1153,10 +1154,10 @@ public class PostDAO extends DBUtils.DBContext {
 
     public Post GetMostLikedPost() {
         try {
-            String sql = "SELECT TOP 1 PostId, COUNT(LikePostId) AS NumberOfLikes\n"
-                    + "FROM LikePost\n"
-                    + "GROUP BY PostId\n"
-                    + "ORDER BY NumberOfLikes DESC ;";
+            String sql = "SELECT TOP 1 l.PostId, COUNT(l.LikePostId) AS NumberOfLikes \n" +
+                        "FROM LikePost as l, post as p \n" +
+                        "where l.PostId = p.post_id AND p.isPublic = 1 AND  p.deleteFlag = 0 AND p.status = 2\n" +
+                        "GROUP BY l.PostId ORDER BY NumberOfLikes DESC;";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -1226,8 +1227,13 @@ public class PostDAO extends DBUtils.DBContext {
                     String content = rs.getString("post_content");
                     String img = rs.getString("post_img");
                     String reason = rs.getString("reason");
+                    
+                    boolean isPublic = rs.getBoolean("isPublic");
+                    
+                    ExchangeDAO eDao = new ExchangeDAO();
+                    Exchange exchange = eDao.GetExchangeByPostId(rs.getInt("post_id"));
 
-                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, status, postType);
+                    Post dto = new Post(postId, user, category, postType, title, content, img, isPublic, rs.getDate("datePosted"), reason, status, exchange);
 
                     if (this.PostSearchResult == null) {
                         this.PostSearchResult = new ArrayList<>();
@@ -1385,5 +1391,285 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
         return result;
+    }
+    
+    public List<Post> getTop3PostByUserID(int userId) {
+        List<Post> list = new ArrayList<>();
+        try {
+            String sql = "select top 3 * from post where userID = ? and post_type !=4 and isPublic=1 and status=2 and deleteFlag=0;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            ResultSet rs = stm.executeQuery();
+
+            PostDAO pDao = new PostDAO();
+            while (rs.next()) {
+                Post p = pDao.GetPostById(rs.getInt("post_id"));
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public void searchPostByCategory(int categoryId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = DBContext.getConnection();
+
+            if (con != null) {
+
+                String sql = "Select * "
+                        + "From post "
+                        + "where status = 1 and post_type != 4 and deleteFlag = 0 and category_id = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, categoryId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int postId = rs.getInt("post_id");
+
+                    UserDAO uDao = new UserDAO();
+                    User user = uDao.GetUserById(rs.getInt("userID"));
+
+                    CategoryDAO cDao = new CategoryDAO();
+                    Category category = cDao.GetCategoryById(categoryId);
+
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType postType = ptDao.GetTypeById(rs.getInt("post_type"));
+
+                    PostStatusDAO psDao = new PostStatusDAO();
+                    PostStatus status = psDao.GetStatusById(rs.getInt("status"));
+
+                    String title = rs.getString("title");
+                    String content = rs.getString("post_content");
+                    String img = rs.getString("post_img");
+                    String reason = rs.getString("reason");
+
+                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, status, postType);
+
+                    if (this.PostSearchResult == null) {
+                        this.PostSearchResult = new ArrayList<>();
+                    }
+                    this.PostSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void searchPostByCategoryAndPostType(int categoryId, int postTypeId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = DBContext.getConnection();
+
+            if (con != null) {
+
+                String sql = "Select * "
+                        + "From post "
+                        + "where status = 1 and post_type = ? and category_id = ? and deleteFlag = 0";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, postTypeId);
+                stm.setInt(2, categoryId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int postId = rs.getInt("post_id");
+
+                    UserDAO uDao = new UserDAO();
+                    User user = uDao.GetUserById(rs.getInt("userID"));
+
+                    CategoryDAO cDao = new CategoryDAO();
+                    Category category = cDao.GetCategoryById(categoryId);
+
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType postType = ptDao.GetTypeById(postTypeId);
+
+                    PostStatusDAO psDao = new PostStatusDAO();
+                    PostStatus status = psDao.GetStatusById(categoryId);
+
+                    String title = rs.getString("title");
+                    String content = rs.getString("post_content");
+                    String img = rs.getString("post_img");
+                    String reason = rs.getString("reason");
+
+                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, status, postType);
+
+                    if (this.PostSearchResult == null) {
+                        this.PostSearchResult = new ArrayList<>();
+                    }
+                    this.PostSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void searchPostByTitleAndCate(String searchValue, int CategoryId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = DBContext.getConnection();
+
+            if (con != null) {
+
+                String sql = "Select * "
+                        + "From post "
+                        + "where title like ? and post_type !=4 and category_id = ? and status = 1 and deleteFlag = 0";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setInt(2, CategoryId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int postId = rs.getInt("post_id");
+
+                    UserDAO uDao = new UserDAO();
+                    User user = uDao.GetUserById(rs.getInt("userID"));
+
+                    CategoryDAO cDao = new CategoryDAO();
+                    Category category = cDao.GetCategoryById(CategoryId);
+
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType postType = ptDao.GetTypeById(rs.getInt("post_type"));
+
+                    PostStatusDAO psDao = new PostStatusDAO();
+                    PostStatus status = psDao.GetStatusById(rs.getInt("status"));
+
+                    String title = rs.getString("title");
+                    String content = rs.getString("post_content");
+                    String img = rs.getString("post_img");
+                    String reason = rs.getString("reason");
+
+                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, status, postType);
+
+                    if (this.PostSearchResult == null) {
+                        this.PostSearchResult = new ArrayList<>();
+                    }
+                    this.PostSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void searchPostByTitleAndCateAndType(String searchValue, int CategoryId, int postTypeId)
+            throws ClassNotFoundException, SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+
+            con = DBContext.getConnection();
+
+            if (con != null) {
+
+                String sql = "Select * "
+                        + "From post "
+                        + "where title like ? and category_id = ? and post_type = ? and status = 1 and deleteFlag = 0";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                stm.setInt(2, CategoryId);
+                stm.setInt(3, postTypeId);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    int postId = rs.getInt("post_id");
+
+                    UserDAO uDao = new UserDAO();
+                    User user = uDao.GetUserById(rs.getInt("userID"));
+
+                    CategoryDAO cDao = new CategoryDAO();
+                    Category category = cDao.GetCategoryById(CategoryId);
+
+                    PostTypeDAO ptDao = new PostTypeDAO();
+                    PostType postType = ptDao.GetTypeById(postTypeId);
+
+                    PostStatusDAO psDao = new PostStatusDAO();
+                    PostStatus status = psDao.GetStatusById(CategoryId);
+
+                    String title = rs.getString("title");
+                    String content = rs.getString("post_content");
+                    String img = rs.getString("post_img");
+                    String reason = rs.getString("reason");
+
+                    Post dto = new Post(postId, user, category, title, content, img, rs.getDate("datePosted"), reason, status, postType);
+
+                    if (this.PostSearchResult == null) {
+                        this.PostSearchResult = new ArrayList<>();
+                    }
+                    this.PostSearchResult.add(dto);
+
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }

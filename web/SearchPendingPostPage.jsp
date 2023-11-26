@@ -147,8 +147,8 @@ e.printStackTrace();
             <!--end header -->
             <!--Start page-wrapper -->
             <div class="page-wrapper">
-                <h1 style="text-align: center; margin-top: 100px">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
-                <div style="margin-top: 50px; margin-left: 360px">
+                <h1 style="text-align: center; margin-top: 10%">DANH SÁCH BÀI VIẾT ĐANG CHỜ DUYỆT</h1>
+                <div style="margin-top: 50px; margin-left: 250px">
                     <form action="MainController" method="POST">
                         <input class="search-User-box" type="text" name="txtSearchValue" 
                             value="${param.txtSearchValue}" placeholder="Nhập tiêu đề bài viết"/>
@@ -156,6 +156,12 @@ e.printStackTrace();
                             <option value="0">Loại bài viết</option>
                             <c:forEach var="t" items="${sessionScope.types}">
                                 <option value="${t.postTypeId}">${t.postTypeName}</option>
+                            </c:forEach>
+                        </select>
+                        <select class="category-selection" name="categoryId">
+                            <option value="0">Danh mục</option>
+                            <c:forEach var="c" items="${sessionScope.categories}">
+                                <option value="${c.categoryId}">${c.categoryName}</option>
                             </c:forEach>
                         </select>
                         <button class="user-page-button" name="action" value="SearchPendingPost"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
@@ -168,16 +174,19 @@ e.printStackTrace();
                             <div><img src="${p.img}" class="img-box"></div>
                             <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                 <div style="display: flex; justify-content: space-between">
-                                    <h5>${p.title}</h5>
-                                    <h5 style="color: coral;">${p.postType.postTypeName}</h5>
+                                    <h4>${p.title}</h4>
                                 </div>
-                                <h6>${p.user.username}</h6>
+                                <h6 style="color: coral;">
+                                        ${p.postType.postTypeName}
+                                        <c:if test="${ not empty p.category}"> : ${p.category.categoryName}</c:if>
+                                    </h6>
+                                <p>${p.user.username}</p>
                                 <div>
                                     <c:if test="${fn:length(p.content) > 100}">
-                                        <p>${p.content.substring(0, 100)}...</p>
+                                        <h6>${p.content.substring(0, 100)}...</h6>
                                     </c:if>
                                     <c:if test="${fn:length(p.content) < 100}">
-                                        <p>${p.content}</p>
+                                        <h6>${p.content}</h6>
                                     </c:if>
                                 </div>
                                 <div style="display: flex; justify-content: space-between">

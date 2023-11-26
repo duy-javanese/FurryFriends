@@ -31,7 +31,7 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
@@ -43,7 +43,7 @@
                             <tbody>
                                 <c:forEach items="${posts}" var="p">
                                     <tr>
-                                       
+
                                         <td>
                                             <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
@@ -60,22 +60,30 @@
                                         <td>
                                             <c:if test="${p.status.postStatusId == 1}">
                                                 <p style="background: gold; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
-                                            </c:if>
-                                            <c:if test="${p.status.postStatusId == 3}">
+                                                </c:if>
+                                                <c:if test="${p.status.postStatusId == 3}">
                                                 <p style="background: red; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
-                                            </c:if>
-                                            <c:if test="${p.status.postStatusId == 2}">
+                                                </c:if>
+                                                <c:if test="${p.status.postStatusId == 2}">
                                                 <p style="background: green; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
-                                            </c:if>
-                                            
+                                                </c:if>
+                                                <c:if test="${p.status.postStatusId == 4}">
+                                                <p style="background: grey; color: white ; text-align: center; padding: 5px; border-radius: 35px; width: 135px"> 
+                                                </c:if>
+
                                                 ${p.status.postStatusValue}
                                             </p>
-                                            <c:if test="${not empty p.reason}">
+                                            <c:if test="${p.status.postStatusId == 3}">
                                                 <p style="color: red">
                                                     Lý do : ${p.reason}
                                                 </p>
                                             </c:if>
-                                            
+                                            <c:if test="${p.status.postStatusId == 4}">
+                                                <p style="color: grey">
+                                                    Báo cáo : ${p.reason}
+                                                </p>
+                                            </c:if>
+
                                         </td>
                                         <td>
                                             <div class="d-flex">
@@ -84,14 +92,14 @@
                                                     <c:if test="${p.isPublic==true}">
                                                         <input type="hidden" value="false" name="PublicStatus">
                                                         <button type="submit"
-                                                            class="btn btn-outline-success me-2">
+                                                                class="btn btn-outline-success me-2">
                                                             <i class="fa-solid fa-eye-slash"></i>
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${p.isPublic==false}">
                                                         <input type="hidden" value="true" name="PublicStatus">
                                                         <button type="submit"
-                                                            class="btn btn-outline-danger me-2">
+                                                                class="btn btn-outline-danger me-2">
                                                             <i class="fa-regular fa-eye-slash"></i>
                                                         </button>
                                                     </c:if>
@@ -103,14 +111,16 @@
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
                                                 </form>
-                                                <form action="editPost" method="post">
-                                                    <input type="hidden" value="${p.postId}" name="postId">
-                                                    <input type="hidden" value="${p.postType.postTypeId}" name="postType">
-                                                    <button type="submit"
-                                                            class="btn btn-outline-success me-2">
-                                                        <i class="fa-solid fa-pen"></i>
-                                                    </button>
-                                                </form>
+                                                <c:if test="${p.status.postStatusId !=4}">
+                                                    <form action="editPost" method="post">
+                                                        <input type="hidden" value="${p.postId}" name="postId">
+                                                        <input type="hidden" value="${p.postType.postTypeId}" name="postType">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-success me-2">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </button>
+                                                    </form>
+                                                </c:if>
                                                 <form action="deletePost" method="post">
                                                     <input type="hidden" value="${p.postId}" name="postId">
                                                     <button type="submit"

@@ -170,8 +170,11 @@ e.printStackTrace();
                             <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                 <div style="display: flex; justify-content: space-between">
                                     <h4>${e.post.title}</h4>
-                                    <h6 style="color: coral;">${e.post.category.categoryName}</h6>
                                 </div>
+                                <h6 style="color: coral;">
+                                        ${e.post.category.postType.postTypeName}
+                                        <c:if test="${not empty e.post.category.categoryName}"> : ${e.post.category.categoryName}</c:if>
+                                    </h6>
                                 <h6 style="color: red">${e.price} VNĐ</h6>
                                 <div style="display: flex">
                                     <p style="color: #878787;">${e.post.user.username}</p>
