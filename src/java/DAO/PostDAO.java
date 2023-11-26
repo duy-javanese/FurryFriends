@@ -666,6 +666,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "      ,[post_content] = ?\n"
                     + "      ,[post_img] = ?\n"
                     + "      ,[status] = ?\n"
+                    + "      ,[category_id] = ?\n"
                     + " WHERE post_id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, post.getPostType().getPostTypeId());
@@ -673,7 +674,8 @@ public class PostDAO extends DBUtils.DBContext {
             stm.setString(3, post.getContent());
             stm.setString(4, post.getImg());
             stm.setInt(5, post.getStatus().getPostStatusId());
-            stm.setInt(6, post.getPostId());
+            stm.setInt(6, post.getCategory().getCategoryId());
+            stm.setInt(7, post.getPostId());
 
             stm.executeUpdate();
         } catch (SQLException ex) {

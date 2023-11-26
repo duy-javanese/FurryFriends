@@ -5,6 +5,7 @@
 package Controller.Post;
 
 import DAO.PostDAO;
+import Model.Category;
 import Model.Constant;
 import Model.Post;
 import Model.PostStatus;
@@ -55,6 +56,9 @@ public class SaveEditBlogController extends HttpServlet {
             int typeId = Integer.parseInt(request.getParameter("type"));
             PostType type = new PostType();
             type.setPostTypeId(typeId);
+            
+            Category category = new Category();
+            category.setCategoryId(Integer.parseInt(request.getParameter("category")));
 
             String title = request.getParameter("title");
             String content = request.getParameter("content");
@@ -69,6 +73,7 @@ public class SaveEditBlogController extends HttpServlet {
             //tao post
             Post post = new Post();
             post.setPostId(postId);
+            post.setCategory(category);
             post.setPostType(type);
             post.setTitle(title);
             post.setContent(content);

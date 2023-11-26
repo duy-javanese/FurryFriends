@@ -44,6 +44,21 @@
                             </select>
                             <label for="floatingSelect">Phân loại bài viết</label>
                         </div>
+
+                        <!-- Category Post -->
+                        <div class="form-floating mt-5">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                                    name="category" required>
+                                <option selected disabled value="">Danh mục trao đổi</option>
+                                <c:forEach items="${categories}" var="c">
+                                    <option value="${c.categoryId}"
+                                            <c:if test="${post.category.categoryId == c.categoryId}">selected</c:if>
+                                            >${c.categoryName}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="floatingSelect">Danh mục bài viết</label>
+                        </div>
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Tiêu đề bài viết <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" 

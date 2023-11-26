@@ -228,6 +228,10 @@
         <servlet-name>ChangePwdController</servlet-name>
         <servlet-class>Controller.User.ChangePwdController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactUserController</servlet-name>
+        <servlet-class>Controller.User.ContactUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -455,6 +459,10 @@
     <servlet-mapping>
         <servlet-name>ChangePwdController</servlet-name>
         <url-pattern>/ChangePwdController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactUserController</servlet-name>
+        <url-pattern>/contactUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

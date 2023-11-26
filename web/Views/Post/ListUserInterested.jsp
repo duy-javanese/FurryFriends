@@ -31,7 +31,7 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    
+
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
@@ -42,7 +42,7 @@
                             <tbody>
                                 <c:forEach items="${ip}" var="ip">
                                     <tr>
-                                        
+
                                         <td>
                                             <img src="${ip.post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
@@ -84,6 +84,7 @@
                                                                                     <th>Số điện thoại</th>
                                                                                     <th>Trạng thái</th>
                                                                                     <th>Thời gian</th>
+                                                                                    <th>Trạng thái giao dịch</th>
                                                                                     <th>Hành động</th>
                                                                                 </tr>
                                                                             </thead>
@@ -107,11 +108,14 @@
                                                                                         <td>${ip.datetime}</td>
                                                                                         <td>
                                                                                             <c:if test="${ui.status == true}">
-                                                                                                <a href="https://zalo.me/${ui.phone}" class="btn btn-outline-primary d-flex align-items-center g-3" role="button">
-                                                                                                    <img src="/img/home/zalo.png"
-                                                                                                         alt="Generic placeholder image" class="img-fluid img-thumbnail"
-                                                                                                         style="width: 40px;height: 40; z-index: 1">Nhắn tin
-                                                                                                </a>
+                                                                                                <form action="contactUser" method="post">
+                                                                                                    <button type="submit" class="btn btn-outline-light d-lg-flex align-items-center align-middle" style="width: 150px">
+                                                                                                        <img src="/img/home/zalo.png"
+                                                                                                             alt="Generic placeholder image" class="img-fluid img-thumbnail"
+                                                                                                             style="width: 40px;height: 40; z-index: 1">
+                                                                                                        <p style="padding-top: 10%; padding-left: 5%">Liên hệ</p>
+                                                                                                    </button>
+                                                                                                </form>
                                                                                             </c:if>
                                                                                         </td>
                                                                                     </tr>
