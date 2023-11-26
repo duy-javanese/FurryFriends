@@ -20,12 +20,22 @@
         <link rel="stylesheet" href="asset/vendors/owl-carousel/owl.carousel.min.css">
 
         <link rel="stylesheet" href="asset/css/style.css">
+        <style>
+            .alertMSG h2{
+                font-family: "Verdana", sans-serif;
+                text-transform:uppercase;
+                font-size:30px;
+                background: linear-gradient(#7928CA, #FF0080);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        </style>
     </head>
 
     <body>
         <%@ include file="../../asset/includes/header.jsp" %>
+        <!--================Hero Banner start =================-->
 
-        <!--================Hero Banner start =================-->  
         <section class="mb-30px">
             <div class="container">
                 <div class="hero-banner"
@@ -34,7 +44,14 @@
                      >
                     <div class="hero-banner__content">
                         <h1>FurryFriends</h1>
-                        <h3>Blog & Trading</h3>
+                        <c:if test="${post.postType.postTypeId != 4}">
+                            <h3>Blog & Trading</h3>
+                        </c:if>
+
+                        <c:if test="${post.postType.postTypeId == 4}">
+                            <h3>Bài viết trao đổi mua bán thu cưng</h3>
+                        </c:if>
+
                     </div>
                 </div>
             </div>
@@ -74,7 +91,13 @@
                 </form>
             </div>
         </div>
-
+        <c:if test="${post.postType.postTypeId == 4}">
+            <div class="w-100 justify-content-center" style="text-align: center">
+                <div class="alertMSG">
+                    <h2 style="color: red">Hãy lưu ý kiểm tra kỹ thông tin trước mỗi lần giao dịch</h2>
+                </div>
+            </div>
+        </c:if>
         <!--================ Start Blog Post Area =================-->
         <section class="blog-post-area section-margin">
             <div class="container">
@@ -131,12 +154,12 @@
                                     <c:if test="${post.postType.postTypeId == 4}">
                                         <c:if test="${sessionScope.account.userId != post.user.userId}">
                                             <a href="interestPost?postId=${post.postId}" class="ml-3
-                                           <c:forEach items="${post.userInterested}" var="ui">
-                                               <c:if test="${ui.userId == sessionScope.account.userId}">
-                                                   text-danger
-                                               </c:if>
-                                           </c:forEach>
-                                           "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                               <c:forEach items="${post.userInterested}" var="ui">
+                                                   <c:if test="${ui.user.userId == sessionScope.account.userId}">
+                                                       text-danger
+                                                   </c:if>
+                                               </c:forEach>
+                                               "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
                                         </c:if>
                                     </c:if>
                                 </div>
@@ -149,7 +172,19 @@
 
                             <div style="margin-top :30px">
                                 <c:if test="${post.postType.postTypeId == 4}">
-                                    <p style="font-weight: bold">Giá bán:</p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
+                                    <c:if test="${post.exchange.isFree == false}">
+                                        <div class="d-flex gap-2">
+                                            <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${post.exchange.isFree == true}">
+                                        <div class="d-flex gap-2">
+                                            <p style="font-weight: bold">Giá bán: </p>
+                                            <div class="rounded-pill bg-success p-2">
+                                                <span style="color: white">Miễn phí</span>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                     <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}</p>
                                 </c:if>
                             </div>
@@ -240,7 +275,7 @@
                                                             <input type="hidden" name="userId" value="${ch.user.userId}">
                                                             <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${ch.user.username}</h5></button>
                                                         </form>
-<!--                                                        <h5>${ch.user.username}</a></h5>-->
+    <!--                                                        <h5>${ch.user.username}</a></h5>-->
                                                         <p class="date">${ch.createdDate}</p>
                                                         <p class="comment">
                                                             ${ch.commentValue}
@@ -316,7 +351,7 @@
                     alert("Hãy chọn một lý do");
                     event.preventDefault(); // Ngăn form submit nếu không hợp lệ
                 }
-                
+
                 if (selectedOption.text === "Khác" && textareaValue === "") {
                     alert("Hãy mô tả lý do khác của bạn");
                     event.preventDefault(); // Ngăn form submit nếu không hợp lệ
@@ -354,17 +389,17 @@
             var openModalBtn = document.getElementById("openModalBtn");
             var closeModalBtn = document.getElementById("closeModalBtn");
 
-// Open the modal when the trigger element is clicked
+            // Open the modal when the trigger element is clicked
             openModalBtn.addEventListener("click", function () {
                 modal.style.display = "block";
             });
 
-// Close the modal when the close button is clicked
+            // Close the modal when the close button is clicked
             closeModalBtn.addEventListener("click", function () {
                 modal.style.display = "none";
             });
 
-// Close the modal if the user clicks outside the modal content
+            // Close the modal if the user clicks outside the modal content
             window.addEventListener("click", function (event) {
                 if (event.target === modal) {
                     modal.style.display = "none";

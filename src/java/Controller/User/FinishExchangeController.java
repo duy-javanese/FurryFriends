@@ -7,7 +7,6 @@ package Controller.User;
 import DAO.ExchangeDAO;
 import DAO.InterestPostDAO;
 import Model.Constant;
-import Model.InterestedPost;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class ContactUserController extends HttpServlet {
+public class FinishExchangeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,13 +31,17 @@ public class ContactUserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int exchangeId = Integer.parseInt(request.getParameter("exchangeId"));
         int postId = Integer.parseInt(request.getParameter("postId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
-        
-        InterestPostDAO ipDao = new InterestPostDAO();
-        ipDao.updateExchangeStatus(postId,userId,Constant.ExchangeDoing);
 
-        response.sendRedirect("https://zalo.me/0983218694");
+        InterestPostDAO ipDao = new InterestPostDAO();
+        ipDao.updateExchangeStatus(postId, userId, Constant.ExchangeFinish);
+
+        ExchangeDAO eDao = new ExchangeDAO();
+        eDao.updateExchangeStatus(true, exchangeId);
+
+        response.sendRedirect("listUserInterested");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

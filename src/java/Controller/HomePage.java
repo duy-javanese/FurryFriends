@@ -11,6 +11,7 @@ import DAO.PostTypeDAO;
 import Model.Category;
 import Model.Comment;
 import Model.Constant;
+import Model.InterestedPost;
 import Model.Post;
 import Model.PostType;
 import Model.User;
@@ -82,16 +83,15 @@ public class HomePage extends HttpServlet {
             ArrayList<Comment> comments = cmDao.GetCommentByPostId(post.getPostId());
             post.setComments(comments);
 
-            ArrayList<User> listUI = pDao.GetUserInterested(post.getPostId());
+            ArrayList<InterestedPost> listUI = pDao.GetUserInterested(post.getPostId());
             post.setUserInterested(listUI);
-            
+
             ArrayList<User> listUL = pDao.GetUserLike(post.getPostId());
             post.setUserLike(listUL);
-            
+
             ArrayList<User> listUS = pDao.GetUserSave(post.getPostId());
             post.setUserSave(listUS);
         }
-        
 
         ArrayList<Post> top3Post = pDao.GetTop3Post();
 

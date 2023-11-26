@@ -57,4 +57,18 @@ public class InterestPostDAO extends DBUtils.DBContext {
         return 0;
     }
 
+    public void updateExchangeStatus(int postId, int userId, int exchangeStatus) {
+        try {
+            String sql = "UPDATE [dbo].[InterestPost]\n"
+                    + "   SET [ExchangeStatus] = ?\n"
+                    + " WHERE UserId = ? and PostId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, exchangeStatus);
+            stm.setInt(2, userId);
+            stm.setInt(3, postId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

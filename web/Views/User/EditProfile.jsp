@@ -86,198 +86,198 @@
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
         <!-- Dashboard Products wrapper -->
-        <div class="edit-profile-box">
-            <!-- Account page navigation-->
-            <h4>Chỉnh sửa thông tin cá nhân</h4>
-            <hr class="mt-0 mb-4">
+        <section style="margin-left: 280px; height: calc(100vh - 133px); overflow-y: auto;">
+            <div class="edit-profile-box">
+                <!-- Account page navigation-->
+                <h4>Chỉnh sửa thông tin cá nhân</h4>
+                <hr class="mt-0 mb-4">
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header">Thông tin cá nhân</div>
+                        <div class="card-body">
+                            <form action="editProfile" method="post">
+                                <!-- Form Group (username)-->
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label style="font-weight: 500" for="inputUsername">Tên đăng nhập</label><br>
+    <!--                                        <input name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.username}" required>-->
+                                        ${sessionScope.account.username}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="font-weight: 500" for="inputLocation">Số điện thoại</label>
+                                        <input name="phone" class="form-control" id="inputLocation" type="text" value="${sessionScope.account.phone}" required>
+                                        <c:if test="${not empty requestScope.EDIT_PHONE_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_PHONE_ERROR}*</p>
+                                        </c:if>
+                                    </div>
+                                </div>
+                                <!-- Form Row        -->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (organization name)-->
+                                    <div class="col-md-6">
+                                        <label style="font-weight: 500" for="inputEmailAddress">Địa chỉ email</label>
+                                        <input name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Nhập email" value="${sessionScope.account.email}" required>
 
-            <div class="col-xl-8">
-                <!-- Account details card-->
-                <div class="card mb-4">
-                    <div class="card-header">Thông tin cá nhân</div>
-                    <div class="card-body">
-                        <form action="editProfile" method="post">
-                            <!-- Form Group (username)-->
-                            <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputUsername">Tên đăng nhập</label><br>
-<!--                                        <input name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.username}" required>-->
-                                    ${sessionScope.account.username}
+                                        <c:if test="${not empty requestScope.EDIT_EMAIL_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_EMAIL_ERROR}*</p>
+                                        </c:if>
+                                    </div>
+                                    <!-- Form Group (location)-->
+                                    <div class="col-md-6">
+                                        <label style="font-weight: 500" for="inputBirthday">Địa chỉ</label>
+                                        <input name="address" class="form-control" type="text" placeholder="Nhập địa chỉ" value="${sessionScope.account.address}" required>
+                                        <c:if test="${not empty requestScope.EDIT_ADDRESS_ERROR}">
+                                            <p style="color: red">${requestScope.EDIT_ADDRESS_ERROR}*</p>
+                                        </c:if>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputLocation">Số điện thoại</label>
-                                    <input name="phone" class="form-control" id="inputLocation" type="text" value="${sessionScope.account.phone}" required>
-                                    <c:if test="${not empty requestScope.EDIT_PHONE_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_PHONE_ERROR}*</p>
-                                    </c:if>
-                                </div>
-                            </div>
-                            <!-- Form Row        -->
-                            <div class="row gx-3 mb-3">
-                                <!-- Form Group (organization name)-->
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputEmailAddress">Địa chỉ email</label>
-                                    <input name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Nhập email" value="${sessionScope.account.email}" required>
-
-                                    <c:if test="${not empty requestScope.EDIT_EMAIL_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_EMAIL_ERROR}*</p>
-                                    </c:if>
-                                </div>
-                                <!-- Form Group (location)-->
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputBirthday">Địa chỉ</label>
-                                    <input name="address" class="form-control" type="text" placeholder="Nhập địa chỉ" value="${sessionScope.account.address}" required>
-                                    <c:if test="${not empty requestScope.EDIT_ADDRESS_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_ADDRESS_ERROR}*</p>
-                                    </c:if>
-                                </div>
-                            </div>
-                            <!-- Save changes button-->
-                            <input type="hidden" name="userId" value="${sessionScope.account.userId}">
-                            <button class="btn btn-primary" type="submit">Lưu</button>
-                        </form>
+                                <!-- Save changes button-->
+                                <input type="hidden" name="userId" value="${sessionScope.account.userId}">
+                                <button class="btn btn-primary" type="submit">Lưu</button>
+                            </form>
                             <form action="MainController">
                                 <button style="margin-top: 15px" class="btn btn-primary" name="action" value="ChangePwd">Đổi mật khẩu</button>
                             </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <%@ include file="../../asset/includes/User/FooterUser.jsp" %>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <%@ include file="../../asset/includes/User/FooterUser.jsp" %>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        // Area Chart Example
-        var ctx = document.getElementById("myAreaChart");
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                        label: "Earnings",
-                        lineTension: 0.3,
-                        backgroundColor: "rgba(78, 115, 223, 0.05)",
-                        borderColor: "rgba(78, 115, 223, 1)",
-                        pointRadius: 3,
-                        pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHoverRadius: 3,
-                        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHitRadius: 10,
-                        pointBorderWidth: 2,
-                        data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-                    }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 25,
-                        top: 25,
-                        bottom: 0
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                            time: {
-                                unit: 'date'
-                            },
-                            gridLines: {
-                                display: false,
-                                drawBorder: false
-                            },
-                            ticks: {
-                                maxTicksLimit: 7
-                            }
+        <script>
+            // Area Chart Example
+            var ctx = document.getElementById("myAreaChart");
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                            label: "Earnings",
+                            lineTension: 0.3,
+                            backgroundColor: "rgba(78, 115, 223, 0.05)",
+                            borderColor: "rgba(78, 115, 223, 1)",
+                            pointRadius: 3,
+                            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHoverRadius: 3,
+                            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHitRadius: 10,
+                            pointBorderWidth: 2,
+                            data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
                         }],
-                    yAxes: [{
-                            ticks: {
-                                maxTicksLimit: 5,
-                                padding: 10,
-                                // Include a dollar sign in the ticks
-                                callback: function (value, index, values) {
-                                    return '$' + number_format(value);
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 25,
+                            top: 25,
+                            bottom: 0
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                                time: {
+                                    unit: 'date'
+                                },
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    maxTicksLimit: 7
                                 }
-                            },
-                            gridLines: {
-                                color: "rgb(234, 236, 244)",
-                                zeroLineColor: "rgb(234, 236, 244)",
-                                drawBorder: false,
-                                borderDash: [2],
-                                zeroLineBorderDash: [2]
+                            }],
+                        yAxes: [{
+                                ticks: {
+                                    maxTicksLimit: 5,
+                                    padding: 10,
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        return '$' + number_format(value);
+                                    }
+                                },
+                                gridLines: {
+                                    color: "rgb(234, 236, 244)",
+                                    zeroLineColor: "rgb(234, 236, 244)",
+                                    drawBorder: false,
+                                    borderDash: [2],
+                                    zeroLineBorderDash: [2]
+                                }
+                            }],
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        titleMarginBottom: 10,
+                        titleFontColor: '#6e707e',
+                        titleFontSize: 14,
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        intersect: false,
+                        mode: 'index',
+                        caretPadding: 10,
+                        callbacks: {
+                            label: function (tooltipItem, chart) {
+                                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                             }
-                        }],
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
-                    titleMarginBottom: 10,
-                    titleFontColor: '#6e707e',
-                    titleFontSize: 14,
-                    borderColor: '#dddfeb',
-                    borderWidth: 1,
-                    xPadding: 15,
-                    yPadding: 15,
-                    displayColors: false,
-                    intersect: false,
-                    mode: 'index',
-                    caretPadding: 10,
-                    callbacks: {
-                        label: function (tooltipItem, chart) {
-                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                         }
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
 
-    <script>
-        // Pie Chart Example
-        var ctx = document.getElementById("myPieChart");
-        var myPieChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Direct", "Referral", "Social"],
-                datasets: [{
-                        data: [55, 30, 15],
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-                        hoverBorderColor: "rgba(234, 236, 244, 1)",
-                    }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
-                    borderColor: '#dddfeb',
-                    borderWidth: 1,
-                    xPadding: 15,
-                    yPadding: 15,
-                    displayColors: false,
-                    caretPadding: 10,
+        <script>
+            // Pie Chart Example
+            var ctx = document.getElementById("myPieChart");
+            var myPieChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Direct", "Referral", "Social"],
+                    datasets: [{
+                            data: [55, 30, 15],
+                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                        }],
                 },
-                legend: {
-                    display: false
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                    },
+                    legend: {
+                        display: false
+                    },
+                    cutoutPercentage: 80,
                 },
-                cutoutPercentage: 80,
-            },
-        });
+            });
 
-    </script>
+        </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+    </body>
 
 </html>

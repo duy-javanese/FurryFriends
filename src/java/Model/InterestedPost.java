@@ -15,24 +15,22 @@ public class InterestedPost {
     private int interestedPostId;
     private Post post;
     private User user;
-    private ArrayList<User> userInterested;
     private Timestamp datetime;
+    private ExchangeStatus exchangeStatus;
 
     public InterestedPost() {
     }
 
-    public InterestedPost(int interestedPostId, Post post, User user, ArrayList<User> userInterested) {
+    public InterestedPost(int interestedPostId, Post post, User user) {
         this.interestedPostId = interestedPostId;
         this.post = post;
         this.user = user;
-        this.userInterested = userInterested;
     }
 
-    public InterestedPost(int interestedPostId, Post post, User user, ArrayList<User> userInterested, Timestamp datetime) {
+    public InterestedPost(int interestedPostId, Post post, User user, Timestamp datetime) {
         this.interestedPostId = interestedPostId;
         this.post = post;
         this.user = user;
-        this.userInterested = userInterested;
         this.datetime = datetime;
     }
 
@@ -60,20 +58,20 @@ public class InterestedPost {
         this.user = user;
     }
 
-    public ArrayList<User> getUserInterested() {
-        return userInterested;
-    }
-
-    public void setUserInterested(ArrayList<User> userInterested) {
-        this.userInterested = userInterested;
-    }
-
     public Timestamp getDatetime() {
         return datetime;
     }
 
     public void setDatetime(Timestamp datetime) {
         this.datetime = datetime;
+    }
+
+    public ExchangeStatus getExchangeStatus() {
+        return exchangeStatus;
+    }
+
+    public void setExchangeStatus(ExchangeStatus exchangeStatus) {
+        this.exchangeStatus = exchangeStatus;
     }
     
 }

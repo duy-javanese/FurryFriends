@@ -134,14 +134,14 @@ public class ExchangeDAO extends DBContext {
             stm.setBoolean(1, exchange.isIsFree());
             stm.setDouble(2, exchange.getPrice());
             stm.setString(3, exchange.getAddress());
-            
+
             stm.setInt(4, exchange.getExchangeId());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Exchange GetExchangeById(int id) {
         try {
             String sql = "SELECT *\n"
@@ -151,16 +151,16 @@ public class ExchangeDAO extends DBContext {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                
+
                 PostDAO pDao = new PostDAO();
                 Post post = pDao.GetPostById(rs.getInt("post_id"));
-                
+
                 boolean isFree = rs.getBoolean("is_free");
-                
+
                 double price = rs.getDouble("price");
-                
+
                 String address = rs.getString("address");
-                
+
                 boolean isFinish = rs.getBoolean("isFinish");
                 return new Exchange(id, post, isFree, price, address, isFinish);
             }
@@ -169,13 +169,13 @@ public class ExchangeDAO extends DBContext {
         }
         return null;
     }
-    
+
     private List<Exchange> ExchangeSearchResult;
 
     public List<Exchange> getExchangeSearchResult() {
         return ExchangeSearchResult;
     }
-    
+
     public void searchExchangeByTitle(String searchValue)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -183,39 +183,36 @@ public class ExchangeDAO extends DBContext {
         ResultSet rs = null;
 
         try {
-            
+
             con = DBContext.getConnection();
 
             if (con != null) {
-                
+
                 String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
                         + "From post as p, exchange as e "
                         + "where p.post_id = e.post_id and p.status = 1 and (p.title like ?);";
 
-                
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
 
-                
                 rs = stm.executeQuery();
 
-                
                 while (rs.next()) {
-                    
+
                     int exchangeId = rs.getInt("exchange_id");
-                    
+
                     PostDAO pDao = new PostDAO();
                     Post post = pDao.GetPostById(rs.getInt("post_id"));
-                    
+
                     boolean isFree = rs.getBoolean("is_free");
-                
+
                     double price = rs.getDouble("price");
-                
+
                     String address = rs.getString("address");
-                
+
                     boolean isFinish = rs.getBoolean("isFinish");
                     Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
-                    
+
                     if (this.ExchangeSearchResult == null) {
                         this.ExchangeSearchResult = new ArrayList<>();
                     }
@@ -236,7 +233,7 @@ public class ExchangeDAO extends DBContext {
             }
         }
     }
-    
+
     public void searchExchangeByTitleAndCategory(String searchValue, int categoryId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -244,40 +241,37 @@ public class ExchangeDAO extends DBContext {
         ResultSet rs = null;
 
         try {
-            
+
             con = DBContext.getConnection();
 
             if (con != null) {
-                
+
                 String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
                         + "From post as p, exchange as e "
                         + "where p.post_id = e.post_id and p.category_id = ? and p.status = 1 and (p.title like ?);";
 
-                
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, categoryId);
                 stm.setString(2, "%" + searchValue + "%");
 
-                
                 rs = stm.executeQuery();
 
-                
                 while (rs.next()) {
-                    
+
                     int exchangeId = rs.getInt("exchange_id");
-                    
+
                     PostDAO pDao = new PostDAO();
                     Post post = pDao.GetPostById(rs.getInt("post_id"));
-                    
+
                     boolean isFree = rs.getBoolean("is_free");
-                
+
                     double price = rs.getDouble("price");
-                
+
                     String address = rs.getString("address");
-                
+
                     boolean isFinish = rs.getBoolean("isFinish");
                     Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
-                    
+
                     if (this.ExchangeSearchResult == null) {
                         this.ExchangeSearchResult = new ArrayList<>();
                     }
@@ -298,7 +292,7 @@ public class ExchangeDAO extends DBContext {
             }
         }
     }
-    
+
     public void searchExchangeByCategoryId(int categoryId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -306,39 +300,36 @@ public class ExchangeDAO extends DBContext {
         ResultSet rs = null;
 
         try {
-            
+
             con = DBContext.getConnection();
 
             if (con != null) {
-                
+
                 String sql = "Select e.exchange_id, e.post_id, e.is_free, e.price, e.address, e.isFinish "
                         + "From post as p, exchange as e "
                         + "where p.post_id = e.post_id and p.category_id = ? and p.status = 1";
 
-                
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, categoryId);
 
-                
                 rs = stm.executeQuery();
 
-                
                 while (rs.next()) {
-                    
+
                     int exchangeId = rs.getInt("exchange_id");
-                    
+
                     PostDAO pDao = new PostDAO();
                     Post post = pDao.GetPostById(rs.getInt("post_id"));
-                    
+
                     boolean isFree = rs.getBoolean("is_free");
-                
+
                     double price = rs.getDouble("price");
-                
+
                     String address = rs.getString("address");
-                
+
                     boolean isFinish = rs.getBoolean("isFinish");
                     Exchange dto = new Exchange(exchangeId, post, isFree, price, address, isFinish);
-                    
+
                     if (this.ExchangeSearchResult == null) {
                         this.ExchangeSearchResult = new ArrayList<>();
                     }
@@ -359,7 +350,7 @@ public class ExchangeDAO extends DBContext {
             }
         }
     }
-    
+
     public List<Exchange> getExchangeByUserID(int userId) {
         List<Exchange> list = new ArrayList<>();
         try {
@@ -379,7 +370,7 @@ public class ExchangeDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Exchange usePostIdToGetExchange(int postId) {
         try {
             String sql = "SELECT *\n"
@@ -403,4 +394,19 @@ public class ExchangeDAO extends DBContext {
         }
         return null;
     }
+
+    public void updateExchangeStatus(boolean isFinish, int exchangeId) {
+        try {
+            String sql = "UPDATE [dbo].[exchange]\n"
+                    + "   SET [isFinish] = ?\n"
+                    + " WHERE exchange_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setBoolean(1, isFinish);
+            stm.setInt(2, exchangeId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

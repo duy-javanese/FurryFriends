@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller.User;
 
+import DAO.ExchangeDAO;
 import DAO.PostDAO;
+import Model.Exchange;
 import Model.InterestedPost;
 import Model.Post;
 import Model.User;
@@ -74,6 +75,7 @@ public class ListUserInterestedController extends HttpServlet {
         } else {
             User account = (User) request.getSession().getAttribute("account");
 
+            ExchangeDAO eDao = new ExchangeDAO();
             PostDAO pDao = new PostDAO();
 
             //pagenition 
@@ -88,12 +90,15 @@ public class ListUserInterestedController extends HttpServlet {
                 textSearch = "";
             }
 
-            ArrayList<InterestedPost> interestedPost = pDao.GetPostByUserInsterested((page - 1) * recordsPerPage,
+            ArrayList<Post> posts = pDao.GetPostByUserInsterested((page - 1) * recordsPerPage,
                     recordsPerPage, account.getUserId(), textSearch, categoryId,
                     typeId, status, isPublic);
-            for (InterestedPost post : interestedPost) {
-                ArrayList<User> listUI = pDao.GetUserInterested(post.getPost().getPostId());
+            for (Post post : posts) {
+                ArrayList<InterestedPost> listUI = pDao.GetUserInterested(post.getPostId());
                 post.setUserInterested(listUI);
+
+                Exchange exchange = eDao.GetExchangeByPostId(post.getPostId());
+                post.setExchange(exchange);
             }
 
             int noOfRecords = pDao.GetNoOfRecordsPostByUserInsterested(account.getUserId(), textSearch, categoryId,
@@ -106,7 +111,7 @@ public class ListUserInterestedController extends HttpServlet {
             request.setAttribute("currentPage", page);
             request.setAttribute("noOfRecords", noOfRecords);
 
-            request.setAttribute("ip", interestedPost);
+            request.setAttribute("posts", posts);
 
             request.getRequestDispatcher("/Views/Post/ListUserInterested.jsp").forward(request, response);
         }
@@ -114,7 +119,7 @@ public class ListUserInterestedController extends HttpServlet {
 
     public static void main(String[] args) {
         PostDAO pDao = new PostDAO();
-        ArrayList<InterestedPost> interestedPost = pDao.GetPostByUserInsterested(0,
+        ArrayList<Post> interestedPost = pDao.GetPostByUserInsterested(0,
                 3, 18, "", -1, -1, -1, -1);
         System.out.println(interestedPost.size());
     }

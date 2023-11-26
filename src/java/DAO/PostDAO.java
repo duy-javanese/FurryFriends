@@ -8,6 +8,7 @@ import DBUtils.DBContext;
 import Model.Category;
 import Model.Constant;
 import Model.Exchange;
+import Model.ExchangeStatus;
 import Model.InterestedPost;
 import Model.Post;
 import Model.PostStatus;
@@ -274,12 +275,12 @@ public class PostDAO extends DBUtils.DBContext {
         return -1;
     }
 
-    public ArrayList<InterestedPost> GetPostByUserInsterested(int offset, int recordsPerPage,
+    public ArrayList<Post> GetPostByUserInsterested(int offset, int recordsPerPage,
             int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
-        ArrayList<InterestedPost> list = new ArrayList<>();
+        ArrayList<Post> list = new ArrayList<>();
         try {
             int count = 0;
-            String sql = "SELECT DISTINCT ipost.*\n"
+            String sql = "SELECT DISTINCT ipost.PostId\n"
                     + "  FROM [InterestPost] ipost\n"
                     + "  left join post p\n"
                     + "  on p.post_id = ipost.PostId\n"
@@ -332,12 +333,7 @@ public class PostDAO extends DBUtils.DBContext {
                 p = new Post();
                 p = GetPostById(rs.getInt("PostId"));
 
-                InterestedPost ip = new InterestedPost();
-                ip.setInterestedPostId(rs.getInt("IntersestPost"));
-                ip.setPost(p);
-                ip.setDatetime(rs.getTimestamp("DateTime"));
-
-                list.add(ip);
+                list.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -702,8 +698,8 @@ public class PostDAO extends DBUtils.DBContext {
         return total;
     }
 
-    public ArrayList<User> GetUserInterested(int postId) {
-        ArrayList<User> list = new ArrayList<>();
+    public ArrayList<InterestedPost> GetUserInterested(int postId) {
+        ArrayList<InterestedPost> list = new ArrayList<>();
         try {
             String sql = "SELECT *\n"
                     + "  FROM [InterestPost]\n"
@@ -715,8 +711,18 @@ public class PostDAO extends DBUtils.DBContext {
 
             UserDAO uDao = new UserDAO();
             while (rs.next()) {
+                //get user interested
                 User u = uDao.GetUserById(rs.getInt("UserId"));
-                list.add(u);
+                //get status
+                ExchangeStatusDAO esDao = new ExchangeStatusDAO();
+                ExchangeStatus exchangeStatus = esDao.GetExchangeStatusById(rs.getInt("ExchangeStatus"));
+
+                InterestedPost ip = new InterestedPost();
+                ip.setUser(u);
+                ip.setDatetime(rs.getTimestamp("DateTime"));
+                ip.setExchangeStatus(exchangeStatus);
+
+                list.add(ip);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);

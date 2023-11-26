@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Ảnh</th>
+                                    <th>User name</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Thời gian</th>
@@ -47,6 +48,7 @@
                                         <td>
                                             <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
+                                        <td>${ip.post.user.username}</td>
                                         <td>${ip.post.title}</td>
                                         <td>${ip.post.postType.postTypeName}</td>
                                         <td>${ip.datetime}</td>

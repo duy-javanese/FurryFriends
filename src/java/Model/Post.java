@@ -25,7 +25,7 @@ public class Post {
     private PostStatus status;
     private Exchange exchange;
     private ArrayList<Comment> comments;
-    private ArrayList<User> userInterested;
+    private ArrayList<InterestedPost> userInterested;
     private ArrayList<User> userLike;
     private ArrayList<User> userSave;
 
@@ -179,11 +179,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public ArrayList<User> getUserInterested() {
+    public ArrayList<InterestedPost> getUserInterested() {
         return userInterested;
     }
 
-    public void setUserInterested(ArrayList<User> userInterested) {
+    public void setUserInterested(ArrayList<InterestedPost> userInterested) {
         this.userInterested = userInterested;
     }
 

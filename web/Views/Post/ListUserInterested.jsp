@@ -33,38 +33,47 @@
                                 <tr>
 
                                     <th>Ảnh</th>
-                                    <th>Tiêu đề bài viết</th>
+                                    <th>Phân loại bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Chế độ bài viết</th>
+                                    <th>Trạng thái giao dịch</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${ip}" var="ip">
+                                <c:forEach items="${posts}" var="post">
                                     <tr>
 
                                         <td>
-                                            <img src="${ip.post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
+                                            <img src="${post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
-                                        <td>${ip.post.title}</td>
-                                        <td>${ip.post.postType.postTypeName}</td>
+                                        <td>${post.title}</td>
+                                        <td>${post.postType.postTypeName}</td>
                                         <td>
-                                            <c:if test="${ip.post.isPublic == true}">
+                                            <c:if test="${post.isPublic == true}">
                                                 Công khai
                                             </c:if>
-                                            <c:if test="${ip.post.isPublic == false}">
+                                            <c:if test="${post.isPublic == false}">
                                                 Riêng tư
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${post.exchange.isFinish == false}">
+                                                Đang chờ giao dịch
+                                            </c:if>
+                                            <c:if test="${post.exchange.isFinish == true}">
+                                                Giao dịch hoàn thành
                                             </c:if>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <button href="/admin-product-detail.html" type="button"
                                                         class="btn btn-outline-success me-2" data-bs-toggle="modal"
-                                                        data-bs-target="#itemDetail_${ip.post.postId}">
+                                                        data-bs-target="#itemDetail_${post.postId}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
                                                 <!--Modal View Detail-->
-                                                <div class="modal fade" id="itemDetail_${ip.post.postId}" tabindex="-1"
+                                                <div class="modal fade" id="itemDetail_${post.postId}" tabindex="-1"
                                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                                         <div class="modal-content">
@@ -75,7 +84,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <div class="table-responsive">
+                                                                    <div>
                                                                         <table class="table align-middle">
                                                                             <thead>
                                                                                 <tr>
@@ -84,39 +93,77 @@
                                                                                     <th>Số điện thoại</th>
                                                                                     <th>Trạng thái</th>
                                                                                     <th>Thời gian</th>
-                                                                                    <th>Trạng thái giao dịch</th>
-                                                                                    <th>Hành động</th>
+                                                                                    <th style="width: 150px">Trạng thái giao dịch</th>
+                                                                                    <th style="width: 200px">Hành động</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <c:forEach items="${ip.userInterested}" var="ui">
+                                                                                <c:forEach items="${post.userInterested}" var="ui">
                                                                                     <tr>
                                                                                         <td><img src="${pageContext.request.contextPath}/asset/img/paw.png"
                                                                                                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                                                                                  style="width: 150px; z-index: 1"></td>
 
-                                                                                        <td>${ui.username}</td>
-                                                                                        <td>${ui.phone}</td>
+                                                                                        <td>${ui.user.username}</td>
+                                                                                        <td>${ui.user.phone}</td>
                                                                                         <td>
-                                                                                            <c:if test="${ui.status == true}">
+                                                                                            <c:if test="${ui.user.status == true}">
                                                                                                 Hoạt động
                                                                                             </c:if>
-                                                                                            <c:if test="${ui.status == false}">
+                                                                                            <c:if test="${ui.user.status == false}">
                                                                                                 Vô hiệu hóa
                                                                                             </c:if>
                                                                                         </td>
-                                                                                        <td>${ip.datetime}</td>
-                                                                                        <td>
-                                                                                            <c:if test="${ui.status == true}">
-                                                                                                <form action="contactUser" method="post">
-                                                                                                    <button type="submit" class="btn btn-outline-light d-lg-flex align-items-center align-middle" style="width: 150px">
-                                                                                                        <img src="/img/home/zalo.png"
-                                                                                                             alt="Generic placeholder image" class="img-fluid img-thumbnail"
-                                                                                                             style="width: 40px;height: 40; z-index: 1">
-                                                                                                        <p style="padding-top: 10%; padding-left: 5%">Liên hệ</p>
-                                                                                                    </button>
-                                                                                                </form>
+                                                                                        <td>${ui.datetime}</td>
+                                                                                        <td style="width: 150px">
+                                                                                            <c:if test="${ui.exchangeStatus.exchangeStatusId == 3}">
+                                                                                                <div class="rounded-pill bg-success p-2" style="text-align: center">
+                                                                                                    <span style="color: white">${ui.exchangeStatus.exchangeStatusValue}</span>
+                                                                                                </div>
                                                                                             </c:if>
+                                                                                             <c:if test="${ui.exchangeStatus.exchangeStatusId == 2}">
+                                                                                                <div class="rounded-pill p-2" style="text-align: center; background-color: yellow">
+                                                                                                    <span style="color: black">${ui.exchangeStatus.exchangeStatusValue}</span>
+                                                                                                </div>
+                                                                                            </c:if>
+                                                                                             <c:if test="${ui.exchangeStatus.exchangeStatusId == 1}">
+                                                                                                <div class="rounded-pill bg-info p-2" style="text-align: center; border-width: 2px">
+                                                                                                    <span style="color: black">${ui.exchangeStatus.exchangeStatusValue}</span>
+                                                                                                </div>
+                                                                                            </c:if>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="d-flex gap-3">
+                                                                                                <c:if test="${post.exchange.isFinish == false}">
+                                                                                                    <c:if test="${ui.user.status == true && ui.exchangeStatus.exchangeStatusId != 3}">
+                                                                                                        <form action="contactUser" method="post">
+                                                                                                            <input type="hidden" name="postId" value="${post.postId}">
+                                                                                                            <input type="hidden" name="userId" value="${ui.user.userId}">
+                                                                                                            <button type="submit" class="btn btn-outline-info d-lg-flex align-items-center align-middle" style="width: 150px">
+                                                                                                                <img src="/img/home/zalo.png"
+                                                                                                                     alt="Generic placeholder image" class="img-fluid img-thumbnail"
+                                                                                                                     style="width: 40px;height: 40; z-index: 1">
+                                                                                                                <p style="padding-top: 10%; padding-left: 5%">Liên hệ</p>
+                                                                                                            </button>
+                                                                                                        </form>
+                                                                                                    </c:if>
+                                                                                                    <c:if test="${ui.user.status == true && ui.exchangeStatus.exchangeStatusId == 2}">
+                                                                                                        <form action="finishExchange" method="post">
+                                                                                                            <input type="hidden" name="exchangeId" value="${post.exchange.exchangeId}">
+                                                                                                            <input type="hidden" name="postId" value="${post.postId}">
+                                                                                                            <input type="hidden" name="userId" value="${ui.user.userId}">
+                                                                                                            <button class="btn btn-success" type="submit">
+                                                                                                                Hoàn thành
+                                                                                                            </button>
+                                                                                                        </form>
+                                                                                                    </c:if>
+                                                                                                </c:if>
+                                                                                                <c:if test="${post.exchange.isFinish == true}">
+                                                                                                    <div class="rounded-pill bg-success" style="text-align: center">
+                                                                                                        <span style="color: white">Giao dịch này đã được hoàn thành</span>
+                                                                                                    </div>
+                                                                                                </c:if>
+                                                                                            </div>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </c:forEach>

@@ -17,7 +17,7 @@
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
         <!-- Dashboard Products wrapper -->
-        <section class="h-100 gradient-custom-2">
+        <section style="margin-left: 280px; height: calc(100vh - 133px); overflow-y: auto;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-lg-9 col-xl-7">

@@ -10,6 +10,7 @@ import DAO.LikePostDAO;
 import DAO.PostDAO;
 import DAO.ReportContentDAO;
 import Model.Comment;
+import Model.InterestedPost;
 import Model.Post;
 import Model.ReportContent;
 import Model.User;
@@ -50,7 +51,7 @@ public class ViewPostDetailsController extends HttpServlet {
             ArrayList<Comment> comments = cDao.GetCommentByPostId(postId);
             
             
-            ArrayList<User> listUI = pDao.GetUserInterested(p.getPostId());
+            ArrayList<InterestedPost> listUI = pDao.GetUserInterested(p.getPostId());
             p.setUserInterested(listUI);
             
             ArrayList<User> listUL = pDao.GetUserLike(p.getPostId());

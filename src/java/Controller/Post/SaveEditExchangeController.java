@@ -81,7 +81,6 @@ public class SaveEditExchangeController extends HttpServlet {
             exchange.setIsFree(isFree);
             exchange.setAddress(address);
             exchange.setPrice(price);
-            exchange.setIsFinish(false);
 
             //tao post
             Post post = new Post();

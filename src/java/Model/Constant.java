@@ -28,6 +28,10 @@ public class Constant {
     public static int StatusPostAccept = 2;
     public static int StatusPostDenined = 3;
     
+    public static int ExchangePending = 1;
+    public static int ExchangeDoing = 2;
+    public static int ExchangeFinish = 3;
+    
     public static int PostPublic = 1;
     public static int PostPrivate = 0;
     

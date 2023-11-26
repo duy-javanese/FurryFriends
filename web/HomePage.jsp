@@ -104,7 +104,7 @@
                                         <c:if test="${sessionScope.account.userId != p.user.userId and p.postType.postTypeId == 4}">
                                             <a href="interestPost?postId=${p.postId}" class="ml-3
                                                <c:forEach items="${p.userInterested}" var="ui">
-                                                   <c:if test="${ui.userId == sessionScope.account.userId}">
+                                                   <c:if test="${ui.user.userId == sessionScope.account.userId}">
                                                        text-danger
                                                    </c:if>
                                                </c:forEach>
@@ -119,7 +119,17 @@
                                         <p>${p.content.substring(0, 200)}...</p>
                                         <c:if test="${p.postType.postTypeId == 4}">
                                             <div class="d-flex gap-2">
-                                                <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                                <c:if test="${p.exchange.isFree == false}">
+                                                    <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                                </c:if>
+                                                <c:if test="${p.exchange.isFree == true}">
+                                                    <div class="d-flex justify-content-center">
+                                                        <p style="font-weight: bold; margin-top: 3%">Giá bán: </p>
+                                                        <div class="rounded-pill bg-success p-2 ml-2" style="text-align: center; border-radius: 25px">
+                                                            <span style="color: white">Miễn phí</span>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                         </c:if>
                                         <a class="button" href="viewPostDetails?postId=${p.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
