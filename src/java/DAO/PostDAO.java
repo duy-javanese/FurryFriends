@@ -328,12 +328,12 @@ public class PostDAO extends DBUtils.DBContext {
             while (rs.next()) {
                 p = new Post();
                 p = GetPostById(rs.getInt("PostId"));
-                
+
                 InterestedPost ip = new InterestedPost();
                 ip.setInterestedPostId(rs.getInt("IntersestPost"));
                 ip.setPost(p);
                 ip.setDatetime(rs.getTimestamp("DateTime"));
-                
+
                 list.add(ip);
             }
         } catch (SQLException ex) {
@@ -719,8 +719,8 @@ public class PostDAO extends DBUtils.DBContext {
         return list;
     }
 
-    public ArrayList<Post> GetPostInterestedByUser(int offset, int recordsPerPage, int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
-        ArrayList<Post> list = new ArrayList<>();
+    public ArrayList<InterestedPost> GetPostInterestedByUser(int offset, int recordsPerPage, int userId, String textSearch, int categoryId, int typeId, int status, int isPublic) {
+        ArrayList<InterestedPost> list = new ArrayList<>();
         try {
             int count = 0;
             String sql = "SELECT *\n"
@@ -774,7 +774,13 @@ public class PostDAO extends DBUtils.DBContext {
             while (rs.next()) {
                 p = new Post();
                 p = GetPostById(rs.getInt("PostId"));
-                list.add(p);
+
+                InterestedPost ip = new InterestedPost();
+                ip.setInterestedPostId(rs.getInt("IntersestPost"));
+                ip.setPost(p);
+                ip.setDatetime(rs.getTimestamp("DateTime"));
+
+                list.add(ip);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -789,7 +795,7 @@ public class PostDAO extends DBUtils.DBContext {
                     + "  FROM [InterestPost] ip\n"
                     + "  left join [post] p\n"
                     + "  on p.post_id = ip.PostId\n"
-                    + "  Where ip.UserId = ? and p.deleteFlag = 0\n";
+                    + "  Where ip.UserId = ? and p.deleteFlag = 0 and p.isPublic = 1\n";
             HashMap<Integer, Object> setter = new HashMap<>();
             //find by user id
             setter.put(++count, userId);
@@ -1154,10 +1160,10 @@ public class PostDAO extends DBUtils.DBContext {
 
     public Post GetMostLikedPost() {
         try {
-            String sql = "SELECT TOP 1 l.PostId, COUNT(l.LikePostId) AS NumberOfLikes \n" +
-                        "FROM LikePost as l, post as p \n" +
-                        "where l.PostId = p.post_id AND p.isPublic = 1 AND  p.deleteFlag = 0 AND p.status = 2\n" +
-                        "GROUP BY l.PostId ORDER BY NumberOfLikes DESC;";
+            String sql = "SELECT TOP 1 l.PostId, COUNT(l.LikePostId) AS NumberOfLikes \n"
+                    + "FROM LikePost as l, post as p \n"
+                    + "where l.PostId = p.post_id AND p.isPublic = 1 AND  p.deleteFlag = 0 AND p.status = 2\n"
+                    + "GROUP BY l.PostId ORDER BY NumberOfLikes DESC;";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -1185,7 +1191,7 @@ public class PostDAO extends DBUtils.DBContext {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public ArrayList<Post> ajaxSearchPostByTitle(String searchValue)
             throws ClassNotFoundException, SQLException, NamingException {
         ArrayList<Post> searchAjaxResult = new ArrayList<>();
@@ -1227,9 +1233,9 @@ public class PostDAO extends DBUtils.DBContext {
                     String content = rs.getString("post_content");
                     String img = rs.getString("post_img");
                     String reason = rs.getString("reason");
-                    
+
                     boolean isPublic = rs.getBoolean("isPublic");
-                    
+
                     ExchangeDAO eDao = new ExchangeDAO();
                     Exchange exchange = eDao.GetExchangeByPostId(rs.getInt("post_id"));
 
@@ -1256,7 +1262,7 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return searchAjaxResult;
     }
-    
+
     public ArrayList<User> GetUserSave(int postId) {
         ArrayList<User> list = new ArrayList<>();
         try {
@@ -1278,9 +1284,9 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return list;
     }
-    
+
     public boolean updatePostPublicStatus(int postId, boolean status) {
-         boolean result = false;
+        boolean result = false;
         try {
             String sql = "UPDATE [dbo].[post]\n"
                     + "   SET [isPublic] = ? \n"
@@ -1291,14 +1297,14 @@ public class PostDAO extends DBUtils.DBContext {
             stm.executeUpdate();
             int effectRow = stm.executeUpdate();
             if (effectRow > 0) {
-                    result = true;
-                }
+                result = true;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
+
     public List<Post> getPostByUserID(int userId) {
         List<Post> list = new ArrayList<>();
         try {
@@ -1318,7 +1324,7 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return list;
     }
-    
+
     public int getTotalShowedPostOfUser(int userId) {
         int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
 
@@ -1337,7 +1343,7 @@ public class PostDAO extends DBUtils.DBContext {
 
         return numofPost;
     }
-    
+
     public int getTotalShowedExchangeOfUser(int userId) {
         int numofPost = 0; // Initialize with a default value (e.g., -1) in case no records exist.
 
@@ -1356,7 +1362,7 @@ public class PostDAO extends DBUtils.DBContext {
 
         return numofPost;
     }
-    
+
     public boolean UpdateUserPostIsPublic(int userId, boolean isPublic)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
@@ -1392,7 +1398,7 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return result;
     }
-    
+
     public List<Post> getTop3PostByUserID(int userId) {
         List<Post> list = new ArrayList<>();
         try {
@@ -1412,7 +1418,7 @@ public class PostDAO extends DBUtils.DBContext {
         }
         return list;
     }
-    
+
     public void searchPostByCategory(int categoryId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -1476,7 +1482,7 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
-    
+
     public void searchPostByCategoryAndPostType(int categoryId, int postTypeId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -1541,7 +1547,7 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
-    
+
     public void searchPostByTitleAndCate(String searchValue, int CategoryId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;
@@ -1606,7 +1612,7 @@ public class PostDAO extends DBUtils.DBContext {
             }
         }
     }
-    
+
     public void searchPostByTitleAndCateAndType(String searchValue, int CategoryId, int postTypeId)
             throws ClassNotFoundException, SQLException, NamingException {
         Connection con = null;

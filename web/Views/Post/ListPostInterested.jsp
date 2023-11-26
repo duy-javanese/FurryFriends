@@ -35,31 +35,33 @@
                                     <th>Ảnh</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
+                                    <th>Thời gian</th>
                                     <th>Chế độ bài viết</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${posts}" var="p">
+                                <c:forEach items="${ip}" var="ip">
                                     <tr>
-                                        <td>${p.postId}</td>
+                                        <td>${ip.post.postId}</td>
                                         <td>
                                             <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
-                                        <td>${p.title}</td>
-                                        <td>${p.postType.postTypeName}</td>
+                                        <td>${ip.post.title}</td>
+                                        <td>${ip.post.postType.postTypeName}</td>
+                                        <td>${ip.datetime}</td>
                                         <td>
-                                            <c:if test="${p.isPublic == true}">
+                                            <c:if test="${ip.post.isPublic == true}">
                                                 Công khai
                                             </c:if>
-                                            <c:if test="${p.isPublic == false}">
+                                            <c:if test="${ip.post.isPublic == false}">
                                                 Riêng tư
                                             </c:if>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <form action="viewPostDetails" method="get">
-                                                    <input type="hidden" value="${p.postId}" name="postId">
+                                                    <input type="hidden" value="${ip.post.postId}" name="postId">
                                                     <button type="submit"
                                                             class="btn btn-outline-success me-2">
                                                         <i class="fa-solid fa-eye"></i>
@@ -74,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center mt-1">
+            <div class="d-flex justify-content-center">
                 <nav aria-label="Page navigation example col-12">
                     <ul class="pagination">
                         <%--For displaying Previous link except for the 1st page --%>

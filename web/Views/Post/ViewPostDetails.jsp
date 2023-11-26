@@ -150,7 +150,7 @@
                             <div style="margin-top :30px">
                                 <c:if test="${post.postType.postTypeId == 4}">
                                     <p style="font-weight: bold">Giá bán:</p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
-                                    <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}đ</p>
+                                    <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}</p>
                                 </c:if>
                             </div>
 

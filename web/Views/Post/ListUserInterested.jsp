@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center mt-1">
+            <div class="d-flex justify-content-center">
                 <nav aria-label="Page navigation example col-12">
                     <ul class="pagination">
                         <%--For displaying Previous link except for the 1st page --%>

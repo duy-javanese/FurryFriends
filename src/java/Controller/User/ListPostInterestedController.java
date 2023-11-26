@@ -6,6 +6,7 @@
 package Controller.User;
 
 import DAO.PostDAO;
+import Model.InterestedPost;
 import Model.Post;
 import Model.User;
 import java.io.IOException;
@@ -86,7 +87,7 @@ public class ListPostInterestedController extends HttpServlet {
                 textSearch = "";
             }
 
-            ArrayList<Post> posts = pDao.GetPostInterestedByUser((page - 1) * recordsPerPage,
+            ArrayList<InterestedPost> posts = pDao.GetPostInterestedByUser((page - 1) * recordsPerPage,
                     recordsPerPage, account.getUserId(), textSearch, categoryId,
                     typeId, status, isPublic);
 
@@ -100,7 +101,7 @@ public class ListPostInterestedController extends HttpServlet {
             request.setAttribute("currentPage", page);
             request.setAttribute("noOfRecords", noOfRecords);
 
-            request.setAttribute("posts", posts);
+            request.setAttribute("ip", posts);
 
             request.getRequestDispatcher("/Views/Post/ListPostInterested.jsp").forward(request, response);
         }
