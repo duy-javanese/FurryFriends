@@ -497,7 +497,7 @@ public class PostDAO extends DBUtils.DBContext {
             if (conn != null) {
                 String sql = "Select * "
                         + "From post "
-                        + "Where status = 1 AND (post_type = 1 or post_type = 2 or post_type =3 )";
+                        + "Where status = 1 AND post_type !=4 AND deleteFlag=0 ";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {

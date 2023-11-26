@@ -62,6 +62,7 @@ private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserCon
 private static final String VIEW_REPORTED_CONTENT_DETAIL_CONTROLLER="ViewReportDetailController";
 private static final String BAN_REPORTED_USER="BanUserController";
 private static final String PROCESS_REPORT_HISTORY_CONTROLLER="GetReportProcessHistory";
+private static final String CHANGE_PWD_PAGE = "/Views/User/ChangePwd.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -198,6 +199,9 @@ private static final String PROCESS_REPORT_HISTORY_CONTROLLER="GetReportProcessH
             }
             else if (action.equals("DeletePostType")){
                 url = DELETE_POSTTYPE;
+            }
+            else if (action.equals("ChangePwd")){
+                url = CHANGE_PWD_PAGE;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

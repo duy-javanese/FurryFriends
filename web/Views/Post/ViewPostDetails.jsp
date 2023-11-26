@@ -129,13 +129,15 @@
                                     </c:if>
 
                                     <c:if test="${post.postType.postTypeId == 4}">
-                                        <a href="interestPost?postId=${post.postId}" class="ml-3
+                                        <c:if test="${sessionScope.account.userId != post.user.userId}">
+                                            <a href="interestPost?postId=${post.postId}" class="ml-3
                                            <c:forEach items="${post.userInterested}" var="ui">
                                                <c:if test="${ui.userId == sessionScope.account.userId}">
                                                    text-danger
                                                </c:if>
                                            </c:forEach>
                                            "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                        </c:if>
                                     </c:if>
                                 </div>
                                 <c:if test="${sessionScope.account.userId != post.user.userId}">
@@ -234,7 +236,11 @@
                                                         <img src="${pageContext.request.contextPath}/asset/img/paw.png" alt="" height="42" width="42">
                                                     </div>
                                                     <div class="desc">
-                                                        <h5><a href="#">${ch.user.username}</a></h5>
+                                                        <form action="MainController" method="get">
+                                                            <input type="hidden" name="userId" value="${ch.user.userId}">
+                                                            <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${ch.user.username}</h5></button>
+                                                        </form>
+<!--                                                        <h5>${ch.user.username}</a></h5>-->
                                                         <p class="date">${ch.createdDate}</p>
                                                         <p class="comment">
                                                             ${ch.commentValue}

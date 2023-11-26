@@ -478,4 +478,24 @@ public class UserDAO extends DBContext {
         }
         return result ;
     }
+    
+    public boolean changePwd(String pwd, int userID) {
+        boolean success = false;
+        try {
+            String sql = "UPDATE users SET pwd = ? WHERE userID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pwd);
+            stm.setInt(2, userID);
+            ResultSet rs = stm.executeQuery();
+            int effectRow = stm.executeUpdate();
+            
+            if(effectRow > 0){
+                success= true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return success;
+    }
 }

@@ -99,6 +99,7 @@ public class EditProfileController extends HttpServlet {
         
         if (validate){
             User user = new User();
+            user.setUsername(account.getUsername());
             user.setUserId(account.getUserId());
             user.setEmail(email);
             user.setPhone(phone);
@@ -107,7 +108,7 @@ public class EditProfileController extends HttpServlet {
         UserDAO uDao = new UserDAO();
         uDao.UpdateUser(user);
         
-        session.setAttribute("account", user);
+        request.getSession().setAttribute("account", user);
         response.sendRedirect("userProfile");
         }
         else{

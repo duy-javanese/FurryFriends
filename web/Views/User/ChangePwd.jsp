@@ -1,14 +1,19 @@
+<%-- 
+    Document   : ChangePwd
+    Created on : Nov 26, 2023, 5:18:44 PM
+    Author     : Admin
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Đổi mật khẩu</title>
         <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -80,70 +85,41 @@
             }
         </style>
     </head>
-
     <body>
-
         <%@ include file="../../asset/includes/User/HeaderUser.jsp" %>
         <%@ include file="../../asset/includes/User/NavbarUser.jsp" %>
-        <!-- Dashboard Products wrapper -->
+        
         <div class="edit-profile-box">
-            <!-- Account page navigation-->
-            <h4>Chỉnh sửa thông tin cá nhân</h4>
+            <h4>Đổi mật khẩu</h4>
             <hr class="mt-0 mb-4">
-
-            <div class="col-xl-8">
-                <!-- Account details card-->
+            <div class="col-xl-4">
                 <div class="card mb-4">
-                    <div class="card-header">Thông tin cá nhân</div>
+                    <div class="card-header">Điền thông tin vào các ô</div>
                     <div class="card-body">
-                        <form action="editProfile" method="post">
-                            <!-- Form Group (username)-->
+                        <form action="ChangePwdController" method="get">
                             <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputUsername">Tên đăng nhập</label><br>
-<!--                                        <input name="username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${sessionScope.account.username}" required>-->
-                                    ${sessionScope.account.username}
-                                </div>
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputLocation">Số điện thoại</label>
-                                    <input name="phone" class="form-control" id="inputLocation" type="text" value="${sessionScope.account.phone}" required>
-                                    <c:if test="${not empty requestScope.EDIT_PHONE_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_PHONE_ERROR}*</p>
-                                    </c:if>
-                                </div>
+                                <label style="font-weight: 500" for="inputUsername">Mật khẩu cũ</label><br>
+                                <input name="oldPwd" class="form-control" id="inputLocation" type="password" value="" required>
+                                <span style="color: red">${requestScope.OLD_PASSWORD}</span>
                             </div>
-                            <!-- Form Row        -->
                             <div class="row gx-3 mb-3">
-                                <!-- Form Group (organization name)-->
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputEmailAddress">Địa chỉ email</label>
-                                    <input name="email" class="form-control" id="inputEmailAddress" type="email" placeholder="Nhập email" value="${sessionScope.account.email}" required>
-
-                                    <c:if test="${not empty requestScope.EDIT_EMAIL_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_EMAIL_ERROR}*</p>
-                                    </c:if>
-                                </div>
-                                <!-- Form Group (location)-->
-                                <div class="col-md-6">
-                                    <label style="font-weight: 500" for="inputBirthday">Địa chỉ</label>
-                                    <input name="address" class="form-control" type="text" placeholder="Nhập địa chỉ" value="${sessionScope.account.address}" required>
-                                    <c:if test="${not empty requestScope.EDIT_ADDRESS_ERROR}">
-                                        <p style="color: red">${requestScope.EDIT_ADDRESS_ERROR}*</p>
-                                    </c:if>
-                                </div>
+                                <label style="font-weight: 500" for="inputUsername">Mật khẩu mới</label><br>
+                                <input name="newPwd" class="form-control" id="inputLocation" type="password" value="" required>
+                                <span style="color: red">${requestScope.NEW_PASSWORD}</span>
                             </div>
-                            <!-- Save changes button-->
+                            <div class="row gx-3 mb-3">
+                                <label style="font-weight: 500" for="inputUsername">Nhập lại mật khẩu mới</label><br>
+                                <input name="RnewPwd" class="form-control" id="inputLocation" type="password" value="" required>
+                                <span style="color: red">${requestScope.RNEW_PASSWORD}</span>
+                            </div>
                             <input type="hidden" name="userId" value="${sessionScope.account.userId}">
+                            <input type="hidden" name="userName" value="${sessionScope.account.username}">
                             <button class="btn btn-primary" type="submit">Lưu</button>
                         </form>
-                            <form action="MainController">
-                                <button style="margin-top: 15px" class="btn btn-primary" name="action" value="ChangePwd">Đổi mật khẩu</button>
-                            </form>
                     </div>
                 </div>
             </div>
         </div>
-
     <%@ include file="../../asset/includes/User/FooterUser.jsp" %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -278,6 +254,5 @@
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
-</body>
-
+    </body>
 </html>

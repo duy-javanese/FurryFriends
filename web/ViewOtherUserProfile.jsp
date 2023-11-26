@@ -66,7 +66,7 @@
                         <p>${user.address}</p>
                     </div>
                         <div>
-                                <form action="MainController" method="get">
+                                <form action="MainController" method="POST">
                                     <div class="user-post-type-box">
                                         <input type="hidden" name="userId" value="${user.userId}">
                                         <button class="user-profile-menu" name="action" value="viewUserListPost">Bài viết đang hiển thị (${totalPost})</button>
