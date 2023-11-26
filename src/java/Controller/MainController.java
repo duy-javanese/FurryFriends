@@ -54,6 +54,9 @@ private static final String STATISTIC_VIEW_POST_DETAIL_CONTROLLER="statisticView
 private static final String ADD_CATEGORY = "AddCategoryController";
 private static final String UPDATE_CATEGORY = "UpdateCategoryController";
 private static final String DELETE_CATEGORY = "DeleteCategoryController";
+private static final String ADD_POSTTYPE = "AddPostTypeController";
+private static final String UPDATE_POSTTYPE = "UpdatePostTypeController";
+private static final String DELETE_POSTTYPE = "DeletePostTypeController";
 
 private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserController";
     /**
@@ -168,6 +171,15 @@ private static final String VIEW_OTHER_USER_PROFILE_CONTROLLER="ViewOtherUserCon
             }
             else if (action.equals("viewUserListExchange")){
                 url = VIEW_OTHER_USER_PROFILE_CONTROLLER;
+            }
+            else if (action.equals("AddPostType")){
+                url = ADD_POSTTYPE;
+            }
+            else if (action.equals("UpdatePostType")){
+                url = UPDATE_POSTTYPE;
+            }
+            else if (action.equals("DeletePostType")){
+                url = DELETE_POSTTYPE;
             }
         }catch (Exception e) {
             log("Error at MainController: " + e.toString());

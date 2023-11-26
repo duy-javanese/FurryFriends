@@ -3,6 +3,8 @@
 <%@ page import="Model.Information" %>
 <%@ page import="DAO.CategoryDAO" %>
 <%@ page import="Model.Category" %>
+<%@ page import="DAO.PostTypeDAO" %>
+<%@ page import="Model.PostType" %>
 <%@ page import="java.util.ArrayList" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -118,7 +120,7 @@
         </style>
     </head>
     <c:if test="${sessionScope.account == null}">
-            <c:redirect url="loginPage.jsp"></c:redirect>
+        <c:redirect url="loginPage.jsp"></c:redirect>
     </c:if>
 
     <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 1}">
@@ -130,6 +132,8 @@
             Information info = InformationDAO.getInfor();
             CategoryDAO categoryDAO = new CategoryDAO();
             ArrayList<Category> categories = categoryDAO.GetAllCategories();
+            PostTypeDAO postTypeDAO = new PostTypeDAO();
+            ArrayList<PostType> posttypes = postTypeDAO.GetAllPostType();
         %>
         <h1>Admin Management</h1>
         <div id="menu">
@@ -189,7 +193,7 @@
                 <input type="text" id="category_name" name="category_name" required="">
                 <button type="submit" name="action" value="AddCategory">Thêm mới</button><br><br>
                 <label>Danh mục hiện có:</label>
-                <span class="error-text">${requestScope.DELETE_ERROR}</span>
+                <span class="error-text">${requestScope.DELETE_CATEGORY_ERROR}</span>
             </form>
 
             <table border="1" class="category_table exclude-styles">
@@ -213,13 +217,13 @@
                         <input type="text" name="category_name_update" value="<%= category.getCategoryName() %>" required="">
                     </td>
                     <td>
-                        <input type="hidden" name="id" value="<%= category.getCategoryId() %>">
+                        <input type="hidden" name="category_id" value="<%= category.getCategoryId() %>">
                         <button type="submit" name="action" value="UpdateCategory">Cập nhật</button>
                     </td>
                 </form>
                 <form action="MainController" method="POST">
                     <td>
-                        <input type="hidden" name="id" value="<%= category.getCategoryId() %>">
+                        <input type="hidden" name="category_id" value="<%= category.getCategoryId() %>">
                         <button type="submit" name="action" value="DeleteCategory">Xoá</button>
                     </td>
                 </form>
@@ -227,6 +231,49 @@
                 <% } %>
                 </tbody>
             </table>
+            <form action="MainController" method="post">
+                <label for="postType_name">Thêm mới thể loại bài viết:</label>
+                <span class="error-text">${requestScope.POSTTYPE_ERROR}</span>
+                <input type="text" id="postType_name" name="postType_name" required="">
+                <button type="submit" name="action" value="AddPostType">Thêm mới</button><br><br>
+                <label>Thể loại bài viết hiện có:</label>
+                <span class="error-text">${requestScope.DELETE_POSTTYPE_ERROR}</span>
+            </form>
+            <table border="1" class="category_table exclude-styles">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Thể loại bài viết</th>
+                        <th>Cập nhật</th>
+                        <th>Xoá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        for (int i = 0; i < posttypes.size(); i++) {
+                            PostType postType = posttypes.get(i);
+                    %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                <form action="MainController" method="POST">
+                    <td>
+                        <input type="text" name="postType_name_update" value="<%= postType.getPostTypeName() %>" required="">
+                    </td>
+                    <td>
+                        <input type="hidden" name="postType_id" value="<%= postType.getPostTypeId() %>">
+                        <button type="submit" name="action" value="UpdatePostType">Cập nhật</button>
+                    </td>
+                </form>
+                <form action="MainController" method="POST">
+                    <td>
+                        <input type="hidden" name="postType_id" value="<%= postType.getPostTypeId() %>">
+                        <button type="submit" name="action" value="DeletePostType">Xoá</button>
+                    </td>
+                </form>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>            
         </div>
         <%
     } catch (Exception e) {
