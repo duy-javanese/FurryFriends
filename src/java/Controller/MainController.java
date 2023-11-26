@@ -189,6 +189,7 @@ private static final String PROCESS_REPORT_HISTORY_CONTROLLER="GetReportProcessH
             }
             else if (action.equals("ReportProcessHitory")){
                 url = PROCESS_REPORT_HISTORY_CONTROLLER;
+            }
             else if (action.equals("AddPostType")){
                 url = ADD_POSTTYPE;
             }
