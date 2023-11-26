@@ -47,16 +47,30 @@
                 <span class="close" id="closeModalBtn">&times;</span>
                 <form action="reportPost" method="post">
                     <input value="${post.postId}" name="postId" type="hidden">
-                    <select name="reportId" required="">
-                        <option selected disabled>Lựa chọn lý do báo cáo</option>
-                        <c:forEach items="${reports}" var="r">
-                            <option value="${r.reportContentId}">${r.reportContent}</option>
-                        </c:forEach>
-                    </select>
+                    <c:if test="${post.postType.postTypeId == 4}">
+                        <select name="reportId" required="">
+                            <option selected disabled>Lựa chọn lý do báo cáo</option>
+                            <c:forEach items="${reports}" var="r">
+                                <c:if test="${r.postType.postTypeId == 4}">
+                                    <option value="${r.reportContentId}">${r.reportContent}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </c:if>
+                    <c:if test="${post.postType.postTypeId != 4}">
+                        <select name="reportId" required="">
+                            <option selected disabled>Lựa chọn lý do báo cáo</option>
+                            <c:forEach items="${reports}" var="r">
+                                <c:if test="${empty r.postType}">
+                                    <option value="${r.reportContentId}">${r.reportContent}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </c:if>
                     <br>
-                    <label>Lý do:</label><br>
+                    <label>Chi tiết:</label><br>
                     <textarea rows="5" cols="60" name="reason"></textarea>
-                    <button class="btn btn-outline-danger">Báo cáo</button>
+                    <button class="btn btn-outline-danger" id="reportButton" onclick="validateReport(event)" >Báo cáo</button>
                 </form>
             </div>
         </div>
@@ -94,45 +108,50 @@
                             <p>
                                 ${post.content}
                             </p>
-                            <div class="d-flex">
-                                <a href="likePost?postId=${post.postId}" class="ml-3
-                                   <c:forEach items="${post.userLike}" var="ul">
-                                       <c:if test="${ul.userId == sessionScope.account.userId}">
-                                           text-danger
-                                       </c:if>
-                                   </c:forEach>
-                                   "><i class="ti-thumb-up mr-1"></i>Thích</a>
-                                   
-                                   <c:if test="${sessionScope.account.userId != post.user.userId}">
-                                       <a href="SavePostController?postId=${post.postId}" class="ml-3
-                                            <c:forEach items="${post.userSave}" var="us">
-                                                <c:if test="${us.userId == sessionScope.account.userId}">
-                                                    text-danger
-                                                </c:if>
-                                            </c:forEach>
-                                   "><i class="ti-heart mr-1"></i>Lưu</a>
-                                   </c:if>
-                                
-                                <c:if test="${post.postType.postTypeId == 4}">
-                                    <a href="interestPost?postId=${post.postId}" class="ml-3
-                                       <c:forEach items="${post.userInterested}" var="ui">
-                                           <c:if test="${ui.userId == sessionScope.account.userId}">
+                            <div class="d-flex" style="align-items: center; justify-content: space-between">
+                                <div>
+                                    <a href="likePost?postId=${post.postId}" class="ml-3
+                                       <c:forEach items="${post.userLike}" var="ul">
+                                           <c:if test="${ul.userId == sessionScope.account.userId}">
                                                text-danger
                                            </c:if>
                                        </c:forEach>
-                                       "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                       "><i class="ti-thumb-up mr-1"></i>Thích</a>
+
+                                    <c:if test="${sessionScope.account.userId != post.user.userId}">
+                                        <a href="SavePostController?postId=${post.postId}" class="ml-3
+                                           <c:forEach items="${post.userSave}" var="us">
+                                               <c:if test="${us.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-heart mr-1"></i>Lưu</a>
+                                    </c:if>
+
+                                    <c:if test="${post.postType.postTypeId == 4}">
+                                        <a href="interestPost?postId=${post.postId}" class="ml-3
+                                           <c:forEach items="${post.userInterested}" var="ui">
+                                               <c:if test="${ui.userId == sessionScope.account.userId}">
+                                                   text-danger
+                                               </c:if>
+                                           </c:forEach>
+                                           "><i class="ti-face-smile mr-1"></i>Quan tâm</a>
+                                    </c:if>
+                                </div>
+                                <c:if test="${sessionScope.account.userId != post.user.userId}">
+                                    <div class="d-flex justify-content-end">
+                                        <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>
+                                    </div>
                                 </c:if>
                             </div>
-<!--                            <div class="d-flex justify-content-end">
-                                <button id="openModalBtn" class="ml-3 btn btn-outline-danger"><i class="ti-flag-alt mr-1"></i>Báo cáo bài viết</button>
-                            </div>-->
-<div style="margin-top :30px">
+
+                            <div style="margin-top :30px">
                                 <c:if test="${post.postType.postTypeId == 4}">
-                                <p style="font-weight: bold">Giá bán:</p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
-                                <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}đ</p>
-                            </c:if>
+                                    <p style="font-weight: bold">Giá bán:</p><p style="color: gold; font-weight: bold">${post.exchange.price}đ</p>
+                                    <p style="color: green; font-weight: bold">Địa chỉ: ${post.exchange.address}đ</p>
+                                </c:if>
                             </div>
-                            
+
                             <div class="news_d_footer flex-column flex-sm-row">
                                 <a href="#"><span class="align-middle"><i class="ti-heart"></i></span>${totalLike}người thích</a>
                                 <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle"><i class="ti-themify-favicon"></i></span>${post.comments.size()} bình luận</a>
@@ -186,8 +205,8 @@
                                             </div>
                                             <div class="desc">
                                                 <form action="MainController" method="get">
-                                                <input type="hidden" name="userId" value="${c.user.userId}">
-                                                <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${c.user.username}</h5></button>
+                                                    <input type="hidden" name="userId" value="${c.user.userId}">
+                                                    <button style="background: white; border: 0;" name="action" value="viewUserListPost"><h5>${c.user.username}</h5></button>
                                                 </form>
                                                 <p class="date">${c.createdDate}</p>
                                                 <p class="comment">
@@ -270,7 +289,7 @@
                                 </ul>
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -281,6 +300,23 @@
 
         <%@ include file="../../asset/includes/footer.jsp" %>
         <!--Script go to top, copy to every single page-->
+        <script>
+            function validateReport(event) {
+                var selectElement = document.querySelector('select[name="reportId"]');
+                var selectedOption = selectElement.options[selectElement.selectedIndex];
+                var textareaValue = document.querySelector('textarea[name="reason"]').value.trim();
+
+                if (selectedOption.value === "" || selectedOption.text === "Lựa chọn lý do báo cáo") {
+                    alert("Hãy chọn một lý do");
+                    event.preventDefault(); // Ngăn form submit nếu không hợp lệ
+                }
+                
+                if (selectedOption.text === "Khác" && textareaValue === "") {
+                    alert("Hãy mô tả lý do khác của bạn");
+                    event.preventDefault(); // Ngăn form submit nếu không hợp lệ
+                }
+            }
+        </script>
         <script>
             //Get the button
             let mybutton = document.getElementById("btn-back-to-top");

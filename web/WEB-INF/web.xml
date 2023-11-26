@@ -220,6 +220,10 @@
         <servlet-name>ViewOtherUserController</servlet-name>
         <servlet-class>Controller.User.ViewOtherUserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetReportProcessHistory</servlet-name>
+        <servlet-class>Staff.GetReportProcessHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -439,6 +443,10 @@
     <servlet-mapping>
         <servlet-name>ViewOtherUserController</servlet-name>
         <url-pattern>/ViewOtherUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReportProcessHistory</servlet-name>
+        <url-pattern>/GetReportProcessHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

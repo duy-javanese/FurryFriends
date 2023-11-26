@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class ViewReportDetailController extends HttpServlet {
    private static final String ERROR = "errorPage.jsp";
-   private static final String VIEW_REPORT_DETAIL_PAGE="ViewReportDetail.jsp";
+   private static final String VIEW_REPORT_DETAIL_PAGE="ViewReportedContentDetail.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -33,11 +33,19 @@ public class ViewReportDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int reportId = Integer.parseInt(request.getParameter("reportId"));
+        int postType = Integer.parseInt(request.getParameter("postType"));
         String url = ERROR;
         try  {
             ReportDAO rDao = new ReportDAO();
-            Report dto = rDao.GetReportById(reportId);
-            request.setAttribute("REPORT", dto);
+            if (postType != 4) {
+                Report dto = rDao.GetReportPostById(reportId);
+                request.setAttribute("REPORTED_POST", dto);
+            }
+            else {
+                Report dto = rDao.GetReportExchangeById(reportId);
+                request.setAttribute("REPORTED_EXCHANGE", dto);
+            }
+            
             url = VIEW_REPORT_DETAIL_PAGE;
         }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -80,5 +88,9 @@ public class ViewReportDetailController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    public static void main(String[] args) {
+        ReportDAO rDao = new ReportDAO();
+        Report dto = rDao.GetReportExchangeById(2);
+        System.out.println(dto);
+    }
 }

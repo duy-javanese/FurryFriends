@@ -6,6 +6,8 @@
 
 package Staff;
 
+import DAO.PostDAO;
+import DAO.ReportDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +15,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -35,21 +39,29 @@ public class BanUserController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String urlRewriting = ERROR_PAGE;
+        int reportId = Integer.parseInt(request.getParameter("reportId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
-        String reportType = request.getParameter("reportType");
+        int postType = Integer.parseInt(request.getParameter("postType"));
+        int staffId = Integer.parseInt(request.getParameter("staffId"));
         String action = request.getParameter("action");
         try{
-            if(reportType.equals("Post")){
-                UserDAO dao = new UserDAO();
-                boolean result = dao.BanUser(userId);
-                if (result){
+            UserDAO uDao = new UserDAO();
+            PostDAO pDao = new PostDAO();
+            ReportDAO rDdao = new ReportDAO();
+            Date processDate = Date.valueOf(LocalDate.now());
+            if(postType != 4){
+                boolean result = uDao.BanUser(userId);
+                boolean hideAllUserPost = pDao.UpdateUserPostIsPublic(userId, false);
+                boolean updateReportStatus = rDdao.UpdateReportResult(reportId, 4, staffId, processDate);
+                if (result && hideAllUserPost && updateReportStatus){
                     urlRewriting = "GetReportedPost";
                 }
             }
-            if (reportType.equals("Exchange")){
-                UserDAO dao = new UserDAO();
-                boolean result = dao.BanUser(userId);
-                if (result){
+            if (postType == 4){
+                boolean result = uDao.BanUser(userId);
+                boolean hideAllUserPost = pDao.UpdateUserPostIsPublic(userId, false);
+                boolean updateReportStatus = rDdao.UpdateReportResult(reportId, 4, staffId, processDate);
+                if (result && hideAllUserPost && updateReportStatus){
                     urlRewriting = "GetReportedExchange";
                 }
             }

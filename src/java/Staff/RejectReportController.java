@@ -14,7 +14,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -36,24 +38,23 @@ public class RejectReportController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR_PAGE;
-        String reportType = request.getParameter("reportType");
+        int postType = Integer.parseInt(request.getParameter("postType"));
         int reportId = Integer.parseInt(request.getParameter("reportId"));
+        int staffId = Integer.parseInt(request.getParameter("staffId"));
         try  {
-            if (reportType.equals("Post")){
+            ReportDAO rDao = new ReportDAO();
+            Date processDate = Date.valueOf(LocalDate.now());
+            if (postType !=4){
                 
-                ReportDAO rDao = new ReportDAO();
-                
-                boolean ReportIsFinish = rDao.ReportIsFinish(reportId);
-                if (ReportIsFinish){
+                boolean updateReportStatus = rDao.UpdateReportResult(reportId, 3, staffId, processDate);
+                if (updateReportStatus){
                     url = "GetReportedPost";
                 }
             }
-            if (reportType.equals("Exchange")){
+            if (postType ==4){
                 
-                ReportDAO rDao = new ReportDAO();
-                
-                boolean ReportIsFinish = rDao.ReportIsFinish(reportId);
-                if ( ReportIsFinish){
+                boolean updateReportStatus = rDao.UpdateReportResult(reportId, 3, staffId, processDate);
+                if ( updateReportStatus){
                     url = "GetReportedExchange";
                 }
             }

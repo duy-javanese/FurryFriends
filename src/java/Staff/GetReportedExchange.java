@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 public class GetReportedExchange extends HttpServlet {
    private final String ERROR_PAGE = "errorPage.jsp";
-   private final String RESULT_PAGE = "StaffReportedExchange.jsp";
+   private final String RESULT_PAGE = "StaffReportPage.jsp";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -43,6 +43,8 @@ public class GetReportedExchange extends HttpServlet {
              dao.getReportedExchange();
              List<Report> result = dao.getReportedExchangeList();
              request.setAttribute("REPORTED_ECHANGE_LIST", result);
+             request.setAttribute("TOTAL_REPORTED_POST", dao.getTotalReportedPost());
+             request.setAttribute("TOTAL_REPORTED_EXCHANGE", dao.getTotalReportedExchange());
             url = RESULT_PAGE;
         } catch (SQLException ex) {
            Logger.getLogger(GetReportedExchange.class.getName()).log(Level.SEVERE, null, ex);

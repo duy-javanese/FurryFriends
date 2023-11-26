@@ -8,14 +8,11 @@ package Controller;
 import DAO.CategoryDAO;
 import Model.Category;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -44,7 +41,7 @@ public class UpdateCategoryController extends HttpServlet {
         Category category = new Category();
         try {
             String category_name = request.getParameter("category_name_update");
-            int category_id = Integer.parseInt(request.getParameter("id"));
+            int category_id = Integer.parseInt(request.getParameter("category_id"));
             if (category_name != null && !category_name.isEmpty()) {
                 boolean checkExists = dao.isCategoryExists(category_name);
                 if (checkExists) {

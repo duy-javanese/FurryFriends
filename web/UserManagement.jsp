@@ -81,7 +81,7 @@ e.printStackTrace();
                                 <a style="background: #ff9907" href="GetAllUserController">Quản lí người dùng</a>
                                 <a href="GetPendingPost">Bài viết</a>
                                 <a href="GetPendingExchange">Bài trao đổi</a>
-<!--                                <a href="GetReportedPost">Báo cáo từ người dùng</a>-->
+                                <a href="GetReportedPost">Báo cáo từ người dùng</a>
                                 <a href="logout">Đăng xuất</a>
                                 
                             </form>

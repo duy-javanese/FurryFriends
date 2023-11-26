@@ -3,64 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
 
-import DAO.CategoryDAO;
-import Model.Category;
+package Staff;
+
+import DAO.ReportDAO;
+import Model.Report;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author DUY
+ * @author Admin
  */
-@WebServlet(name = "DeleteCategoryController", urlPatterns = {"/DeleteCategoryController"})
-public class DeleteCategoryController extends HttpServlet {
-
-    private static final String ERROR = "configPage.jsp";
-    private static final String SUCCESS = "configPage.jsp";
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class GetReportProcessHistory extends HttpServlet {
+   private final String ERROR_PAGE = "errorPage.jsp";
+   private final String RESULT_PAGE = "StaffReportPage.jsp";
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        CategoryDAO dao = new CategoryDAO();
-        Category category = new Category();
+        String url = ERROR_PAGE;
         try {
-            int category_id = Integer.parseInt(request.getParameter("category_id"));
-            category.setCategoryId(category_id);
-            boolean check = dao.deleteCategory(category);
-            if (check) {
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
-            log("Error at DeleteCategoryController: " + e.toString());
-            if (e.toString().contains("conflicted")) {
-                request.setAttribute("DELETE_CATEGORY_ERROR", "Danh mục này đã có bài viết vì vậy không thể xoá!");
-            }
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            ReportDAO rDao = new ReportDAO();
+            List<Report> ProcessReportHistory = rDao.getProcessReportHistory();
+            request.setAttribute("PROCESS_REPORT_HISTORY", ProcessReportHistory);
+            request.setAttribute("TOTAL_REPORTED_POST", rDao.getTotalReportedPost());
+            request.setAttribute("TOTAL_REPORTED_EXCHANGE", rDao.getTotalReportedExchange());
+            url = RESULT_PAGE;
+        }finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -68,13 +61,12 @@ public class DeleteCategoryController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -82,13 +74,12 @@ public class DeleteCategoryController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override
