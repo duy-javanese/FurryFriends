@@ -17,6 +17,8 @@ public class InterestedPost {
     private User user;
     private Timestamp datetime;
     private ExchangeStatus exchangeStatus;
+    private boolean isRated;
+    
 
     public InterestedPost() {
     }
@@ -72,6 +74,14 @@ public class InterestedPost {
 
     public void setExchangeStatus(ExchangeStatus exchangeStatus) {
         this.exchangeStatus = exchangeStatus;
+    }
+
+    public boolean isIsRated() {
+        return isRated;
+    }
+
+    public void setIsRated(boolean isRated) {
+        this.isRated = isRated;
     }
     
 }

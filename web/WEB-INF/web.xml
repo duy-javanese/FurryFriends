@@ -236,6 +236,10 @@
         <servlet-name>FinishExchangeController</servlet-name>
         <servlet-class>Controller.User.FinishExchangeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RatePointController</servlet-name>
+        <servlet-class>Controller.User.RatePointController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -471,6 +475,10 @@
     <servlet-mapping>
         <servlet-name>FinishExchangeController</servlet-name>
         <url-pattern>/finishExchange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RatePointController</servlet-name>
+        <url-pattern>/ratePoint</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -786,10 +786,15 @@ public class PostDAO extends DBUtils.DBContext {
                 p = new Post();
                 p = GetPostById(rs.getInt("PostId"));
 
+                ExchangeStatusDAO exDao = new ExchangeStatusDAO();
+                ExchangeStatus ex = exDao.GetExchangeStatusById(rs.getInt("ExchangeStatus"));
+
                 InterestedPost ip = new InterestedPost();
                 ip.setInterestedPostId(rs.getInt("IntersestPost"));
                 ip.setPost(p);
                 ip.setDatetime(rs.getTimestamp("DateTime"));
+                ip.setExchangeStatus(ex);
+                ip.setIsRated(rs.getBoolean("isRated"));
 
                 list.add(ip);
             }

@@ -39,11 +39,15 @@ public class InterestPostDAO extends DBUtils.DBContext {
                 sql = "INSERT INTO [dbo].[InterestPost]\n"
                         + "           ([UserId]\n"
                         + "           ,[PostId]\n"
-                        + "           ,[DateTime])\n"
+                        + "           ,[DateTime]\n"
+                        + "           ,[ExchangeStatus]\n"
+                        + "           ,[isRated])\n"
                         + "     VALUES\n"
                         + "           (?\n"
                         + "           ,?\n"
-                        + "           ,?)";
+                        + "           ,?\n"
+                        + "           ,1\n"
+                        + "           ,0)";
                 stm = connection.prepareStatement(sql);
                 stm.setInt(1, userId);
                 stm.setInt(2, postId);
@@ -66,6 +70,20 @@ public class InterestPostDAO extends DBUtils.DBContext {
             stm.setInt(1, exchangeStatus);
             stm.setInt(2, userId);
             stm.setInt(3, postId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void UpdateRateStatus(boolean isRated, int interestedPostId) {
+        try {
+            String sql = "UPDATE [dbo].[InterestPost]\n"
+                    + "   SET [isRated] = ?\n"
+                    + " WHERE IntersestPost = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setBoolean(1, isRated);
+            stm.setInt(2, interestedPostId);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);

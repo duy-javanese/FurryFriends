@@ -444,7 +444,7 @@ public class UserDAO extends DBContext {
         }
     }
 
-    public boolean BanUser(int userID) 
+    public boolean BanUser(int userID)
             throws SQLException, ClassNotFoundException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -476,9 +476,9 @@ public class UserDAO extends DBContext {
                 con.close();
             }
         }
-        return result ;
+        return result;
     }
-    
+
     public boolean changePwd(String pwd, int userID) {
         boolean success = false;
         try {
@@ -488,14 +488,28 @@ public class UserDAO extends DBContext {
             stm.setInt(2, userID);
             ResultSet rs = stm.executeQuery();
             int effectRow = stm.executeUpdate();
-            
-            if(effectRow > 0){
-                success= true;
+
+            if (effectRow > 0) {
+                success = true;
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return success;
+    }
+
+    public void UpdatePoint(String userRated, int rate) {
+        try {
+            String sql = "UPDATE [dbo].[users]\n"
+                    + "   SET [point] = point + ?\n"
+                    + " WHERE username = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, rate);
+            stm.setString(2, userRated);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ExchangeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

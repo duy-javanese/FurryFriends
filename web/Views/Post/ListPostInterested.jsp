@@ -11,6 +11,47 @@
         <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px;
+            }
+            .rate:not(:checked) > input {
+                position:absolute;
+                top:-9999px;
+            }
+            .rate:not(:checked) > label {
+                float:right;
+                width:1em;
+                overflow:hidden;
+                white-space:nowrap;
+                cursor:pointer;
+                font-size:30px;
+                color:#ccc;
+            }
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+        </style>
     </head>
 
     <body>
@@ -22,7 +63,7 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Bài viết của tôi</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Bài viết quan tâm</h1>
                 </div>
 
                 <!-- Content Row -->
@@ -69,6 +110,50 @@
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
                                                 </form>
+                                                <c:if test="${ip.exchangeStatus.exchangeStatusId == 3 and ip.isRated == false}">
+                                                    <button href="/admin-product-detail.html" type="button"
+                                                            class="btn btn-outline-success me-2" data-bs-toggle="modal"
+                                                            data-bs-target="#itemDetail_${ip.post.postId}">
+                                                        Đánh giá
+                                                    </button>
+                                                </c:if>
+                                            </div>
+                                            <div class="modal fade" id="itemDetail_${ip.post.postId}" tabindex="-1"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                    <div class="modal-content" style="width: 350px">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Đánh giá giao dịch</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="ratePoint" method="post">
+                                                                <div class="row">
+                                                                    <input type="hidden" value="${ip.interestedPostId}" name="interestedPostId">
+                                                                    <input type="hidden" value="${ip.post.user.username}" name="userRated">
+                                                                    <div class="rate">
+                                                                        <input type="radio" id="star5_${ip.interestedPostId}" name="rate" value="5" />
+                                                                        <label for="star5_${ip.interestedPostId}" title="text">5 stars</label>
+                                                                        <input type="radio" id="star4_${ip.interestedPostId}" name="rate" value="4" />
+                                                                        <label for="star4_${ip.interestedPostId}" title="text">4 stars</label>
+                                                                        <input type="radio" id="star3_${ip.interestedPostId}" name="rate" value="3" />
+                                                                        <label for="star3_${ip.interestedPostId}" title="text">3 stars</label>
+                                                                        <input type="radio" id="star2_${ip.interestedPostId}" name="rate" value="2" />
+                                                                        <label for="star2_${ip.interestedPostId}" title="text">2 stars</label>
+                                                                        <input type="radio" id="star1_${ip.interestedPostId}" name="rate" value="1" />
+                                                                        <label for="star1_${ip.interestedPostId}" title="text">1 star</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-success">
+                                                                        Đánh giá
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
