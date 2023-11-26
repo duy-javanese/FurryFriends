@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : header
-    Created on : Oct 1, 2023, 9:31:26 PM
-    Author     : dell
+<%-- 
+Document   : header
+Created on : Oct 1, 2023, 9:31:26 PM
+Author     : dell
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -85,7 +85,7 @@
             gap: 20px;
             background: white;
             width: 100%;
-           
+
         }
         .each-ajax-result{
             display: flex;
@@ -97,25 +97,25 @@
     </style>
     <script>
         function showSearchResults() {
-    var searchAjaxContent = document.getElementById('searchAjaxContent');
-    searchAjaxContent.style.display = 'flex';
-}
-        
-        function hideSearchResults() {
-        var searchAjaxContent = document.getElementById('searchAjaxContent');
-        var inputValue = document.getElementsByName('txtSearchValue')[0].value.trim();
-
-        // Kiểm tra xem ô input có giá trị hay không
-        if (inputValue === '') {
-            // Nếu không, ẩn searchAjaxContent
-            searchAjaxContent.style.display = "none";
+            var searchAjaxContent = document.getElementById('searchAjaxContent');
+            searchAjaxContent.style.display = 'flex';
         }
-    }
-        
+
+        function hideSearchResults() {
+            var searchAjaxContent = document.getElementById('searchAjaxContent');
+            var inputValue = document.getElementsByName('txtSearchValue')[0].value.trim();
+
+            // Kiểm tra xem ô input có giá trị hay không
+            if (inputValue === '') {
+                // Nếu không, ẩn searchAjaxContent
+                searchAjaxContent.style.display = "none";
+            }
+        }
+
         function searchByTitle(param) {
             var txtSearch = param.value;
 
-            
+
             $.ajax({
                 url: "/SearchAjaxHomePage",
                 type: "get", //send it through get method
@@ -125,7 +125,7 @@
                 success: function (data) {
                     var row = document.getElementById("searchAjaxContent");
                     row.innerHTML = data;
-                    
+
                     var searchResults = row.getElementsByClassName("each-ajax-result");
                     var maxHeight = 300;
 
@@ -185,11 +185,22 @@ e.printStackTrace();
                             <ul class="dropdown-menu">
                                 <c:forEach var="t" items="${sessionScope.types}">
                                     <c:if test="${sessionScope.PostExchange != t.postTypeId}">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/findPostByPostType?postType=${t.postTypeId}">
-                                                ${t.postTypeName}
-                                            </a>
-                                        </li>
+                                        <div class="d-inline">
+                                            <li class="nav-item">
+                                                <div>
+                                                    <a class="nav-link" href="/findPostByPostType?postType=${t.postTypeId}" onmouseover="showUl('${t.postTypeId}')" onmouseout="hideUl('${t.postTypeId}')">
+                                                        ${t.postTypeName}
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <div style="display: none;" id="item-dropdown-${t.postTypeId}" onmouseover="showUl('${t.postTypeId}')" onmouseout="hideUl('${t.postTypeId}')">
+                                                <c:forEach var="c" items="${sessionScope.categories}">
+                                                    <a style="text-decoration: none;color: #ffc107;" href="findPostByPostTypeAndCategory?postType=${t.postTypeId}&categoryId=${c.categoryId}">
+                                                        - ${c.categoryName}
+                                                    </a><br>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
                                     </c:if>
                                 </c:forEach>
                             </ul>
@@ -244,12 +255,22 @@ e.printStackTrace();
                 </form>
                 <div id="searchAjaxContent" class="search-ajax-result" >
                     <div class="each-ajax-result">
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<script>
+    // JavaScript functions to show and hide the ul based on its id
+    function showUl(ulId) {
+        document.getElementById('item-dropdown-' + ulId).style.display = 'block';
+    }
+
+    function hideUl(ulId) {
+        document.getElementById('item-dropdown-' + ulId).style.display = 'none';
+    }
+</script>
 <%@ include file="toast.jsp" %>
 <!--================Header Menu Area =================-->
