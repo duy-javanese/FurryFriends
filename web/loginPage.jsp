@@ -34,7 +34,7 @@
                         <form action="login" method="post">
                             <c:if test="${isFail != null}">
                                 <c:if test="${isFail == true}">
-                                    <p style="color: red">Thông tin đăng nhập không chính xác hoặc bạn đã bị cấm truy cập !</p>
+                                    <p style="color: red">Thông tin đăng nhập không chính xác hoặc bạn đã bị cấm truy cập!</p>
                                 </c:if>
                             </c:if>
                             <h6>Tên đăng nhập <span class="text-danger">*</span></h6>
