@@ -33,7 +33,7 @@
                                 <tr>
 
                                     <th>Ảnh</th>
-                                    <th>Phân loại bài viết</th>
+                                    <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Chế độ bài viết</th>
                                     <th>Trạng thái giao dịch</th>
@@ -89,7 +89,8 @@
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Ảnh</th>
-                                                                                    <th>User name</th>
+                                                                                    <th>Người dùng</th>
+                                                                                    <th>Điểm giao dịch</th>
                                                                                     <th>Số điện thoại</th>
                                                                                     <th>Trạng thái</th>
                                                                                     <th>Thời gian</th>
@@ -105,6 +106,7 @@
                                                                                                  style="width: 150px; z-index: 1"></td>
 
                                                                                         <td>${ui.user.username}</td>
+                                                                                        <td>${ui.user.point}</td>
                                                                                         <td>${ui.user.phone}</td>
                                                                                         <td>
                                                                                             <c:if test="${ui.user.status == true}">
