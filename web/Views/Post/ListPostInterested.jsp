@@ -74,7 +74,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Ảnh</th>
-                                    <th>User name</th>
+                                    <th>Người dùng</th>
                                     <th>Tiêu đề bài viết</th>
                                     <th>Phân loại bài viết</th>
                                     <th>Thời gian</th>

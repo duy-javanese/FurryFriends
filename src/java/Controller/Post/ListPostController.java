@@ -4,8 +4,13 @@
  */
 package Controller.Post;
 
+import DAO.CategoryDAO;
 import DAO.PostDAO;
+import DAO.PostTypeDAO;
+import Model.Category;
+import Model.Constant;
 import Model.Post;
+import Model.PostType;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -96,6 +101,22 @@ public class ListPostController extends HttpServlet {
             int noOfPages = (int) Math.ceil((double) noOfRecords
                     / recordsPerPage);
 
+            CategoryDAO cDao = new CategoryDAO();
+            PostTypeDAO ptDao = new PostTypeDAO();
+
+            //get all category post
+            ArrayList<Category> categories = cDao.GetAllCategories();
+
+            //get all post type
+            ArrayList<PostType> types = ptDao.GetAllPostType();
+
+            request.setAttribute("types", types);
+            request.setAttribute("categories", categories);
+
+            request.setAttribute("typeId", typeId);
+            request.setAttribute("categoryId", categoryId);
+            request.setAttribute("textSearch", textSearch);
+
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("noOfRecords", noOfRecords);
@@ -124,7 +145,15 @@ public class ListPostController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        switch (action) {
+            case "search":
+                textSearch = request.getParameter("textSearch");
+                categoryId = Integer.parseInt(request.getParameter("categorySearch"));
+                typeId = Integer.parseInt(request.getParameter("typeSearch"));
+                doGet(request, response);
+                break;
+        }
     }
 
     /**

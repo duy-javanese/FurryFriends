@@ -75,14 +75,14 @@
                                                 <!--Modal View Detail-->
                                                 <div class="modal fade" id="itemDetail_${post.postId}" tabindex="-1"
                                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                                                        <div class="modal-content">
+                                                    <div class="modal-dialog modal-xl modal-dialog-centered w-100">
+                                                        <div class="modal-content w-100">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                             </div>
-                                                            <div class="modal-body">
+                                                            <div class="modal-body w-100">
                                                                 <div class="row">
                                                                     <div>
                                                                         <table class="table align-middle">
@@ -123,12 +123,12 @@
                                                                                                     <span style="color: white">${ui.exchangeStatus.exchangeStatusValue}</span>
                                                                                                 </div>
                                                                                             </c:if>
-                                                                                             <c:if test="${ui.exchangeStatus.exchangeStatusId == 2}">
+                                                                                            <c:if test="${ui.exchangeStatus.exchangeStatusId == 2}">
                                                                                                 <div class="rounded-pill p-2" style="text-align: center; background-color: yellow">
                                                                                                     <span style="color: black">${ui.exchangeStatus.exchangeStatusValue}</span>
                                                                                                 </div>
                                                                                             </c:if>
-                                                                                             <c:if test="${ui.exchangeStatus.exchangeStatusId == 1}">
+                                                                                            <c:if test="${ui.exchangeStatus.exchangeStatusId == 1}">
                                                                                                 <div class="rounded-pill bg-info p-2" style="text-align: center; border-width: 2px">
                                                                                                     <span style="color: black">${ui.exchangeStatus.exchangeStatusValue}</span>
                                                                                                 </div>
@@ -139,6 +139,7 @@
                                                                                                 <c:if test="${post.exchange.isFinish == false}">
                                                                                                     <c:if test="${ui.user.status == true && ui.exchangeStatus.exchangeStatusId != 3}">
                                                                                                         <form action="contactUser" method="post">
+                                                                                                            <input type="hidden" name="userPhone" value="${ui.user.phone}">
                                                                                                             <input type="hidden" name="postId" value="${post.postId}">
                                                                                                             <input type="hidden" name="userId" value="${ui.user.userId}">
                                                                                                             <button type="submit" class="btn btn-outline-info d-lg-flex align-items-center align-middle" style="width: 150px">

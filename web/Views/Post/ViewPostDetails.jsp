@@ -108,9 +108,7 @@
                             <a href="#"><h4>${post.title}</h4></a>
                             <div class="user_details">
                                 <div class="float-left">
-                                    <c:if test="${post.postType.postTypeId == 4}">
-                                        <a href="#">${post.category.categoryName}</a>
-                                    </c:if>
+                                    <a href="#">${post.category.categoryName}</a>
                                     <a href="#">${post.postType.postTypeName}</a>
                                 </div>
                                 <div class="float-right mt-sm-0 mt-3">

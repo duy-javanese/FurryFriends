@@ -32,13 +32,14 @@ public class ContactUserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String userPhone = request.getParameter("userPhone");
         int postId = Integer.parseInt(request.getParameter("postId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
-        
-        InterestPostDAO ipDao = new InterestPostDAO();
-        ipDao.updateExchangeStatus(postId,userId,Constant.ExchangeDoing);
 
-        response.sendRedirect("https://zalo.me/0983218694");
+        InterestPostDAO ipDao = new InterestPostDAO();
+        ipDao.updateExchangeStatus(postId, userId, Constant.ExchangeDoing);
+
+        response.sendRedirect("https://zalo.me/" + userPhone);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

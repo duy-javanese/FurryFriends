@@ -25,6 +25,38 @@
                     <h1 class="h3 mb-0 text-gray-800">Bài viết của tôi</h1>
                 </div>
 
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <form action="listPost" method="post">
+                        <input type="hidden" name="action" value="search">
+                        <div class="d-flex gap-3">
+                            <input class="form-control" type="text" name="textSearch" value="${textSearch}">
+                            <select class="form-control" name="categorySearch">
+                                <option value="-1">Tất cả phân loại</option>
+                                <c:forEach items="${categories}" var="c">
+                                    <option 
+                                        <c:if test="${c.categoryId == categoryId}">
+                                            selected
+                                        </c:if>
+                                        value="${c.categoryId}">${c.categoryName}</option>
+                                </c:forEach>
+                            </select>
+                            <select class="form-control" name="typeSearch">
+                                <option value="-1">Tất cả danh mục</option>
+                                <c:forEach items="${types}" var="t">
+                                    <option value="${t.postTypeId}"
+                                            <c:if test="${t.postTypeId  == typeId}">
+                                                selected
+                                            </c:if>
+                                            >${t.postTypeName}</option>
+                                </c:forEach>
+                            </select>
+                            <button class="btn btn-outline-info" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
                 <!-- Content Row -->
                 <div class="row">
                     <div class="table-responsive">
