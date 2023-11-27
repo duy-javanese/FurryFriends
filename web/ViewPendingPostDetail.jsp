@@ -27,9 +27,9 @@
         <link rel="stylesheet" href="asset/staff-page/css/semi-dark.css" />
         <link rel="stylesheet" href="asset/staff-page/css/header-colors.css" />
         <script>
-            function validate(){
+            function validate() {
                 var reason = document.getElementById('declineReason').value;
-                if (reason == ""){
+                if (reason == "") {
                     alert("Hãy chọn một lý do");
                     return false;
                 } else {
@@ -55,15 +55,15 @@
         <title>Chi tiết bài viết</title>
     </head>
     <c:if test="${sessionScope.account == null}">
-            <c:redirect url="loginPage.jsp"></c:redirect>
+        <c:redirect url="loginPage.jsp"></c:redirect>
     </c:if>
 
     <c:if test="${not empty sessionScope.account and sessionScope.account.role.roleId ne 2}">
-    <!-- Người dùng đã đăng nhập nhưng không phải là ADMIN -->
+        <!-- Người dùng đã đăng nhập nhưng không phải là ADMIN -->
         <h1>Bạn không có quyền truy cập trang web này.</h1>
         <c:redirect url="HomePage.jsp"></c:redirect>
     </c:if>
-    
+
     <body>
         <div class="wrapper">
             <!--sidebar wrapper -->
@@ -72,18 +72,18 @@
                     <%
         try {
             Information info = InformationDAO.getInfor();
-%>
+                    %>
                     <div>
                         <%
     String logoPath = (info.getLogoPath() != null) ? info.getLogoPath() : "${pageContext.request.contextPath}/asset/img/furryfriends-1.png";
-                    %>
+                        %>
                         <img class="rounded-circle" src="<%= logoPath %>" alt="" width="42px" height="42px">
                     </div>
                     <%
 } catch (Exception e) {
 e.printStackTrace();
 }
-%>
+                    %>
                     <div style="margin-left: 15px">
                         <h4 class="logo-text">Furry Friends</h4>
                     </div>
@@ -91,13 +91,13 @@ e.printStackTrace();
                 <!--navigation-->
                 <ul class="metismenu" id="menu">
                     <form action="MainController">
-<!--                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
-                        <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
-                        <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
-                        <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
-                        <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
-                        <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
-                        <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
+                        <!--                        <button class="menuButton" name="action" value="Dashboard">Thống kê</button><br/>
+                                                <button class="menuButton" name="action" value="Get all user">Quản lí người dùng</button><br/>
+                                                <button class="selected-button" name="action" value="PostApprovement">Bài viết</button><br/>
+                                                <button class="menuButton" name="action" value="ExchangeApprovement">Bài trao đổi</button><br/>
+                                                <button class="menuButton" name="action" value="Get Reported Post">Báo cáo từ người dùng</button><br/>
+                                                <button class="menuButton" name="action" value="#">Thông tin cá nhân</button><br/>
+                                                <button class="menuButton" name="action" value="Logout">Đăng xuất</button><br/>-->
                         <a href="viewStatisticController">Thống kê</a>
                         <a href="GetAllUserController">Quản lí người dùng</a>
                         <a style="background: #ff9907"  href="GetPendingPost">Bài viết</a>
@@ -112,18 +112,18 @@ e.printStackTrace();
             <!--start header -->
             <header>
                 <div class="topbar d-flex align-items-center">
-                                            <nav class="navbar navbar-expand">
-                                                <div class="user-box dropdown">
-                                                                    <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                            
-                                                                            <div class="user-info ps-3">
-                                                                                    <c:if test="${sessionScope.account != null}">
-                                                                                        <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
-                                                                                    </c:if>
-                                                                            </div>
-                                                                    </a>
-                                                            </div>
-                                            </nav>
+                    <nav class="navbar navbar-expand">
+                        <div class="user-box dropdown">
+                            <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                <div class="user-info ps-3">
+                                    <c:if test="${sessionScope.account != null}">
+                                        <p class="user-name mb-0">Hello ${sessionScope.account.username}</p>
+                                    </c:if>
+                                </div>
+                            </a>
+                        </div>
+                    </nav>
                 </div>
             </header>
             <!--end header -->
@@ -134,47 +134,49 @@ e.printStackTrace();
                 </form>
                 <div class="post-style">
                     <c:set var="p" value ="${requestScope.POST}"/>
-                        <c:if test="${not empty p.img}">
-                            <img src="${p.img}" class="detail-img-box"> <br>         
-                        </c:if>
-<!--                            <div>
-                                            <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
-                            </div>-->
-                            <h4 class="pending-post-detail-title">${p.title}</h4>
-                            <div style="display: flex; justify-content: space-between;">
-                                <div style="display: flex">
-                                    <div class="d-flex">
-                                                    <img width="42" height="42" src="${pageContext.request.contextPath}/asset/img/paw.png" alt="">
-                                    </div>
-                                    <div style="margin-left: 15px">
-                                        <h6>${p.user.username}</h6>
-                                                <p>${p.datePost}</p>
-                                    </div>
-                                </div>
-                                <div>
-                                                <h6 style="color: coral;">${p.postType.postTypeName}</h6>
-                                </div>
+                    <c:if test="${not empty p.img}">
+                        <img src="${p.img}" class="detail-img-box"> <br>         
+                    </c:if>
+                    <!--                            <div>
+                                                                <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
+                                                </div>-->
+                    <h4 class="pending-post-detail-title">${p.title}</h4>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex">
+                            <div class="d-flex">
+                                <img width="42" height="42" src="${pageContext.request.contextPath}/asset/img/paw.png" alt="">
                             </div>
-                        <p>${p.content}</p>
-                        <form action="MainController" method="POST">
-                            <input type="hidden" name="postId" value="${p.postId}">
-                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
-                            <button class="approve-button" name="action" value="Approve">Chấp nhận</button>
-                        </form><br>
-                        <form name="declineform" action="MainController" onsubmit="return validate()" method="POST">
-<!--                            <button class="decline-button" name="action" value="Decline">Từ chối</button>-->
-<!--                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>-->
-                            <select class="search-User-box" name="declineReason" id="declineReason">
-                                <option value="">Chọn một lý do</option>
-                                <option value="Bôi nhọ cá nhân, tổ chức, nhà nước">Bôi nhọ cá nhân, tổ chức, nhà nước</option>
-                                <option value="Ảnh đồi trụy">Ảnh đồi trụy</option>
-                                <option value="Sai chuyên mục">Sai chuyên mục</option>
-                                <input class="decline-button" type="submit" name="action" value="Từ chối">
-                            </select>
-                            <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
-                            <input type="hidden" name="postId" value="${p.postId}">
-                            <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
-                        </form>
+                            <div style="margin-left: 15px">
+                                <h6>${p.user.username}</h6>
+                                <p>${p.datePost}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 style="color: coral;">${p.postType.postTypeName}</h6>
+                        </div>
+                    </div>
+                    <p>${p.content}</p>
+                    <form action="MainController" method="POST">
+                        <input type="hidden" name="postId" value="${p.postId}">
+                        <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
+                        <button class="approve-button" name="action" value="Approve">Chấp nhận</button>
+                    </form><br>
+                    <form name="declineform" action="MainController" onsubmit="return validate()" method="POST">
+                        <!--                            <button class="decline-button" name="action" value="Decline">Từ chối</button>-->
+                        <!--                            <input class="search-User-box" type="text" name="declineReason" value="" placeholder="Lý do từ chối" required=""><br>-->
+                        <select class="search-User-box" name="declineReason" id="declineReason">
+                            <option value="">Chọn một lý do</option>
+                            <option value="Nội dung tiêu cực">Nội dung tiêu cực</option>
+                            <option value="Từ ngữ không phù hợp">Từ ngữ không phù hợp</option>
+                            <option value="Ảnh không phù hợp">Ảnh không phù hợp</option>
+                            <option value="Bài viết trùng lặp">Bài viết trùng lặp</option>
+                            <option value="Sai chuyên mục">Sai chuyên mục</option>
+                            <input class="decline-button" type="submit" name="action" value="Từ chối">
+                        </select>
+                        <input type="hidden" name="postTypeId" value="${e.post.postType.postTypeId}">
+                        <input type="hidden" name="postId" value="${p.postId}">
+                        <input type="hidden" name="postTypeId" value="${p.postType.postTypeId}">
+                    </form>
                 </div>
             </div>
             <!--end page-wrapper -->

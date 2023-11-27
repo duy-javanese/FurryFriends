@@ -22,8 +22,16 @@
             <div class="p-4" style="margin-bottom: 42px;">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Tạo blog</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Tạo bài viết chia sẻ</h1>
                 </div>
+                <div style="display: flex; flex-direction: column">
+                    <h4>Bạn có thể chia sẻ thông tin nhưng nên tránh :</h4>
+                    <p>- Tránh nội tiêu cực</p>
+                    <p>- Tránh hình ảnh không phù hợp</p>
+                    <p>- Tránh từ ngữ không phù hợp</p>
+                    <p>- Tránh công kích cá nhân</p>
+                </div>
+                
                 <hr>
                 <!-- Content Row -->
                 <form action="createPost" method="post" enctype="multipart/form-data">

@@ -24,7 +24,8 @@ import javax.naming.NamingException;
  */
 public class ApprovePostController extends HttpServlet {
    private final String DEFAULT_PAGE = "errorPage.jsp";
-   private final String RESULT_PAGE = "GetPendingPost";
+   private final String RESULT_PAGE1 = "GetPendingPost";
+   private final String RESULT_PAGE2 = "GetPendingExchange";
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,13 +37,17 @@ public class ApprovePostController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int postId = Integer.parseInt(request.getParameter("postId"));
+        int postTypeId = Integer.parseInt(request.getParameter("postTypeId"));
         String url = DEFAULT_PAGE;
         int updateStatus = 2; //2 = approve
         try{
                 PostDAO dao = new PostDAO();
                 boolean result = dao.ApprovePost(postId, updateStatus);
-                if(result){
-                    url = RESULT_PAGE;
+                if(result && postTypeId == 4){
+                    url = RESULT_PAGE2;
+                }
+                if(result && postTypeId != 4){
+                    url = RESULT_PAGE1;
                 }
             
         } catch (SQLException ex) {

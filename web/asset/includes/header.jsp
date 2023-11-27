@@ -105,9 +105,7 @@ Author     : dell
             var searchAjaxContent = document.getElementById('searchAjaxContent');
             var inputValue = document.getElementsByName('txtSearchValue')[0].value.trim();
 
-            // Kiểm tra xem ô input có giá trị hay không
             if (inputValue === '') {
-                // Nếu không, ẩn searchAjaxContent
                 searchAjaxContent.style.display = "none";
             }
         }
@@ -118,7 +116,7 @@ Author     : dell
 
             $.ajax({
                 url: "/SearchAjaxHomePage",
-                type: "get", //send it through get method
+                type: "get",
                 data: {
                     txt: txtSearch
                 },
@@ -129,7 +127,7 @@ Author     : dell
                     var searchResults = row.getElementsByClassName("each-ajax-result");
                     var maxHeight = 300;
 
-                    if (searchResults.length > 3) { // Chỉ định số lượng tối đa trước khi hiển thị thanh cuộn
+                    if (searchResults.length > 3) {
                         row.style.height = maxHeight + "px";
                         row.style.overflowY = "scroll";
                     } else {
@@ -255,8 +253,15 @@ e.printStackTrace();
                 </form>
                 <div id="searchAjaxContent" class="search-ajax-result" >
                     <div class="each-ajax-result">
-
+                        
                     </div>
+<!--                    <div class=each-ajax-result>
+"                        <img src="img" width=70px height=70px style="object-fit: cover; margin-left : 15px; border-radius : 5px ; border: 1px solid black;">
+"                            <div style="">
+"                                <a style="font-weight: bolder ; margin: 0 ; color: black; font-style: normal" href=\"viewPostDetails?postId="postid">title</a>
+"                                <p style="font-size: 12px"> content...</p>
+"                            </div>
+"                    </div>-->
                 </div>
             </div>
         </div>

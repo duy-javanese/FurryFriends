@@ -148,6 +148,8 @@ e.printStackTrace();
                 <c:set var="mip" value ="${requestScope.MOST_INTERACTION_POST}"/>
 
                 <c:set var="finishedExchangeQuantity" value ="${requestScope.FINISHED_EXCHANGE_QUANTITY}"/>
+                
+                <c:set var="test" value ="${requestScope.TEST}"/>
                 <div class="big-box-Style">
                     <h4 style="color: coral; text-align: center; margin-top: 30px; margin-bottom: 30px">SỐ LƯỢNG BÀI VIẾT</h4>
                     <figure class="highcharts-figure">
@@ -216,222 +218,137 @@ e.printStackTrace();
                         <h4>Đã dừng hoạt động : ${BannedStaff}</h4><br>
                     </div>
                 </div>
-                <div>
-                    <h4 style="color: coral; text-align: center; margin-top: 30px; margin-bottom: 30px">CÁC DANH HIỆU</h4>
-                <c:if test="${not empty mlp}">
-                        <h5 style="margin-left: 135px; margin-top: 30px; margin-bottom: 30px">BÀI VIẾT CÓ NHIỀU LƯỢT THÍCH NHẤT : ${mlpt}</h5>
-                        <div class="post-box">
-                            <div><img src="${mlp.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${mlp.title}</h4>
-                                    <h6 style="color: coral;">${mlp.postType.postTypeName}</h6>
-                                </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${mlp.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(mlp.content) > 100}">
-                                        <h6>${mlp.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(mlp.content) < 100}">
-                                        <h6>${mlp.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${mlp.datePost}</p>
-                                    <form action="MainController">
-                                        <input type="hidden" name="postId" value="${mlp.postId}">
-                                        <button class="view-detail-button" name="action" value="ViewPostDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty mcp}">
-                        <h5 style="margin-left: 135px; margin-top: 30px; margin-bottom: 30px">BÀI VIẾT CÓ NHIỀU LƯỢT BÌNH LUẬN NHẤT : ${mcp.quantity}</h5>
-                        <div class="post-box">
-                            <div><img src="${mcp.post.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${mcp.post.title}</h4>
-                                    <h6 style="color: coral;">${mcp.post.postType.postTypeName}</h6>
-                                </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${mcp.post.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(mcp.post.content) > 100}">
-                                        <h6>${mcp.post.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(mlp.content) < 100}">
-                                        <h6>${mcp.post.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${mcp.post.datePost}</p>
-                                    <form action="MainController">
-                                        <input type="hidden" name="postId" value="${mcp.post.postId}">
-                                        <button class="view-detail-button" name="action" value="ViewPostDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty mip}">
-                        <h5 style="margin-left: 135px; margin-top: 30px; margin-bottom: 30px">BÀI VIẾT CÓ NHIỀU LƯỢT TƯƠNG TÁC NHẤT : ${mip.quantity}</h5>
-                        <div class="post-box">
-                            <div><img src="${mip.post.img}" class="img-box"></div>
-                            <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
-                                <div style="display: flex; justify-content: space-between">
-                                    <h4>${mip.post.title}</h4>
-                                    <h6 style="color: coral;">${mip.post.postType.postTypeName}</h6>
-                                </div>
-                                <div style="display: flex">
-                                    <p style="color: #878787;">${mip.post.user.username}</p>
-                                </div>
-                                <div>
-                                    <c:if test="${fn:length(mip.post.content) > 100}">
-                                        <h6>${mip.post.content.substring(0, 100)}...</h6>
-                                    </c:if>
-                                    <c:if test="${fn:length(mip.post.content) < 100}">
-                                        <h6>${mip.post.content}</h6>
-                                    </c:if>
-                                </div>
-                                <div style="display: flex; justify-content: space-between">
-                                    <p>${mip.post.datePost}</p>
-                                    <form action="MainController">
-                                        <input type="hidden" name="postId" value="${mip.post.postId}">
-                                        <button class="view-detail-button" name="action" value="ViewPostDetail">Xem chi tiết <i class="fa-solid fa-arrow-right" style="color: black;"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
-                </div>
             </div>
             <!--end page-wrapper -->
 
-        </div>
+ </div>
         <!--end wrapper-->
 
         <!--HighChart-->
-<script>
-<!-------------------------------- Category Detail -------------------------------->
+                                                    <script>
+                                                                    <!-------------------------------- Category Detail -------------------------------->
 
-<c:if test="${not empty category}">
-var categoryData = [];
-
-// Sử dụng vòng lặp để tạo đối tượng dữ liệu cho series
-    <c:forEach var="cat" items="${category}">
-categoryData.push({
-        name: '${cat.category.categoryName}',
-        y: ${cat.quantity}
-});
-    </c:forEach>
-
-    Highcharts.chart('categoryDetail', {
-    chart: {
-                    type: 'pie'
-        },
-    title: {
-                            text: ''
-        },
-        tooltip: {
-                                                        valueSuffix: ' bài'
-        },
-                                                        subtitle: {
-                                                        text: ''
-    },
-                                                        plotOptions: {
-                                                        series: {
-                                                        allowPointSelect: true,
-                                                        cursor: 'pointer',
-dataLabels: [{
-enabled: true,
-                                                                                    distance: 20
-}, {
-                        enabled: true,
-                                                                                    distance: - 40,
-                                                                                            format: '{point.percentage:.1f}%',
-                        style: {
-                                                                                            fontSize: '1.2em',
-                                                                                            textOutline: 'none',
-                                                                                                    opacity: 0.7
-        },
-                                                                                                    filter: {
-                                                                                                            operator: '>',
-                                                                                                            property: 'percentage',
-                                                                                                                    value: 10
-                }
-                        }]
-                                }
-                                                                                                                    },
-            series: [{
-            name: 'Số lượng ',
-                                                                                                                    colorByPoint: true,
-          data: categoryData
-     }]
+            <c:if test="${not empty category}">
+                var categoryData = [];                                                 
+        <c:forEach var="cat" items="${category}">
+                categoryData.push({
+                    name: '${cat.category.categoryName}',
+                    y: ${cat.quantity}
                 });
-                </c:if>
-                
-                <!-------------------------------- Post Type Detail -------------------------------->
-                <c:if test="${not empty postType}">
-                var postTypeData = [];
-                
-                // Sử dụng vòng lặp để tạo đối tượng dữ liệu cho series
-                <c:forEach var="pt" items="${postType}">
-                postTypeData.push({
-                name: '${pt.postType.postTypeName}',
-                y: ${pt.quantity}
-            });
-                </c:forEach>
+        </c:forEach>
 
-                Highcharts.chart('postTypeDetail', {
-            chart: {
-                type: 'pie'
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                valueSuffix: ' bài'
+        Highcharts.chart('categoryDetail', {
+                chart: {
+                    type: 'pie'
                 },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    valueSuffix: ' bài'
+                    },
                 subtitle: {
-                text: ''
+                            text: ''
                 },
                 plotOptions: {
-                series: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: [{
-                        enabled: true,
-                        distance: 20
+                                                                                    series: {
+                            allowPointSelect: true,
+                                    cursor: 'pointer',
+                                                                                    dataLabels: [{
+                                    enabled: true,
+                                            distance: 20
                 }, {
-                        enabled: true,
-                        distance: -40,
-                        format: '{point.percentage:.1f}%',
-                        style: {
-                            fontSize: '1.2em',
-                            textOutline: 'none',
-                            opacity: 0.7
+                                            enabled: true,
+                                                                                    distance: -  40,
+                                            format: '{point.percentage:.1f}%',
+                                            style: {
+                                                                                            fontSize: '1.2em',
+                                                    textOutline: 'none',
+                                                                                            opacity: 0.7
                 },
                 filter: {
-                            operator: '>',
-                            property: 'percentage',
-                            value: 10
+                                operator: '>',
+                                property: 'percentage',
+                                value: 10
                 }
                 }]
                 }
                 },
                 series: [{
-                name: 'Số lượng ',
-                colorByPoint: true,
-                data: postTypeData
+                                                                                            name: 'Số lượng ',
+                                                    colorByPoint: true,
+                                                                                            data: categoryData
                 }]
                 });
             </c:if>
-            
+                    
+            <!-------------------------------- Post Type Detail -------------------------------->
+            <c:if test="${not empty postType}">
+                                    var postTypeData = [];
+                            
+                                    // Sử dụng vòng lặp để tạo đối tượng dữ liệu cho series
+                                <c:forEach var="pt" items="${postType}">
+                    postTypeData.push({
+                                                                                            name: '${pt.postType.postTypeName}',
+                                                                                            y: ${pt.quantity}
+                                    });
+                        </c:forEach>
+                    
+                Highcharts.chart('postTypeDetail', {
+                        chart: {
+                            type: 'pie'
+                        },
+                        title: {
+                                text: ''
+                },
+                tooltip: {
+                    valueSuffix: ' bài'
+                },
+                subtitle: {
+                    text: ''
+                },
+                plotOptions: {
+                                                                                                    series: {
+                                                                                                    allowPointSelect: true,
+                                                                                                            cursor: 'pointer',
+                                                                                                            dataLabels: [{
+                                                                                                            enabled: true,
+                                                                                                                    distance: 20
+                }, {
+                                                                                                                    enabled: true,
+                                                                                                                    distance: - 40,                  format: '{point.percentage:.1f}%',
+                                style: {
+                                    fontSize: '1.2em',
+                                    textOutline: 'none',
+                                    opacity: 0.7
+                },
+                filter: {
+                                    operator: '>',
+                                    property: 'percentage',
+                                    value: 10
+                }
+                }]
+                }
+                },
+                series: [{
+                        name: 'Số lượng ',
+                        colorByPoint: true,
+                        data: postTypeData
+                }]
+                });
+            </c:if>
+            var postDataMonth = [];
+            <c:forEach var="t" items="${test}">
+                categoryData.push({
+                    month : ${t.object}
+                });
+        </c:forEach>
+            var postDataNum = [];
+            <c:forEach var="t" items="${test}">
+                categoryData.push({
+                    month : ${t.quantity}
+                });
+        </c:forEach>
             
             <!--------------------------------Num of posts created this year and last year -------------------------------->
             // Create a new Date object
@@ -442,65 +359,66 @@ enabled: true,
 
             Highcharts.chart('numOfPost', {
 
-                title: {
-                    text: '',
-                    align: 'left'
+                        title: {
+                            text: '',
+                            align: 'left'
             },
 
             subtitle: {
-                    text: '',
-                    align: 'left'
+                            text: '',
+                            align: 'left'
             },
 
             yAxis: {
-                    title: {
-                        text: 'Số lượng bài viết'
+                            title: {
+                                text: 'Số lượng bài viết'
             }
             },
 
             xAxis: {
-                    categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+                            categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
             },
 
             legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle'
             },
 
             //                plotOptions: {
-//                    series: {
-//                        label: {
-//                            connectorAllowed: false
-//                        },
-//                        pointStart: "Sunday"
-//                    }
-//                },
+        //                    series: {
+        //                        label: {
+        //                            connectorAllowed: false
+        //                        },
+        //                        pointStart: "Sunday"
+        //                    }
+        //                },
 
-                series: [{
-                    name: currentYear-1,
-                    data: ${lastYear}
-                }, {
-                    name: currentYear,
-                    data: ${thisYear}
-                }],
+                        series: [{
+                            name: currentYear-1,
+                            data: ${lastYear}
+//                            data: [1,2,3,4,5,6,7,8,9,10,11,12]
+                        }, {
+                            name: currentYear,
+                            data: ${thisYear}
+                        }],
 
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 500
-                        },
-                        chartOptions: {
-                            legend: {
-                                layout: 'horizontal',
-                                align: 'center',
-                                verticalAlign: 'bottom'
-                            }
+                        responsive: {
+                            rules: [{
+                                condition: {
+                                    maxWidth: 500
+                                },
+                                chartOptions: {
+                                    legend: {
+                                        layout: 'horizontal',
+                                        align: 'center',
+                                        verticalAlign: 'bottom'
+                                    }
+                                }
+                            }]
                         }
-                    }]
-                }
 
-            });
+                    });
 
         </script>
         <!-- Bootstrap JS -->

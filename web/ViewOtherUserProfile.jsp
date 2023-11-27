@@ -64,6 +64,7 @@
                         <img class="rounded-circle" src="${pageContext.request.contextPath}/asset/img/paw.png" alt="" width="80px" height="80px">
                         <h3>${user.username}</h3>
                         <p>${user.address}</p>
+                        <p>${user.point} Điểm trao đổi</p>
                     </div>
                         <div>
                                 <form action="MainController" method="POST">
@@ -165,6 +166,15 @@
                                         </a>
                                         <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <p>${e.post.content.substring(0, 200)}...</p>
+                                        <c:if test="${e.isFree == false}">
+                                                    <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${e.price}đ</p>
+                                                </c:if>
+                                                <c:if test="${e.isFree == true}">
+                                                    <div style="display: flex">
+                                                        <p style="font-weight: bold; margin-top: 3%">Giá bán: </p>
+                                                        <p style="margin-left: 15px;margin-top: 2% ;font-weight: bold; color: white; background: green; width: 75px; text-align: center; padding: 5px; border-radius: 25px">Miễn phí</p>
+                                                    </div>
+                                                </c:if>
                                         <a class="button" href="viewPostDetails?postId=${e.post.postId}">Xem bài viết<i class="ti-arrow-right"></i></a>
                                     </div>
                                 </div>

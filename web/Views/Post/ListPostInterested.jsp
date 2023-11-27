@@ -87,7 +87,7 @@
                                     <tr>
                                         <td>${ip.post.postId}</td>
                                         <td>
-                                            <img src="${p.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
+                                            <img src="${ip.post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>
                                         <td>${ip.post.user.username}</td>
                                         <td>${ip.post.title}</td>

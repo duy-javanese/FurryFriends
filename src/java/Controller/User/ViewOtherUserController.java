@@ -47,7 +47,7 @@ public class ViewOtherUserController extends HttpServlet {
             ExchangeDAO eDao = new ExchangeDAO();
             User user = uDao.GetUserById(userId);
             if(action.equals("viewUserListPost")){
-                List<Post> content = pDao.getTop3PostByUserID(userId);
+                List<Post> content = pDao.getPostByUserID(userId);
                 request.setAttribute("OTHER_USER_POST", content);
             }
             if(action.equals("viewUserListExchange")){

@@ -6,6 +6,7 @@
 
 package Staff;
 
+import DAO.PostDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,21 +36,27 @@ public class UpdateUserStatus extends HttpServlet {
         String searchValue = request.getParameter("lastSearchValue");
         String urlRewriting = ERROR_PAGE;
         try {
-            //1.1 new DAO
+            
             UserDAO dao = new UserDAO();
-            //1.2 call DAO's methods
-            boolean result = dao.UpdateUserStatus(userId, status);
-            //2. process result
-            if (result) {
-                //2.1 call the search func again using URL rewriting
-                urlRewriting = "MainController"
-                        + "?action=Search User"
-                        + "&txtSearchValue=" + searchValue;
+            PostDAO pDao = new PostDAO();
+            if(status == false){
+                boolean result = dao.UpdateUserStatus(userId, status);
+                boolean hideAllUserPost = pDao.UpdateUserPostIsPublic(userId, false);
+                if (result && hideAllUserPost) {
+                    urlRewriting = "GetAllUserController";
+                }
+            }
+            if(status == true){
+                boolean result = dao.UpdateUserStatus(userId, status);
+                boolean PublicAllUserPost = pDao.UpdateUserPostIsPublic(userId, true);
+                if (result && PublicAllUserPost) {
+                    urlRewriting = "GetAllUserController";
+                }
             }
         } catch (Exception ex) {
             System.out.println(ex);
         } finally {
-            //2.2 transfer Dispatcher
+            
             response.sendRedirect(urlRewriting);
         }
     } 

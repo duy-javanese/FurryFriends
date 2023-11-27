@@ -35,7 +35,7 @@
     <body>
         <%@ include file="../../asset/includes/header.jsp" %>
         <!--================Hero Banner start =================-->
-
+<!--
         <section class="mb-30px">
             <div class="container">
                 <div class="hero-banner"
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
         <!--================Hero Banner end =================-->  
 
         <!-- The Modal -->
@@ -304,16 +304,23 @@
                     <!-- Start Blog Post Siddebar -->
                     <div class="col-lg-4 sidebar-widgets">
                         <div class="widget-wrap">
+                            <%
+            try {
+                Information info = InformationDAO.getInfor();
+                            %>
                             <div class="single-sidebar-widget newsletter-widget">
-                                <h4 class="single-sidebar-widget__title">Newsletter</h4>
+                                <h4 class="single-sidebar-widget__title">Thông báo</h4>
                                 <div class="form-group mt-30">
                                     <div class="col-autos">
-                                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''"
-                                               onblur="this.placeholder = 'Enter email'">
+                                        <strong><%= (info.getNotification() != null) ? info.getNotification() : "Không có thông báo" %></strong>
                                     </div>
                                 </div>
-                                <button class="bbtns d-block mt-20 w-100">Subcribe</button>
                             </div>
+                            <%
+} catch (Exception e) {
+e.printStackTrace();
+}
+                            %>
 
                             <div class="single-sidebar-widget post-category-widget">
                                 <h4 class="single-sidebar-widget__title">Loại bài viết</h4>
@@ -327,8 +334,6 @@
                                     </c:forEach>
                                 </ul>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

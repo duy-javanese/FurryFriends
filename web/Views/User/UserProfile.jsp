@@ -37,6 +37,7 @@
                                 <div class="ms-3" style="margin-top: 130px;">
                                     <h5>${sessionScope.account.username}</h5>
                                     <p>${sessionScope.account.address}</p>
+                                    <p>${sessionScope.account.point} Điểm trao đổi</p>
                                 </div>
                             </div>
                             <div class="p-4 text-black" style="background-color: #f8f9fa;">

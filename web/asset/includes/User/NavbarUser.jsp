@@ -40,7 +40,7 @@
                 <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid"></use>
                 </svg>
-                Tạo blog
+                Tạo bài chia sẻ
             </a>
         </li>
         <li class="nav-item">

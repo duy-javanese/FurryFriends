@@ -172,10 +172,15 @@ e.printStackTrace();
                                     <h4>${e.post.title}</h4>
                                 </div>
                                 <h6 style="color: coral;">
-                                        ${e.post.category.postType.postTypeName}
+                                        ${e.post.postType.postTypeName}
                                         <c:if test="${not empty e.post.category.categoryName}"> : ${e.post.category.categoryName}</c:if>
                                     </h6>
-                                <h6 style="color: red">${e.price} VNĐ</h6>
+                                <c:if test="${e.isFree == false}">
+                                    <h6 style="color: gold; font-weight: bold">${e.price}đ</h6>
+                                </c:if>
+                                <c:if test="${e.isFree == true}">
+                                    <h6 style="color: gold; font-weight: bold">Miễn phí</h6>
+                                </c:if>
                                 <div style="display: flex">
                                     <p style="color: #878787;">${e.post.user.username}</p>
                                 </div>

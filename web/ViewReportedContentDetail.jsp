@@ -200,7 +200,12 @@ e.printStackTrace();
                             </div>
                         </div>
                         <p>${reE.exchange.post.content}</p>
-                        <h5>Giá : </h5><h5 style="color: red">${reE.exchange.price} VNĐ</h5>
+                                <c:if test="${reE.exchange.isFree == true}">
+                                    <h5 style="color: green">Miễn phí</h5>
+                                </c:if>
+                                <c:if test="${reE.exchange.isFree == false}">
+                                    <h5>Giá : </h5><h5 style="color: gold">${reE.exchange.price} VNĐ</h5>
+                                </c:if>
                         <h6 class="report-reason-style">${reE.reportDate} : ${reE.reporter.username} đã báo cáo bài trao đổi với lý do "${reE.reportContent.reportContent} <c:if test="${not empty reE.reason}"> : ${reE.reason}</c:if>"</h6>
                         <div>
                                 <form action="MainController">
@@ -213,7 +218,7 @@ e.printStackTrace();
                                     <div style="display: flex; gap : 15px">
                                         <button class="process-report-button" name="action" value="HideReportedContent">Ẩn bài viết này</button>
                                         <button class="process-report-button" name="action" value="RejectReportedContent">Từ chối báo cáo</button>
-                                        <button class="process-report-button" name="action" value="BanReportedUser">Cấm người dùng nầy</button>
+                                        <button class="process-report-button" name="action" value="BanReportedUser">Cấm người dùng này</button>
                                     </div>
                                 </form>
                             </div>

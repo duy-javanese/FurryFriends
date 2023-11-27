@@ -38,7 +38,7 @@
                          >
                         <div class="hero-banner__content">
                             <h1>FurryFriends</h1>
-                            <h3>Blog & Trading</h3>
+                            <h3>Diễn đàn & Trao đổi</h3>
                         </div>
                     </div>
                 </div>
@@ -207,8 +207,6 @@
                                         </c:forEach>
                                     </ul>
                                 </div>
-
-
                             </div>
                         </div>
                         <%

@@ -156,8 +156,8 @@ e.printStackTrace();
                                 <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                     <div style="display: flex; justify-content: space-between">
                                         <h4>${r.post.title}</h4>
-                                        <h6 style="color: coral;">${r.post.postType.postTypeName}<c:if test="${not empty r.post.category.categoryName}"> : ${r.post.category.categoryName}</c:if></h6>
                                         </div>
+                                        <h6 style="color: coral;">${r.post.postType.postTypeName}<c:if test="${not empty r.post.category.categoryName}"> : ${r.post.category.categoryName}</c:if></h6>
                                         <div style="display: flex">
                                             <p style="color: #878787;">${r.post.user.username}</p>
                                     </div>
@@ -192,8 +192,8 @@ e.printStackTrace();
                             <div style="margin-left: 15px ; width: 100%; display: flex; flex-direction: column; justify-content: space-between">
                                 <div style="display: flex; justify-content: space-between">
                                     <h4>${r.exchange.post.title}</h4>
-                                    <h6 style="color: coral;">${r.exchange.post.postType.postTypeName}<c:if test="${not empty r.exchange.post.category.categoryName}"> : ${r.exchange.post.category.categoryName}</c:if></h6>
                                     </div>
+                                    <h6 style="color: coral;">${r.exchange.post.postType.postTypeName}<c:if test="${not empty r.exchange.post.category.categoryName}"> : ${r.exchange.post.category.categoryName}</c:if></h6>
                                     <h6 style="color: gold">${r.exchange.price} VNĐ</h6>
                                 <div style="display: flex">
                                     <p style="color: #878787;">${r.exchange.post.user.username}</p>

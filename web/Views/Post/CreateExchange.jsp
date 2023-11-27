@@ -24,6 +24,15 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Tạo bài viết</h1>
                 </div>
+                <div style="display: flex; flex-direction: column">
+                    <h4>Gợi ý thông tin nên cung cấp thông tin:</h4>
+                <p>- Giống loài</p>
+                <p>- Tuổi</p>
+                <p>- Kích cỡ thú cưng</p>
+                <p>- Màu lông</p>
+                <p>- Tiêm ngừa và khai sinh</p>
+                <p>- Chính sách đổi trả</p>
+                </div>
                 <hr>
                 <!-- Content Row -->
                 <form action="createExchange" method="post" enctype="multipart/form-data">

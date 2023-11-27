@@ -913,7 +913,7 @@ public class PostDAO extends DBUtils.DBContext {
 
             if (con != null) {
                 //2. create SQL String
-                String sql = "UPDATE post SET status = 4 and reason = ? WHERE post_id = ?";
+                String sql = "UPDATE post SET status = 4, reason = ? WHERE post_id = ?";
                 //3. Create statement
                 stm = con.prepareStatement(sql);
                 stm.setString(1, reason);

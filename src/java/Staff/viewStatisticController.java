@@ -52,6 +52,7 @@ public class viewStatisticController extends HttpServlet {
             int currentYear = LocalDate.now().getYear();
             // Num of posts created this year and last year
             List<statisticModel> list= dao.PostStatisticDetail(currentYear);
+            request.setAttribute("TEST", list);
             request.setAttribute("LIST_POST_OF_THIS_YEAR", this.generateDataMonth(list));
             request.setAttribute("THIS_YEAR_TOTAL_POST", pDao.getYearTotalPost(currentYear));
             list= dao.PostStatisticDetail(currentYear-1);
