@@ -141,6 +141,7 @@ e.printStackTrace();
                                                                 <h5 style="color: #ff9e00">${p.postType.postTypeName}</h5>
                                                 </div>-->
                     <h4 class="pending-post-detail-title">${p.title}</h4>
+                    <h6 style="color: coral;">${p.postType.postTypeName} <c:if test="${not empty p.category.categoryName}"> : ${p.category.categoryName}</c:if></h6>
                     <div style="display: flex; justify-content: space-between;">
                         <div style="display: flex">
                             <div class="d-flex">
@@ -150,9 +151,6 @@ e.printStackTrace();
                                 <h6>${p.user.username}</h6>
                                 <p>${p.datePost}</p>
                             </div>
-                        </div>
-                        <div>
-                            <h6 style="color: coral;">${p.postType.postTypeName}</h6>
                         </div>
                     </div>
                     <p>${p.content}</p>

@@ -72,7 +72,7 @@
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+<!--                                    <th>ID</th>-->
                                     <th>Ảnh</th>
                                     <th>Người dùng</th>
                                     <th>Tiêu đề bài viết</th>
@@ -85,7 +85,7 @@
                             <tbody>
                                 <c:forEach items="${ip}" var="ip">
                                     <tr>
-                                        <td>${ip.post.postId}</td>
+<!--                                        <td>${ip.post.postId}</td>-->
                                         <td>
                                             <img src="${ip.post.img}" alt="alt" width="80px" height="80px" style="background-size: cover; object-fit: cover"/>
                                         </td>

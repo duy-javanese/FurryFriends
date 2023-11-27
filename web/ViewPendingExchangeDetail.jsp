@@ -130,6 +130,7 @@ e.printStackTrace();
                         <img src="${e.post.img}" class="detail-img-box"> <br>        
                     </c:if>
                     <h4 class="pending-post-detail-title">${e.post.title}</h4>
+                    <h6 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h6>
                     <div style="display: flex; justify-content: space-between;">
                         <div style="display: flex">
                             <div class="d-flex">
@@ -139,9 +140,6 @@ e.printStackTrace();
                                 <h6>${e.post.user.username}</h6>
                                 <p>${e.post.datePost}</p>
                             </div>
-                        </div>
-                        <div>
-                            <h6 style="color: #ff9e00">${e.post.postType.postTypeName} : ${e.post.category.categoryName}</h6>
                         </div>
                     </div>
 

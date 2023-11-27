@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.PostDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,9 +43,20 @@ public class AdminUpdateUserStatusController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
             UserDAO dao = new UserDAO();
-            boolean check = dao.UpdateUserStatus(id, status);
-            if (check) {
-                url = SUCCESS;
+            PostDAO pDao = new PostDAO();
+            if (status == true ){
+                boolean check = dao.UpdateUserStatus(id, status);
+                boolean PublicAllUserPost = pDao.UpdateUserPostIsPublic(id, true);
+                if(check && PublicAllUserPost){
+                    url = SUCCESS;
+                }
+            }
+            if (status == false ){
+                boolean check = dao.UpdateUserStatus(id, status);
+                boolean hideAllUserPost = pDao.UpdateUserPostIsPublic(id, false);
+                if(check && hideAllUserPost){
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             log("Error at AdminUpdateUserStatusController: " + e.toString());

@@ -73,7 +73,17 @@
                                         <!--                                        <p class="tag-list-inline">Tag: <a href="#">travel</a>, <a href="#">life style</a>, <a href="#">technology</a>, <a href="#">fashion</a></p>-->
                                         <c:if test="${p.postType.postTypeId == 4}">
                                             <div class="d-flex gap-2">
-                                                <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                                <c:if test="${p.exchange.isFree == false}">
+                                                    <p style="font-weight: bold">Giá bán: </p><p style="color: gold; font-weight: bold">${p.exchange.price}đ</p>
+                                                </c:if>
+                                                <c:if test="${p.exchange.isFree == true}">
+                                                    <div class="d-flex justify-content-center">
+                                                        <p style="font-weight: bold; margin-top: 3%">Giá bán: </p>
+                                                        <div class="rounded-pill bg-success p-2 ml-2" style="text-align: center; border-radius: 25px">
+                                                            <span style="color: white">Miễn phí</span>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                         </c:if>
                                         <p>${p.content.substring(0, 200)}...</p>
